@@ -50,7 +50,10 @@ const config = {
       filename: 'index.html',
       inject: 'body'
     })
-  ]
+  ],
+  devServer: {
+    historyApiFallback: true
+  }
 }
 
 if (!isDev) {

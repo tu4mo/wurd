@@ -2,13 +2,14 @@
   @include rounded;
 
   background-color: transparent;
-  border: 2px solid $color-dark-grey;
+  border: 2px solid $color-dark-gray;
+  color: $color-dark-gray;
   cursor: pointer;
   font-family: $font;
   font-size: 14px;
   font-weight: 400;
   height: 40px;
   line-height: 1;
-  padding: 0 $padding-sm;
+  padding: 0 $spacing-sm;
   text-transform: uppercase;
 }
