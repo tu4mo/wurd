@@ -34,6 +34,13 @@ const config = {
             }
           }
         ]
+      },
+      {
+        test: /\.(jpg|png|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: './images/[name].[hash].[ext]'
+        }
       }
     ]
   },

@@ -1,0 +1,14 @@
+.button {
+  @include rounded;
+
+  background-color: transparent;
+  border: 2px solid $color-dark-grey;
+  cursor: pointer;
+  font-family: $font;
+  font-size: 14px;
+  font-weight: 400;
+  height: 40px;
+  line-height: 1;
+  padding: 0 $padding-sm;
+  text-transform: uppercase;
+}

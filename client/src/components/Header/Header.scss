@@ -1,0 +1,41 @@
+.header {
+  background-color: #fff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  padding: 0 $padding-md;
+}
+
+.navbar {
+  display: flex;
+
+  &__item {
+    align-items: center;
+    border-bottom: 2px solid transparent;
+    display: flex;
+    height: 80px;
+    padding-top: 2px;
+
+    &--active {
+      border-color: $color-dark-grey;
+    }
+
+    &--ml-auto {
+      margin-left: auto;
+    }
+
+    &--mr {
+      margin-right: $padding-md;
+    }
+  }
+
+  &__profile {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+  }
+}
+
+.logo {
+  display: block;
+  height: 24px;
+  width: 67px;
+}
