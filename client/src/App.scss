@@ -15,6 +15,10 @@ body {
   padding-bottom: $spacing-md;
 }
 
+.main {
+  padding-top: $header-height;
+}
+
 .container {
   margin: 0 auto;
   max-width: 1100px;
