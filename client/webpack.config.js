@@ -46,9 +46,10 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, '/src/index.html'),
+      favicon: 'src/assets/favicon.png',
       filename: 'index.html',
-      inject: 'body'
+      inject: 'body',
+      template: path.join(__dirname, '/src/index.html')
     })
   ],
   devServer: {
