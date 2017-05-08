@@ -29,16 +29,28 @@
 
   &__time {
     color: $color-light-gray;
-    font-weight: 300;
     margin-left: auto;
   }
 
   &__body {
+    align-items: center;
     background-color: #eee;
+    color: #fff;
+    display: flex;
     height: 200px;
+    justify-content: center;
+    padding: $spacing-md;
+  }
+
+  &__content {
+    line-height: 1;
   }
 
   &__footer {
     padding: $spacing-md;
+  }
+
+  &__likes {
+    color: $color-light-gray;
   }
 }

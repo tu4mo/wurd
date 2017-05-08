@@ -6,7 +6,16 @@ import './Posts.scss'
 const Posts = ({ posts }) => {
   return (
     <div className="posts">
-      {posts.map(post => <Post content={post.content} />)}
+      {posts.map((post, i) => (
+        <Post
+          content={post.content}
+          gradientStart={post.gradientStart}
+          gradientEnd={post.gradientEnd}
+          key={i}
+          user={post.user}
+          timestamp={post.timestamp}
+        />
+      ))}
     </div>
   )
 }

@@ -5,8 +5,8 @@ import Posts from '../../components/Posts'
 import './Profile.scss'
 
 const MOCK_POSTS = [
-  { content: 'Lorem' },
-  { content: 'Consectetuer' }
+  { content: 'Lorem', user: 'tu4mo', timestamp: Date.now() - 1000000, gradientStart: '#84fab0', gradientEnd: '#8fd3f4' },
+  { content: 'Consectetuer', user: 'tu4mo', timestamp: Date.now() - 200000000, gradientStart: '#fccb90', gradientEnd: '#d57eeb' }
 ]
 
 class Profile extends Component {
