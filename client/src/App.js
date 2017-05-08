@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import asyncComponent from './asyncComponent'
 import Header from './partials/Header'
 import Home from './pages/Home'
-import Profile from './pages/Profile'
 import './App.scss'
 
 class App extends Component {
   render () {
+    const Profile = asyncComponent(() => import('./pages/Profile').then(module => module.default))
+
     return (
       <BrowserRouter>
         <div className="app">
