@@ -10,6 +10,17 @@
   font-weight: 400;
   height: 40px;
   line-height: 1;
+  outline: none;
   padding: 0 $spacing-sm;
   text-transform: uppercase;
+  transition: transform 0.05s ease-in-out;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:hover {
+    background-color: $color-dark-gray;
+    color: #fff;
+  }
 }
