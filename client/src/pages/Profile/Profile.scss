@@ -1,6 +1,7 @@
 .profile-container {
   border-bottom: 1px solid #eee;
   padding: $spacing-md;
+  margin-bottom: $spacing-md;
 }
 
 .profile {
@@ -31,4 +32,8 @@
   &__stats {
     margin-left: auto;
   }
+}
+
+.profile-posts {
+  padding: 0 $spacing-md;
 }

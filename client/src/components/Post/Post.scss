@@ -1,0 +1,44 @@
+.post {
+  @include rounded();
+
+  background-color: #fff;
+  border: 1px solid #eee;
+  max-width: 600px;
+  width: 100%;
+
+  &:not(:last-child) {
+    margin-bottom: $spacing-md;
+  }
+
+  &__header {
+    align-items: center;
+    display: flex;
+    padding: $spacing-md;
+  }
+
+  &__profile {
+    border-radius: 50%;
+    height: 40px;
+    margin-right: $spacing-sm;
+    width: 40px;
+  }
+
+  &__user {
+    font-weight: 600;
+  }
+
+  &__time {
+    color: $color-light-gray;
+    font-weight: 300;
+    margin-left: auto;
+  }
+
+  &__body {
+    background-color: #eee;
+    height: 200px;
+  }
+
+  &__footer {
+    padding: $spacing-md;
+  }
+}
