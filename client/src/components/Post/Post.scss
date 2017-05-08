@@ -17,14 +17,20 @@
   }
 
   &__profile {
-    border-radius: 50%;
-    height: 40px;
     margin-right: $spacing-sm;
-    width: 40px;
+
+    img {
+      border-radius: 50%;
+      display: block;
+      height: 40px;
+      width: 40px;
+    }
   }
 
   &__user {
+    color: $color-dark-gray;
     font-weight: 600;
+    text-decoration: none;
   }
 
   &__time {

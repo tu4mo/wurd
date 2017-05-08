@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import moment from 'moment'
 import './Post.scss'
 
@@ -47,8 +48,12 @@ class Post extends Component {
     return (
       <div className="post">
         <div className="post__header">
-          <img className="post__profile" src="http://placehold.it/40x40" />
-          <div className="post__user">{user}</div>
+          <Link className="post__profile" to={`/${user}`}>
+            <img alt={user} src="http://placehold.it/40x40" title={user} />
+          </Link>
+          <Link className="post__user" to={`/${user}`}>
+            {user}
+          </Link>
           <div className="post__time">{moment(timestamp).fromNow()}</div>
         </div>
         <div
