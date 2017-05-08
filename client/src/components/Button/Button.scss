@@ -1,7 +1,7 @@
 .button {
   @include rounded;
 
-  background-color: transparent;
+  background-color: #fff;
   border: 2px solid $color-dark-gray;
   color: $color-dark-gray;
   cursor: pointer;
