@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Button from '../../components/Button'
+import Stats from '../../components/Stats'
 import './Profile.scss'
 
 class Profile extends Component {
@@ -17,18 +18,7 @@ class Profile extends Component {
               </div>
             </div>
             <div className="profile__stats">
-              <div className="stat">
-                <div className="stat__number">51</div>
-                <div className="stat__text">followers</div>
-              </div>
-              <div className="stat">
-                <div className="stat__number">23</div>
-                <div className="stat__text">following</div>
-              </div>
-              <div className="stat">
-                <div className="stat__number">87</div>
-                <div className="stat__text">posts</div>
-              </div>
+              <Stats followers={51} following={24} posts={87} />
             </div>
           </div>
         </div>

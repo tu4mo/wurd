@@ -29,27 +29,6 @@
   }
 
   &__stats {
-    display: flex;
     margin-left: auto;
-  }
-}
-
-.stat {
-  padding-left: $spacing-md;
-  text-align: center;
-
-  &:not(:last-child) {
-    border-right: 2px solid $color-light-gray;
-    padding-right: $spacing-md;
-  }
-
-  &__number {
-    font-size: 20px;
-  }
-
-  &__text {
-    color: $color-light-gray;
-    font-size: 12px;
-    text-transform: uppercase;
   }
 }
