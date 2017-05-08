@@ -4,14 +4,18 @@ import './Button.scss'
 
 class Button extends Component {
   static propTypes = {
-    children: PropTypes.node
+    children: PropTypes.node,
+    onClick: PropTypes.func
   }
 
   render () {
-    const { children } = this.props
+    const {
+      children,
+      onClick
+    } = this.props
 
     return (
-      <button className="button">
+      <button className="button" onClick={onClick}>
         {children}
       </button>
     )

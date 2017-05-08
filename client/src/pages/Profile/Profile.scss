@@ -1,11 +1,7 @@
-.profile-container {
-  border-bottom: 1px solid #eee;
-  padding: $spacing-md;
-}
-
 .profile {
   align-items: center;
   display: flex;
+  padding: $spacing-md 0;
 
   &__photo {
     border-radius: 50%;
@@ -34,5 +30,6 @@
 }
 
 .profile-posts {
-  padding: $spacing-md;
+  border-top: 1px solid #eee;
+  padding: $spacing-md 0;
 }
