@@ -1,14 +1,15 @@
 .profile-container {
   border-bottom: 1px solid #eee;
+  padding: $spacing-md;
 }
 
 .profile {
   align-items: center;
   display: flex;
-  padding: $spacing-md;
 
   &__photo {
     border-radius: 50%;
+    display: block;
     height: 160px;
     width: 160px;
   }
