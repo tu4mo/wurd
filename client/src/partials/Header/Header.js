@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 import Button from '../../components/Button'
-import logo from './wurd.png'
+import logo from '../../assets/wurd.svg'
 import './Header.scss'
 
 class Header extends Component {
