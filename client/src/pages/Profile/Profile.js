@@ -1,15 +1,22 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { getPosts } from '../../actions/posts'
 import Button from '../../components/Button'
 import Stats from '../../components/Stats'
 import Posts from '../../components/Posts'
 import './Profile.scss'
 
-const MOCK_POSTS = [
-  { content: 'Lorem', user: 'tu4mo', timestamp: Date.now() - 1000000, gradientStart: '#84fab0', gradientEnd: '#8fd3f4' },
-  { content: 'Consectetuer', user: 'tu4mo', timestamp: Date.now() - 200000000, gradientStart: '#fccb90', gradientEnd: '#d57eeb' }
-]
-
 class Profile extends Component {
+  static propTypes = {
+    getPosts: PropTypes.func.isRequired,
+    posts: PropTypes.array.isRequired
+  }
+
+  componentDidMount () {
+    this.props.getPosts()
+  }
+
   render () {
     return (
       <div>
@@ -30,7 +37,7 @@ class Profile extends Component {
         </div>
         <div className="profile-posts">
           <div className="container">
-            <Posts posts={MOCK_POSTS} />
+            <Posts posts={this.props.posts} />
           </div>
         </div>
       </div>
@@ -38,4 +45,10 @@ class Profile extends Component {
   }
 }
 
-export default Profile
+const mapStateToProps = (state) => {
+  return {
+    posts: state.posts
+  }
+}
+
+export default connect(mapStateToProps, { getPosts })(Profile)
