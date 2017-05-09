@@ -8,7 +8,8 @@ import './Header.scss'
 
 class Header extends Component {
   static propTypes = {
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
+    onComposerToggle: PropTypes.func
   }
 
   state = {
@@ -19,26 +20,22 @@ class Header extends Component {
     this.setState({
       isComposerOpen: true
     })
+    this.props.onComposerToggle(true)
   }
 
   onComposerCloseClick = () => {
     this.setState({
       isComposerOpen: false
     })
+    this.props.onComposerToggle(false)
   }
 
   render () {
     const { location } = this.props
     const { isComposerOpen } = this.state
 
-    const classNames = ['header']
-
-    if (isComposerOpen) {
-      classNames.push('header--with-composer')
-    }
-
     return (
-      <header className={classNames.join(' ')}>
+      <header className="header">
         <div className="container">
           <nav className="navbar">
             <NavBarItem to="/" location={location}>

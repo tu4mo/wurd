@@ -4,14 +4,14 @@ import Button from '../Button'
 import ColorPicker from '../ColorPicker'
 import './Composer.scss'
 
-class NewPost extends Component {
+class Composer extends Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
     onCloseClick: PropTypes.func.isRequired
   }
 
   state = {
-    color: '',
+    color: {},
     content: ''
   }
 
@@ -46,7 +46,7 @@ class NewPost extends Component {
           onChange={this.onContentChange}
           placeholder="write here"
           ref={ref => (this.input = ref)}
-          style={{ backgroundColor: color }}
+          style={{ backgroundImage: `linear-gradient(45deg, ${color.from}, ${color.to})` }}
           value={content}
         />
         <ColorPicker onChange={this.onColorChange} value={color} />
@@ -63,4 +63,4 @@ class NewPost extends Component {
   }
 }
 
-export default NewPost
+export default Composer
