@@ -40,7 +40,6 @@ class Composer extends Component {
     return (
       <div className="composer">
         <input
-          autoFocus
           className="composer__input"
           maxLength="30"
           onChange={this.onContentChange}

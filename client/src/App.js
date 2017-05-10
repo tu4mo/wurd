@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import asyncComponent from './asyncComponent'
 import Header from './partials/Header'
+import ScrollToTop from './components/ScrollToTop'
 import './App.scss'
 
 class App extends Component {
@@ -23,15 +24,17 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <div className="app">
-          <main className={`main ${dimmed ? 'main--dimmed' : ''}`}>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/:user" component={Profile} />
-            </Switch>
-          </main>
-          <Header onComposerToggle={this.onComposerToggle} />
-        </div>
+        <ScrollToTop>
+          <div className="app">
+            <main className={`main ${dimmed ? 'main--dimmed' : ''}`}>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/:user" component={Profile} />
+              </Switch>
+            </main>
+            <Header onComposerToggle={this.onComposerToggle} />
+          </div>
+        </ScrollToTop>
       </BrowserRouter>
     )
   }
