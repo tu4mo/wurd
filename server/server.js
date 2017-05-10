@@ -4,8 +4,12 @@ require('dotenv').config()
 // Import dependencies
 const bodyParser = require('body-parser')
 const express = require('express')
+const mongoose = require('mongoose')
 const morgan = require('morgan')
 const path = require('path')
+
+// Set mongoose to use ES6 promises
+mongoose.Promise = global.Promise
 
 // Initialize Express
 const app = express()
@@ -18,6 +22,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // Set up port
 const port = process.env.PORT || 3000
+
+// Connect to database
+mongoose.connect(process.env.MONGODB_URI)
 
 // Serve static files
 app.use(express.static('../client/dist'))
