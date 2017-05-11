@@ -42,10 +42,7 @@ class Welcome extends Component {
               placeholder="password"
               value={this.state.password}
             />
-            <div className="login__buttons">
-              <Button onClick={this.onLogInClick}>Log In</Button>
-              <Button>Sign Up</Button>
-            </div>
+            <Button className="login__button" onClick={this.onLogInClick}>Log In</Button>
           </div>
         </div>
       </div>

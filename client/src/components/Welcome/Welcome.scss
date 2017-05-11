@@ -3,7 +3,7 @@
   background-image: linear-gradient(45deg, #30cfd0, #330867);
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   margin-top: -$header-height;
   justify-content: center;
 
@@ -29,15 +29,21 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  max-width: 360px;
+  max-width: 300px;
 
   &__input {
     @include rounded();
 
+    background-color: rgba(255, 255, 255, 0.1);
     border: 0;
+    color: #fff;
     font-size: 1.2rem;
     outline: none;
     padding: $spacing-sm;
+
+    &::-webkit-input-placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
 
     &--email {
       border-bottom-left-radius: 0;
@@ -52,12 +58,7 @@
     }
   }
 
-  &__buttons {
-    display: flex;
-    justify-content: center;
-
-    & > *:not(:last-child) {
-      margin-right: $spacing-sm;
-    }
+  &__button {
+    border: 0;
   }
 }
