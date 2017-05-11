@@ -10,26 +10,6 @@
 .navbar {
   display: flex;
 
-  &__item {
-    align-items: center;
-    border-bottom: 2px solid transparent;
-    display: flex;
-    height: $header-height;
-    padding-top: 2px;
-
-    &--active {
-      border-color: $color-dark-gray;
-    }
-
-    &--ml-auto {
-      margin-left: auto;
-    }
-
-    &--mr {
-      margin-right: $spacing-md;
-    }
-  }
-
   &__profile {
     border-radius: 50%;
     display: block;
