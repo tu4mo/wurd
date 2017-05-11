@@ -18,7 +18,7 @@ const app = express()
 app.use(morgan('dev'))
 
 // Set up body parser
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 // Set up port
 const port = process.env.PORT || 3000
@@ -30,8 +30,8 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use(express.static('../client/dist'))
 
 // Set up routes
-// const api = require('./routes')
-// app.use('/api', api)
+const api = require('./routes')
+app.use('/api', api)
 
 // Serve index.html
 app.get('*', (req, res) => {
