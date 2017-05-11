@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { isAuthenticated } from '../../selectors/auth'
+import Welcome from '../../components/Welcome'
 import Posts from '../../components/Posts'
 import './Home.scss'
 
@@ -8,15 +12,27 @@ const MOCK_POSTS = [
 ]
 
 class Home extends Component {
+  static propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired
+  }
+
   render () {
+    const { isAuthenticated } = this.props
     return (
-      <div className="container">
-        <div className="home">
-          <Posts posts={MOCK_POSTS} />
+      <div className="home">
+        {!isAuthenticated && <Welcome />}
+        <div className="container">
+          <div className="home__content">
+            <Posts posts={MOCK_POSTS} />
+          </div>
         </div>
       </div>
     )
   }
 }
 
-export default Home
+const mapStateToProps = state => ({
+  isAuthenticated: isAuthenticated(state)
+})
+
+export default connect(mapStateToProps)(Home)

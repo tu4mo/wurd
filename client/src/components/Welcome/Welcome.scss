@@ -1,0 +1,25 @@
+.welcome {
+  align-items: center;
+  background-image: linear-gradient(45deg, #30cfd0, #330867);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin-top: -$header-height;
+  justify-content: center;
+
+  &__heading {
+    margin-bottom: $spacing-md;
+  }
+
+  &__logo {
+    display: block;
+    width: 200px;
+  }
+
+  &__tagline {
+    color: #fff;
+    font-size: 3rem;
+    font-weight: 600;
+    text-align: center;
+  }
+}

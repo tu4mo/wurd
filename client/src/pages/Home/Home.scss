@@ -1,3 +1,5 @@
 .home {
-  padding: $spacing-md 0;
+  &__content {
+    padding: $spacing-md 0;
+  }
 }

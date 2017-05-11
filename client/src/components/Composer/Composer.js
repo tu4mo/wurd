@@ -23,7 +23,7 @@ class Composer extends Component {
 
   onContentChange = event => {
     this.setState({
-      content: event.target.value.replace(/\s/, '')
+      content: event.target.value.replace(/[^A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff]/, '')
     })
   }
 

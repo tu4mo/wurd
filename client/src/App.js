@@ -10,7 +10,7 @@ class App extends Component {
     dimmed: false
   }
 
-  onComposerToggle = (isOpen) => {
+  onComposerToggle = isOpen => {
     this.setState({
       dimmed: isOpen
     })
@@ -19,8 +19,12 @@ class App extends Component {
   render () {
     const { dimmed } = this.state
 
-    const Home = asyncComponent(() => import('./pages/Home').then(module => module.default))
-    const Profile = asyncComponent(() => import('./pages/Profile').then(module => module.default))
+    const Home = asyncComponent(() =>
+      import('./pages/Home').then(module => module.default)
+    )
+    const Profile = asyncComponent(() =>
+      import('./pages/Profile').then(module => module.default)
+    )
 
     return (
       <BrowserRouter>
