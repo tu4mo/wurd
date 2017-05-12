@@ -1,10 +1,17 @@
-const auth = (state = {}, action) => {
+import { AUTH_TOKEN } from '../actions'
+
+const INITIAL_STATE = {
+  token: null
+}
+
+const auth = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    default:
+    case AUTH_TOKEN:
       return {
-        isAuthenticated: false,
-        username: 'tu4mo'
+        token: action.token
       }
+    default:
+      return state
   }
 }
 

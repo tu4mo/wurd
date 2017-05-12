@@ -6,13 +6,15 @@
     "start": "webpack-dev-server --hot"
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "moment": "^2.18.1",
     "prop-types": "^15.5.9",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",

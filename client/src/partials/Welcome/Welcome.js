@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
-import Button from '../Button'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { login } from '../../actions/auth'
+import Button from '../../components/Button'
 import './Welcome.scss'
 
 class Welcome extends Component {
+  static propTypes = {
+    login: PropTypes.func.isRequired
+  }
+
   state = {
     email: '',
     password: ''
@@ -17,7 +24,7 @@ class Welcome extends Component {
   }
 
   onLogInClick = () => {
-    console.log(this.state)
+    this.props.login(this.state.email, this.state.password)
   }
 
   render () {
@@ -42,7 +49,9 @@ class Welcome extends Component {
               placeholder="password"
               value={this.state.password}
             />
-            <Button className="login__button" onClick={this.onLogInClick}>Log In</Button>
+            <Button className="login__button" onClick={this.onLogInClick}>
+              Log In
+            </Button>
           </div>
         </div>
       </div>
@@ -50,4 +59,4 @@ class Welcome extends Component {
   }
 }
 
-export default Welcome
+export default connect(null, { login })(Welcome)

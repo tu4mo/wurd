@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { isAuthenticated } from '../../selectors/auth'
-import Welcome from '../../components/Welcome'
+import Welcome from '../../partials/Welcome'
 import Posts from '../../components/Posts'
 import './Home.scss'
 
