@@ -16,7 +16,7 @@ const users = require('./users')
 router.get('/auth', isAuthenticated, auth.get)
 router.post('/auth', auth.post)
 // router.get('/posts', posts.get)
-router.post('/posts', posts.post)
+router.post('/posts', isAuthenticated, posts.post)
 router.post('/users', users)
 
 module.exports = router
