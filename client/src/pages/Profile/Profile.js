@@ -25,15 +25,22 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    api('get', `users/${this.props.match.params.username}`)
+    this.getUserForProfile(this.props.match.params.username)
+    this.props.getPosts()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.getUserForProfile(nextProps.match.params.username)
+  }
+
+  getUserForProfile(username) {
+    api('get', `users/${username}`)
       .then(response => {
         this.setState({ user: response.data })
       })
       .catch(() => {
         this.props.history.push('/404')
       })
-
-    this.props.getPosts()
   }
 
   onLogOutClick = () => {
