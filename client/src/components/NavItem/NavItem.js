@@ -6,7 +6,7 @@ import './NavItem.scss'
 const NavItem = ({ children, className, to, isActive }) => {
   const classNames = ['nav-item']
 
-  if (isActive) {
+  if (isActive && isActive(to)) {
     classNames.push('nav-item--active')
   }
 
@@ -26,7 +26,7 @@ const NavItem = ({ children, className, to, isActive }) => {
 NavItem.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  isActive: PropTypes.boolean,
+  isActive: PropTypes.func,
   to: PropTypes.string
 }
 
