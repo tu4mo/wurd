@@ -59,6 +59,7 @@ const config = {
 
 if (!isDev) {
   config.plugins.push(
+    new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
