@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { logOut } from '../../actions/auth'
 import { getPosts } from '../../actions/posts'
+import { getUser } from '../../selectors/auth'
+import api from '../../api'
 import Button from '../../components/Button'
 import Stats from '../../components/Stats'
 import Posts from '../../components/Posts'
@@ -12,11 +14,25 @@ class Profile extends Component {
   static propTypes = {
     getPosts: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
+    isMe: PropTypes.bool.isRequired,
     logOut: PropTypes.func.isRequired,
+    match: PropTypes.object.isRequired,
     posts: PropTypes.array.isRequired
   }
 
-  componentDidMount () {
+  state = {
+    user: {}
+  }
+
+  componentDidMount() {
+    api('get', `users/${this.props.match.params.username}`)
+      .then(response => {
+        this.setState({ user: response.data })
+      })
+      .catch(() => {
+        this.props.history.push('/404')
+      })
+
     this.props.getPosts()
   }
 
@@ -25,21 +41,30 @@ class Profile extends Component {
     this.props.history.push('/')
   }
 
-  render () {
+  render() {
+    const { user } = this.state
+    const { isMe } = this.props
+
+    if (!Object.keys(user).length) return null
+
     return (
       <div>
         <div className="container">
           <div className="profile">
             <img className="profile__photo" src="http://placehold.it/160x160" />
             <div className="profile__user">
-              <div className="profile__name">tu4mo</div>
+              <div className="profile__name">{user.username}</div>
               <div className="profile__buttons">
-                <Button>Follow</Button>
-                <Button onClick={this.onLogOutClick}>Log Out</Button>
+                {!isMe && <Button>Follow</Button>}
+                {isMe && <Button onClick={this.onLogOutClick}>Log Out</Button>}
               </div>
             </div>
             <div className="profile__stats">
-              <Stats followers={51} following={24} posts={87} />
+              <Stats
+                followers={user.followers}
+                following={user.following}
+                posts={user.posts}
+              />
             </div>
           </div>
         </div>
@@ -53,9 +78,10 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    posts: state.posts
+    posts: state.posts,
+    isMe: getUser(state).username === ownProps.match.params.username
   }
 }
 

@@ -1,4 +1,6 @@
-import { api, AUTH_CLEAR, AUTH_SET_TOKEN, AUTH_SET_USER } from '.'
+import api from '../api'
+
+import { AUTH_CLEAR, AUTH_SET_TOKEN, AUTH_SET_USER } from '.'
 
 export const getUser = () => dispatch => {
   api('get', 'auth').then(response =>

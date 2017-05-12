@@ -5,6 +5,7 @@
   "extends": ["standard", "standard-react"],
   "parser": "babel-eslint",
   "rules": {
-    "jsx-quotes": ["error", "prefer-double"]
+    "jsx-quotes": ["error", "prefer-double"],
+    "space-before-function-paren": ["error", "never"]
   }
 }

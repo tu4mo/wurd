@@ -3,6 +3,25 @@ const bcrypt = require('bcrypt')
 
 // Require models
 const User = require('../models/User')
+const Post = require('../models/Post')
+
+const get = async (req, res) => {
+  const { username } = req.params
+
+  try {
+    const user = await User.findOne({ username })
+    const posts = await Post.count({ user: user._id })
+
+    return res.status(200).json({
+      id: user._id,
+      email: user.email,
+      username: user.username,
+      posts
+    })
+  } catch (err) {
+    return res.sendStatus(500)
+  }
+}
 
 const post = (req, res) => {
   const { email, username, password, passwordConfirm } = req.body
@@ -39,4 +58,7 @@ const post = (req, res) => {
   })
 }
 
-module.exports = post
+module.exports = {
+  get,
+  post
+}

@@ -16,11 +16,14 @@ class App extends Component {
     })
   }
 
-  render () {
+  render() {
     const { dimmed } = this.state
 
     const Home = asyncComponent(() =>
       import('./pages/Home').then(module => module.default)
+    )
+    const NotFound = asyncComponent(() =>
+      import('./pages/NotFound').then(module => module.default)
     )
     const Profile = asyncComponent(() =>
       import('./pages/Profile').then(module => module.default)
@@ -33,7 +36,8 @@ class App extends Component {
             <main className={`main ${dimmed ? 'main--dimmed' : ''}`}>
               <Switch>
                 <Route exact path="/" component={Home} />
-                <Route path="/:user" component={Profile} />
+                <Route path="/404" component={NotFound} />
+                <Route path="/:username" component={Profile} />
               </Switch>
             </main>
             <Header onComposerToggle={this.onComposerToggle} />
