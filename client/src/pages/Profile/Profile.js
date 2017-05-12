@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { logOut } from '../../actions/auth'
 import { getPosts } from '../../actions/posts'
 import Button from '../../components/Button'
 import Stats from '../../components/Stats'
@@ -10,11 +11,18 @@ import './Profile.scss'
 class Profile extends Component {
   static propTypes = {
     getPosts: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    logOut: PropTypes.func.isRequired,
     posts: PropTypes.array.isRequired
   }
 
   componentDidMount () {
     this.props.getPosts()
+  }
+
+  onLogOutClick = () => {
+    this.props.logOut()
+    this.props.history.push('/')
   }
 
   render () {
@@ -27,7 +35,7 @@ class Profile extends Component {
               <div className="profile__name">tu4mo</div>
               <div className="profile__buttons">
                 <Button>Follow</Button>
-                <Button>Log Out</Button>
+                <Button onClick={this.onLogOutClick}>Log Out</Button>
               </div>
             </div>
             <div className="profile__stats">
@@ -45,10 +53,10 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     posts: state.posts
   }
 }
 
-export default connect(mapStateToProps, { getPosts })(Profile)
+export default connect(mapStateToProps, { getPosts, logOut })(Profile)

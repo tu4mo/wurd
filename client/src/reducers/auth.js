@@ -1,4 +1,4 @@
-import { AUTH_SET_TOKEN, AUTH_SET_USER } from '../actions'
+import { AUTH_CLEAR, AUTH_SET_TOKEN, AUTH_SET_USER } from '../actions'
 
 const INITIAL_STATE = {
   isAuthenticated: false,
@@ -8,6 +8,8 @@ const INITIAL_STATE = {
 
 const auth = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case AUTH_CLEAR:
+      return INITIAL_STATE
     case AUTH_SET_TOKEN:
       return {
         isAuthenticated: true,

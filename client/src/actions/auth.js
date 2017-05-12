@@ -1,6 +1,15 @@
-import { api, AUTH_SET_TOKEN, AUTH_SET_USER } from '.'
+import { api, AUTH_CLEAR, AUTH_SET_TOKEN, AUTH_SET_USER } from '.'
 
-export const login = (email, password, callback) => dispatch => {
+export const getUser = () => dispatch => {
+  api('get', 'auth').then(response =>
+    dispatch({
+      type: AUTH_SET_USER,
+      user: response.data
+    })
+  )
+}
+
+export const logIn = (email, password, callback) => dispatch => {
   api('post', 'auth', {
     email,
     password
@@ -13,11 +22,6 @@ export const login = (email, password, callback) => dispatch => {
   })
 }
 
-export const getUser = () => dispatch => {
-  api('get', 'auth').then(response =>
-    dispatch({
-      type: AUTH_SET_USER,
-      user: response.data
-    })
-  )
-}
+export const logOut = () => ({
+  type: AUTH_CLEAR
+})

@@ -3,6 +3,7 @@ import store from '../store'
 
 export const API_URL = 'http://localhost:3000/api'
 
+export const AUTH_CLEAR = 'AUTH_CLEAR'
 export const AUTH_SET_TOKEN = 'AUTH_SET_TOKEN'
 export const AUTH_SET_USER = 'AUTH_SET_USER'
 
