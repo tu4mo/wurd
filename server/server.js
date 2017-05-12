@@ -14,6 +14,12 @@ mongoose.Promise = global.Promise
 // Initialize Express
 const app = express()
 
+// Enable cors
+if (process.env.NODE_ENV === 'development') {
+  const cors = require('cors')
+  app.use(cors())
+}
+
 // Use Morgan to log requests to the console
 app.use(morgan('dev'))
 
