@@ -5,6 +5,18 @@ const jwt = require('jsonwebtoken')
 // Require models
 const User = require('../models/User')
 
+const get = (req, res) => {
+  const { sub: id } = req.jwtPayload
+
+  User.findById(id).then(user => {
+    return res.status(200).json({
+      id: user._id,
+      email: user.email,
+      username: user.username
+    })
+  })
+}
+
 const post = async (req, res) => {
   const { email, password } = req.body
   const errorResponse = { error: 'The user name or password is incorrect' }
@@ -37,4 +49,7 @@ const post = async (req, res) => {
   }
 }
 
-module.exports = post
+module.exports = {
+  get,
+  post
+}

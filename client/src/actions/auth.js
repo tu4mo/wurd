@@ -1,18 +1,23 @@
-import axios from 'axios'
-import { AUTH_TOKEN } from '.'
+import { api, AUTH_SET_TOKEN, AUTH_SET_USER } from '.'
 
-const API_URL = 'http://localhost:3000/api'
+export const login = (email, password, callback) => dispatch => {
+  api('post', 'auth', {
+    email,
+    password
+  }).then(response => {
+    dispatch({
+      type: AUTH_SET_TOKEN,
+      token: response.data.token
+    })
+    callback()
+  })
+}
 
-export const login = (email, password) => dispatch => {
-  axios
-    .post(`${API_URL}/auth`, {
-      email,
-      password
+export const getUser = () => dispatch => {
+  api('get', 'auth').then(response =>
+    dispatch({
+      type: AUTH_SET_USER,
+      user: response.data
     })
-    .then(response => {
-      return dispatch({
-        type: AUTH_TOKEN,
-        token: response.data.token
-      })
-    })
+  )
 }

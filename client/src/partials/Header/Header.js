@@ -37,21 +37,26 @@ class Header extends Component {
   render () {
     const { location, user } = this.props
     const { isComposerOpen } = this.state
+    console.log(this.props)
+
+    const isNavItemActive = path => {
+      return location.pathname === path
+    }
 
     return (
       <header className="header">
         <div className="container">
           <nav className="navbar">
-            <NavItem to="/" location={location}>
+            <NavItem isActive={isNavItemActive('/')} to="/">
               <img alt="Wurd" className="logo" src={logo} title="Wurd" />
             </NavItem>
             {user &&
-              <div className="navbar__item navbar__item--ml-auto navbar__item--mr">
+              <NavItem className="nav-item--ml-auto nav-item--mr">
                 <Button onClick={this.onNewPostClick}>New Post</Button>
-              </div>
+              </NavItem>
             }
             {user &&
-              <NavItem to={`/${user.username}`} location={location}>
+              <NavItem isActive={isNavItemActive(`/${user.username}`)} to={`/${user.username}`}>
                 <img className="navbar__profile" src="http://placehold.it/40x40" />
               </NavItem>
             }

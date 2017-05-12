@@ -1,14 +1,23 @@
-import { AUTH_TOKEN } from '../actions'
+import { AUTH_SET_TOKEN, AUTH_SET_USER } from '../actions'
 
 const INITIAL_STATE = {
-  token: null
+  isAuthenticated: false,
+  token: null,
+  user: null
 }
 
 const auth = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case AUTH_TOKEN:
+    case AUTH_SET_TOKEN:
       return {
-        token: action.token
+        isAuthenticated: true,
+        token: action.token,
+        user: {}
+      }
+    case AUTH_SET_USER:
+      return {
+        ...state,
+        user: action.user
       }
     default:
       return state

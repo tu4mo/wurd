@@ -2,7 +2,7 @@
 const express = require('express')
 
 // Require middleware
-// const isAuthenticated = require('../middleware/isAuthenticated')
+const isAuthenticated = require('../middleware/isAuthenticated')
 
 // Set up Router
 const router = new express.Router()
@@ -13,7 +13,8 @@ const posts = require('./posts')
 const users = require('./users')
 
 // Set up routes
-router.post('/auth', auth)
+router.get('/auth', isAuthenticated, auth.get)
+router.post('/auth', auth.post)
 // router.get('/posts', posts.get)
 router.post('/posts', posts.post)
 router.post('/users', users)

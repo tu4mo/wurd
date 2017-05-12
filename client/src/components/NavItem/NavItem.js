@@ -3,23 +3,30 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import './NavItem.scss'
 
-const NavItem = ({ children, to, location }) => {
+const NavItem = ({ children, className, to, isActive }) => {
   const classNames = ['nav-item']
 
-  if (location.pathname === to) classNames.push('nav-item--active')
+  if (isActive) {
+    classNames.push('nav-item--active')
+  }
+
+  classNames.push(className)
 
   return (
     <div className={classNames.join(' ')}>
-      <Link to={to}>
-        {children}
-      </Link>
+      {to
+        ? <Link to={to}>
+            {children}
+          </Link>
+        : children}
     </div>
   )
 }
 
 NavItem.propTypes = {
   children: PropTypes.node,
-  location: PropTypes.object,
+  className: PropTypes.string,
+  isActive: PropTypes.boolean,
   to: PropTypes.string
 }
 
