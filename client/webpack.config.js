@@ -55,7 +55,7 @@ const config = {
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       },
-      __API__: JSON.stringify(isDev ? 'http://locahost:3000/api' : '/api')
+      __API__: JSON.stringify(isDev ? 'http://localhost:3000/api' : '/api')
     })
   ],
   devServer: {

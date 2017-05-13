@@ -1,20 +1,31 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { getUser } from './actions/auth'
 import asyncComponent from './asyncComponent'
 import Header from './partials/Header'
 import ScrollToTop from './components/ScrollToTop'
 import './App.scss'
 
 class App extends Component {
+  static propTypes = {
+    getUser: PropTypes.func.isRequired
+  }
+
+  componentDidMount() {
+    this.props.getUser()
+  }
+
   render() {
     const Home = asyncComponent(() =>
-      import('./pages/Home').then(module => module.default)
+      import('./views/Home').then(module => module.default)
     )
     const NotFound = asyncComponent(() =>
-      import('./pages/NotFound').then(module => module.default)
+      import('./views/NotFound').then(module => module.default)
     )
     const Profile = asyncComponent(() =>
-      import('./pages/Profile').then(module => module.default)
+      import('./views/Profile').then(module => module.default)
     )
 
     return (
@@ -36,4 +47,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default connect(null, { getUser })(App)

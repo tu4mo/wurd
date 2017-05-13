@@ -35,7 +35,7 @@ class Profile extends Component {
     }
   }
 
-  getUserForProfile(username) {
+  getUserForProfile = (username) => {
     api('get', `users/${username}`)
       .then(response => {
         this.setState({ user: response.data })
@@ -88,8 +88,10 @@ class Profile extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  const user = getUser(state) || {}
+
   return {
-    isMe: getUser(state).username === ownProps.match.params.username,
+    isMe: user.username === ownProps.match.params.username,
     posts: state.posts
   }
 }

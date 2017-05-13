@@ -12,13 +12,14 @@ const auth = (state = INITIAL_STATE, action) => {
       return INITIAL_STATE
     case AUTH_SET_TOKEN:
       return {
-        isAuthenticated: true,
+        ...state,
         token: action.token,
         user: null
       }
     case AUTH_SET_USER:
       return {
         ...state,
+        isAuthenticated: true,
         user: action.user
       }
     default:
