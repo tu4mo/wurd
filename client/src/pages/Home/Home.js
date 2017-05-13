@@ -2,28 +2,40 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { isAuthenticated } from '../../selectors/auth'
+import api from '../../api'
 import Welcome from '../../partials/Welcome'
 import Posts from '../../components/Posts'
 import './Home.scss'
-
-const MOCK_POSTS = [
-  { content: 'Lorem', user: 'tu4mo', timestamp: Date.now() - 1000000, gradientStart: '#84fab0', gradientEnd: '#8fd3f4' },
-  { content: 'Consectetuer', user: 'johndoe', timestamp: Date.now() - 200000000, gradientStart: '#fccb90', gradientEnd: '#d57eeb' }
-]
 
 class Home extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired
   }
 
-  render () {
+  state = {
+    posts: []
+  }
+
+  componentDidMount() {
+    api('get', 'posts').then(response => {
+      this.setState({ posts: response.data })
+    })
+  }
+
+  render() {
     const { isAuthenticated } = this.props
+    const { posts } = this.state
+
+    if (!posts.length) {
+      return null
+    }
+
     return (
       <div className="home">
         {!isAuthenticated && <Welcome />}
         <div className="container">
           <div className="home__content">
-            <Posts posts={MOCK_POSTS} />
+            <Posts posts={posts} />
           </div>
         </div>
       </div>

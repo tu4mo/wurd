@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { logOut } from '../../actions/auth'
-import { getPosts } from '../../actions/posts'
 import { getUser } from '../../selectors/auth'
 import api from '../../api'
 import Button from '../../components/Button'
@@ -12,7 +11,6 @@ import './Profile.scss'
 
 class Profile extends Component {
   static propTypes = {
-    getPosts: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
     isMe: PropTypes.bool.isRequired,
     logOut: PropTypes.func.isRequired,
@@ -21,12 +19,12 @@ class Profile extends Component {
   }
 
   state = {
+    posts: [],
     user: {}
   }
 
   componentDidMount() {
     this.getUserForProfile(this.props.match.params.username)
-    this.props.getPosts()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,6 +39,10 @@ class Profile extends Component {
       .catch(() => {
         this.props.history.push('/404')
       })
+
+    api('get', `posts?username=${username}`).then(response => {
+      this.setState({ posts: response.data })
+    })
   }
 
   onLogOutClick = () => {
@@ -49,7 +51,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { user } = this.state
+    const { posts, user } = this.state
     const { isMe } = this.props
 
     if (!Object.keys(user).length) return null
@@ -77,7 +79,7 @@ class Profile extends Component {
         </div>
         <div className="profile-posts">
           <div className="container">
-            <Posts posts={this.props.posts} />
+            <Posts posts={posts} />
           </div>
         </div>
       </div>
@@ -87,9 +89,8 @@ class Profile extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    posts: state.posts,
     isMe: getUser(state).username === ownProps.match.params.username
   }
 }
 
-export default connect(mapStateToProps, { getPosts, logOut })(Profile)
+export default connect(mapStateToProps, { logOut })(Profile)

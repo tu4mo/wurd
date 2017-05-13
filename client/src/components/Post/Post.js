@@ -7,13 +7,14 @@ import './Post.scss'
 class Post extends Component {
   static propTypes = {
     content: PropTypes.string.isRequired,
+    created: PropTypes.number.isRequired,
     gradientEnd: PropTypes.string.isRequired,
     gradientStart: PropTypes.string.isRequired,
-    timestamp: PropTypes.number.isRequired,
-    user: PropTypes.string.isRequired
+    likes: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const parentStyle = getComputedStyle(this.parent)
     const parentPaddingX =
       parseInt(parentStyle.getPropertyValue('padding-left')) +
@@ -31,7 +32,10 @@ class Post extends Component {
     let i = 1
 
     while (true) {
-      if (this.content.offsetWidth > maxWidth || this.content.offsetHeight > maxHeight) {
+      if (
+        this.content.offsetWidth > maxWidth ||
+        this.content.offsetHeight > maxHeight
+      ) {
         i--
         setFontSize(this.content, i)
         break
@@ -42,19 +46,30 @@ class Post extends Component {
     }
   }
 
-  render () {
-    const { content, gradientEnd, gradientStart, timestamp, user } = this.props
+  render() {
+    const {
+      content,
+      gradientEnd,
+      gradientStart,
+      created,
+      likes,
+      username
+    } = this.props
 
     return (
       <div className="post">
         <div className="post__header">
-          <Link className="post__profile" to={`/${user}`}>
-            <img alt={user} src="http://placehold.it/40x40" title={user} />
+          <Link className="post__profile" to={`/${username}`}>
+            <img
+              alt={username}
+              src="http://placehold.it/40x40"
+              title={username}
+            />
           </Link>
-          <Link className="post__user" to={`/${user}`}>
-            {user}
+          <Link className="post__user" to={`/${username}`}>
+            {username}
           </Link>
-          <div className="post__time">{moment(timestamp).fromNow()}</div>
+          <div className="post__time">{moment(created).fromNow()}</div>
         </div>
         <div
           className="post__body"
@@ -69,7 +84,7 @@ class Post extends Component {
         </div>
         <div className="post__footer">
           <div className="post__likes">
-            5 likes
+            {likes} likes
           </div>
         </div>
       </div>

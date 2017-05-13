@@ -9,11 +9,12 @@ const Posts = ({ posts }) => {
       {posts.map((post, i) => (
         <Post
           content={post.content}
+          created={post.created}
           gradientStart={post.gradientStart}
           gradientEnd={post.gradientEnd}
           key={i}
-          user={post.user}
-          timestamp={post.timestamp}
+          likes={post.likes}
+          username={post.user.username}
         />
       ))}
     </div>

@@ -1,11 +1,6 @@
 const mongoose = require('mongoose')
 
 const postSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
   content: {
     type: String,
     required: true
@@ -13,6 +8,19 @@ const postSchema = new mongoose.Schema({
   created: {
     type: Date,
     default: Date.now,
+    required: true
+  },
+  gradientEnd: {
+    type: String,
+    required: true
+  },
+  gradientStart: {
+    type: String,
+    required: true
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true
   }
 })

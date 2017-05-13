@@ -14,6 +14,7 @@ const users = require('./users')
 
 // Set up routes
 router.get('/auth', isAuthenticated, auth.get)
+router.get('/posts', posts.get)
 router.get('/users/:username', isAuthenticated, users.get)
 router.post('/auth', auth.post)
 router.post('/posts', isAuthenticated, posts.post)
