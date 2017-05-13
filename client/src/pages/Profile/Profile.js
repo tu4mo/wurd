@@ -14,8 +14,7 @@ class Profile extends Component {
     history: PropTypes.object.isRequired,
     isMe: PropTypes.bool.isRequired,
     logOut: PropTypes.func.isRequired,
-    match: PropTypes.object.isRequired,
-    posts: PropTypes.array.isRequired
+    match: PropTypes.object.isRequired
   }
 
   state = {

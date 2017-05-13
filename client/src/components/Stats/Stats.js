@@ -27,4 +27,10 @@ Stats.propTypes = {
   posts: PropTypes.number
 }
 
+Stats.defaultProps = {
+  followers: 0,
+  following: 0,
+  posts: 0
+}
+
 export default Stats

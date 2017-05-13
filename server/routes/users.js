@@ -14,7 +14,6 @@ const get = async (req, res) => {
 
     return res.status(200).json({
       id: user._id,
-      email: user.email,
       username: user.username,
       posts
     })
