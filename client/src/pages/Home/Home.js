@@ -26,10 +26,6 @@ class Home extends Component {
     const { isAuthenticated } = this.props
     const { posts } = this.state
 
-    if (!posts.length) {
-      return null
-    }
-
     return (
       <div className="home">
         {!isAuthenticated && <Welcome />}

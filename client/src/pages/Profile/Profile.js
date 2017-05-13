@@ -53,8 +53,6 @@ class Profile extends Component {
     const { posts, user } = this.state
     const { isMe } = this.props
 
-    if (!Object.keys(user).length) return null
-
     return (
       <div>
         <div className="container">

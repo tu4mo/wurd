@@ -4,6 +4,18 @@ import Post from '../Post'
 import './Posts.scss'
 
 const Posts = ({ posts }) => {
+  if (!posts.length) {
+    return (
+      <div className="posts">
+        <Post isPlaceholder />
+        <Post isPlaceholder />
+        <Post isPlaceholder />
+        <Post isPlaceholder />
+        <Post isPlaceholder />
+      </div>
+    )
+  }
+
   return (
     <div className="posts">
       {posts.map((post, i) => (

@@ -10,11 +10,14 @@ class Post extends Component {
     created: PropTypes.number.isRequired,
     gradientEnd: PropTypes.string.isRequired,
     gradientStart: PropTypes.string.isRequired,
+    isPlaceholder: PropTypes.bool,
     likes: PropTypes.number.isRequired,
     username: PropTypes.string.isRequired
   }
 
   componentDidMount() {
+    if (!this.props.content) return
+
     const parentStyle = getComputedStyle(this.parent)
     const parentPaddingX =
       parseInt(parentStyle.getPropertyValue('padding-left')) +
@@ -52,12 +55,13 @@ class Post extends Component {
       gradientEnd,
       gradientStart,
       created,
+      isPlaceholder,
       likes,
       username
     } = this.props
 
     return (
-      <div className="post">
+      <div className={`post ${isPlaceholder ? 'post--placeholder' : ''}`}>
         <div className="post__header">
           <Link className="post__profile" to={`/${username}`}>
             <img
