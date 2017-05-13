@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getUser } from '../../selectors/auth'
 import { withRouter } from 'react-router-dom'
+import api from '../../api'
 import Button from '../../components/Button'
 import Composer from '../../components/Composer'
 import NavItem from '../../components/NavItem'
@@ -28,6 +29,14 @@ class Header extends Component {
   onComposerCloseClick = () => {
     this.setState({
       isComposerOpen: false
+    })
+  }
+
+  onComposerSaveClick = data => {
+    api('post', 'posts', data).then(response => {
+      this.setState({
+        isComposerOpen: false
+      })
     })
   }
 
@@ -65,6 +74,7 @@ class Header extends Component {
           <Composer
             isOpen={isComposerOpen}
             onCloseClick={this.onComposerCloseClick}
+            onSaveClick={this.onComposerSaveClick}
           />
         </header>
       </div>

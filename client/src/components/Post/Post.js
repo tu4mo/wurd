@@ -6,13 +6,13 @@ import './Post.scss'
 
 class Post extends Component {
   static propTypes = {
-    content: PropTypes.string.isRequired,
-    created: PropTypes.number.isRequired,
-    gradientEnd: PropTypes.string.isRequired,
-    gradientStart: PropTypes.string.isRequired,
+    content: PropTypes.string,
+    created: PropTypes.string,
+    gradientEnd: PropTypes.string,
+    gradientStart: PropTypes.string,
     isPlaceholder: PropTypes.bool,
-    likes: PropTypes.number.isRequired,
-    username: PropTypes.string.isRequired
+    likes: PropTypes.number,
+    username: PropTypes.string
   }
 
   componentDidMount() {

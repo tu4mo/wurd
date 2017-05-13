@@ -7,7 +7,8 @@ import './Composer.scss'
 class Composer extends Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
-    onCloseClick: PropTypes.func.isRequired
+    onCloseClick: PropTypes.func.isRequired,
+    onSaveClick: PropTypes.func.isRequired
   }
 
   state = {
@@ -23,13 +24,22 @@ class Composer extends Component {
 
   onContentChange = event => {
     this.setState({
-      content: event.target.value.replace(/[^A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff]/, '')
+      content: event.target.value.replace(
+        /[^A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff]/,
+        ''
+      )
     })
   }
 
-  onSaveClick = () => {}
+  onSaveClick = () => {
+    this.props.onSaveClick({
+      content: this.state.content,
+      gradientEnd: this.state.color.to,
+      gradientStart: this.state.color.from
+    })
+  }
 
-  render () {
+  render() {
     const { color, content } = this.state
     const { isOpen, onCloseClick } = this.props
 
@@ -45,7 +55,9 @@ class Composer extends Component {
           onChange={this.onContentChange}
           placeholder="write here"
           ref={ref => (this.input = ref)}
-          style={{ backgroundImage: `linear-gradient(45deg, ${color.from}, ${color.to})` }}
+          style={{
+            backgroundImage: `linear-gradient(45deg, ${color.from}, ${color.to})`
+          }}
           value={content}
         />
         <ColorPicker onChange={this.onColorChange} value={color} />
