@@ -12,7 +12,6 @@ import './Header.scss'
 class Header extends Component {
   static propTypes = {
     location: PropTypes.object.isRequired,
-    onComposerToggle: PropTypes.func,
     user: PropTypes.object
   }
 
@@ -24,17 +23,15 @@ class Header extends Component {
     this.setState({
       isComposerOpen: true
     })
-    this.props.onComposerToggle(true)
   }
 
   onComposerCloseClick = () => {
     this.setState({
       isComposerOpen: false
     })
-    this.props.onComposerToggle(false)
   }
 
-  render () {
+  render() {
     const { location, user } = this.props
     const { isComposerOpen } = this.state
 
@@ -43,33 +40,34 @@ class Header extends Component {
     }
 
     return (
-      <header className="header">
-        <div className="container">
-          <nav className="navbar">
-            <NavItem isActive={isNavItemActive} to="/">
-              <img alt="Wurd" className="logo" src={logo} title="Wurd" />
-            </NavItem>
-            {user &&
-              <NavItem className="nav-item--ml-auto nav-item--mr">
-                <Button onClick={this.onNewPostClick}>New Post</Button>
-              </NavItem>}
-            {user &&
-              <NavItem
-                isActive={isNavItemActive}
-                to={`/${user.username}`}
-              >
-                <img
-                  className="navbar__profile"
-                  src="http://placehold.it/40x40"
-                />
-              </NavItem>}
-          </nav>
-        </div>
-        <Composer
-          isOpen={isComposerOpen}
-          onCloseClick={this.onComposerCloseClick}
-        />
-      </header>
+      <div
+        className={`header-container ${isComposerOpen ? 'header-container--with-composer' : ''}`}
+      >
+        <header className="header">
+          <div className="container">
+            <nav className="navbar">
+              <NavItem isActive={isNavItemActive} to="/">
+                <img alt="Wurd" className="logo" src={logo} title="Wurd" />
+              </NavItem>
+              {user &&
+                <NavItem className="nav-item--ml-auto nav-item--mr">
+                  <Button onClick={this.onNewPostClick}>New Post</Button>
+                </NavItem>}
+              {user &&
+                <NavItem isActive={isNavItemActive} to={`/${user.username}`}>
+                  <img
+                    className="navbar__profile"
+                    src="http://placehold.it/40x40"
+                  />
+                </NavItem>}
+            </nav>
+          </div>
+          <Composer
+            isOpen={isComposerOpen}
+            onCloseClick={this.onComposerCloseClick}
+          />
+        </header>
+      </div>
     )
   }
 }

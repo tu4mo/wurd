@@ -6,19 +6,7 @@ import ScrollToTop from './components/ScrollToTop'
 import './App.scss'
 
 class App extends Component {
-  state = {
-    dimmed: false
-  }
-
-  onComposerToggle = isOpen => {
-    this.setState({
-      dimmed: isOpen
-    })
-  }
-
   render() {
-    const { dimmed } = this.state
-
     const Home = asyncComponent(() =>
       import('./pages/Home').then(module => module.default)
     )
@@ -33,14 +21,14 @@ class App extends Component {
       <BrowserRouter>
         <ScrollToTop>
           <div className="app">
-            <main className={`main ${dimmed ? 'main--dimmed' : ''}`}>
+            <main className="main">
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/404" component={NotFound} />
                 <Route path="/:username" component={Profile} />
               </Switch>
             </main>
-            <Header onComposerToggle={this.onComposerToggle} />
+            <Header />
           </div>
         </ScrollToTop>
       </BrowserRouter>

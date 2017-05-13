@@ -1,10 +1,19 @@
-.header {
-  background-color: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+.header-container {
   left: 0;
   position: fixed;
   right: 0;
   top: 0;
+
+  &--with-composer {
+    animation: header-background-fade 4s forwards ease-out;
+    background-color: transparent;
+    bottom: 0;
+  }
+}
+
+.header {
+  background-color: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 
 .navbar {
@@ -21,4 +30,14 @@
 .logo {
   display: block;
   height: 24px;
+}
+
+@keyframes header-background-fade {
+  0% {
+    background-color: transparentize($color-dark-gray, 1);
+  }
+
+  100% {
+    background-color: transparentize($color-dark-gray, 0.5);
+  }
 }
