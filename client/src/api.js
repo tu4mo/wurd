@@ -1,7 +1,9 @@
+/* global __API__ */
+
 import axios from 'axios'
 import store from './store'
 
-const API_URL = 'http://localhost:3000/api'
+const API_URL = __API__
 
 export default (method, endpoint, data) => {
   const auth = store.getState().auth

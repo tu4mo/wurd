@@ -50,6 +50,12 @@ const config = {
       filename: 'index.html',
       inject: 'body',
       template: path.join(__dirname, '/src/index.html')
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      },
+      __API__: JSON.stringify(isDev ? 'http://locahost:3000/api' : '/api')
     })
   ],
   devServer: {
@@ -60,11 +66,6 @@ const config = {
 if (!isDev) {
   config.plugins.push(
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
     new webpack.optimize.UglifyJsPlugin({
       output: {
         comments: false
