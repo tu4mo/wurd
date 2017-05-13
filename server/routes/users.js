@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 // Require models
 const User = require('../models/User')
 const Post = require('../models/Post')
+const Relationship = require('../models/Relationship')
 
 const get = async (req, res) => {
   const { username } = req.params
@@ -11,11 +12,15 @@ const get = async (req, res) => {
   try {
     const user = await User.findOne({ username })
     const posts = await Post.count({ user: user._id })
+    const followers = await Relationship.count({ following: user._id })
+    const following = await Relationship.count({ user: user._id })
 
     return res.status(200).json({
+      followers,
+      following,
       id: user._id,
-      username: user.username,
-      posts
+      posts,
+      username: user.username
     })
   } catch (err) {
     return res.sendStatus(500)
