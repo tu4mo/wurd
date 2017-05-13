@@ -1,7 +1,12 @@
-const posts = (state = [], action) => {
+import { FETCH_POSTS } from '../actions'
+
+const posts = (state = {}, action) => {
   switch (action.type) {
-    case 'GET_POSTS':
-      return action.payload
+    case FETCH_POSTS:
+      return {
+        ...state,
+        [action.username]: action.posts
+      }
     default:
       return state
   }

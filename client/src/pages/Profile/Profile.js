@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { logOut } from '../../actions/auth'
+import { fetchPostsByUsername } from '../../actions/posts'
 import { getUser } from '../../selectors/auth'
 import api from '../../api'
 import Button from '../../components/Button'
@@ -11,14 +12,16 @@ import './Profile.scss'
 
 class Profile extends Component {
   static propTypes = {
+    fetchPostsByUsername: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
     isMe: PropTypes.bool.isRequired,
+    location: PropTypes.object.isRequired,
     logOut: PropTypes.func.isRequired,
-    match: PropTypes.object.isRequired
+    match: PropTypes.object.isRequired,
+    posts: PropTypes.object.isRequired
   }
 
   state = {
-    posts: [],
     user: {}
   }
 
@@ -27,7 +30,9 @@ class Profile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.getUserForProfile(nextProps.match.params.username)
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      this.getUserForProfile(nextProps.match.params.username)
+    }
   }
 
   getUserForProfile(username) {
@@ -39,9 +44,7 @@ class Profile extends Component {
         this.props.history.push('/404')
       })
 
-    api('get', `posts?username=${username}`).then(response => {
-      this.setState({ posts: response.data })
-    })
+    this.props.fetchPostsByUsername(username)
   }
 
   onLogOutClick = () => {
@@ -50,8 +53,8 @@ class Profile extends Component {
   }
 
   render() {
-    const { posts, user } = this.state
-    const { isMe } = this.props
+    const { user } = this.state
+    const { isMe, posts } = this.props
 
     return (
       <div>
@@ -76,7 +79,7 @@ class Profile extends Component {
         </div>
         <div className="profile-posts">
           <div className="container">
-            <Posts posts={posts} />
+            <Posts posts={posts[user.username]} />
           </div>
         </div>
       </div>
@@ -86,8 +89,9 @@ class Profile extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isMe: getUser(state).username === ownProps.match.params.username
+    isMe: getUser(state).username === ownProps.match.params.username,
+    posts: state.posts
   }
 }
 
-export default connect(mapStateToProps, { logOut })(Profile)
+export default connect(mapStateToProps, { fetchPostsByUsername, logOut })(Profile)
