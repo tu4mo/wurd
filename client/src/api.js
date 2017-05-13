@@ -3,8 +3,6 @@
 import axios from 'axios'
 import store from './store'
 
-const API_URL = __API__
-
 export default (method, endpoint, data) => {
   const auth = store.getState().auth
   const token = auth.token
@@ -15,6 +13,6 @@ export default (method, endpoint, data) => {
       Authorization: `Bearer ${token}`
     },
     method,
-    url: `${API_URL}/${endpoint}`
+    url: `${__API__}/${endpoint}`
   })
 }
