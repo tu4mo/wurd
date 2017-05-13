@@ -25,12 +25,12 @@ class Welcome extends Component {
   }
 
   onLogInClick = () => {
-    this.props.logIn(this.state.email, this.state.password, () =>
+    this.props.logIn(this.state.email, this.state.password).then(() => {
       this.props.getUser()
-    )
+    })
   }
 
-  render () {
+  render() {
     return (
       <div className="welcome">
         <div className="container">
