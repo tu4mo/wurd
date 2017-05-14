@@ -14,7 +14,7 @@ const get = async (req, res) => {
     }
 
     const posts = await Post.find(query, null)
-      .sort({ created: -1 })
+      .sort({ createdAt: -1 })
       .limit(limit)
       .populate('user')
 
