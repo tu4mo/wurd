@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom'
 import Button from '../../components/Button'
 import Composer from '../../components/Composer'
 import NavItem from '../../components/NavItem'
+import ProfilePhoto from '../../components/ProfilePhoto'
 import logo from '../../assets/wurd.svg'
 import './Header.scss'
 
@@ -67,10 +68,7 @@ class Header extends Component {
                 </NavItem>}
               {user &&
                 <NavItem isActive={isNavItemActive} to={`/${user.username}`}>
-                  <img
-                    className="navbar__profile"
-                    src="http://placehold.it/40x40"
-                  />
+                  <ProfilePhoto size="small" />
                 </NavItem>}
             </nav>
           </div>

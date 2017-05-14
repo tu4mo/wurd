@@ -1,0 +1,11 @@
+.profile-photo {
+  border-radius: 50%;
+  display: block;
+  height: 160px;
+  width: 160px;
+
+  &--small {
+    height: 40px;
+    width: 40px;
+  }
+}

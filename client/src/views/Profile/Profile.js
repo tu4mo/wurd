@@ -6,8 +6,9 @@ import { fetchPostsByUsername } from '../../actions/posts'
 import { getUser } from '../../selectors/auth'
 import api from '../../api'
 import Button from '../../components/Button'
-import Stats from '../../components/Stats'
 import Posts from '../../components/Posts'
+import ProfilePhoto from '../../components/ProfilePhoto'
+import Stats from '../../components/Stats'
 import './Profile.scss'
 
 class Profile extends Component {
@@ -60,7 +61,7 @@ class Profile extends Component {
       <div>
         <div className="container">
           <div className="profile">
-            <img className="profile__photo" src="http://placehold.it/160x160" />
+            <ProfilePhoto />
             <div className="profile__user">
               <div className="profile__name">{user.username}</div>
               <div className="profile__buttons">

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
+import ProfilePhoto from '../ProfilePhoto'
 import './Post.scss'
 
 class Post extends Component {
@@ -64,11 +65,7 @@ class Post extends Component {
       <div className={`post ${isPlaceholder ? 'post--placeholder' : ''}`}>
         <div className="post__header">
           <Link className="post__profile" to={`/${username}`}>
-            <img
-              alt={username}
-              src="http://placehold.it/40x40"
-              title={username}
-            />
+            <ProfilePhoto size="small" />
           </Link>
           <Link className="post__user" to={`/${username}`}>
             {username}
