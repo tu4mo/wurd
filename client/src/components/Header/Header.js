@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { createPost, fetchPostsByUsername } from '../../actions/posts'
 import { getUser } from '../../selectors/auth'
 import { withRouter } from 'react-router-dom'
-import api from '../../api'
 import Button from '../../components/Button'
 import Composer from '../../components/Composer'
 import NavItem from '../../components/NavItem'
@@ -12,6 +12,8 @@ import './Header.scss'
 
 class Header extends Component {
   static propTypes = {
+    createPost: PropTypes.func.isRequired,
+    fetchPostsByUsername: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     user: PropTypes.object
   }
@@ -33,10 +35,11 @@ class Header extends Component {
   }
 
   onComposerSaveClick = data => {
-    api('post', 'posts', data).then(response => {
+    this.props.createPost(data).then(() => {
       this.setState({
         isComposerOpen: false
       })
+      this.props.fetchPostsByUsername(this.props.user.username)
     })
   }
 
@@ -86,4 +89,4 @@ const mapStateToProps = state => ({
   user: getUser(state)
 })
 
-export default withRouter(connect(mapStateToProps)(Header))
+export default withRouter(connect(mapStateToProps, { createPost, fetchPostsByUsername })(Header))

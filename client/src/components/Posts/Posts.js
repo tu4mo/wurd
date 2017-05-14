@@ -4,7 +4,7 @@ import Post from '../Post'
 import './Posts.scss'
 
 const Posts = ({ posts }) => {
-  if (!posts.length) {
+  if (!Object.keys(posts).length) {
     return (
       <div className="posts">
         <Post isPlaceholder />
@@ -18,31 +18,31 @@ const Posts = ({ posts }) => {
 
   return (
     <div className="posts">
-      {posts.map((post, i) => (
-        <Post
-          content={post.content}
-          created={post.created}
-          gradientStart={post.gradientStart}
-          gradientEnd={post.gradientEnd}
-          key={i}
-          likes={post.likes}
-          username={post.user.username}
-        />
-      ))}
+      {Object.keys(posts).map(key => {
+        const post = posts[key]
+
+        return (
+          <Post
+            content={post.content}
+            created={post.created}
+            gradientStart={post.gradientStart}
+            gradientEnd={post.gradientEnd}
+            key={key}
+            likes={post.likes}
+            username={post.user.username}
+          />
+        )
+      })}
     </div>
   )
 }
 
 Posts.propTypes = {
-  posts: PropTypes.arrayOf(
-    PropTypes.shape({
-      content: PropTypes.string
-    })
-  )
+  posts: PropTypes.object
 }
 
 Posts.defaultProps = {
-  posts: []
+  posts: {}
 }
 
 export default Posts

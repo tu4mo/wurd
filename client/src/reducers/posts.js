@@ -5,7 +5,11 @@ const posts = (state = {}, action) => {
     case FETCH_POSTS:
       return {
         ...state,
-        [action.username]: action.posts
+        [action.username]: Object.assign(
+          {},
+          state[action.username],
+          action.posts
+        )
       }
     default:
       return state

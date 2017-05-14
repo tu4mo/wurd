@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { isAuthenticated } from '../../selectors/auth'
 import api from '../../api'
-import Welcome from '../../partials/Welcome'
+import Welcome from '../../components/Welcome'
 import Posts from '../../components/Posts'
 import './Home.scss'
 

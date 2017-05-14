@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getUser } from './actions/auth'
 import asyncComponent from './asyncComponent'
-import Header from './partials/Header'
+import Header from './components/Header'
 import ScrollToTop from './components/ScrollToTop'
 import './App.scss'
 
