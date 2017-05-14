@@ -3,21 +3,23 @@ const mongoose = require('mongoose')
 const postSchema = new mongoose.Schema(
   {
     content: {
-      type: String,
-      required: true
+      maxlength: 30,
+      minlength: 1,
+      required: true,
+      type: String
     },
     gradientEnd: {
-      type: String,
-      required: true
+      required: true,
+      type: String
     },
     gradientStart: {
-      type: String,
-      required: true
+      required: true,
+      type: String
     },
     user: {
-      type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true
+      required: true,
+      type: mongoose.Schema.Types.ObjectId
     }
   },
   {
