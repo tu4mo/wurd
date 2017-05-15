@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { logOut } from '../../actions/auth'
 import { fetchUserByUsername } from '../../actions/users'
 import { fetchPostsByUsername } from '../../actions/posts'
-import { getAuthenticatedUser } from '../../selectors/auth'
+import { getAuthenticatedUser, isAuthenticated } from '../../selectors/auth'
 import { getUser } from '../../selectors/users'
 import Button from '../../components/Button'
 import Posts from '../../components/Posts'
@@ -17,6 +17,7 @@ class Profile extends Component {
     fetchPostsByUsername: PropTypes.func.isRequired,
     fetchUserByUsername: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
     isMe: PropTypes.bool.isRequired,
     location: PropTypes.object.isRequired,
     logOut: PropTypes.func.isRequired,
@@ -46,7 +47,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { isMe, posts, user } = this.props
+    const { isAuthenticated, isMe, posts, user } = this.props
 
     return (
       <div>
@@ -56,7 +57,7 @@ class Profile extends Component {
             <div className="profile__user">
               <div className="profile__name">{user.username}</div>
               <div className="profile__buttons">
-                {!isMe && <Button>Follow</Button>}
+                {isAuthenticated && !isMe && <Button>Follow</Button>}
                 {isMe && <Button onClick={this.onLogOutClick}>Log Out</Button>}
               </div>
             </div>
@@ -84,6 +85,7 @@ const mapStateToProps = (state, ownProps) => {
   const userFromUrl = ownProps.match.params.username
 
   return {
+    isAuthenticated: isAuthenticated(state),
     isMe: user.username === userFromUrl,
     posts: state.posts,
     user: getUser(userFromUrl)(state) || {}
