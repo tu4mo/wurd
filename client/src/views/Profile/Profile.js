@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { logOut } from '../../actions/auth'
+import { fetchUserByUsername } from '../../actions/users'
 import { fetchPostsByUsername } from '../../actions/posts'
-import { getUser } from '../../selectors/auth'
-import api from '../../api'
+import { getAuthenticatedUser } from '../../selectors/auth'
+import { getUser } from '../../selectors/users'
 import Button from '../../components/Button'
 import Posts from '../../components/Posts'
 import ProfilePhoto from '../../components/ProfilePhoto'
@@ -14,16 +15,14 @@ import './Profile.scss'
 class Profile extends Component {
   static propTypes = {
     fetchPostsByUsername: PropTypes.func.isRequired,
+    fetchUserByUsername: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
     isMe: PropTypes.bool.isRequired,
     location: PropTypes.object.isRequired,
     logOut: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
-    posts: PropTypes.object.isRequired
-  }
-
-  state = {
-    user: {}
+    posts: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
   }
 
   componentDidMount() {
@@ -36,15 +35,8 @@ class Profile extends Component {
     }
   }
 
-  getUserForProfile = (username) => {
-    api('get', `users/${username}`)
-      .then(response => {
-        this.setState({ user: response.data })
-      })
-      .catch(() => {
-        this.props.history.push('/404')
-      })
-
+  getUserForProfile = username => {
+    this.props.fetchUserByUsername(username)
     this.props.fetchPostsByUsername(username)
   }
 
@@ -54,8 +46,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { user } = this.state
-    const { isMe, posts } = this.props
+    const { isMe, posts, user } = this.props
 
     return (
       <div>
@@ -89,12 +80,18 @@ class Profile extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const user = getUser(state) || {}
+  const user = getAuthenticatedUser(state) || {}
+  const userFromUrl = ownProps.match.params.username
 
   return {
-    isMe: user.username === ownProps.match.params.username,
-    posts: state.posts
+    isMe: user.username === userFromUrl,
+    posts: state.posts,
+    user: getUser(userFromUrl)(state) || {}
   }
 }
 
-export default connect(mapStateToProps, { fetchPostsByUsername, logOut })(Profile)
+export default connect(mapStateToProps, {
+  fetchPostsByUsername,
+  fetchUserByUsername,
+  logOut
+})(Profile)

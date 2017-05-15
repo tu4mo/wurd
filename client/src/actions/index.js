@@ -4,3 +4,5 @@ export const AUTH_SET_USER = 'AUTH_SET_USER'
 
 export const CREATE_POST = 'CREATE_POST'
 export const FETCH_POSTS = 'FETCH_POSTS'
+
+export const FETCH_USER = 'FETCH_USER'

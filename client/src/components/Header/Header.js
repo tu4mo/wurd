@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createPost, fetchPostsByUsername } from '../../actions/posts'
-import { getUser } from '../../selectors/auth'
+import { getAuthenticatedUser } from '../../selectors/auth'
 import { withRouter } from 'react-router-dom'
 import Button from '../../components/Button'
 import Composer from '../../components/Composer'
@@ -84,7 +84,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: getUser(state)
+  user: getAuthenticatedUser(state)
 })
 
 export default withRouter(connect(mapStateToProps, { createPost, fetchPostsByUsername })(Header))
