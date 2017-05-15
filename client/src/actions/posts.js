@@ -3,7 +3,7 @@ import { CREATE_POST, FETCH_POSTS } from '.'
 
 export const fetchPostsByUsername = username => (dispatch, getState, api) => {
   api('get', `posts?username=${username}`).then(response => {
-    const sortedPosts = _.sortBy(response.data, 'created').reverse()
+    const sortedPosts = _.sortBy(response.data, 'createdAt').reverse()
     const posts = _.mapKeys(sortedPosts, 'id')
 
     dispatch({

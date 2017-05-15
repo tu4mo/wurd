@@ -21,7 +21,7 @@ const get = async (req, res) => {
     const json = posts.map(post => ({
       id: post._id,
       content: post.content,
-      created: post.created,
+      createdAt: post.createdAt,
       gradientEnd: post.gradientEnd,
       gradientStart: post.gradientStart,
       likes: 5,
