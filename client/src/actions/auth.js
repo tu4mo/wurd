@@ -7,6 +7,9 @@ export const getUser = () => (dispatch, getState, api) => {
       user: response.data
     })
   )
+  .catch(() => {
+    dispatch(logOut())
+  })
 }
 
 export const logIn = (email, password) => (dispatch, getState, api) => {
