@@ -2,6 +2,20 @@
 const Post = require('../../models/Post')
 const User = require('../../models/User')
 
+const decoratePostJSON = (post, userId) => ({
+  id: post._id,
+  content: post.content,
+  createdAt: post.createdAt,
+  gradientEnd: post.gradientEnd,
+  gradientStart: post.gradientStart,
+  liked: post.likes.indexOf(userId) !== -1,
+  likes: post.likes.length,
+  user: {
+    id: post.user._id,
+    username: post.user.username
+  }
+})
+
 const get = async (req, res) => {
   const { limit = 10, username } = req.query
 
@@ -18,21 +32,22 @@ const get = async (req, res) => {
       .limit(limit)
       .populate('user')
 
-    const json = posts.map(post => ({
-      id: post._id,
-      content: post.content,
-      createdAt: post.createdAt,
-      gradientEnd: post.gradientEnd,
-      gradientStart: post.gradientStart,
-      liked: post.likes.indexOf(req.userId) !== -1,
-      likes: post.likes.length,
-      user: {
-        id: post.user._id,
-        username: post.user.username
-      }
-    }))
+    const json = posts.map(post => decoratePostJSON(post, req.userId))
 
-    res.status(200).json(json)
+    return res.status(200).json(json)
+  } catch (err) {
+    res.sendStatus(500)
+    throw err
+  }
+}
+
+const getSingle = async (req, res) => {
+  const { id } = req.params
+
+  try {
+    const post = await Post.findById(id)
+
+    return res.status(200).json(decoratePostJSON(post, req.userId))
   } catch (err) {
     res.sendStatus(500)
     throw err
@@ -40,7 +55,6 @@ const get = async (req, res) => {
 }
 
 const post = (req, res) => {
-  const { sub: user } = req.jwtPayload
   const { content, gradientEnd, gradientStart } = req.body
 
   // Create new post
@@ -48,7 +62,7 @@ const post = (req, res) => {
     content,
     gradientEnd,
     gradientStart,
-    user
+    user: req.userId
   })
 
   // Save new post
@@ -58,11 +72,13 @@ const post = (req, res) => {
       return res.sendStatus(400)
     }
 
-    res.sendStatus(201)
+    res.status(201).json(decoratePostJSON(post, req.userId))
   })
 }
 
 module.exports = {
+  decoratePostJSON,
   get,
+  getSingle,
   post
 }

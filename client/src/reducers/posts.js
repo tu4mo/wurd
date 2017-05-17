@@ -1,15 +1,16 @@
-import { FETCH_POSTS } from '../actions'
+import { FETCH_POST, FETCH_POSTS } from '../actions'
 
 const posts = (state = {}, action) => {
   switch (action.type) {
+    case FETCH_POST:
+      return {
+        ...state,
+        [action.post.id]: action.post
+      }
     case FETCH_POSTS:
       return {
         ...state,
-        [action.username]: Object.assign(
-          {},
-          state[action.username],
-          action.posts
-        )
+        ...action.posts
       }
     default:
       return state

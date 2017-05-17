@@ -5,6 +5,7 @@ import { logOut } from '../../actions/auth'
 import { fetchUserByUsername } from '../../actions/users'
 import { fetchPostsByUsername } from '../../actions/posts'
 import { getAuthenticatedUser, isAuthenticated } from '../../selectors/auth'
+import { getPostsByUsername } from '../../selectors/posts'
 import { getUser } from '../../selectors/users'
 import Button from '../../components/Button'
 import Posts from '../../components/Posts'
@@ -72,7 +73,7 @@ class Profile extends Component {
         </div>
         <div className="profile-posts">
           <div className="container">
-            <Posts posts={posts[user.username]} />
+            <Posts posts={posts} />
           </div>
         </div>
       </div>
@@ -87,7 +88,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     isAuthenticated: isAuthenticated(state),
     isMe: user.username === userFromUrl,
-    posts: state.posts,
+    posts: getPostsByUsername(userFromUrl)(state),
     user: getUser(userFromUrl)(state) || {}
   }
 }

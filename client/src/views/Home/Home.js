@@ -1,30 +1,26 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { fetchHomePosts } from '../../actions/posts'
 import { isAuthenticated } from '../../selectors/auth'
-import api from '../../api'
+import { getPostsForHome } from '../../selectors/posts'
 import Welcome from '../../components/Welcome'
 import Posts from '../../components/Posts'
 import './Home.scss'
 
 class Home extends Component {
   static propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired
-  }
-
-  state = {
-    posts: []
+    fetchHomePosts: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+    posts: PropTypes.object.isRequired
   }
 
   componentDidMount() {
-    api('get', 'posts').then(response => {
-      this.setState({ posts: response.data })
-    })
+    this.props.fetchHomePosts()
   }
 
   render() {
-    const { isAuthenticated } = this.props
-    const { posts } = this.state
+    const { isAuthenticated, posts } = this.props
 
     return (
       <div className="home">
@@ -40,7 +36,8 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: isAuthenticated(state)
+  isAuthenticated: isAuthenticated(state),
+  posts: getPostsForHome(state)
 })
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps, { fetchHomePosts })(Home)
