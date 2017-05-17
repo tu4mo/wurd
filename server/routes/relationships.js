@@ -5,7 +5,6 @@ const User = require('../models/User')
 const get = async (req, res) => {}
 
 const post = async (req, res) => {
-  const { sub: user } = req.jwtPayload
   const { username } = req.body
 
   try {
@@ -14,7 +13,7 @@ const post = async (req, res) => {
     // Create new relationship
     const newRelationship = new Relationship({
       following: followingUser._id,
-      user
+      user: req.userId
     })
 
     // Save new post

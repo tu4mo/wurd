@@ -62,7 +62,25 @@
   }
 
   &__likes {
+    align-items: center;
     color: $color-light-gray;
+    display: flex;
+
+    &::before {
+      background-image: url('../../assets/like.png');
+      background-size: 24px 22px;
+      content: '';
+      cursor: pointer;
+      height: 22px;
+      margin-right: $spacing-sm;
+      width: 24px;
+    }
+
+    &--liked {
+      &::before {
+        background-image: url('../../assets/like--active.png');
+      }
+    }
   }
 }
 

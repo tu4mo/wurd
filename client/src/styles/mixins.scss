@@ -1,3 +1,9 @@
 @mixin rounded() {
   border-radius: 5px;
 }
+
+@mixin breakpoint($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}

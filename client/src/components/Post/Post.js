@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { likePost, unlikePost } from '../../actions/posts'
 import moment from 'moment'
 import ProfilePhoto from '../ProfilePhoto'
 import './Post.scss'
@@ -8,11 +10,15 @@ import './Post.scss'
 class Post extends Component {
   static propTypes = {
     content: PropTypes.string,
-    created: PropTypes.string,
+    createdAt: PropTypes.string,
     gradientEnd: PropTypes.string,
     gradientStart: PropTypes.string,
+    id: PropTypes.number,
     isPlaceholder: PropTypes.bool,
+    likePost: PropTypes.object.isRequired,
+    liked: PropTypes.bool,
     likes: PropTypes.number,
+    unlikePost: PropTypes.func,
     username: PropTypes.string
   }
 
@@ -50,13 +56,22 @@ class Post extends Component {
     }
   }
 
+  onLikeClick = () => {
+    if (this.props.liked) {
+      this.props.unlikePost(this.props.id)
+    } else {
+      this.props.likePost(this.props.id)
+    }
+  }
+
   render() {
     const {
       content,
       gradientEnd,
       gradientStart,
-      created,
+      createdAt,
       isPlaceholder,
+      liked,
       likes,
       username
     } = this.props
@@ -70,7 +85,7 @@ class Post extends Component {
           <Link className="post__user" to={`/${username}`}>
             {username}
           </Link>
-          <div className="post__time">{moment(created).fromNow()}</div>
+          <div className="post__time">{moment(createdAt).fromNow()}</div>
         </div>
         <div
           className="post__body"
@@ -84,8 +99,12 @@ class Post extends Component {
           </span>
         </div>
         <div className="post__footer">
-          <div className="post__likes">
-            {likes} likes
+          <div
+            className={`post__likes ${liked ? 'post__likes--liked' : ''}`}
+            onClick={this.onLikeClick}
+            title={`Like${liked ? 'd' : ''}`}
+          >
+            {likes} like{likes !== 1 && 's'}
           </div>
         </div>
       </div>
@@ -93,4 +112,4 @@ class Post extends Component {
   }
 }
 
-export default Post
+export default connect(null, { likePost, unlikePost })(Post)

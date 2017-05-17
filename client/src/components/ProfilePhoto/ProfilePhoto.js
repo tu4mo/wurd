@@ -4,19 +4,27 @@ import profile from '../../assets/profile.png'
 
 import './ProfilePhoto.scss'
 
-const ProfilePhoto = ({ size, url }) => {
+const ProfilePhoto = ({ size, url, username }) => {
   const classNames = ['profile-photo']
 
   if (size === 'small') {
     classNames.push('profile-photo--small')
   }
 
-  return <img className={classNames.join(' ')} src={url} />
+  return (
+    <img
+      alt={username}
+      className={classNames.join(' ')}
+      src={url}
+      title={username}
+    />
+  )
 }
 
 ProfilePhoto.propTypes = {
   size: PropTypes.oneOf(['small']),
-  url: PropTypes.string
+  url: PropTypes.string,
+  username: PropTypes.string
 }
 
 ProfilePhoto.defaultProps = {

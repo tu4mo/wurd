@@ -1,6 +1,6 @@
 // Require models
-const Post = require('../models/Post')
-const User = require('../models/User')
+const Post = require('../../models/Post')
+const User = require('../../models/User')
 
 const get = async (req, res) => {
   const { limit = 10, username } = req.query
@@ -24,7 +24,8 @@ const get = async (req, res) => {
       createdAt: post.createdAt,
       gradientEnd: post.gradientEnd,
       gradientStart: post.gradientStart,
-      likes: 5,
+      liked: post.likes.indexOf(req.userId) !== -1,
+      likes: post.likes.length,
       user: {
         id: post.user._id,
         username: post.user.username

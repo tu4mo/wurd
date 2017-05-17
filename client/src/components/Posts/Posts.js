@@ -24,12 +24,14 @@ const Posts = ({ posts }) => {
         return (
           <Post
             content={post.content}
-            created={post.created}
+            createdAt={post.createdAt}
             gradientStart={post.gradientStart}
             gradientEnd={post.gradientEnd}
+            id={post.id}
             key={key}
+            liked={post.liked}
             likes={post.likes}
-            username={post.user.username}
+            username={post.user ? post.user.username : null}
           />
         )
       })}

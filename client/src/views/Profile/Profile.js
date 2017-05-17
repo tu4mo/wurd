@@ -53,7 +53,7 @@ class Profile extends Component {
       <div>
         <div className="container">
           <div className="profile">
-            <ProfilePhoto />
+            <ProfilePhoto username={user.username} />
             <div className="profile__user">
               <div className="profile__name">{user.username}</div>
               <div className="profile__buttons">
