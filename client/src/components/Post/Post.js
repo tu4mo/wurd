@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { likePost, unlikePost } from '../../actions/posts'
 import moment from 'moment'
+import Like from '../Like'
 import ProfilePhoto from '../ProfilePhoto'
 import './Post.scss'
 
@@ -15,10 +14,8 @@ class Post extends Component {
     gradientStart: PropTypes.string,
     id: PropTypes.number,
     isPlaceholder: PropTypes.bool,
-    likePost: PropTypes.object.isRequired,
     liked: PropTypes.bool,
     likes: PropTypes.number,
-    unlikePost: PropTypes.func,
     username: PropTypes.string
   }
 
@@ -60,20 +57,13 @@ class Post extends Component {
     }
   }
 
-  onLikeClick = () => {
-    if (this.props.liked) {
-      this.props.unlikePost(this.props.id)
-    } else {
-      this.props.likePost(this.props.id)
-    }
-  }
-
   render() {
     const {
       content,
       gradientEnd,
       gradientStart,
       createdAt,
+      id,
       isPlaceholder,
       liked,
       likes,
@@ -103,17 +93,11 @@ class Post extends Component {
           </span>
         </div>
         <div className="post__footer">
-          <div
-            className={`post__likes ${liked ? 'post__likes--liked' : ''}`}
-            onClick={this.onLikeClick}
-            title={`Like${liked ? 'd' : ''}`}
-          >
-            {likes} like{likes !== 1 && 's'}
-          </div>
+          <Like liked={liked} likes={likes} postId={id} />
         </div>
       </div>
     )
   }
 }
 
-export default connect(null, { likePost, unlikePost })(Post)
+export default Post

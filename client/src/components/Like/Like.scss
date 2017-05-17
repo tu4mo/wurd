@@ -1,0 +1,20 @@
+.like {
+  align-items: center;
+  color: $color-light-gray;
+  display: flex;
+
+  &__icon {
+    background-image: url('../../assets/like.png');
+    background-size: 24px 22px;
+    cursor: pointer;
+    height: 22px;
+    margin-right: $spacing-sm;
+    width: 24px;
+  }
+
+  &--liked {
+    .like__icon {
+      background-image: url('../../assets/like--active.png');
+    }
+  }
+}
