@@ -36,7 +36,7 @@ class Welcome extends Component {
         this.props.getUser()
       })
       .catch(err => {
-        console.error(err)
+        console.log(err)
       })
   }
 
