@@ -23,6 +23,10 @@ class Post extends Component {
   }
 
   componentDidMount() {
+    this.resizeContent()
+  }
+
+  resizeContent() {
     if (!this.props.content) return
 
     const parentStyle = getComputedStyle(this.parent)

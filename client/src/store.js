@@ -4,8 +4,8 @@ import reducers from './reducers'
 import api from './api'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const persistedState = localStorage.getItem('auth')
-  ? { auth: JSON.parse(localStorage.getItem('auth')) }
+const persistedState = localStorage.getItem('token')
+  ? { auth: { token: JSON.parse(localStorage.getItem('token')) } }
   : {}
 
 const store = createStore(
@@ -15,7 +15,8 @@ const store = createStore(
 )
 
 store.subscribe(() => {
-  localStorage.setItem('auth', JSON.stringify(store.getState().auth))
+  const { auth } = store.getState()
+  localStorage.setItem('token', JSON.stringify(auth.token))
 })
 
 export default store
