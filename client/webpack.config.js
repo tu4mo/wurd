@@ -1,5 +1,6 @@
 const isDev = process.env.NODE_ENV !== 'production'
 
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const webpack = require('webpack')
@@ -9,7 +10,7 @@ const config = {
   entry: ['react-hot-loader/patch', './src/index.js'],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'wurd.[hash].js'
   },
   module: {
     rules: [
@@ -45,6 +46,7 @@ const config = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin('dist'),
     new HtmlWebpackPlugin({
       favicon: 'src/assets/favicon.png',
       filename: 'index.html',
