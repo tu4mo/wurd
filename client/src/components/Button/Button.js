@@ -6,18 +6,25 @@ class Button extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    secondary: PropTypes.bool
   }
 
-  render () {
-    const {
-      children,
-      className,
-      onClick
-    } = this.props
+  render() {
+    const { children, className, onClick, secondary } = this.props
+
+    const classNames = ['button']
+
+    if (secondary) {
+      classNames.push('button--secondary')
+    }
+
+    if (className) {
+      classNames.push(className)
+    }
 
     return (
-      <button className={`button ${className}`} onClick={onClick}>
+      <button className={classNames.join(' ')} onClick={onClick}>
         {children}
       </button>
     )

@@ -24,4 +24,14 @@
     background-color: $color-dark-gray;
     color: #fff;
   }
+
+  &--secondary {
+    background-color: $color-gray;
+    border-color: $color-gray;
+    color: #fff;
+
+    &:hover {
+      border-color: $color-dark-gray;
+    }
+  }
 }

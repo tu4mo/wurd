@@ -59,7 +59,10 @@ class Profile extends Component {
               <div className="profile__name">{user.username}</div>
               <div className="profile__buttons">
                 {isAuthenticated && !isMe && <Button>Follow</Button>}
-                {isMe && <Button onClick={this.onLogOutClick}>Log Out</Button>}
+                {isMe &&
+                  <Button onClick={this.onLogOutClick} secondary>
+                    Log Out
+                  </Button>}
               </div>
             </div>
             <div className="profile__stats">
