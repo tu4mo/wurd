@@ -8,3 +8,19 @@ export const fetchUserByUsername = username => (dispatch, getState, api) => {
     })
   })
 }
+
+export const followUser = username => (dispatch, getState, api) => {
+  api('post', `relationships?username=${username}`).then(response => {
+    // TODO: Instead of fetching the user separately,
+    // make API return the user after following
+    dispatch(fetchUserByUsername(username))
+  })
+}
+
+export const unfollowUser = username => (dispatch, getState, api) => {
+  api('delete', `relationships?username=${username}`).then(response => {
+    // TODO: Instead of fetching the user separately,
+    // make API return the user after following
+    dispatch(fetchUserByUsername(username))
+  })
+}

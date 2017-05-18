@@ -5,7 +5,7 @@ const User = require('../models/User')
 const get = async (req, res) => {}
 
 const post = async (req, res) => {
-  const { username } = req.body
+  const { username } = req.query
 
   try {
     const followingUser = await User.findOne({ username }).select({ _id: 1 })
@@ -25,7 +25,22 @@ const post = async (req, res) => {
   }
 }
 
+const deleteRelationship = async (req, res) => {
+  const { username } = req.query
+
+  try {
+    const followingUser = await User.findOne({ username }).select({ _id: 1 })
+
+    await Relationship.findOneAndRemove({ following: followingUser._id, user: req.userId })
+    res.sendStatus(200)
+  } catch (err) {
+    console.log(err)
+    return res.sendStatus(400)
+  }
+}
+
 module.exports = {
+  deleteRelationship,
   get,
   post
 }

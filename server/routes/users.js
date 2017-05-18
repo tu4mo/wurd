@@ -14,11 +14,13 @@ const get = async (req, res) => {
     const posts = await Post.count({ user: user._id })
     const followers = await Relationship.count({ following: user._id })
     const following = await Relationship.count({ user: user._id })
+    const isFollowed = await Relationship.findOne({ following: user._id, user: req.userId })
 
     return res.status(200).json({
       followers,
       following,
       id: user._id,
+      isFollowed: !!isFollowed,
       posts,
       username: user.username
     })

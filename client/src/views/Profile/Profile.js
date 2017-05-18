@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { logOut } from '../../actions/auth'
-import { fetchUserByUsername } from '../../actions/users'
+import { fetchUserByUsername, followUser, unfollowUser } from '../../actions/users'
 import { fetchPostsByUsername } from '../../actions/posts'
 import { getAuthenticatedUser, isAuthenticated } from '../../selectors/auth'
 import { getPostsByUsername } from '../../selectors/posts'
@@ -17,6 +17,8 @@ class Profile extends Component {
   static propTypes = {
     fetchPostsByUsername: PropTypes.func.isRequired,
     fetchUserByUsername: PropTypes.func.isRequired,
+    followUser: PropTypes.func.isRequired,
+    unfollowUser: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
     isMe: PropTypes.bool.isRequired,
@@ -42,6 +44,14 @@ class Profile extends Component {
     this.props.fetchPostsByUsername(username)
   }
 
+  onFollowClick = () => {
+    this.props.followUser(this.props.user.username)
+  }
+
+  onUnfollowClick = () => {
+    this.props.unfollowUser(this.props.user.username)
+  }
+
   onLogOutClick = () => {
     this.props.logOut()
     this.props.history.push('/')
@@ -49,6 +59,12 @@ class Profile extends Component {
 
   render() {
     const { isAuthenticated, isMe, posts, user } = this.props
+
+    const FollowButton = ({ isFollowed }) => (
+      <Button onClick={isFollowed ? this.onUnfollowClick : this.onFollowClick}>
+        {isFollowed ? 'Unfollow' : 'Follow'}
+      </Button>
+    )
 
     return (
       <div>
@@ -58,7 +74,9 @@ class Profile extends Component {
             <div className="profile__user">
               <div className="profile__name">{user.username}</div>
               <div className="profile__buttons">
-                {isAuthenticated && !isMe && <Button>Follow</Button>}
+                {isAuthenticated &&
+                  !isMe &&
+                  <FollowButton isFollowed={user.isFollowed} />}
                 {isMe &&
                   <Button onClick={this.onLogOutClick} secondary>
                     Log Out
@@ -99,5 +117,7 @@ const mapStateToProps = (state, ownProps) => {
 export default connect(mapStateToProps, {
   fetchPostsByUsername,
   fetchUserByUsername,
-  logOut
+  followUser,
+  logOut,
+  unfollowUser
 })(Profile)

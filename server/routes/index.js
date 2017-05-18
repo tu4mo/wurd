@@ -16,6 +16,7 @@ const users = require('./users')
 
 // Set up routes
 router.delete('/posts/:id/likes', resolveToken(true), likes.deleteLike)
+router.delete('/relationships', resolveToken(true), relationships.deleteRelationship)
 router.get('/auth', resolveToken(true), auth.get)
 router.get('/posts', resolveToken(false), posts.get)
 router.get('/posts/:id', resolveToken(false), posts.getSingle)
