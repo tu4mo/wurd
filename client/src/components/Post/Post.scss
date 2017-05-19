@@ -48,13 +48,16 @@
     color: #fff;
     display: flex;
     height: 200px;
+    line-height: 1;
     justify-content: center;
     overflow: hidden;
     padding: $spacing-md;
   }
 
   &__content {
-    line-height: 1;
+    animation: post-content-fade-in 1s;
+    animation-fill-mode: forwards;
+    opacity: 0;
   }
 
   &__footer {
@@ -65,6 +68,16 @@
 @keyframes post-placeholder-animation {
   0% {
     opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes post-content-fade-in {
+  50% {
+    opacity: 0;
   }
 
   100% {

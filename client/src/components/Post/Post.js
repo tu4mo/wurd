@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
+import FitText from '../FitText'
 import Like from '../Like'
 import ProfilePhoto from '../ProfilePhoto'
 import './Post.scss'
@@ -17,44 +18,6 @@ class Post extends Component {
     liked: PropTypes.bool,
     likes: PropTypes.number,
     username: PropTypes.string
-  }
-
-  componentDidMount() {
-    this.resizeContent()
-  }
-
-  resizeContent() {
-    if (!this.props.content) return
-
-    const parentStyle = getComputedStyle(this.parent)
-    const parentPaddingX =
-      parseInt(parentStyle.getPropertyValue('padding-left')) +
-      parseInt(parentStyle.getPropertyValue('padding-right'))
-    const parentPaddingY =
-      parseInt(parentStyle.getPropertyValue('padding-bottom')) +
-      parseInt(parentStyle.getPropertyValue('padding-top'))
-    const maxWidth = this.parent.offsetWidth - parentPaddingX
-    const maxHeight = this.parent.offsetHeight - parentPaddingY
-
-    const setFontSize = (element, size) => {
-      element.style.fontSize = `${size}px`
-    }
-
-    let i = 1
-
-    while (true) {
-      if (
-        this.content.offsetWidth > maxWidth ||
-        this.content.offsetHeight > maxHeight
-      ) {
-        i--
-        setFontSize(this.content, i)
-        break
-      } else {
-        i++
-        setFontSize(this.content, i)
-      }
-    }
   }
 
   render() {
@@ -86,11 +49,10 @@ class Post extends Component {
           style={{
             backgroundImage: `linear-gradient(45deg, ${gradientStart}, ${gradientEnd})`
           }}
-          ref={ref => (this.parent = ref)}
         >
-          <span className="post__content" ref={ref => (this.content = ref)}>
+          <FitText className="post__content">
             {content}
-          </span>
+          </FitText>
         </div>
         <div className="post__footer">
           <Like liked={liked} likes={likes} postId={id} />
