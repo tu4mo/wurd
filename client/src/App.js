@@ -40,6 +40,7 @@ class App extends Component {
       <BrowserRouter>
         <ScrollToTop>
           <div className="app">
+            <Header />
             <main className="main">
               <Switch>
                 <Route
@@ -51,7 +52,6 @@ class App extends Component {
                 <Route path="/:username" component={Profile} />
               </Switch>
             </main>
-            <Header />
           </div>
         </ScrollToTop>
       </BrowserRouter>

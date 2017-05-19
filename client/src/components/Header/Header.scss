@@ -3,6 +3,7 @@
   position: fixed;
   right: 0;
   top: 0;
+  z-index: 1;
 
   &--with-composer {
     animation: header-background-fade 4s forwards ease-out;

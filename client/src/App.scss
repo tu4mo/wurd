@@ -17,6 +17,7 @@ body {
 .main {
   padding-top: $header-height;
   position: relative;
+  z-index: 0;
 }
 
 .container {
