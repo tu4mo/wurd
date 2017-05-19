@@ -5,7 +5,8 @@ import _ from 'lodash'
 class FitText extends Component {
   static propTypes = {
     children: PropTypes.node,
-    className: PropTypes.string
+    className: PropTypes.string,
+    onResized: PropTypes.func
   }
 
   constructor() {
@@ -66,6 +67,8 @@ class FitText extends Component {
         setFontSize(this.content, i)
       }
     }
+
+    this.props.onResized()
   }
 
   render() {

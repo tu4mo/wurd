@@ -8,6 +8,10 @@ import ProfilePhoto from '../ProfilePhoto'
 import './Post.scss'
 
 class Post extends Component {
+  state = {
+    resizeDone: false
+  }
+
   static propTypes = {
     content: PropTypes.string,
     createdAt: PropTypes.string,
@@ -18,6 +22,12 @@ class Post extends Component {
     liked: PropTypes.bool,
     likes: PropTypes.number,
     username: PropTypes.string
+  }
+
+  onContentResized = () => {
+    this.setState({
+      resizeDone: true
+    })
   }
 
   render() {
@@ -33,8 +43,18 @@ class Post extends Component {
       username
     } = this.props
 
+    const classNames = ['post']
+
+    if (isPlaceholder) {
+      classNames.push('post--placeholder')
+    }
+
+    if (this.state.resizeDone) {
+      classNames.push('post--ready')
+    }
+
     return (
-      <div className={`post ${isPlaceholder ? 'post--placeholder' : ''}`}>
+      <div className={classNames.join(' ')}>
         <div className="post__header">
           <Link className="post__profile" to={`/${username}`}>
             <ProfilePhoto size="small" />
@@ -50,7 +70,7 @@ class Post extends Component {
             backgroundImage: `linear-gradient(45deg, ${gradientStart}, ${gradientEnd})`
           }}
         >
-          <FitText className="post__content">
+          <FitText className="post__content" onResized={this.onContentResized}>
             {content}
           </FitText>
         </div>

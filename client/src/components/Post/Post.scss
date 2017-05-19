@@ -55,13 +55,18 @@
   }
 
   &__content {
-    animation: post-content-fade-in 1s;
-    animation-fill-mode: forwards;
     opacity: 0;
   }
 
   &__footer {
     padding: $spacing-md;
+  }
+
+  &--ready {
+    .post__content {
+      animation: post-content-fade-in 1s;
+      animation-fill-mode: forwards;
+    }
   }
 }
 
@@ -76,7 +81,7 @@
 }
 
 @keyframes post-content-fade-in {
-  50% {
+  0% {
     opacity: 0;
   }
 
