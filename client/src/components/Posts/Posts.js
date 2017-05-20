@@ -31,6 +31,7 @@ const Posts = ({ posts }) => {
             key={key}
             liked={post.liked}
             likes={post.likes}
+            profileUrl={post.user.profileUrl}
             username={post.user ? post.user.username : null}
           />
         )

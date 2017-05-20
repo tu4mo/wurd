@@ -2,7 +2,7 @@
 const Post = require('../../models/Post')
 const User = require('../../models/User')
 
-const decoratePostJSON = (post, userId) => ({
+const decoratePostJSON = (post, userId, req) => ({
   id: post._id,
   content: post.content,
   createdAt: post.createdAt,
@@ -12,7 +12,8 @@ const decoratePostJSON = (post, userId) => ({
   likes: post.likes.length,
   user: {
     id: post.user._id,
-    username: post.user.username
+    username: post.user.username,
+    profileUrl: `${req.protocol}://${req.get('host')}/assets/profile/${post.user._id}.jpg`
   }
 })
 
@@ -32,7 +33,7 @@ const get = async (req, res) => {
       .limit(limit)
       .populate('user')
 
-    const json = posts.map(post => decoratePostJSON(post, req.userId))
+    const json = posts.map(post => decoratePostJSON(post, req.userId, req))
 
     return res.status(200).json(json)
   } catch (err) {

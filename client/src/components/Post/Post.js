@@ -21,6 +21,7 @@ class Post extends Component {
     isPlaceholder: PropTypes.bool,
     liked: PropTypes.bool,
     likes: PropTypes.number,
+    profileUrl: PropTypes.string,
     username: PropTypes.string
   }
 
@@ -40,6 +41,7 @@ class Post extends Component {
       isPlaceholder,
       liked,
       likes,
+      profileUrl,
       username
     } = this.props
 
@@ -57,7 +59,7 @@ class Post extends Component {
       <div className={classNames.join(' ')}>
         <div className="post__header">
           <Link className="post__profile" to={`/${username}`}>
-            <ProfilePhoto size="small" />
+            <ProfilePhoto size="small" url={profileUrl} />
           </Link>
           <Link className="post__user" to={`/${username}`}>
             {username}
