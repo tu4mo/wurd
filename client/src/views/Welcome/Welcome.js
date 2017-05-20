@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getUser, logIn } from '../../actions/auth'
-import { getAuhtenticationError } from '../../selectors/auth'
+import { authenticateUser, logIn } from '../../actions/auth'
+import { getAuthenticationError } from '../../selectors/auth'
 import Alert from '../../components/Alert'
 import Button from '../../components/Button'
 import './Welcome.scss'
 
 class Welcome extends Component {
   static propTypes = {
+    authenticateUser: PropTypes.func.isRequired,
     error: PropTypes.string,
-    getUser: PropTypes.func.isRequired,
     logIn: PropTypes.func.isRequired
   }
 
@@ -33,7 +33,7 @@ class Welcome extends Component {
     this.props
       .logIn(this.state.email, this.state.password)
       .then(() => {
-        this.props.getUser()
+        this.props.authenticateUser()
       })
       .catch(err => {
         console.log(err)
@@ -77,7 +77,7 @@ class Welcome extends Component {
 }
 
 const mapStateToProps = state => ({
-  error: getAuhtenticationError(state)
+  error: getAuthenticationError(state)
 })
 
-export default connect(mapStateToProps, { getUser, logIn })(Welcome)
+export default connect(mapStateToProps, { authenticateUser, logIn })(Welcome)

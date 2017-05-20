@@ -5,12 +5,13 @@ import { logOut } from '../../actions/auth'
 import {
   fetchUserByUsername,
   followUser,
-  unfollowUser
+  unfollowUser,
+  saveProfilePhoto
 } from '../../actions/users'
 import { fetchPostsByUsername } from '../../actions/posts'
-import { getAuthenticatedUser, isAuthenticated } from '../../selectors/auth'
+import { isAuthenticated } from '../../selectors/auth'
 import { getPostsByUsername } from '../../selectors/posts'
-import { getUser } from '../../selectors/users'
+import { getAuthenticatedUser, getUser } from '../../selectors/users'
 import Button from '../../components/Button'
 import Posts from '../../components/Posts'
 import ProfilePhoto from '../../components/ProfilePhoto'
@@ -35,6 +36,7 @@ class Profile extends Component {
     logOut: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
     posts: PropTypes.object.isRequired,
+    saveProfilePhoto: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired
   }
 
@@ -51,6 +53,14 @@ class Profile extends Component {
   getUserForProfile = username => {
     this.props.fetchUserByUsername(username)
     this.props.fetchPostsByUsername(username)
+  }
+
+  onProfilePhotoUpload = (e) => {
+    if (!this.props.isMe) {
+      return
+    }
+
+    this.props.saveProfilePhoto(e.target.files[0])
   }
 
   onFollowClick = () => {
@@ -85,7 +95,13 @@ class Profile extends Component {
       <div>
         <div className="container">
           <div className="profile">
-            <ProfilePhoto username={user.username} />
+            <div className="profile__photo">
+              <ProfilePhoto
+                onUpload={this.onProfilePhotoUpload}
+                url={user.profileUrl}
+                username={user.username}
+              />
+            </div>
             <div className="profile__user">
               <div className="profile__name">{user.username}</div>
               <div className="profile__buttons">
@@ -139,5 +155,6 @@ export default connect(mapStateToProps, {
   fetchUserByUsername,
   followUser,
   logOut,
+  saveProfilePhoto,
   unfollowUser
 })(Profile)

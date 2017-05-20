@@ -1,13 +1,20 @@
 import { AUTH_CLEAR, AUTH_SET_ERROR, AUTH_SET_TOKEN, AUTH_SET_USER } from '.'
 
-export const getUser = () => (dispatch, getState, api) => {
+import { fetchUserByUsername } from './users'
+
+export const authenticateUser = () => (dispatch, getState, api) => {
   api('get', 'auth')
-    .then(response =>
+    .then(response => {
+      const { data: { id, username } } = response
+
       dispatch({
         type: AUTH_SET_USER,
-        user: response.data
+        id,
+        username
       })
-    )
+
+      dispatch(fetchUserByUsername(username))
+    })
     .catch(() => {
       dispatch(logOut())
     })

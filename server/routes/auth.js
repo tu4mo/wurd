@@ -9,7 +9,6 @@ const get = (req, res) => {
   User.findById(req.userId).then(user => {
     return res.status(200).json({
       id: user._id,
-      email: user.email,
       username: user.username
     })
   })

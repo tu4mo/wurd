@@ -3,6 +3,10 @@
   display: flex;
   padding: $spacing-md 0;
 
+  &__photo {
+    flex: 0 0 auto;
+  }
+
   &__user {
     font-size: 30px;
     font-weight: 600;

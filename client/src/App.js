@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getUser } from './actions/auth'
-import { isAuthenticated } from './selectors/auth'
+import { authenticateUser } from './actions/auth'
+import { getAuthenticatedUsername, isAuthenticated } from './selectors/auth'
 import asyncComponent from './asyncComponent'
 import Header from './components/Header'
 import ScrollToTop from './components/ScrollToTop'
@@ -11,12 +11,12 @@ import './App.scss'
 
 class App extends Component {
   static propTypes = {
-    getUser: PropTypes.func.isRequired,
+    authenticateUser: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool.isRequired
   }
 
   componentDidMount() {
-    this.props.getUser()
+    this.props.authenticateUser()
   }
 
   render() {
@@ -60,7 +60,11 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
+  authenticatedUsername: getAuthenticatedUsername(state),
   isAuthenticated: isAuthenticated(state)
 })
 
-export default connect(mapStateToProps, { getUser })(App)
+export default connect(mapStateToProps, {
+  authenticateUser,
+  getAuthenticatedUsername
+})(App)

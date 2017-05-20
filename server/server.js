@@ -34,6 +34,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Serve static files
 app.use(express.static('../client/dist'))
+app.use('/assets', express.static(path.join(__dirname, 'assets')))
 
 // Set up routes
 const api = require('./routes')

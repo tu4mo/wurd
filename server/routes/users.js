@@ -22,6 +22,7 @@ const get = async (req, res) => {
       id: user._id,
       isFollowed: !!isFollowed,
       posts,
+      profileUrl: `${req.protocol}://${req.get('host')}/assets/profile/${user._id}.jpg`,
       username: user.username
     })
   } catch (err) {

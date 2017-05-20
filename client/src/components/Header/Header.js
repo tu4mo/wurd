@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createPost, fetchPostsByUsername } from '../../actions/posts'
-import { getAuthenticatedUser } from '../../selectors/auth'
+import { getAuthenticatedUser } from '../../selectors/users'
 import { withRouter } from 'react-router-dom'
 import Button from '../../components/Button'
 import Composer from '../../components/Composer'
@@ -68,7 +68,7 @@ class Header extends Component {
                 </NavItem>}
               {user &&
                 <NavItem isActive={isNavItemActive} to={`/${user.username}`}>
-                  <ProfilePhoto size="small" />
+                  <ProfilePhoto size="small" url={user.profileUrl} />
                 </NavItem>}
             </nav>
           </div>
