@@ -2,7 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { logOut } from '../../actions/auth'
-import { fetchUserByUsername, followUser, unfollowUser } from '../../actions/users'
+import {
+  fetchUserByUsername,
+  followUser,
+  unfollowUser
+} from '../../actions/users'
 import { fetchPostsByUsername } from '../../actions/posts'
 import { getAuthenticatedUser, isAuthenticated } from '../../selectors/auth'
 import { getPostsByUsername } from '../../selectors/posts'
@@ -10,10 +14,15 @@ import { getUser } from '../../selectors/users'
 import Button from '../../components/Button'
 import Posts from '../../components/Posts'
 import ProfilePhoto from '../../components/ProfilePhoto'
+import Settings from '../../components/Settings'
 import Stats from '../../components/Stats'
 import './Profile.scss'
 
 class Profile extends Component {
+  state = {
+    isSettingsOpen: false
+  }
+
   static propTypes = {
     fetchPostsByUsername: PropTypes.func.isRequired,
     fetchUserByUsername: PropTypes.func.isRequired,
@@ -52,6 +61,12 @@ class Profile extends Component {
     this.props.unfollowUser(this.props.user.username)
   }
 
+  onSettingsClick = () => {
+    this.setState(prevState => ({
+      isSettingsOpen: !prevState.isSettingsOpen
+    }))
+  }
+
   onLogOutClick = () => {
     this.props.logOut()
     this.props.history.push('/')
@@ -78,6 +93,10 @@ class Profile extends Component {
                   !isMe &&
                   <FollowButton isFollowed={user.isFollowed} />}
                 {isMe &&
+                  <Button onClick={this.onSettingsClick} secondary>
+                    Settings
+                  </Button>}
+                {isMe &&
                   <Button onClick={this.onLogOutClick} secondary>
                     Log Out
                   </Button>}
@@ -92,6 +111,7 @@ class Profile extends Component {
             </div>
           </div>
         </div>
+        {this.state.isSettingsOpen && <Settings />}
         <div className="profile-posts">
           <div className="container">
             <Posts posts={posts} />

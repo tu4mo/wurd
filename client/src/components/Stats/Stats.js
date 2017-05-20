@@ -6,16 +6,16 @@ const Stats = ({ followers, following, posts }) => {
   return (
     <div className="stats">
       <div className="stat">
+        <div className="stat__number">{posts}</div>
+        <div className="stat__text">posts</div>
+      </div>
+      <div className="stat">
         <div className="stat__number">{followers}</div>
         <div className="stat__text">followers</div>
       </div>
       <div className="stat">
         <div className="stat__number">{following}</div>
         <div className="stat__text">following</div>
-      </div>
-      <div className="stat">
-        <div className="stat__number">{posts}</div>
-        <div className="stat__text">posts</div>
       </div>
     </div>
   )
