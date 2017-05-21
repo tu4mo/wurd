@@ -7,7 +7,7 @@ const resolveToken = require('../middleware/resolveToken')
 
 // Set up Multer
 const storage = multer.memoryStorage()
-const upload = multer({ storage })
+const upload = multer({ limits: { files: 1, fileSize: 1024 * 1024 }, storage })
 
 // Set up Router
 const router = new express.Router()

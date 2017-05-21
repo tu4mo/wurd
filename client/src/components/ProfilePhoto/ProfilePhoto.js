@@ -21,7 +21,12 @@ const ProfilePhoto = ({ onUpload, size, url, username }) => {
       {onUpload &&
         <div className="profile-photo__upload">
           Upload Photo
-          <input className="profile-photo__file-input" onChange={onUpload} type="file" />
+          <input
+            accept=".gif,.jpg,.png"
+            className="profile-photo__file-input"
+            onChange={onUpload}
+            type="file"
+          />
         </div>}
     </div>
   )
