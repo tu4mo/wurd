@@ -9,6 +9,9 @@ const userSchema = new mongoose.Schema(
       index: true,
       unique: true
     },
+    hasProfilePhoto: {
+      type: Boolean
+    },
     username: {
       maxlength: 15,
       minlength: 1,

@@ -6,6 +6,9 @@ const User = require('../models/User')
 const Post = require('../models/Post')
 const Relationship = require('../models/Relationship')
 
+const getProfileUrl = (userId, req) =>
+  `${req.protocol}://${req.get('host')}/assets/profile/${userId}.jpg`
+
 const get = async (req, res) => {
   const { username } = req.params
 
@@ -14,7 +17,10 @@ const get = async (req, res) => {
     const posts = await Post.count({ user: user._id })
     const followers = await Relationship.count({ following: user._id })
     const following = await Relationship.count({ user: user._id })
-    const isFollowed = await Relationship.findOne({ following: user._id, user: req.userId })
+    const isFollowed = await Relationship.findOne({
+      following: user._id,
+      user: req.userId
+    })
 
     return res.status(200).json({
       followers,
@@ -22,7 +28,7 @@ const get = async (req, res) => {
       id: user._id,
       isFollowed: !!isFollowed,
       posts,
-      profileUrl: `${req.protocol}://${req.get('host')}/assets/profile/${user._id}.jpg`,
+      profileUrl: user.hasProfilePhoto ? getProfileUrl(user._id, req) : null,
       username: user.username
     })
   } catch (err) {
@@ -67,5 +73,6 @@ const post = (req, res) => {
 
 module.exports = {
   get,
+  getProfileUrl,
   post
 }

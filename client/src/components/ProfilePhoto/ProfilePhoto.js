@@ -15,7 +15,7 @@ const ProfilePhoto = ({ onUpload, size, url, username }) => {
       <img
         alt={username}
         className="profile-photo__image"
-        src={url}
+        src={url || profile}
         title={username}
       />
       {onUpload &&
@@ -37,10 +37,6 @@ ProfilePhoto.propTypes = {
   size: PropTypes.oneOf(['small']),
   url: PropTypes.string,
   username: PropTypes.string
-}
-
-ProfilePhoto.defaultProps = {
-  url: profile
 }
 
 export default ProfilePhoto

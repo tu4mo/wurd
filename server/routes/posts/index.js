@@ -1,6 +1,7 @@
 // Require models
 const Post = require('../../models/Post')
 const User = require('../../models/User')
+const { getProfileUrl } = require('../users')
 
 const decoratePostJSON = (post, userId, req) => ({
   id: post._id,
@@ -13,7 +14,7 @@ const decoratePostJSON = (post, userId, req) => ({
   user: {
     id: post.user._id,
     username: post.user.username,
-    profileUrl: `${req.protocol}://${req.get('host')}/assets/profile/${post.user._id}.jpg`
+    profileUrl: post.user.hasProfilePhoto ? getProfileUrl(post.user._id, req) : null
   }
 })
 
