@@ -19,6 +19,12 @@ class App extends Component {
     this.props.authenticateUser()
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.isAuthenticated === this.props.isAuthenticated) {
+      return false
+    }
+  }
+
   render() {
     const Home = asyncComponent(() =>
       import('./views/Home').then(module => module.default)
