@@ -55,7 +55,7 @@ class Profile extends Component {
     this.props.fetchPostsByUsername(username)
   }
 
-  onProfilePhotoUpload = (e) => {
+  onProfilePhotoUpload = e => {
     if (!this.props.isMe) {
       return
     }
@@ -97,7 +97,7 @@ class Profile extends Component {
           <div className="profile">
             <div className="profile__photo">
               <ProfilePhoto
-                onUpload={this.onProfilePhotoUpload}
+                onUpload={isMe ? this.onProfilePhotoUpload : null}
                 url={user.profileUrl}
                 username={user.username}
               />
