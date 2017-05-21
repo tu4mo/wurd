@@ -25,7 +25,11 @@
   &__header {
     align-items: center;
     display: flex;
-    padding: $spacing-md;
+    padding: $spacing-sm;
+
+    @include breakpoint($breakpoint-md) {
+      padding: $spacing-md;
+    }
   }
 
   &__profile {
@@ -47,11 +51,17 @@
     align-items: center;
     color: #fff;
     display: flex;
-    height: 200px;
     line-height: 1;
     justify-content: center;
     overflow: hidden;
     padding: $spacing-md;
+    position: relative;
+
+    &::before {
+      content: '';
+      display: block;
+      padding-top: 33.33%;
+    }
   }
 
   &__content {
@@ -59,7 +69,11 @@
   }
 
   &__footer {
-    padding: $spacing-md;
+    padding: $spacing-sm;
+
+    @include breakpoint($breakpoint-md) {
+      padding: $spacing-md;
+    }
   }
 
   &--ready {
