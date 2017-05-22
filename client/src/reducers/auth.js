@@ -28,7 +28,7 @@ const auth = (state = INITIAL_STATE, action) => {
         ...state,
         error: null,
         token: action.token,
-        user: null
+        username: null
       }
     case AUTH_SET_USER:
       return {

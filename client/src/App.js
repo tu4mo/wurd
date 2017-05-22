@@ -20,7 +20,9 @@ class App extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    if (nextProps.isAuthenticated === this.props.isAuthenticated) {
+    if (nextProps.isAuthenticated !== this.props.isAuthenticated) {
+      return true
+    } else {
       return false
     }
   }

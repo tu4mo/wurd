@@ -1,3 +1,3 @@
 export const getAuthenticationError = state => state.auth.error
 export const getAuthenticatedUsername = state => state.auth.username
-export const isAuthenticated = state => !!state.auth.token
+export const isAuthenticated = state => state.auth.token !== null
