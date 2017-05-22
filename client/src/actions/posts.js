@@ -1,30 +1,19 @@
-import _ from 'lodash'
 import { CREATE_POST, FETCH_POST, FETCH_POSTS } from '.'
-
-const handlePosts = posts => {
-  const sortedPosts = _.sortBy(posts, 'createdAt').reverse()
-  const keyedPosts = _.mapKeys(sortedPosts, 'id')
-  return keyedPosts
-}
 
 export const fetchHomePosts = () => (dispatch, getState, api) => {
   api('get', 'posts').then(response => {
-    const posts = handlePosts(response.data)
-
     dispatch({
       type: FETCH_POSTS,
-      posts
+      posts: response.data
     })
   })
 }
 
 export const fetchPostsByUsername = username => (dispatch, getState, api) => {
   api('get', `posts?username=${username}`).then(response => {
-    const posts = handlePosts(response.data)
-
     dispatch({
       type: FETCH_POSTS,
-      posts
+      posts: response.data
     })
   })
 }

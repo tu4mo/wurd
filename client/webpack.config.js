@@ -10,7 +10,7 @@ const config = {
   entry: ['react-hot-loader/patch', './src/index.js'],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'wurd.[hash].js'
+    filename: isDev ? 'wurd.js' : 'wurd.[hash].js'
   },
   module: {
     rules: [
@@ -46,7 +46,6 @@ const config = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin('dist'),
     new HtmlWebpackPlugin({
       favicon: 'src/assets/favicon.png',
       filename: 'index.html',
@@ -67,6 +66,7 @@ const config = {
 
 if (!isDev) {
   config.plugins.push(
+    new CleanWebpackPlugin('dist'),
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/),
     new webpack.optimize.UglifyJsPlugin({
       output: {

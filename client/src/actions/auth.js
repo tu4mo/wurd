@@ -30,6 +30,8 @@ export const logIn = (email, password) => (dispatch, getState, api) => {
         type: AUTH_SET_TOKEN,
         token: response.data.token
       })
+
+      dispatch(authenticateUser())
     })
     .catch(err => {
       dispatch({
@@ -44,3 +46,22 @@ export const logIn = (email, password) => (dispatch, getState, api) => {
 export const logOut = () => ({
   type: AUTH_CLEAR
 })
+
+export const signUp = (username, email, password, passwordConfirm) => (
+  dispatch,
+  getState,
+  api
+) => {
+  api('post', 'users', {
+    email,
+    username,
+    password,
+    passwordConfirm
+  })
+    .then(response => {
+      dispatch(logIn(email, password))
+    })
+    .catch(err => {
+      throw err
+    })
+}
