@@ -48,13 +48,7 @@
   }
 
   &__body {
-    align-items: center;
     color: #fff;
-    display: flex;
-    line-height: 1;
-    justify-content: center;
-    overflow: hidden;
-    padding: $spacing-md;
     position: relative;
 
     &::before {
@@ -65,7 +59,17 @@
   }
 
   &__content {
-    opacity: 0;
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    left: 0;
+    line-height: 1;
+    justify-content: center;
+    padding: $spacing-md;
+    position: absolute;
+    text-transform: uppercase;
+    top: 0;
+    right: 0;
   }
 
   &__footer {
@@ -75,29 +79,11 @@
       padding: $spacing-md;
     }
   }
-
-  &--ready {
-    .post__content {
-      animation: post-content-fade-in 0.5s ease-in-out;
-      animation-fill-mode: forwards;
-    }
-  }
 }
 
 @keyframes post-placeholder-animation {
   0% {
     opacity: 0.5;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes post-content-fade-in {
-  0% {
-    opacity: 0;
-    transform: scale(0.98);
   }
 
   100% {

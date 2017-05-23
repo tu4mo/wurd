@@ -2,16 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
-import FitText from '../FitText'
+import { Textfit } from 'react-textfit'
 import Like from '../Like'
 import ProfilePhoto from '../ProfilePhoto'
 import './Post.scss'
 
 class Post extends Component {
-  state = {
-    resizeDone: false
-  }
-
   static propTypes = {
     content: PropTypes.string,
     createdAt: PropTypes.string,
@@ -23,12 +19,6 @@ class Post extends Component {
     likes: PropTypes.number,
     profileUrl: PropTypes.string,
     username: PropTypes.string
-  }
-
-  onContentResized = () => {
-    this.setState({
-      resizeDone: true
-    })
   }
 
   render() {
@@ -51,10 +41,6 @@ class Post extends Component {
       classNames.push('post--placeholder')
     }
 
-    if (this.state.resizeDone) {
-      classNames.push('post--ready')
-    }
-
     return (
       <div className={classNames.join(' ')}>
         <div className="post__header">
@@ -72,9 +58,9 @@ class Post extends Component {
             backgroundImage: `linear-gradient(45deg, ${gradientStart}, ${gradientEnd})`
           }}
         >
-          <FitText className="post__content" onResized={this.onContentResized}>
+          <Textfit className="post__content" mode="single">
             {content}
-          </FitText>
+          </Textfit>
         </div>
         <div className="post__footer">
           <Like liked={liked} likes={likes} postId={id} />
