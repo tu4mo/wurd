@@ -25,11 +25,7 @@
   &__header {
     align-items: center;
     display: flex;
-    padding: $spacing-sm;
-
-    @include breakpoint($breakpoint-md) {
-      padding: $spacing-md;
-    }
+    padding: var(--spacing-md);
   }
 
   &__profile {
@@ -73,11 +69,7 @@
   }
 
   &__footer {
-    padding: $spacing-sm;
-
-    @include breakpoint($breakpoint-md) {
-      padding: $spacing-md;
-    }
+    padding: var(--spacing-md);
   }
 }
 

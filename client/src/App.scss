@@ -5,6 +5,13 @@
 }
 
 :root {
+  --spacing-md: 15px;
+  --spacing-sm: 15px;
+
+  @include breakpoint($breakpoint-md) {
+    --spacing-md: 30px;
+  }
+
   font-size: 14px;
 }
 
@@ -23,7 +30,7 @@ body {
 .container {
   margin: 0 auto;
   max-width: 1100px;
-  padding: 0 $spacing-md;
+  padding: 0 var(--spacing-md);
   width: 100%;
 }
 
