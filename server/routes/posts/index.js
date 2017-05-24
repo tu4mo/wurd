@@ -49,7 +49,7 @@ const getSingle = async (req, res) => {
   try {
     const post = await Post.findById(id)
 
-    return res.status(200).json(decoratePostJSON(post, req.userId))
+    return res.status(200).json(decoratePostJSON(post, req.userId, req))
   } catch (err) {
     res.sendStatus(500)
     throw err
@@ -74,7 +74,7 @@ const post = (req, res) => {
       return res.sendStatus(400)
     }
 
-    res.status(201).json(decoratePostJSON(post, req.userId))
+    res.status(201).json(decoratePostJSON(post, req.userId, req))
   })
 }
 

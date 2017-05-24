@@ -12,7 +12,7 @@ const deleteLike = async (req, res) => {
       { new: true }
     ).populate('user')
 
-    return res.status(201).json(decoratePostJSON(post, req.userId))
+    return res.status(201).json(decoratePostJSON(post, req.userId, req))
   } catch (err) {
     console.error(err)
     return res.sendStatus(400)
@@ -29,7 +29,7 @@ const post = async (req, res) => {
       { new: true }
     ).populate('user')
 
-    return res.status(201).json(decoratePostJSON(post, req.userId))
+    return res.status(201).json(decoratePostJSON(post, req.userId, req))
   } catch (err) {
     console.error(err)
     return res.sendStatus(400)
