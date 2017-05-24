@@ -48,7 +48,7 @@ const config = {
         test: /\.(jpg|png|svg)$/,
         loader: 'file-loader',
         options: {
-          name: './images/[name].[hash].[ext]'
+          name: './assets/[name].[hash].[ext]'
         }
       }
     ]

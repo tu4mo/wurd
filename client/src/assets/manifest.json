@@ -1,0 +1,8 @@
+{
+  "name": "Wurd",
+  "short_name": "Wurd",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "The one-word nanoblogging social networking service."
+}
