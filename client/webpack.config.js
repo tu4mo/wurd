@@ -9,7 +9,9 @@ const webpack = require('webpack')
 const config = {
   devtool: isDev ? 'cheap-module-source-map' : '',
 
-  entry: ['react-hot-loader/patch', './src/index.js'],
+  entry: isDev
+    ? ['react-hot-loader/patch', './src/index.js']
+    : './src/index.js',
 
   output: {
     path: path.join(__dirname, 'dist'),
@@ -67,7 +69,7 @@ const config = {
     }),
     new ExtractTextPlugin({
       allChunks: true,
-      filename: 'styles.[hash].css'
+      filename: 'wurd.[hash].css'
     })
   ],
 
