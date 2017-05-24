@@ -1,17 +1,21 @@
 const isDev = process.env.NODE_ENV !== 'production'
 
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const webpack = require('webpack')
 
 const config = {
   devtool: isDev ? 'cheap-module-source-map' : '',
+
   entry: ['react-hot-loader/patch', './src/index.js'],
+
   output: {
     path: path.join(__dirname, 'dist'),
     filename: isDev ? 'wurd.js' : 'wurd.[hash].js'
   },
+
   module: {
     rules: [
       {
@@ -21,20 +25,22 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
-          {
-            loader: 'sass-resources-loader',
-            options: {
-              resources: [
-                './src/styles/variables.scss',
-                './src/styles/mixins.scss'
-              ]
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            'sass-loader',
+            {
+              loader: 'sass-resources-loader',
+              options: {
+                resources: [
+                  './src/styles/variables.scss',
+                  './src/styles/mixins.scss'
+                ]
+              }
             }
-          }
-        ]
+          ]
+        })
       },
       {
         test: /\.(jpg|png|svg)$/,
@@ -45,6 +51,7 @@ const config = {
       }
     ]
   },
+
   plugins: [
     new HtmlWebpackPlugin({
       favicon: 'src/assets/favicon.png',
@@ -57,8 +64,13 @@ const config = {
         NODE_ENV: JSON.stringify('production')
       },
       __API__: JSON.stringify(isDev ? 'http://localhost:3000/api' : '/api')
+    }),
+    new ExtractTextPlugin({
+      allChunks: true,
+      filename: 'styles.[hash].css'
     })
   ],
+
   devServer: {
     historyApiFallback: true
   }

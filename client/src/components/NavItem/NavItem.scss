@@ -14,6 +14,6 @@
   }
 
   &--mr {
-    margin-right: $spacing-md;
+    margin-right: var(--spacing-md);
   }
 }
