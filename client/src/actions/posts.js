@@ -1,4 +1,4 @@
-import { CREATE_POST, FETCH_POST, FETCH_POSTS } from '.'
+import { CREATE_POST, FETCH_POST, FETCH_POSTS, LIKE_POST, UNLIKE_POST } from '.'
 
 export const fetchHomePosts = () => (dispatch, getState, api) => {
   api('get', 'posts').then(response => {
@@ -30,6 +30,11 @@ export const createPost = post => (dispatch, getState, api) => {
 export const likePost = id => (dispatch, getState, api) => {
   return api('post', `posts/${id}/likes`).then(response => {
     dispatch({
+      type: LIKE_POST,
+      id
+    })
+
+    dispatch({
       type: FETCH_POST,
       post: response.data
     })
@@ -38,6 +43,11 @@ export const likePost = id => (dispatch, getState, api) => {
 
 export const unlikePost = id => (dispatch, getState, api) => {
   return api('delete', `posts/${id}/likes`).then(response => {
+    dispatch({
+      type: UNLIKE_POST,
+      id
+    })
+
     dispatch({
       type: FETCH_POST,
       post: response.data
