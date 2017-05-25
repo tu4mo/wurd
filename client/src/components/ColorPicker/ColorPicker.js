@@ -33,12 +33,14 @@ class ColorPicker extends Component {
     value: PropTypes.object
   }
 
-  componentDidMount () {
-    const randomGradient = GRADIENTS[Math.floor(Math.random() * GRADIENTS.length)]
+  componentDidMount() {
+    const randomGradient =
+      GRADIENTS[Math.floor(Math.random() * GRADIENTS.length)]
+
     this.props.onChange(randomGradient)
   }
 
-  render () {
+  render() {
     const { onChange, value } = this.props
 
     return (
@@ -48,7 +50,9 @@ class ColorPicker extends Component {
             className={`color-picker__color ${gradient === value ? 'color-picker__color--active' : ''}`}
             key={i}
             onClick={() => onChange(gradient)}
-            style={{ backgroundImage: `linear-gradient(45deg, ${gradient.from}, ${gradient.to}` }}
+            style={{
+              backgroundImage: `linear-gradient(45deg, ${gradient.from}, ${gradient.to}`
+            }}
           />
         ))}
       </div>

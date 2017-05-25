@@ -1,28 +1,29 @@
 import React, { Component } from 'react'
 
-export default loader => class AsyncComponent extends Component {
-  constructor (props) {
-    super(props)
+export default loader =>
+  class AsyncComponent extends Component {
+    constructor(props) {
+      super(props)
 
-    this.Component = null
-    this.state = { Component: AsyncComponent.Component }
-  }
-
-  componentWillMount () {
-    if (!this.state.Component) {
-      loader().then(Component => {
-        AsyncComponent.Component = Component
-
-        this.setState({ Component })
-      })
-    }
-  }
-
-  render () {
-    if (this.state.Component) {
-      return <this.state.Component {...this.props} />
+      this.Component = null
+      this.state = { Component: AsyncComponent.Component }
     }
 
-    return null
+    componentWillMount() {
+      if (!this.state.Component) {
+        loader().then(Component => {
+          AsyncComponent.Component = Component
+
+          this.setState({ Component })
+        })
+      }
+    }
+
+    render() {
+      if (this.state.Component) {
+        return <this.state.Component {...this.props} />
+      }
+
+      return null
+    }
   }
-}

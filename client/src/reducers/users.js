@@ -12,10 +12,7 @@ const users = (state = {}, action) => {
         ...state,
         [action.username]: {
           ...state[action.username],
-          following: [
-            ...state[action.username].following,
-            action.following
-          ]
+          following: [...state[action.username].following, action.following]
         }
       }
     case UNFOLLOW_USER:
@@ -23,7 +20,9 @@ const users = (state = {}, action) => {
         ...state,
         [action.username]: {
           ...state[action.username],
-          following: state[action.username].following.filter(user => user !== action.following)
+          following: state[action.username].following.filter(
+            user => user !== action.following
+          )
         }
       }
     default:

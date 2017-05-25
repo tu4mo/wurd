@@ -31,7 +31,11 @@ const deleteRelationship = async (req, res) => {
   try {
     const followingUser = await User.findOne({ username }).select({ _id: 1 })
 
-    await Relationship.findOneAndRemove({ following: followingUser._id, user: req.userId })
+    await Relationship.findOneAndRemove({
+      following: followingUser._id,
+      user: req.userId
+    })
+
     res.sendStatus(200)
   } catch (err) {
     console.log(err)

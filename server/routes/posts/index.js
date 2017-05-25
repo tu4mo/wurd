@@ -15,7 +15,9 @@ const decoratePostJSON = (post, userId, req) => ({
   user: {
     id: post.user._id,
     username: post.user.username,
-    profileUrl: post.user.hasProfilePhoto ? getProfileUrl(post.user._id, req) : null
+    profileUrl: post.user.hasProfilePhoto
+      ? getProfileUrl(post.user._id, req)
+      : null
   }
 })
 
@@ -26,9 +28,14 @@ const get = async (req, res) => {
     const query = {}
 
     if (filter === 'following') {
-      const followedUsers = await Relationship.find({ user: req.userId }).select({ following: 1 })
+      const followedUsers = await Relationship.find({
+        user: req.userId
+      }).select({ following: 1 })
+
       query.$or = [
-        ...followedUsers.map(relationship => ({ user: relationship.following })),
+        ...followedUsers.map(relationship => ({
+          user: relationship.following
+        })),
         { user: req.userId }
       ]
     }

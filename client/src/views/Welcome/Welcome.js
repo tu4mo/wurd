@@ -47,6 +47,4 @@ const mapStateToProps = state => ({
   error: getAuthenticationError(state)
 })
 
-export default connect(mapStateToProps, { logIn, signUp })(
-  Welcome
-)
+export default connect(mapStateToProps, { logIn, signUp })(Welcome)
