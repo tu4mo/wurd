@@ -1,4 +1,4 @@
-import { FETCH_USER } from '../actions'
+import { FETCH_USER, FOLLOW_USER, UNFOLLOW_USER } from '../actions'
 
 const users = (state = {}, action) => {
   switch (action.type) {
@@ -6,6 +6,25 @@ const users = (state = {}, action) => {
       return {
         ...state,
         [action.user.username]: action.user
+      }
+    case FOLLOW_USER:
+      return {
+        ...state,
+        [action.username]: {
+          ...state[action.username],
+          following: [
+            ...state[action.username].following,
+            action.following
+          ]
+        }
+      }
+    case UNFOLLOW_USER:
+      return {
+        ...state,
+        [action.username]: {
+          ...state[action.username],
+          following: state[action.username].following.filter(user => user !== action.following)
+        }
       }
     default:
       return state

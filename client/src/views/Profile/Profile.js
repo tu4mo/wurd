@@ -11,7 +11,11 @@ import {
 import { fetchPostsByUsername } from '../../actions/posts'
 import { isAuthenticated } from '../../selectors/auth'
 import { getPostsByUsername } from '../../selectors/posts'
-import { getAuthenticatedUser, getUser } from '../../selectors/users'
+import {
+  getAuthenticatedUser,
+  getUser,
+  isFollowingUsername
+} from '../../selectors/users'
 import Button from '../../components/Button'
 import Posts from '../../components/Posts'
 import ProfilePhoto from '../../components/ProfilePhoto'
@@ -31,6 +35,7 @@ class Profile extends Component {
     unfollowUser: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
+    isFollowing: PropTypes.bool.isRequired,
     isMe: PropTypes.bool.isRequired,
     location: PropTypes.object.isRequired,
     logOut: PropTypes.func.isRequired,
@@ -83,7 +88,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { isAuthenticated, isMe, posts, user } = this.props
+    const { isAuthenticated, isFollowing, isMe, posts, user } = this.props
 
     const FollowButton = ({ isFollowed }) => (
       <Button onClick={isFollowed ? this.onUnfollowClick : this.onFollowClick}>
@@ -107,7 +112,7 @@ class Profile extends Component {
               <div className="profile__buttons">
                 {isAuthenticated &&
                   !isMe &&
-                  <FollowButton isFollowed={user.isFollowed} />}
+                  <FollowButton isFollowed={isFollowing} />}
                 {isMe &&
                   <Button onClick={this.onSettingsClick} secondary>
                     Settings
@@ -119,11 +124,13 @@ class Profile extends Component {
               </div>
             </div>
             <div className="profile__stats">
-              <Stats
-                followers={user.followers}
-                following={user.following}
-                posts={user.posts}
-              />
+              {user.following &&
+                <Stats
+                  followers={user.followers}
+                  following={user.following.length}
+                  posts={user.posts}
+                />
+              }
             </div>
           </div>
         </div>
@@ -144,6 +151,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     isAuthenticated: isAuthenticated(state),
+    isFollowing: isFollowingUsername(userFromUrl)(state),
     isMe: user.username === userFromUrl,
     posts: getPostsByUsername(userFromUrl)(state),
     user: getUser(userFromUrl)(state) || {}

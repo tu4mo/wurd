@@ -1,4 +1,4 @@
-import { FETCH_USER } from '.'
+import { FETCH_USER, FOLLOW_USER, UNFOLLOW_USER } from '.'
 
 export const fetchUserByUsername = username => (dispatch, getState, api) => {
   api('get', `users/${username}`).then(response => {
@@ -10,7 +10,13 @@ export const fetchUserByUsername = username => (dispatch, getState, api) => {
 }
 
 export const followUser = username => (dispatch, getState, api) => {
-  api('post', `relationships?username=${username}`).then(response => {
+  dispatch({
+    type: FOLLOW_USER,
+    username: getState().auth.username,
+    following: username
+  })
+
+  return api('post', `relationships?username=${username}`).then(response => {
     // TODO: Instead of fetching the user separately,
     // make API return the user after following
     dispatch(fetchUserByUsername(username))
@@ -18,7 +24,13 @@ export const followUser = username => (dispatch, getState, api) => {
 }
 
 export const unfollowUser = username => (dispatch, getState, api) => {
-  api('delete', `relationships?username=${username}`).then(response => {
+  dispatch({
+    type: UNFOLLOW_USER,
+    username: getState().auth.username,
+    following: username
+  })
+
+  return api('delete', `relationships?username=${username}`).then(response => {
     // TODO: Instead of fetching the user separately,
     // make API return the user after following
     dispatch(fetchUserByUsername(username))

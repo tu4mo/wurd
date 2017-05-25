@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchHomePosts } from '../../actions/posts'
-import { getPostsForHome } from '../../selectors/posts'
+import { getFollowedPosts } from '../../selectors/posts'
 import Posts from '../../components/Posts'
 import './Home.scss'
 
@@ -32,7 +32,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  posts: getPostsForHome(state)
+  posts: getFollowedPosts(state)
 })
 
 export default connect(mapStateToProps, { fetchHomePosts })(Home)

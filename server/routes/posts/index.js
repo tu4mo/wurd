@@ -1,5 +1,6 @@
 // Require models
 const Post = require('../../models/Post')
+const Relationship = require('../../models/Relationship')
 const User = require('../../models/User')
 const { getProfileUrl } = require('../users')
 
@@ -19,10 +20,18 @@ const decoratePostJSON = (post, userId, req) => ({
 })
 
 const get = async (req, res) => {
-  const { limit = 10000, username } = req.query
+  const { filter, limit = 10000, username } = req.query
 
   try {
     const query = {}
+
+    if (filter === 'following') {
+      const followedUsers = await Relationship.find({ user: req.userId }).select({ following: 1 })
+      query.$or = [
+        ...followedUsers.map(relationship => ({ user: relationship.following })),
+        { user: req.userId }
+      ]
+    }
 
     if (username) {
       const user = await User.findOne({ username }).select({ _id: 1 })

@@ -16,17 +16,12 @@ const get = async (req, res) => {
     const user = await User.findOne({ username })
     const posts = await Post.count({ user: user._id })
     const followers = await Relationship.count({ following: user._id })
-    const following = await Relationship.count({ user: user._id })
-    const isFollowed = await Relationship.findOne({
-      following: user._id,
-      user: req.userId
-    })
+    const following = await Relationship.find({ user: user._id }, 'following').populate('following')
 
     return res.status(200).json({
       followers,
-      following,
+      following: following.map(followedUser => followedUser.following.username),
       id: user._id,
-      isFollowed: !!isFollowed,
       posts,
       profileUrl: user.hasProfilePhoto ? getProfileUrl(user._id, req) : null,
       username: user.username

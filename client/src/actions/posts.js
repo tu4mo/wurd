@@ -1,7 +1,7 @@
 import { CREATE_POST, FETCH_POST, FETCH_POSTS, LIKE_POST, UNLIKE_POST } from '.'
 
 export const fetchHomePosts = () => (dispatch, getState, api) => {
-  api('get', 'posts').then(response => {
+  api('get', 'posts?filter=following').then(response => {
     dispatch({
       type: FETCH_POSTS,
       posts: response.data
