@@ -69,6 +69,7 @@ class SignInUp extends Component {
           {tab === 'signup' &&
             <input
               className="sign-in-up__input sign-in-up__input--top"
+              maxLength="15"
               placeholder="username"
               onChange={this.onInputChange('username')}
               value={username}

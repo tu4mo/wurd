@@ -17,7 +17,11 @@ const userSchema = new mongoose.Schema(
       minlength: 1,
       type: String,
       unique: true,
-      required: true
+      required: true,
+      validate: {
+        validator: v => /^[a-zA-Z0-9_]+$/.test(v),
+        message: 'Invalid username'
+      }
     },
     password: {
       type: String,
