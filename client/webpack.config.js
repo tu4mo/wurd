@@ -6,6 +6,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const webpack = require('webpack')
 
+const styleLoaders = [
+  'css-loader',
+  'sass-loader',
+  {
+    loader: 'sass-resources-loader',
+    options: {
+      resources: ['./src/styles/variables.scss', './src/styles/mixins.scss']
+    }
+  }
+]
+
 const config = {
   devtool: isDev ? 'cheap-module-source-map' : '',
 
@@ -27,22 +38,12 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader',
-            'sass-loader',
-            {
-              loader: 'sass-resources-loader',
-              options: {
-                resources: [
-                  './src/styles/variables.scss',
-                  './src/styles/mixins.scss'
-                ]
-              }
-            }
-          ]
-        })
+        use: isDev
+          ? ['style-loader', ...styleLoaders]
+          : ExtractTextPlugin.extract({
+              fallback: 'style-loader',
+              use: styleLoaders
+            })
       },
       {
         test: /\.(jpg|png|svg)$/,
