@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { fetchUserByUsername } from '../../actions/users'
 import { createPost, fetchPostsByUsername } from '../../actions/posts'
 import { getAuthenticatedUser } from '../../selectors/users'
 import { withRouter } from 'react-router-dom'
@@ -15,6 +16,7 @@ class Header extends Component {
   static propTypes = {
     createPost: PropTypes.func.isRequired,
     fetchPostsByUsername: PropTypes.func.isRequired,
+    fetchUserByUsername: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     user: PropTypes.object
   }
@@ -40,6 +42,7 @@ class Header extends Component {
       this.setState({
         isComposerOpen: false
       })
+      this.props.fetchUserByUsername(this.props.user.username)
       this.props.fetchPostsByUsername(this.props.user.username)
     })
   }
@@ -87,4 +90,4 @@ const mapStateToProps = state => ({
   user: getAuthenticatedUser(state)
 })
 
-export default withRouter(connect(mapStateToProps, { createPost, fetchPostsByUsername })(Header))
+export default withRouter(connect(mapStateToProps, { createPost, fetchPostsByUsername, fetchUserByUsername })(Header))
