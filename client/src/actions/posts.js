@@ -28,12 +28,12 @@ export const createPost = post => (dispatch, getState, api) => {
 }
 
 export const likePost = id => (dispatch, getState, api) => {
-  return api('post', `posts/${id}/likes`).then(response => {
-    dispatch({
-      type: LIKE_POST,
-      id
-    })
+  dispatch({
+    type: LIKE_POST,
+    id
+  })
 
+  return api('post', `posts/${id}/likes`).then(response => {
     dispatch({
       type: FETCH_POST,
       post: response.data
@@ -42,12 +42,12 @@ export const likePost = id => (dispatch, getState, api) => {
 }
 
 export const unlikePost = id => (dispatch, getState, api) => {
-  return api('delete', `posts/${id}/likes`).then(response => {
-    dispatch({
-      type: UNLIKE_POST,
-      id
-    })
+  dispatch({
+    type: UNLIKE_POST,
+    id
+  })
 
+  return api('delete', `posts/${id}/likes`).then(response => {
     dispatch({
       type: FETCH_POST,
       post: response.data
