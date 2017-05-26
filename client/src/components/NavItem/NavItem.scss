@@ -2,7 +2,7 @@
   align-items: center;
   border-bottom: 2px solid transparent;
   display: flex;
-  height: $header-height;
+  height: var(--header-height);
   padding-top: 2px;
 
   &--active {

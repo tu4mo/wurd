@@ -3,5 +3,5 @@
   display: flex;
   justify-content: center;
   min-height: 100vh;
-  margin-top: -$header-height;
+  margin-top: calc(var(--header-height) * -1);
 }

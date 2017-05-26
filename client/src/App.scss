@@ -5,8 +5,13 @@
 }
 
 :root {
+  --header-height: 70px;
   --spacing-md: 15px;
   --spacing-sm: 15px;
+
+  @include breakpoint($breakpoint-sm) {
+    --header-height: 80px;
+  }
 
   @include breakpoint($breakpoint-md) {
     --spacing-md: 30px;
@@ -22,7 +27,7 @@ body {
 }
 
 .main {
-  padding-top: $header-height;
+  padding-top: var(--header-height);
   position: relative;
   z-index: 0;
 }
