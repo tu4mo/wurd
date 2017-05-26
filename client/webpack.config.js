@@ -1,6 +1,7 @@
 const isDev = process.env.NODE_ENV !== 'production'
 
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
@@ -49,7 +50,7 @@ const config = {
         test: /\.(jpg|png|svg)$/,
         loader: 'file-loader',
         options: {
-          name: './assets/[name].[hash].[ext]'
+          name: './images/[name].[hash].[ext]'
         }
       }
     ]
@@ -71,7 +72,8 @@ const config = {
     new ExtractTextPlugin({
       allChunks: true,
       filename: 'wurd.[hash].css'
-    })
+    }),
+    new CopyWebpackPlugin([{ from: 'src/assets/root' }])
   ],
 
   devServer: {
