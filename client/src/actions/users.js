@@ -1,7 +1,7 @@
 import { FETCH_USER, FOLLOW_USER, UNFOLLOW_USER } from '.'
 
 export const fetchUserByUsername = username => (dispatch, getState, api) => {
-  api('get', `users/${username}`).then(response => {
+  return api('get', `users/${username}`).then(response => {
     dispatch({
       type: FETCH_USER,
       user: response.data

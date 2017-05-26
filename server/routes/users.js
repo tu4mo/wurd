@@ -14,6 +14,11 @@ const get = async (req, res) => {
 
   try {
     const user = await User.findOne({ username })
+
+    if (!user) {
+      return res.sendStatus(404)
+    }
+
     const posts = await Post.count({ user: user._id })
     const followers = await Relationship.count({ following: user._id })
     const following = await Relationship.find(

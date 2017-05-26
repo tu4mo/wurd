@@ -24,10 +24,6 @@ import Stats from '../../components/Stats'
 import './Profile.scss'
 
 class Profile extends Component {
-  state = {
-    isSettingsOpen: false
-  }
-
   static propTypes = {
     fetchPostsByUsername: PropTypes.func.isRequired,
     fetchUserByUsername: PropTypes.func.isRequired,
@@ -45,6 +41,10 @@ class Profile extends Component {
     user: PropTypes.object.isRequired
   }
 
+  state = {
+    isSettingsOpen: false
+  }
+
   componentDidMount() {
     this.getUserForProfile(this.props.match.params.username)
   }
@@ -56,7 +56,11 @@ class Profile extends Component {
   }
 
   getUserForProfile = username => {
-    this.props.fetchUserByUsername(username)
+    this.props.fetchUserByUsername(username).catch(err => {
+      if (err.response.status === 404) {
+        this.props.history.push('/404')
+      }
+    })
     this.props.fetchPostsByUsername(username)
   }
 
@@ -89,6 +93,8 @@ class Profile extends Component {
 
   render() {
     const { isAuthenticated, isFollowing, isMe, posts, user } = this.props
+
+    if (!Object.keys(user).length) return null
 
     const FollowButton = ({ isFollowed }) => (
       <Button onClick={isFollowed ? this.onUnfollowClick : this.onFollowClick}>
