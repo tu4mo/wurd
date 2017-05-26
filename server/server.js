@@ -33,7 +33,8 @@ const port = process.env.PORT || 3000
 mongoose.connect(process.env.MONGODB_URI)
 
 // Serve static files
-app.use(express.static('../client/dist'))
+app.use(express.static(path.resolve(__dirname, '../dist')))
+app.use(express.static(path.resolve(__dirname, '../public')))
 app.use('/assets', express.static(path.join(__dirname, 'assets')))
 
 // Set up routes
@@ -42,7 +43,7 @@ app.use('/api', api)
 
 // Serve index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/dist/index.html'))
+  res.sendFile(path.resolve(__dirname, '../dist/index.html'))
 })
 
 // Start the server

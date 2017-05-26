@@ -1,7 +1,6 @@
 const isDev = process.env.NODE_ENV !== 'production'
 
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
@@ -13,7 +12,7 @@ const styleLoaders = [
   {
     loader: 'sass-resources-loader',
     options: {
-      resources: ['./src/styles/variables.scss', './src/styles/mixins.scss']
+      resources: ['./client/styles/variables.scss', './client/styles/mixins.scss']
     }
   }
 ]
@@ -22,8 +21,8 @@ const config = {
   devtool: isDev ? 'cheap-module-source-map' : '',
 
   entry: isDev
-    ? ['react-hot-loader/patch', './src/index.js']
-    : './src/index.js',
+    ? ['react-hot-loader/patch', './client/index.js']
+    : './client/index.js',
 
   output: {
     path: path.join(__dirname, 'dist'),
@@ -58,10 +57,9 @@ const config = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      favicon: 'src/assets/favicon.png',
       filename: 'index.html',
       inject: 'body',
-      template: path.join(__dirname, '/src/index.html')
+      template: path.join(__dirname, '/client/index.html')
     }),
     new webpack.DefinePlugin({
       'process.env': {
@@ -72,8 +70,7 @@ const config = {
     new ExtractTextPlugin({
       allChunks: true,
       filename: 'wurd.[hash].css'
-    }),
-    new CopyWebpackPlugin([{ from: 'src/assets/root' }])
+    })
   ],
 
   devServer: {

@@ -1,4 +1,4 @@
-client/dist/
+.env
+dist/
 node_modules/
-server/.env
 server/assets
