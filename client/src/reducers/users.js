@@ -7,6 +7,7 @@ const users = (state = {}, action) => {
         ...state,
         [action.user.username]: action.user
       }
+
     case FOLLOW_USER:
       return {
         ...state,
@@ -15,6 +16,7 @@ const users = (state = {}, action) => {
           following: [...state[action.username].following, action.following]
         }
       }
+
     case UNFOLLOW_USER:
       return {
         ...state,
@@ -25,6 +27,7 @@ const users = (state = {}, action) => {
           )
         }
       }
+
     default:
       return state
   }

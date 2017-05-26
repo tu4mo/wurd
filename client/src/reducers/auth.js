@@ -18,11 +18,13 @@ const auth = (state = INITIAL_STATE, action) => {
         ...INITIAL_STATE,
         error: state.error
       }
+
     case AUTH_SET_ERROR:
       return {
         ...state,
         error: action.error
       }
+
     case AUTH_SET_TOKEN:
       return {
         ...state,
@@ -30,6 +32,7 @@ const auth = (state = INITIAL_STATE, action) => {
         token: action.token,
         username: null
       }
+
     case AUTH_SET_USER:
       return {
         ...state,
@@ -37,6 +40,7 @@ const auth = (state = INITIAL_STATE, action) => {
         error: null,
         username: action.username
       }
+
     default:
       return state
   }

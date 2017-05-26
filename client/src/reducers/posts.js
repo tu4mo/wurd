@@ -9,11 +9,13 @@ const posts = (state = {}, action) => {
         ...state,
         [action.post.id]: action.post
       }
+
     case FETCH_POSTS:
       return {
         ...state,
         ..._.mapKeys(action.posts, 'id')
       }
+
     case LIKE_POST: {
       const post = state[action.id]
 
@@ -30,6 +32,7 @@ const posts = (state = {}, action) => {
 
       return state
     }
+
     case UNLIKE_POST: {
       const post = state[action.id]
 
@@ -46,6 +49,7 @@ const posts = (state = {}, action) => {
 
       return state
     }
+
     default:
       return state
   }
