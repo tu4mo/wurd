@@ -47,13 +47,19 @@ class Header extends Component {
     })
   }
 
-  render() {
-    const { location, user } = this.props
-    const { isComposerOpen } = this.state
+  isNavItemActive = to => {
+    const { pathname } = this.props.location
 
-    const isNavItemActive = to => {
-      return location.pathname === to
+    if (to === '/') {
+      return pathname === '/'
     }
+
+    return pathname.startsWith(to)
+  }
+
+  render() {
+    const { user } = this.props
+    const { isComposerOpen } = this.state
 
     return (
       <div
@@ -62,7 +68,7 @@ class Header extends Component {
         <header className="header">
           <div className="container">
             <nav className="navbar">
-              <NavItem isActive={isNavItemActive} to="/">
+              <NavItem isActive={this.isNavItemActive} to="/">
                 <img alt="Wurd" className="logo" src={logo} title="Wurd" />
               </NavItem>
               {user &&
@@ -70,7 +76,7 @@ class Header extends Component {
                   <Button onClick={this.onNewPostClick}>New Post</Button>
                 </NavItem>}
               {user &&
-                <NavItem isActive={isNavItemActive} to={`/${user.username}`}>
+                <NavItem isActive={this.isNavItemActive} to={`/${user.username}`}>
                   <ProfilePhoto size="small" url={user.profileUrl} />
                 </NavItem>}
             </nav>
