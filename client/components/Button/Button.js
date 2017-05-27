@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import './Button.scss'
 
-class Button extends Component {
+class Button extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
