@@ -41,6 +41,10 @@ class Post extends Component {
       classNames.push('post--placeholder')
     }
 
+    const postTime = new Date(createdAt) < Date.now() - (1000 * 60 * 60 * 24)
+      ? moment(createdAt).format('LL')
+      : moment(createdAt).fromNow()
+
     return (
       <div className={classNames.join(' ')}>
         <div className="post__header">
@@ -50,7 +54,7 @@ class Post extends Component {
           <Link className="post__user" to={`/${username}`}>
             {username}
           </Link>
-          <div className="post__time">{moment(createdAt).fromNow()}</div>
+          <div className="post__time">{postTime}</div>
         </div>
         <div
           className="post__body"
