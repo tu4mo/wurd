@@ -7,10 +7,11 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       required: true,
       index: true,
-      unique: true
-    },
-    hasProfilePhoto: {
-      type: Boolean
+      maxlength: 50,
+      unique: true,
+      validate: {
+        validator: v => /^\S+@\S+$/.test(v)
+      }
     },
     username: {
       maxlength: 15,
@@ -19,7 +20,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       required: true,
       validate: {
-        validator: v => /^[a-zA-Z0-9_]+$/.test(v),
+        validator: v => /^[a-z0-9_]+$/i.test(v),
         message: 'Invalid username'
       }
     },

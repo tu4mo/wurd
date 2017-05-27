@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+const hexColorRegExp = /^#[0-9a-f]{6}$/i
+
 const postSchema = new mongoose.Schema(
   {
     content: {
@@ -9,12 +11,21 @@ const postSchema = new mongoose.Schema(
       type: String
     },
     gradientEnd: {
+      maxlength: 7,
       required: true,
-      type: String
+      type: String,
+      validate: {
+        validator: v => hexColorRegExp.test(v),
+        message: 'Invalid gradient'
+      }
     },
     gradientStart: {
       required: true,
-      type: String
+      type: String,
+      validate: {
+        validator: v => hexColorRegExp.test(v),
+        message: 'Invalid gradient'
+      }
     },
     likes: {
       ref: 'User',
