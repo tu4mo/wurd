@@ -120,9 +120,9 @@ class Profile extends Component {
               </div>
             </div>
             <div className="profile__stats">
-              {user.following &&
+              {user.followers && user.following &&
                 <Stats
-                  followers={user.followers}
+                  followers={user.followers.length}
                   following={user.following.length}
                   posts={user.posts}
                 />}
