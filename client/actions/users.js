@@ -36,16 +36,3 @@ export const unfollowUser = username => (dispatch, getState, api) => {
     dispatch(fetchUserByUsername(username))
   })
 }
-
-export const saveProfilePhoto = (file, username) => (
-  dispatch,
-  getState,
-  api
-) => {
-  let data = new FormData()
-  data.append('file', file)
-
-  api('post', 'account/profile-photo', data).then(response => {
-    dispatch(fetchUserByUsername(username))
-  })
-}

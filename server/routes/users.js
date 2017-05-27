@@ -1,13 +1,14 @@
 // Require dependencies
 const bcrypt = require('bcrypt')
+const md5 = require('md5')
 
 // Require models
 const User = require('../models/User')
 const Post = require('../models/Post')
 const Relationship = require('../models/Relationship')
 
-const getProfileUrl = (userId, req) =>
-  `${req.protocol}://${req.get('host')}/assets/profile/${userId}.jpg`
+const getProfileUrl = email =>
+  `https://www.gravatar.com/avatar/${md5(email.trim())}?default=identicon&size=256`
 
 const get = async (req, res) => {
   const { username } = req.params
@@ -31,7 +32,7 @@ const get = async (req, res) => {
       following: following.map(followedUser => followedUser.following.username),
       id: user._id,
       posts,
-      profileUrl: user.hasProfilePhoto ? getProfileUrl(user._id, req) : null,
+      profileUrl: getProfileUrl(user.email),
       username: user.username
     })
   } catch (err) {

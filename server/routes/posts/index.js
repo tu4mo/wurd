@@ -15,9 +15,7 @@ const decoratePostJSON = (post, userId, req) => ({
   user: {
     id: post.user._id,
     username: post.user.username,
-    profileUrl: post.user.hasProfilePhoto
-      ? getProfileUrl(post.user._id, req)
-      : null
+    profileUrl: getProfileUrl(post.user.email)
   }
 })
 

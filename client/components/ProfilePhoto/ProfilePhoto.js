@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import profile from '../../assets/profile.png'
 import './ProfilePhoto.scss'
 
-const ProfilePhoto = ({ onUpload, size, url, username }) => {
+const ProfilePhoto = ({ isMe, size, url, username }) => {
   const classNames = ['profile-photo']
 
   if (size === 'small') {
@@ -15,25 +14,23 @@ const ProfilePhoto = ({ onUpload, size, url, username }) => {
       <img
         alt={username}
         className="profile-photo__image"
-        src={url || profile}
+        src={url}
         title={username}
       />
-      {onUpload &&
-        <div className="profile-photo__upload">
-          Upload Photo
-          <input
-            accept=".gif,.jpg,.png"
-            className="profile-photo__file-input"
-            onChange={onUpload}
-            type="file"
-          />
-        </div>}
+      {isMe &&
+        <a
+          className="profile-photo__change"
+          href="https://www.gravatar.com"
+          target="_blank"
+        >
+          Change Gravatar
+        </a>}
     </div>
   )
 }
 
 ProfilePhoto.propTypes = {
-  onUpload: PropTypes.func,
+  isMe: PropTypes.bool,
   size: PropTypes.oneOf(['small']),
   url: PropTypes.string,
   username: PropTypes.string

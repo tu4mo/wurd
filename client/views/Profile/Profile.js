@@ -5,8 +5,7 @@ import { logOut } from '../../actions/auth'
 import {
   fetchUserByUsername,
   followUser,
-  unfollowUser,
-  saveProfilePhoto
+  unfollowUser
 } from '../../actions/users'
 import { fetchPostsByUsername } from '../../actions/posts'
 import { isAuthenticated } from '../../selectors/auth'
@@ -37,7 +36,6 @@ class Profile extends Component {
     logOut: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
     posts: PropTypes.object.isRequired,
-    saveProfilePhoto: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired
   }
 
@@ -62,14 +60,6 @@ class Profile extends Component {
       }
     })
     this.props.fetchPostsByUsername(username)
-  }
-
-  onProfilePhotoUpload = e => {
-    if (!this.props.isMe) {
-      return
-    }
-
-    this.props.saveProfilePhoto(e.target.files[0])
   }
 
   onFollowClick = () => {
@@ -108,7 +98,7 @@ class Profile extends Component {
           <div className="profile">
             <div className="profile__photo">
               <ProfilePhoto
-                onUpload={isMe ? this.onProfilePhotoUpload : null}
+                isMe={isMe}
                 url={user.profileUrl}
                 username={user.username}
               />
@@ -168,6 +158,5 @@ export default connect(mapStateToProps, {
   fetchUserByUsername,
   followUser,
   logOut,
-  saveProfilePhoto,
   unfollowUser
 })(Profile)
