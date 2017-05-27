@@ -1,6 +1,13 @@
-import _ from 'lodash'
-
 import { FETCH_POST, FETCH_POSTS, LIKE_POST, UNLIKE_POST } from '../actions'
+
+const toObjByKey = (arr, key) =>
+  arr.reduce(
+    (acc, val) => ({
+      ...acc,
+      [val[key]]: val
+    }),
+    {}
+  )
 
 const posts = (state = {}, action) => {
   switch (action.type) {
@@ -13,7 +20,7 @@ const posts = (state = {}, action) => {
     case FETCH_POSTS:
       return {
         ...state,
-        ..._.mapKeys(action.posts, 'id')
+        ...toObjByKey(action.posts, 'id')
       }
 
     case LIKE_POST: {
