@@ -70,7 +70,7 @@ const getSingle = async (req, res) => {
   }
 }
 
-const post = (req, res) => {
+const post = async (req, res) => {
   const { content, gradientEnd, gradientStart } = req.body
 
   // Create new post
@@ -82,14 +82,14 @@ const post = (req, res) => {
   })
 
   // Save new post
-  newPost.save((err, post) => {
-    if (err) {
-      console.error(err)
-      return res.sendStatus(400)
-    }
-
-    res.status(201).json(decoratePostJSON(post, req.userId, req))
-  })
+  try {
+    const post = await newPost.save()
+    const populatedPost = await Post.findOne(post).populate('user')
+    return res.status(201).json(decoratePostJSON(populatedPost))
+  } catch (err) {
+    console.error(err)
+    return res.sendStatus(400)
+  }
 }
 
 module.exports = {
