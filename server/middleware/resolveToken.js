@@ -1,21 +1,21 @@
 const jwt = require('jsonwebtoken')
 
-const resolveToken = preventOnError => (req, res, next) => {
+const resolveToken = returnOnError => (req, res, next) => {
   const auth = req.headers['authorization']
 
-  if (preventOnError && !auth) {
+  if (returnOnError && !auth) {
     return res.sendStatus(403)
   }
 
-  const parts = auth.split(' ')
+  const parts = auth ? auth.split(' ') : []
   const token = parts[1]
 
-  if (preventOnError && !token) {
+  if (returnOnError && !token) {
     return res.sendStatus(403)
   }
 
   jwt.verify(token, process.env.JWT_SECRET, (err, jwtPayload) => {
-    if (preventOnError && err) {
+    if (returnOnError && err) {
       return res.sendStatus(403)
     }
 
