@@ -65,8 +65,7 @@ const config = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
-      },
-      __API__: JSON.stringify(isDev ? 'http://localhost:3000/api' : '/api')
+      }
     }),
     new ExtractTextPlugin({
       allChunks: true,
@@ -75,7 +74,10 @@ const config = {
   ],
 
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
   }
 }
 

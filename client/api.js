@@ -1,5 +1,3 @@
-/* global __API__ */
-
 import axios from 'axios'
 import store from './store'
 
@@ -13,6 +11,6 @@ export default (method, endpoint, data) => {
       Authorization: `Bearer ${token}`
     },
     method,
-    url: `${__API__}/${endpoint}`
+    url: `/api/${endpoint}`
   })
 }
