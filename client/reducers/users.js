@@ -13,7 +13,10 @@ const users = (state = {}, action) => {
         ...state,
         [action.username]: {
           ...state[action.username],
-          following: [...state[action.username].following, action.following]
+          following: [
+            ...state[action.username].following,
+            { username: action.following }
+          ]
         }
       }
 
@@ -23,7 +26,7 @@ const users = (state = {}, action) => {
         [action.username]: {
           ...state[action.username],
           following: state[action.username].following.filter(
-            user => user !== action.following
+            user => user.username !== action.following
           )
         }
       }

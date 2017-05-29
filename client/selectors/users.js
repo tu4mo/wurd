@@ -7,5 +7,9 @@ export const isFollowingUsername = username => state => {
 
   if (!authenticatedUser) return false
 
-  return authenticatedUser.following.includes(username)
+  return (
+    authenticatedUser.following.findIndex(
+      user => username === user.username
+    ) !== -1
+  )
 }
