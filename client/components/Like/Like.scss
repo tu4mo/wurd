@@ -14,7 +14,30 @@
 
   &--liked {
     .like__icon {
+      animation: heart-animation 0.5s;
       background-image: url('../../assets/like--active.png');
     }
+  }
+}
+
+@keyframes heart-animation {
+  0% {
+    transform: scale(1);
+  }
+
+  20% {
+    transform: scale(1.2);
+  }
+
+  30% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
   }
 }
