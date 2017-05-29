@@ -76,7 +76,10 @@ class Header extends Component {
                   <Button onClick={this.onNewPostClick}>New Post</Button>
                 </NavItem>}
               {user &&
-                <NavItem isActive={this.isNavItemActive} to={`/${user.username}`}>
+                <NavItem
+                  isActive={this.isNavItemActive}
+                  to={`/${user.username}`}
+                >
                   <ProfilePhoto size="small" url={user.profileUrl} />
                 </NavItem>}
             </nav>
@@ -96,4 +99,10 @@ const mapStateToProps = state => ({
   user: getAuthenticatedUser(state)
 })
 
-export default withRouter(connect(mapStateToProps, { createPost, fetchPostsByUsername, fetchUserByUsername })(Header))
+export default withRouter(
+  connect(mapStateToProps, {
+    createPost,
+    fetchPostsByUsername,
+    fetchUserByUsername
+  })(Header)
+)

@@ -25,11 +25,12 @@ class Like extends Component {
     const { liked, likes } = this.props
 
     return (
-      <div
-        className={`like ${liked ? 'like--liked' : ''}`}
-
-      >
-        <div className="like__icon" onClick={this.onLikeClick} title={`Like${liked ? 'd' : ''}`} />
+      <div className={`like ${liked ? 'like--liked' : ''}`}>
+        <div
+          className="like__icon"
+          onClick={this.onLikeClick}
+          title={`Like${liked ? 'd' : ''}`}
+        />
         <div className="like__count">
           {likes} like{likes !== 1 && 's'}
         </div>
