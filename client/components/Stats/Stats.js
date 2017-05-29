@@ -1,22 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import './Stats.scss'
 
-const Stats = ({ followers, following, posts }) => {
+const Stats = ({ followers, following, posts, username }) => {
   return (
     <div className="stats">
-      <div className="stat">
+      <Link className="stat" to={`/${username}`}>
         <div className="stat__number">{posts}</div>
         <div className="stat__text">posts</div>
-      </div>
-      <div className="stat">
+      </Link>
+      <Link className="stat" to={`/${username}/followers`}>
         <div className="stat__number">{followers}</div>
         <div className="stat__text">followers</div>
-      </div>
-      <div className="stat">
+      </Link>
+      <Link className="stat" to={`/${username}/following`}>
         <div className="stat__number">{following}</div>
         <div className="stat__text">following</div>
-      </div>
+      </Link>
     </div>
   )
 }
@@ -24,7 +25,8 @@ const Stats = ({ followers, following, posts }) => {
 Stats.propTypes = {
   followers: PropTypes.number,
   following: PropTypes.number,
-  posts: PropTypes.number
+  posts: PropTypes.number,
+  username: PropTypes.string
 }
 
 Stats.defaultProps = {

@@ -5,6 +5,7 @@
 
 .stat {
   text-align: center;
+  text-decoration: none;
 
   &:not(:first-child) {
     padding-left: var(--spacing-sm);

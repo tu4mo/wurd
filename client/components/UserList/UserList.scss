@@ -1,0 +1,9 @@
+.user-list {
+  margin: 0 auto;
+  max-width: 640px;
+
+  &__username {
+    margin-left: var(--spacing-sm);
+    text-decoration: none;
+  }
+}

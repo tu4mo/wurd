@@ -10,6 +10,11 @@ const Relationship = require('../models/Relationship')
 const getProfileUrl = email =>
   `https://www.gravatar.com/avatar/${md5(email.trim())}?default=identicon&size=256`
 
+const decorateFollowingUser = user => ({
+  username: user.username,
+  profileUrl: getProfileUrl(user.email)
+})
+
 const get = async (req, res) => {
   const { username } = req.params
 
@@ -31,8 +36,12 @@ const get = async (req, res) => {
     ).populate('following')
 
     return res.status(200).json({
-      followers: followers.map(relationship => relationship.user.username),
-      following: following.map(relationship => relationship.following.username),
+      followers: followers.map(relationship =>
+        decorateFollowingUser(relationship.user)
+      ),
+      following: following.map(relationship =>
+        decorateFollowingUser(relationship.following)
+      ),
       id: user._id,
       posts,
       profileUrl: getProfileUrl(user.email),

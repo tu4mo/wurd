@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logOut } from '../../actions/auth'
 import {
@@ -20,6 +21,7 @@ import Posts from '../../components/Posts'
 import ProfilePhoto from '../../components/ProfilePhoto'
 import Settings from '../../components/Settings'
 import Stats from '../../components/Stats'
+import UserList from '../../components/UserList'
 import './Profile.scss'
 
 class Profile extends Component {
@@ -120,19 +122,31 @@ class Profile extends Component {
               </div>
             </div>
             <div className="profile__stats">
-              {user.followers && user.following &&
+              {user.followers &&
+                user.following &&
                 <Stats
                   followers={user.followers.length}
                   following={user.following.length}
                   posts={user.posts}
+                  username={user.username}
                 />}
             </div>
           </div>
         </div>
         {this.state.isSettingsOpen && <Settings />}
-        <div className="profile-posts">
+        <div className="profile-body">
           <div className="container">
-            <Posts posts={posts} />
+            <Switch>
+              <Route exact path="/:username">
+                <Posts posts={posts} />
+              </Route>
+              <Route path="/:username/followers">
+                <UserList users={user.followers} />
+              </Route>
+              <Route path="/:username/following">
+                <UserList users={user.following} />
+              </Route>
+            </Switch>
           </div>
         </div>
       </div>

@@ -1,0 +1,15 @@
+.table {
+  @include rounded;
+
+  background-color: #fff;
+  border-spacing: 0;
+  width: 100%;
+
+  tr:not(:last-child) td {
+    border-bottom: 1px solid $color-ultra-light-gray;
+  }
+
+  td {
+    padding: var(--spacing-md);
+  }
+}

@@ -1,8 +1,10 @@
 .profile-photo {
   border-radius: 50%;
+  display: inline-block;
+  height: 160px;
   overflow: hidden;
   position: relative;
-  height: 160px;
+  vertical-align: middle;
   width: 160px;
 
   &:hover {
