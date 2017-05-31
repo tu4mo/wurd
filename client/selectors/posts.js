@@ -37,7 +37,10 @@ export const getFollowedPosts = state => {
 
   if (!state.users[username]) return {}
 
-  const followedUsers = [...state.users[username].following, username]
+  const followedUsers = [
+    ...state.users[username].following.map(user => user.username),
+    username
+  ]
 
   const filteredPosts = Object.keys(posts).reduce((acc, val) => {
     return followedUsers.includes(posts[val].user.username)
