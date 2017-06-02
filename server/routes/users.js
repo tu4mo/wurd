@@ -8,7 +8,9 @@ const Post = require('../models/Post')
 const Relationship = require('../models/Relationship')
 
 const getProfileUrl = email =>
-  `https://www.gravatar.com/avatar/${md5(email.trim())}?default=identicon&size=256`
+  `https://www.gravatar.com/avatar/${md5(
+    email.trim()
+  )}?default=identicon&size=256`
 
 const decorateFollowingUser = user => ({
   username: user.username,

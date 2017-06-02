@@ -63,7 +63,9 @@ class Header extends Component {
 
     return (
       <div
-        className={`header-container ${isComposerOpen ? 'header-container--with-composer' : ''}`}
+        className={`header-container ${isComposerOpen
+          ? 'header-container--with-composer'
+          : ''}`}
       >
         <header className="header">
           <div className="container">

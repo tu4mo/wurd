@@ -45,16 +45,18 @@ class ColorPicker extends Component {
 
     return (
       <div className="color-picker">
-        {GRADIENTS.map((gradient, i) => (
+        {GRADIENTS.map((gradient, i) =>
           <div
-            className={`color-picker__color ${gradient === value ? 'color-picker__color--active' : ''}`}
+            className={`color-picker__color ${gradient === value
+              ? 'color-picker__color--active'
+              : ''}`}
             key={i}
             onClick={() => onChange(gradient)}
             style={{
               backgroundImage: `linear-gradient(45deg, ${gradient.from}, ${gradient.to}`
             }}
           />
-        ))}
+        )}
       </div>
     )
   }

@@ -51,7 +51,9 @@ class SignInUp extends Component {
 
       return (
         <div
-          className={`sign-in-up__tab ${id === tab ? 'sign-in-up__tab--active' : ''}`}
+          className={`sign-in-up__tab ${id === tab
+            ? 'sign-in-up__tab--active'
+            : ''}`}
           onClick={() => changeTab(id)}
         >
           {label}
@@ -75,13 +77,17 @@ class SignInUp extends Component {
               value={username}
             />}
           <input
-            className={`sign-in-up__input sign-in-up__input--${tab === 'signup' ? 'middle' : 'top'}`}
+            className={`sign-in-up__input sign-in-up__input--${tab === 'signup'
+              ? 'middle'
+              : 'top'}`}
             placeholder="email"
             onChange={this.onInputChange('email')}
             value={email}
           />
           <input
-            className={`sign-in-up__input sign-in-up__input--${tab === 'signup' ? 'middle' : 'bottom'}`}
+            className={`sign-in-up__input sign-in-up__input--${tab === 'signup'
+              ? 'middle'
+              : 'bottom'}`}
             type="password"
             onChange={this.onInputChange('password')}
             placeholder="password"

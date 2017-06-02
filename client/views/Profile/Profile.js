@@ -88,11 +88,10 @@ class Profile extends Component {
 
     if (!Object.keys(user).length) return null
 
-    const FollowButton = ({ isFollowed }) => (
+    const FollowButton = ({ isFollowed }) =>
       <Button onClick={isFollowed ? this.onUnfollowClick : this.onFollowClick}>
         {isFollowed ? 'Unfollow' : 'Follow'}
       </Button>
-    )
 
     return (
       <div>

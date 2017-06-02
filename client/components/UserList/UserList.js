@@ -12,7 +12,7 @@ const UserList = ({ users }) => {
 
   return (
     <Table className="user-list">
-      {users.map(({ username, profileUrl }) => (
+      {users.map(({ username, profileUrl }) =>
         <Tr>
           <Td>
             <Link to={`/${username}`}>
@@ -26,7 +26,7 @@ const UserList = ({ users }) => {
             {/* Button */}
           </Td>
         </Tr>
-      ))}
+      )}
     </Table>
   )
 }
