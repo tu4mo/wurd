@@ -105,7 +105,7 @@ class Profile extends Component {
               />
             </div>
             <div className="profile__user">
-              <div className="profile__name">{user.username}</div>
+              {user.username}
             </div>
             <div className="profile__buttons">
               {isAuthenticated &&
