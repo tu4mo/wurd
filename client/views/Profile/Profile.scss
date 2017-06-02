@@ -1,9 +1,13 @@
 .profile {
   align-items: center;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   padding: var(--spacing-md) 0;
+
+  @include breakpoint($breakpoint-md) {
+    flex-direction: row;
+  }
 
   &__photo {
     flex: 0 0 auto;
@@ -16,22 +20,24 @@
     flex-direction: column;
     font-size: 30px;
     font-weight: 600;
-    margin-top: var(--spacing-sm);
+    margin: var(--spacing-sm) 0;
 
-    @include breakpoint($breakpoint-sm) {
+    @include breakpoint($breakpoint-md) {
       align-items: flex-start;
       flex: 0 0 auto;
-      margin-top: 0;
+      margin: 0;
       margin-left: $spacing-md;
     }
   }
 
-  &__name {
-    margin-bottom: $spacing-sm;
-  }
+  &__buttons {
+    @include breakpoint($breakpoint-md) {
+      margin-left: auto;
+    }
 
-  &__buttons > *:not(:last-child) {
-    margin-right: $spacing-sm;
+    & > *:not(:last-child) {
+      margin-right: $spacing-sm;
+    }
   }
 
   &__stats {
@@ -48,6 +54,10 @@
 }
 
 .profile-body {
-  border-top: 1px solid $color-ultra-light-gray;
-  padding: var(--spacing-md) 0;
+  padding-bottom: var(--spacing-md);
+
+  &__tabs {
+    border-bottom: 2px solid #fff;
+    margin-bottom: var(--spacing-md);
+  }
 }

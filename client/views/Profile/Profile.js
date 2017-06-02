@@ -106,34 +106,34 @@ class Profile extends Component {
             </div>
             <div className="profile__user">
               <div className="profile__name">{user.username}</div>
-              <div className="profile__buttons">
-                {isAuthenticated &&
-                  !isMe &&
-                  <FollowButton isFollowed={isFollowing} />}
-                {isMe &&
-                  <Button onClick={this.onSettingsClick} secondary>
-                    Settings
-                  </Button>}
-                {isMe &&
-                  <Button onClick={this.onLogOutClick} secondary>
-                    Log Out
-                  </Button>}
-              </div>
             </div>
-            <div className="profile__stats">
-              {user.followers &&
-                user.following &&
-                <Stats
-                  followers={user.followers.length}
-                  following={user.following.length}
-                  posts={user.posts}
-                  username={user.username}
-                />}
+            <div className="profile__buttons">
+              {isAuthenticated &&
+                !isMe &&
+                <FollowButton isFollowed={isFollowing} />}
+              {isMe &&
+                <Button onClick={this.onSettingsClick} secondary>
+                  Settings
+                </Button>}
+              {isMe &&
+                <Button onClick={this.onLogOutClick} secondary>
+                  Log Out
+                </Button>}
             </div>
           </div>
         </div>
         {this.state.isSettingsOpen && <Settings />}
         <div className="profile-body">
+          <div className="profile-body__tabs">
+            {user.followers &&
+              user.following &&
+              <Stats
+                followers={user.followers.length}
+                following={user.following.length}
+                posts={user.posts}
+                username={user.username}
+              />}
+          </div>
           <div className="container">
             <Switch>
               <Route exact path="/:username">

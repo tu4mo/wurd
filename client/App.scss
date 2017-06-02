@@ -8,6 +8,7 @@
   --header-height: 70px;
   --spacing-md: 15px;
   --spacing-sm: 15px;
+  --spacing-xs: 5px;
 
   @include breakpoint($breakpoint-sm) {
     --header-height: 80px;
