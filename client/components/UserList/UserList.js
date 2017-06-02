@@ -6,8 +6,8 @@ import ProfilePhoto from '../ProfilePhoto'
 import './UserList.scss'
 
 const UserList = ({ users }) => {
-  const cellFitWidth = {
-    width: '1%'
+  if (!users || users.length === 0) {
+    return null
   }
 
   return (
@@ -22,7 +22,7 @@ const UserList = ({ users }) => {
               {username}
             </Link>
           </Td>
-          <Td style={cellFitWidth}>
+          <Td style={{ width: '1%' }}>
             {/* Button */}
           </Td>
         </Tr>
