@@ -25,6 +25,7 @@ body {
   background: #f4f4f8;
   color: $color-dark-gray;
   font-family: $font;
+  -webkit-overflow-scrolling: touch;
 }
 
 .main {
