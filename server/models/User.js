@@ -10,7 +10,8 @@ const userSchema = new mongoose.Schema(
       maxlength: 50,
       unique: true,
       validate: {
-        validator: v => /^\S+@\S+$/.test(v)
+        validator: v => /^\S+@\S+$/.test(v),
+        message: 'Invalid e-mail'
       }
     },
     username: {

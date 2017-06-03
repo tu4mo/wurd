@@ -37,8 +37,6 @@ export const logIn = (email, password) => (dispatch, getState, api) => {
         type: AUTH_SET_ERROR,
         error: err.response.data.error
       })
-
-      throw err
     })
 }
 
@@ -46,21 +44,24 @@ export const logOut = () => ({
   type: AUTH_CLEAR
 })
 
-export const signUp = (username, email, password, passwordConfirm) => (
+export const signUp = (username, email, password, passwordConfirm) => async (
   dispatch,
   getState,
   api
 ) => {
-  api('post', 'users', {
-    email,
-    username,
-    password,
-    passwordConfirm
-  })
-    .then(response => {
-      dispatch(logIn(email, password))
+  try {
+    await api('post', 'users', {
+      email,
+      username,
+      password,
+      passwordConfirm
     })
-    .catch(err => {
-      throw err
+
+    dispatch(logIn(email, password))
+  } catch (err) {
+    dispatch({
+      type: AUTH_SET_ERROR,
+      error: err.response.data.error
     })
+  }
 }

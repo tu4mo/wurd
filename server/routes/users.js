@@ -60,11 +60,21 @@ const post = (req, res) => {
   if (
     !email ||
     !username ||
-    !password ||
-    password.length < 8 ||
-    password !== passwordConfirm
+    !password
   ) {
-    return res.sendStatus(400)
+    return res.status(400).json({ error: 'Fill in the required fields' })
+  }
+
+  if (password.length < 8) {
+    return res.status(400).json({
+      error: 'Password must be at least 8 characters'
+    })
+  }
+
+  if (password !== passwordConfirm) {
+    return res.status(400).json({
+      error: 'Passwords do not match'
+    })
   }
 
   // Create hashed password
@@ -82,7 +92,9 @@ const post = (req, res) => {
   newUser.save((err, user) => {
     if (err) {
       console.error(err)
-      return res.sendStatus(409)
+
+      const firstError = err.errors[Object.keys(err.errors)[0]]
+      return res.status(400).json({ error: firstError.message })
     }
 
     res.sendStatus(201)
