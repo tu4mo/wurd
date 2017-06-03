@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { logIn, signUp } from '../../actions/auth'
 import { getAuthenticationError } from '../../selectors/auth'
-import Alert from '../../components/Alert'
 import SignInUp from '../../components/SignInUp'
 import './Welcome.scss'
 
@@ -33,10 +32,10 @@ class Welcome extends Component {
             social networking service
           </h2>
           <SignInUp
+            errorMessage={error}
             onLoginSubmit={this.onLogInSubmit}
             onSignUpSubmit={this.onSignUpSubmit}
           />
-          {error && <Alert message={error} />}
         </div>
       </div>
     )

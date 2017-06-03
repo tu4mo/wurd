@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Alert from '../Alert'
 import Button from '../Button'
 import './SignInUp.scss'
 
 class SignInUp extends Component {
   static propTypes = {
+    errorMessage: PropTypes.string,
     onLoginSubmit: PropTypes.func.isRequired,
     onSignUpSubmit: PropTypes.func.isRequired
   }
 
   state = {
     email: '',
+    error: '',
     password: '',
     passwordConfirm: '',
     username: '',
@@ -41,6 +44,7 @@ class SignInUp extends Component {
 
   render() {
     const { email, password, passwordConfirm, tab, username } = this.state
+    const { errorMessage } = this.props
 
     const renderTab = (id, label) => {
       const changeTab = tab => {
@@ -104,6 +108,7 @@ class SignInUp extends Component {
           <Button className="sign-in-up__button">
             {tab === 'signup' ? 'Sign Up' : 'Log In'}
           </Button>
+          {errorMessage && <Alert message={errorMessage} />}
         </div>
       </form>
     )
