@@ -30,6 +30,7 @@ body {
 }
 
 .main {
+  padding-bottom: var(--toolbar-height);
   padding-top: var(--header-height);
   position: relative;
   z-index: 0;
