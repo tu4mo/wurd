@@ -17,12 +17,14 @@ const styleLoaders = [
   }
 ]
 
+const entry = ['babel-polyfill', './client/index.js']
+
 const config = {
   devtool: isDev ? 'cheap-module-source-map' : '',
 
   entry: isDev
-    ? ['react-hot-loader/patch', './client/index.js']
-    : './client/index.js',
+    ? ['react-hot-loader/patch', ...entry]
+    : entry,
 
   output: {
     path: path.join(__dirname, 'dist'),
