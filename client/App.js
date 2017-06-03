@@ -3,10 +3,11 @@ import PropTypes from 'prop-types'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { authenticateUser } from './actions/auth'
-import { getAuthenticatedUsername, isAuthenticated } from './selectors/auth'
+import { isAuthenticated } from './selectors/auth'
 import asyncComponent from './asyncComponent'
 import Header from './components/Header'
 import ScrollToTop from './components/ScrollToTop'
+import ToolBar from './components/ToolBar'
 import './App.scss'
 
 class App extends Component {
@@ -17,14 +18,6 @@ class App extends Component {
 
   componentDidMount() {
     this.props.authenticateUser()
-  }
-
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.isAuthenticated !== this.props.isAuthenticated) {
-      return true
-    } else {
-      return false
-    }
   }
 
   render() {
@@ -44,22 +37,25 @@ class App extends Component {
       import('./views/Welcome').then(module => module.default)
     )
 
+    const { isAuthenticated } = this.props
+
     return (
       <BrowserRouter>
         <ScrollToTop>
           <div className="app">
-            <Header />
+            <Route path="/" component={Header} />
             <main className="main">
               <Switch>
                 <Route
                   exact
                   path="/"
-                  component={this.props.isAuthenticated ? Home : Welcome}
+                  component={isAuthenticated ? Home : Welcome}
                 />
                 <Route path="/404" component={NotFound} />
                 <Route path="/:username" component={Profile} />
               </Switch>
             </main>
+            <Route path="/" component={ToolBar} />
           </div>
         </ScrollToTop>
       </BrowserRouter>
@@ -68,11 +64,9 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  authenticatedUsername: getAuthenticatedUsername(state),
   isAuthenticated: isAuthenticated(state)
 })
 
 export default connect(mapStateToProps, {
-  authenticateUser,
-  getAuthenticatedUsername
+  authenticateUser
 })(App)

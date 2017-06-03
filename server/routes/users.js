@@ -57,11 +57,7 @@ const get = async (req, res) => {
 const post = (req, res) => {
   const { email, username, password, passwordConfirm } = req.body
 
-  if (
-    !email ||
-    !username ||
-    !password
-  ) {
+  if (!email || !username || !password) {
     return res.status(400).json({ error: 'Fill in the required fields' })
   }
 

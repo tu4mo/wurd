@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { fetchUserByUsername } from '../../actions/users'
 import { createPost, fetchPostsByUsername } from '../../actions/posts'
 import { getAuthenticatedUser } from '../../selectors/users'
-import { withRouter } from 'react-router-dom'
 import Button from '../../components/Button'
 import Composer from '../../components/Composer'
 import NavItem from '../../components/NavItem'
@@ -17,7 +16,6 @@ class Header extends Component {
     createPost: PropTypes.func.isRequired,
     fetchPostsByUsername: PropTypes.func.isRequired,
     fetchUserByUsername: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired,
     user: PropTypes.object
   }
 
@@ -47,16 +45,6 @@ class Header extends Component {
     })
   }
 
-  isNavItemActive = to => {
-    const { pathname } = this.props.location
-
-    if (to === '/') {
-      return pathname === '/'
-    }
-
-    return pathname.startsWith(to)
-  }
-
   render() {
     const { user } = this.props
     const { isComposerOpen } = this.state
@@ -67,31 +55,30 @@ class Header extends Component {
           ? 'header-container--with-composer'
           : ''}`}
       >
-        <header className="header">
-          <div className="container">
-            <nav className="navbar">
-              <NavItem isActive={this.isNavItemActive} to="/">
-                <img alt="Wurd" className="logo" src={logo} title="Wurd" />
-              </NavItem>
-              {user &&
-                <NavItem className="nav-item--ml-auto nav-item--mr">
-                  <Button onClick={this.onNewPostClick}>New Post</Button>
-                </NavItem>}
-              {user &&
-                <NavItem
-                  isActive={this.isNavItemActive}
-                  to={`/${user.username}`}
-                >
-                  <ProfilePhoto size="small" url={user.profileUrl} />
-                </NavItem>}
-            </nav>
-          </div>
+        <div className="header-container__shadow">
+          <header className="header">
+            <div className="container container--full-height">
+              <nav className="navbar">
+                <NavItem to="/">
+                  <img alt="Wurd" className="logo" src={logo} title="Wurd" />
+                </NavItem>
+                {user &&
+                  <NavItem className="header__new-post">
+                    <Button onClick={this.onNewPostClick}>New Post</Button>
+                  </NavItem>}
+                {user &&
+                  <NavItem className="header__profile" to={`/${user.username}`}>
+                    <ProfilePhoto size="small" url={user.profileUrl} />
+                  </NavItem>}
+              </nav>
+            </div>
+          </header>
           <Composer
             isOpen={isComposerOpen}
             onCloseClick={this.onComposerCloseClick}
             onSaveClick={this.onComposerSaveClick}
           />
-        </header>
+        </div>
       </div>
     )
   }
@@ -101,10 +88,8 @@ const mapStateToProps = state => ({
   user: getAuthenticatedUser(state)
 })
 
-export default withRouter(
-  connect(mapStateToProps, {
-    createPost,
-    fetchPostsByUsername,
-    fetchUserByUsername
-  })(Header)
-)
+export default connect(mapStateToProps, {
+  createPost,
+  fetchPostsByUsername,
+  fetchUserByUsername
+})(Header)

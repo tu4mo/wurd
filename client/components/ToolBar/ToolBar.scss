@@ -1,0 +1,19 @@
+.tool-bar {
+  background-color: #fff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  bottom: 0;
+  display: flex;
+  height: var(--toolbar-height);
+  left: 0;
+  position: fixed;
+  right: 0;
+
+  @include breakpoint($breakpoint-sm) {
+    display: none;
+  }
+
+  & > * {
+    flex: 1 0 50%;
+    justify-content: center;
+  }
+}

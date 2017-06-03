@@ -48,26 +48,28 @@ class Composer extends Component {
     }
 
     return (
-      <div className="composer">
-        <input
-          className="composer__input"
-          maxLength="30"
-          onChange={this.onContentChange}
-          placeholder="write here"
-          ref={ref => (this.input = ref)}
-          style={{
-            backgroundImage: `linear-gradient(45deg, ${color.from}, ${color.to})`
-          }}
-          value={content}
-        />
-        <ColorPicker onChange={this.onColorChange} value={color} />
-        <div className="composer__buttons">
-          <Button onClick={this.onSaveClick}>
-            Save
-          </Button>
-          <Button onClick={onCloseClick}>
-            Cancel
-          </Button>
+      <div className="composer-perspective">
+        <div className="composer">
+          <input
+            className="composer__input"
+            maxLength="30"
+            onChange={this.onContentChange}
+            placeholder="write here"
+            ref={ref => (this.input = ref)}
+            style={{
+              backgroundImage: `linear-gradient(45deg, ${color.from}, ${color.to})`
+            }}
+            value={content}
+          />
+          <ColorPicker onChange={this.onColorChange} value={color} />
+          <div className="composer__buttons">
+            <Button onClick={this.onSaveClick}>
+              Save
+            </Button>
+            <Button onClick={onCloseClick}>
+              Cancel
+            </Button>
+          </div>
         </div>
       </div>
     )

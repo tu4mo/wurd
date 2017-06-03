@@ -5,6 +5,10 @@
   top: 0;
   z-index: 1;
 
+  &__shadow {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  }
+
   &--with-composer {
     animation: header-background-fade 4s forwards ease-out;
     background-color: transparent;
@@ -13,12 +17,26 @@
 }
 
 .header {
-  background-color: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  background-color: var(--header-background-color);
+  height: var(--header-height);
+
+  &__new-post {
+    margin-left: auto;
+  }
+
+  &__profile {
+    display: none;
+
+    @include breakpoint($breakpoint-sm) {
+      display: flex;
+      margin-left: var(--spacing-md);
+    }
+  }
 }
 
 .navbar {
   display: flex;
+  height: 100%;
 }
 
 .logo {

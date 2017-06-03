@@ -5,8 +5,8 @@ import './ProfilePhoto.scss'
 const ProfilePhoto = ({ isMe, size, url, username }) => {
   const classNames = ['profile-photo']
 
-  if (size === 'small') {
-    classNames.push('profile-photo--small')
+  if (size) {
+    classNames.push(`profile-photo--${size}`)
   }
 
   return (
@@ -31,7 +31,7 @@ const ProfilePhoto = ({ isMe, size, url, username }) => {
 
 ProfilePhoto.propTypes = {
   isMe: PropTypes.bool,
-  size: PropTypes.oneOf(['small']),
+  size: PropTypes.oneOf(['small', 'tiny']),
   url: PropTypes.string,
   username: PropTypes.string
 }
