@@ -12,7 +12,10 @@ const styleLoaders = [
   {
     loader: 'sass-resources-loader',
     options: {
-      resources: ['./client/styles/variables.scss', './client/styles/mixins.scss']
+      resources: [
+        './client/styles/variables.scss',
+        './client/styles/mixins.scss'
+      ]
     }
   }
 ]
@@ -22,9 +25,7 @@ const entry = ['babel-polyfill', './client/index.js']
 const config = {
   devtool: isDev ? 'cheap-module-source-map' : '',
 
-  entry: isDev
-    ? ['react-hot-loader/patch', ...entry]
-    : entry,
+  entry: isDev ? ['react-hot-loader/patch', ...entry] : entry,
 
   output: {
     path: path.join(__dirname, 'dist'),
