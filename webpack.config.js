@@ -64,15 +64,11 @@ const config = {
       inject: 'body',
       template: path.join(__dirname, '/client/index.html')
     }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
     new ExtractTextPlugin({
       allChunks: true,
       filename: 'wurd.[hash].css'
-    })
+    }),
+    new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/)
   ],
 
   devServer: {
@@ -86,7 +82,6 @@ const config = {
 if (!isDev) {
   config.plugins.push(
     new CleanWebpackPlugin('dist'),
-    new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/),
     new webpack.optimize.UglifyJsPlugin({
       output: {
         comments: false
