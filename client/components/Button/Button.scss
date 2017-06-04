@@ -40,10 +40,11 @@
 
   &--secondary {
     background-color: $color-gray;
-    border-color: $color-gray;
+    border: 2px solid $color-gray;
     color: #fff;
 
     &:hover {
+      background-color: $color-dark-gray;
       border-color: $color-dark-gray;
     }
   }
