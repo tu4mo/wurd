@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+const postContentRegExp = /[^A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff]/
 const hexColorRegExp = /^#[0-9a-f]{6}$/i
 
 const postSchema = new mongoose.Schema(
@@ -8,7 +9,11 @@ const postSchema = new mongoose.Schema(
       maxlength: 30,
       minlength: 1,
       required: true,
-      type: String
+      type: String,
+      validate: {
+        validator: v => !postContentRegExp.test(v),
+        message: 'Post validation failed'
+      }
     },
     gradientEnd: {
       maxlength: 7,
