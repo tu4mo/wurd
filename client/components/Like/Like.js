@@ -8,9 +8,9 @@ class Like extends Component {
   static propTypes = {
     liked: PropTypes.bool,
     likes: PropTypes.number,
-    likePost: PropTypes.object.isRequired,
-    postId: PropTypes.number,
-    unlikePost: PropTypes.func
+    likePost: PropTypes.func.isRequired,
+    postId: PropTypes.string,
+    unlikePost: PropTypes.func.isRequired
   }
 
   onLikeClick = () => {

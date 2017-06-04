@@ -1,4 +1,10 @@
-import { FETCH_POST, FETCH_POSTS, LIKE_POST, UNLIKE_POST } from '../actions'
+import {
+  DELETE_POST,
+  FETCH_POST,
+  FETCH_POSTS,
+  LIKE_POST,
+  UNLIKE_POST
+} from '../actions'
 
 const toObjByKey = (arr, key) =>
   arr.reduce(
@@ -11,6 +17,10 @@ const toObjByKey = (arr, key) =>
 
 const posts = (state = {}, action) => {
   switch (action.type) {
+    case DELETE_POST:
+      const { [action.id]: omit, ...rest } = state
+      return rest
+
     case FETCH_POST:
       return {
         ...state,

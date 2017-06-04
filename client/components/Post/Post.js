@@ -3,50 +3,58 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import { Textfit } from 'react-textfit'
+import Icon from '../Icon'
 import Like from '../Like'
+import PostMenu from '../PostMenu'
 import ProfilePhoto from '../ProfilePhoto'
 import './Post.scss'
 
 class Post extends Component {
   static propTypes = {
-    content: PropTypes.string,
-    createdAt: PropTypes.string,
-    gradientEnd: PropTypes.string,
-    gradientStart: PropTypes.string,
-    id: PropTypes.number,
     isPlaceholder: PropTypes.bool,
-    liked: PropTypes.bool,
-    likes: PropTypes.number,
-    profileUrl: PropTypes.string,
-    username: PropTypes.string
+    post: PropTypes.object
+  }
+
+  state = {
+    isMenuOpen: false
+  }
+
+  onMenuClick = () => {
+    this.setState(prevState => ({
+      isMenuOpen: !prevState.isMenuOpen
+    }))
   }
 
   render() {
-    const {
-      content,
-      gradientEnd,
-      gradientStart,
-      createdAt,
-      id,
-      isPlaceholder,
-      liked,
-      likes,
-      profileUrl,
-      username
-    } = this.props
-
-    const classNames = ['post']
-
-    if (isPlaceholder) {
-      classNames.push('post--placeholder')
+    if (!this.props.post || this.props.isPlaceholder) {
+      return (
+        <div className="post post--placeholder">
+          <div className="post__header" />
+          <div className="post__body" />
+          <div className="post__footer" />
+        </div>
+      )
     }
+
+    const {
+      post: {
+        content,
+        gradientEnd,
+        gradientStart,
+        createdAt,
+        id,
+        liked,
+        likes,
+        user: { username, profileUrl }
+      }
+    } = this.props
 
     const postTime = new Date(createdAt) < Date.now() - 1000 * 60 * 60 * 24
       ? moment(createdAt).format('LL')
       : moment(createdAt).fromNow()
 
     return (
-      <div className={classNames.join(' ')}>
+      <div className="post">
         <div className="post__header">
           <Link className="post__profile" to={`/${username}`}>
             <ProfilePhoto size="small" url={profileUrl} />
@@ -68,7 +76,12 @@ class Post extends Component {
         </div>
         <div className="post__footer">
           <Like liked={liked} likes={likes} postId={id} />
+          <Icon name="menu" onClick={this.onMenuClick} />
         </div>
+        {this.state.isMenuOpen &&
+          <div className="post__menu">
+            <PostMenu postId={id} />
+          </div>}
       </div>
     )
   }

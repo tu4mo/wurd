@@ -20,21 +20,7 @@ const Posts = ({ posts }) => {
     <div className="posts">
       {Object.keys(posts).map(key => {
         const post = posts[key]
-
-        return (
-          <Post
-            content={post.content}
-            createdAt={post.createdAt}
-            gradientStart={post.gradientStart}
-            gradientEnd={post.gradientEnd}
-            id={post.id}
-            key={key}
-            liked={post.liked}
-            likes={post.likes}
-            profileUrl={post.user.profileUrl}
-            username={post.user ? post.user.username : null}
-          />
-        )
+        return <Post post={post} key={key} />
       })}
     </div>
   )

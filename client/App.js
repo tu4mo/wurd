@@ -55,7 +55,7 @@ class App extends Component {
                 <Route path="/:username" component={Profile} />
               </Switch>
             </main>
-            <Route path="/" component={ToolBar} />
+            {isAuthenticated && <Route path="/" component={ToolBar} />}
           </div>
         </ScrollToTop>
       </BrowserRouter>

@@ -1,4 +1,11 @@
-import { CREATE_POST, FETCH_POST, FETCH_POSTS, LIKE_POST, UNLIKE_POST } from '.'
+import {
+  CREATE_POST,
+  DELETE_POST,
+  FETCH_POST,
+  FETCH_POSTS,
+  LIKE_POST,
+  UNLIKE_POST
+} from '.'
 
 export const fetchHomePosts = () => (dispatch, getState, api) => {
   api('get', 'posts?filter=following').then(response => {
@@ -53,4 +60,13 @@ export const unlikePost = id => (dispatch, getState, api) => {
       post: response.data
     })
   })
+}
+
+export const deletePost = id => (dispatch, getState, api) => {
+  dispatch({
+    type: DELETE_POST,
+    id
+  })
+
+  return api('delete', `posts/${id}`).then(() => {})
 }

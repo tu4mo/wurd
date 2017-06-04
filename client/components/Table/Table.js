@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import './Table.scss'
 
 const Table = ({ children, className }) => {
-  return <table className={`table ${className}`}>{children}</table>
+  return (
+    <table className={`table ${className}`}><tbody>{children}</tbody></table>
+  )
 }
 
 Table.propTypes = {

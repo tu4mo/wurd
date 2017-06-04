@@ -92,9 +92,26 @@ const post = async (req, res) => {
   }
 }
 
+const deletePost = async (req, res) => {
+  const { id } = req.params
+
+  try {
+    await Post.deleteOne({
+      _id: id,
+      user: req.userId
+    })
+
+    return res.sendStatus(200)
+  } catch (err) {
+    console.log(err)
+    return res.sendStatus(400)
+  }
+}
+
 module.exports = {
   decoratePostJSON,
   get,
   getSingle,
-  post
+  post,
+  deletePost
 }

@@ -1,3 +1,5 @@
+import { getAuthenticatedUsername } from './auth'
+
 const sortPostsByCreatedAt = posts => {
   const entries = Object.entries(posts)
   const sorted = entries
@@ -52,4 +54,16 @@ export const getFollowedPosts = state => {
   }, {})
 
   return sortPostsByCreatedAt(filteredPosts)
+}
+
+export const getAllPosts = state => state.posts
+
+export const getPostById = postId => state => {
+  const allPosts = getAllPosts(state)
+  return allPosts[postId]
+}
+
+export const isPostMine = postId => state => {
+  const post = getPostById(postId)(state)
+  return post.user.username === getAuthenticatedUsername(state)
 }
