@@ -9,7 +9,7 @@
     "start": "node server/server.js"
   },
   "engines": {
-    "node": "7.10.0"
+    "node": "8.1.0"
   },
   "dependencies": {
     "axios": "^0.16.2",
