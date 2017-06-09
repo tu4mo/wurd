@@ -19,25 +19,25 @@ export const authenticateUser = () => async (dispatch, getState, api) => {
   }
 }
 
-export const logIn = (email, password) => (dispatch, getState, api) => {
-  return api('post', 'auth', {
-    email,
-    password
-  })
-    .then(response => {
-      dispatch({
-        type: AUTH_SET_TOKEN,
-        token: response.data.token
-      })
+export const logIn = (email, password) => async (dispatch, getState, api) => {
+  try {
+    const response = await api('post', 'auth', {
+      email,
+      password
+    })
 
-      dispatch(authenticateUser())
+    dispatch({
+      type: AUTH_SET_TOKEN,
+      token: response.data.token
     })
-    .catch(err => {
-      dispatch({
-        type: AUTH_SET_ERROR,
-        error: err.response.data.error
-      })
+
+    dispatch(authenticateUser())
+  } catch (err) {
+    dispatch({
+      type: AUTH_SET_ERROR,
+      error: err.response.data.error
     })
+  }
 }
 
 export const logOut = () => ({
