@@ -13,7 +13,7 @@ const UserList = ({ users }) => {
   return (
     <Table className="user-list">
       {users.map(({ username, profileUrl }) =>
-        <Tr>
+        <Tr key={username}>
           <Td>
             <Link to={`/${username}`}>
               <ProfilePhoto size="small" url={profileUrl} username={username} />
