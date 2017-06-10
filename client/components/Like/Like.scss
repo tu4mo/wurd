@@ -4,8 +4,6 @@
   display: flex;
 
   &__icon {
-    background-image: url('../../assets/like.png');
-    background-size: 24px 22px;
     cursor: pointer;
     height: 22px;
     margin-right: $spacing-sm;
@@ -15,7 +13,6 @@
   &--liked {
     .like__icon {
       animation: heart-animation 0.5s;
-      background-image: url('../../assets/like--active.png');
     }
   }
 }
