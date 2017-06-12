@@ -11,12 +11,9 @@ import {
 import { fetchPostsByUsername } from '../../actions/posts'
 import { isAuthenticated } from '../../selectors/auth'
 import { getPostsByUsername } from '../../selectors/posts'
-import {
-  getAuthenticatedUser,
-  getUser,
-  isFollowingUsername
-} from '../../selectors/users'
+import { getAuthenticatedUser, getUser } from '../../selectors/users'
 import Button from '../../components/Button'
+import FollowButton from '../../components/FollowButton'
 import Posts from '../../components/Posts'
 import ProfilePhoto from '../../components/ProfilePhoto'
 import Settings from '../../components/Settings'
@@ -28,11 +25,8 @@ class Profile extends Component {
   static propTypes = {
     fetchPostsByUsername: PropTypes.func.isRequired,
     fetchUserByUsername: PropTypes.func.isRequired,
-    followUser: PropTypes.func.isRequired,
-    unfollowUser: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
-    isFollowing: PropTypes.bool.isRequired,
     isMe: PropTypes.bool.isRequired,
     location: PropTypes.object.isRequired,
     logOut: PropTypes.func.isRequired,
@@ -64,14 +58,6 @@ class Profile extends Component {
     this.props.fetchPostsByUsername(username)
   }
 
-  onFollowClick = () => {
-    this.props.followUser(this.props.user.username)
-  }
-
-  onUnfollowClick = () => {
-    this.props.unfollowUser(this.props.user.username)
-  }
-
   onSettingsClick = () => {
     this.setState(prevState => ({
       isSettingsOpen: !prevState.isSettingsOpen
@@ -84,14 +70,9 @@ class Profile extends Component {
   }
 
   render() {
-    const { isAuthenticated, isFollowing, isMe, posts, user } = this.props
+    const { isAuthenticated, isMe, posts, user } = this.props
 
     if (!Object.keys(user).length) return null
-
-    const FollowButton = ({ isFollowed }) =>
-      <Button onClick={isFollowed ? this.onUnfollowClick : this.onFollowClick}>
-        {isFollowed ? 'Unfollow' : 'Follow'}
-      </Button>
 
     return (
       <div>
@@ -110,7 +91,7 @@ class Profile extends Component {
             <div className="profile__buttons">
               {isAuthenticated &&
                 !isMe &&
-                <FollowButton isFollowed={isFollowing} />}
+                <FollowButton username={user.username} />}
               {isMe &&
                 <Button onClick={this.onSettingsClick} secondary>
                   Settings
@@ -159,7 +140,6 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     isAuthenticated: isAuthenticated(state),
-    isFollowing: isFollowingUsername(userFromUrl)(state),
     isMe: user.username === userFromUrl,
     posts: getPostsByUsername(userFromUrl)(state),
     user: getUser(userFromUrl)(state) || {}

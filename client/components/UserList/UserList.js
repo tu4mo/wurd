@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import FollowButton from '../FollowButton'
 import { Table, Tr, Td } from '../Table'
 import ProfilePhoto from '../ProfilePhoto'
 import './UserList.scss'
@@ -22,8 +23,8 @@ const UserList = ({ users }) => {
               {username}
             </Link>
           </Td>
-          <Td style={{ width: '1%' }}>
-            {/* Button */}
+          <Td style={{ textAlign: 'right', width: '1%' }}>
+            <FollowButton username={username} />
           </Td>
         </Tr>
       )}
