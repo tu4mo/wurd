@@ -59,9 +59,13 @@ class Header extends Component {
           <header className="header">
             <div className="container container--full-height">
               <nav className="navbar">
-                <NavItem to="/">
+                <NavItem to="/" className="navbar__item">
                   <img alt="Wurd" className="logo" src={logo} title="Wurd" />
                 </NavItem>
+                {user &&
+                  <NavItem to="/users" className="header__users navbar__item">
+                    Users
+                  </NavItem>}
                 {user &&
                   <NavItem className="header__new-post">
                     <Button onClick={this.onNewPostClick}>New Post</Button>

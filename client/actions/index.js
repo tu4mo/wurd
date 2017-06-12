@@ -11,5 +11,6 @@ export const LIKE_POST = 'LIKE_POST'
 export const UNLIKE_POST = 'UNLIKE_POST'
 
 export const FETCH_USER = 'FETCH_USER'
+export const FETCH_USERS = 'FETCH_USERS'
 export const FOLLOW_USER = 'FOLLOW_USER'
 export const UNFOLLOW_USER = 'UNFOLLOW_USER'

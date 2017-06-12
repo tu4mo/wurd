@@ -20,6 +20,14 @@
   background-color: var(--header-background-color);
   height: var(--header-height);
 
+  &__users {
+    display: none;
+
+    @include breakpoint($breakpoint-sm) {
+      display: flex;
+    }
+  }
+
   &__new-post {
     margin-left: auto;
   }
@@ -37,6 +45,10 @@
 .navbar {
   display: flex;
   height: 100%;
+
+  &__item {
+    margin-right: var(--spacing-md);
+  }
 }
 
 .logo {

@@ -14,6 +14,7 @@ const ToolBar = ({ user }) => {
   return (
     <div className="tool-bar">
       <NavItem to="/">Feed</NavItem>
+      <NavItem to="/users">Users</NavItem>
       <NavItem to={`/${user.username}`}>
         <ProfilePhoto
           url={user.profileUrl}

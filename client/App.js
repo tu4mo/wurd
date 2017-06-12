@@ -33,6 +33,10 @@ class App extends Component {
       import('./views/Profile').then(module => module.default)
     )
 
+    const Users = asyncComponent(() =>
+      import('./views/Users').then(module => module.default)
+    )
+
     const Welcome = asyncComponent(() =>
       import('./views/Welcome').then(module => module.default)
     )
@@ -51,6 +55,7 @@ class App extends Component {
                   path="/"
                   component={isAuthenticated ? Home : Welcome}
                 />
+                <Route path="/users" component={Users} />
                 <Route path="/404" component={NotFound} />
                 <Route path="/:username" component={Profile} />
               </Switch>

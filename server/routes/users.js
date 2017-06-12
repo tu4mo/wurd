@@ -17,7 +17,47 @@ const decorateFollowingUser = user => ({
   profileUrl: getProfileUrl(user.email)
 })
 
+const decorateUser = async user => {
+  const posts = await Post.count({ user: user._id })
+
+  const followers = await Relationship.find(
+    { following: user._id },
+    'user'
+  ).populate('user')
+
+  const following = await Relationship.find(
+    { user: user._id },
+    'following'
+  ).populate('following')
+
+  return {
+    followers: followers.map(relationship =>
+      decorateFollowingUser(relationship.user)
+    ),
+    following: following.map(relationship =>
+      decorateFollowingUser(relationship.following)
+    ),
+    id: user._id,
+    posts,
+    profileUrl: getProfileUrl(user.email),
+    username: user.username
+  }
+}
+
 const get = async (req, res) => {
+  try {
+    const users = await User.find().sort('username')
+    const decoratedUsers = await Promise.all(users.map(decorateUser))
+
+    return res.status(200).json({
+      users: decoratedUsers
+    })
+  } catch (err) {
+    return res.sendStatus(500)
+  }
+}
+
+const getSingle = async (req, res) => {
   const { username } = req.params
 
   try {
@@ -27,28 +67,9 @@ const get = async (req, res) => {
       return res.sendStatus(404)
     }
 
-    const posts = await Post.count({ user: user._id })
-    const followers = await Relationship.find(
-      { following: user._id },
-      'user'
-    ).populate('user')
-    const following = await Relationship.find(
-      { user: user._id },
-      'following'
-    ).populate('following')
+    const decoratedUser = await decorateUser(user)
 
-    return res.status(200).json({
-      followers: followers.map(relationship =>
-        decorateFollowingUser(relationship.user)
-      ),
-      following: following.map(relationship =>
-        decorateFollowingUser(relationship.following)
-      ),
-      id: user._id,
-      posts,
-      profileUrl: getProfileUrl(user.email),
-      username: user.username
-    })
+    return res.status(200).json(decoratedUser)
   } catch (err) {
     return res.sendStatus(500)
   }
@@ -99,6 +120,7 @@ const post = (req, res) => {
 
 module.exports = {
   get,
+  getSingle,
   getProfileUrl,
   post
 }
