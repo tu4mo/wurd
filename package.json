@@ -33,7 +33,7 @@
     "jsonwebtoken": "^7.4.1",
     "md5": "^2.2.1",
     "moment": "^2.18.1",
-    "mongoose": "^4.10.5",
+    "mongoose": "^4.10.6",
     "morgan": "^1.8.2",
     "node-sass": "^4.5.3",
     "prop-types": "^15.5.10",
