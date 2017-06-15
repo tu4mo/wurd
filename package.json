@@ -10,7 +10,7 @@
     "storybook": "start-storybook -p 9001 -c client/.storybook"
   },
   "engines": {
-    "node": "8.1.0"
+    "node": "8.1.2"
   },
   "dependencies": {
     "axios": "^0.16.2",
