@@ -8,9 +8,9 @@ import {
   followUser,
   unfollowUser
 } from '../../actions/users'
-import { fetchPostsByUsername } from '../../actions/posts'
+import { fetchPostById, fetchPostsByUsername } from '../../actions/posts'
 import { isAuthenticated } from '../../selectors/auth'
-import { getPostsByUsername } from '../../selectors/posts'
+import { getPostById, getPostsByUsername } from '../../selectors/posts'
 import { getAuthenticatedUser, getUser } from '../../selectors/users'
 import Button from '../../components/Button'
 import FollowButton from '../../components/FollowButton'
@@ -23,6 +23,7 @@ import './Profile.scss'
 
 class Profile extends Component {
   static propTypes = {
+    fetchPostById: PropTypes.func.isRequired,
     fetchPostsByUsername: PropTypes.func.isRequired,
     fetchUserByUsername: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
@@ -32,6 +33,7 @@ class Profile extends Component {
     logOut: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
     posts: PropTypes.object.isRequired,
+    singlePost: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired
   }
 
@@ -40,22 +42,29 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    this.getUserForProfile(this.props.match.params.username)
+    const { username, postId } = this.props.match.params
+    this.getUserForProfile(username, postId)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {
-      this.getUserForProfile(nextProps.match.params.username)
+      const { postId, username } = nextProps.match.params
+      this.getUserForProfile(username, postId)
     }
   }
 
-  getUserForProfile = username => {
+  getUserForProfile = (username, postId) => {
     this.props.fetchUserByUsername(username).catch(err => {
       if (err.response.status === 404) {
         this.props.history.push('/404')
       }
     })
-    this.props.fetchPostsByUsername(username)
+
+    if (postId && postId !== 'followers' && postId !== 'following') {
+      this.props.fetchPostById(postId)
+    } else {
+      this.props.fetchPostsByUsername(username)
+    }
   }
 
   onSettingsClick = () => {
@@ -70,7 +79,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { isAuthenticated, isMe, posts, user } = this.props
+    const { isAuthenticated, isMe, posts, singlePost, user } = this.props
 
     if (!Object.keys(user).length) return null
 
@@ -126,6 +135,9 @@ class Profile extends Component {
               <Route path="/:username/following">
                 <UserList users={user.following} />
               </Route>
+              <Route path="/:username/:postId">
+                <Posts posts={singlePost} />
+              </Route>
             </Switch>
           </div>
         </div>
@@ -136,17 +148,19 @@ class Profile extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const user = getAuthenticatedUser(state) || {}
-  const userFromUrl = ownProps.match.params.username
+  const { postId, username: userFromUrl } = ownProps.match.params
 
   return {
     isAuthenticated: isAuthenticated(state),
     isMe: user.username === userFromUrl,
     posts: getPostsByUsername(userFromUrl)(state),
+    singlePost: { [postId]: getPostById(postId)(state) },
     user: getUser(userFromUrl)(state) || {}
   }
 }
 
 export default connect(mapStateToProps, {
+  fetchPostById,
   fetchPostsByUsername,
   fetchUserByUsername,
   followUser,

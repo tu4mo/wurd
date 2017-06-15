@@ -62,7 +62,9 @@ class Post extends Component {
           <Link className="post__user" to={`/${username}`}>
             {username}
           </Link>
-          <div className="post__time">{postTime}</div>
+          <Link className="post__time" to={`/${username}/${id}`}>
+            {postTime}
+          </Link>
         </div>
         <div
           className="post__body"

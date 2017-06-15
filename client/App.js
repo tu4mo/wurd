@@ -57,7 +57,8 @@ class App extends Component {
                 />
                 <Route path="/users" component={Users} />
                 <Route path="/404" component={NotFound} />
-                <Route path="/:username" component={Profile} />
+                <Route exact path="/:username" component={Profile} />
+                <Route path="/:username/:postId" component={Profile} />
               </Switch>
             </main>
             {isAuthenticated && <Route path="/" component={ToolBar} />}

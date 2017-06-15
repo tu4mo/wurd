@@ -16,6 +16,15 @@ export const fetchHomePosts = () => (dispatch, getState, api) => {
   })
 }
 
+export const fetchPostById = id => (dispatch, getState, api) => {
+  api('get', `posts/${id}`).then(response => {
+    dispatch({
+      type: FETCH_POST,
+      post: response.data
+    })
+  })
+}
+
 export const fetchPostsByUsername = username => (dispatch, getState, api) => {
   api('get', `posts?username=${username}`).then(response => {
     dispatch({

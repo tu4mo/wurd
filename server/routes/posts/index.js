@@ -4,7 +4,7 @@ const Relationship = require('../../models/Relationship')
 const User = require('../../models/User')
 const { getProfileUrl } = require('../users')
 
-const decoratePostJSON = (post, userId, req) => ({
+const decoratePostJSON = (post, userId) => ({
   id: post._id,
   content: post.content,
   createdAt: post.createdAt,
@@ -48,7 +48,7 @@ const get = async (req, res) => {
       .limit(limit)
       .populate('user')
 
-    const json = posts.map(post => decoratePostJSON(post, req.userId, req))
+    const json = posts.map(post => decoratePostJSON(post, req.userId))
 
     return res.status(200).json(json)
   } catch (err) {
@@ -61,9 +61,9 @@ const getSingle = async (req, res) => {
   const { id } = req.params
 
   try {
-    const post = await Post.findById(id)
+    const post = await Post.findById(id).populate('user')
 
-    return res.status(200).json(decoratePostJSON(post, req.userId, req))
+    return res.status(200).json(decoratePostJSON(post, req.userId))
   } catch (err) {
     res.sendStatus(500)
     throw err
