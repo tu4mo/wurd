@@ -34,7 +34,7 @@ class Like extends Component {
           title={`Like${liked ? 'd' : ''}`}
         />
         <div className="like__count">
-          {likes} like{likes !== 1 && 's'}
+          {likes || 'No'} like{likes !== 1 && 's'}
         </div>
       </div>
     )
