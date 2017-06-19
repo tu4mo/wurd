@@ -83,6 +83,7 @@ const config = {
 if (!isDev) {
   config.plugins.push(
     new CleanWebpackPlugin('dist'),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       output: {
         comments: false
