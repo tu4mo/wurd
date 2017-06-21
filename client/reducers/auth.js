@@ -3,7 +3,7 @@ import {
   AUTH_SET_ERROR,
   AUTH_SET_TOKEN,
   AUTH_SET_USER
-} from '../actions'
+} from '~/actions'
 
 const INITIAL_STATE = {
   id: null,

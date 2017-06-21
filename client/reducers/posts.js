@@ -4,7 +4,7 @@ import {
   FETCH_POSTS,
   LIKE_POST,
   UNLIKE_POST
-} from '../actions'
+} from '~/actions'
 
 const toObjByKey = (arr, key) =>
   arr.reduce(

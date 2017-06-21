@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { logIn, signUp } from '../../actions/auth'
-import { getAuthenticationError } from '../../selectors/auth'
-import SignInUp from '../../components/SignInUp'
+import { logIn, signUp } from '~/actions/auth'
+import { getAuthenticationError } from '~/selectors/auth'
+import SignInUp from '~/components/SignInUp'
 import './Welcome.scss'
 
 class Welcome extends Component {

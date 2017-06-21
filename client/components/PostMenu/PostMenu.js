@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { deletePost } from '../../actions/posts'
-import { isPostMine } from '../../selectors/posts'
+import { deletePost } from '~/actions/posts'
+import { isPostMine } from '~/selectors/posts'
 import Button from '../Button'
 import './PostMenu.scss'
 

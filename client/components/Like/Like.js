@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { likePost, unlikePost } from '../../actions/posts'
+import { likePost, unlikePost } from '~/actions/posts'
 import Icon from '../Icon'
 import './Like.scss'
 

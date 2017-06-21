@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getAuthenticatedUser } from '../../selectors/users'
+import { getAuthenticatedUser } from '~/selectors/users'
 import NavItem from '../NavItem'
 import ProfilePhoto from '../ProfilePhoto'
 import './ToolBar.scss'

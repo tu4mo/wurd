@@ -6,6 +6,12 @@
     "react"
   ],
   "plugins": [
+    [
+      "babel-plugin-root-import",
+      {
+        "rootPathSuffix": "client"
+      }
+    ],
     "syntax-dynamic-import",
     "transform-class-properties",
     "transform-object-rest-spread",

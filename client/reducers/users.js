@@ -1,4 +1,4 @@
-import { FETCH_USER, FETCH_USERS, FOLLOW_USER, UNFOLLOW_USER } from '../actions'
+import { FETCH_USER, FETCH_USERS, FOLLOW_USER, UNFOLLOW_USER } from '~/actions'
 
 const users = (state = {}, action) => {
   switch (action.type) {
