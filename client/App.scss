@@ -12,15 +12,17 @@
   --spacing-xs: 5px;
   --toolbar-height: 50px;
 
+  font-size: 12px;
+
   @include breakpoint($breakpoint-sm) {
     --header-height: 80px;
+
+    font-size: 14px;
   }
 
   @include breakpoint($breakpoint-md) {
     --spacing-md: 30px;
   }
-
-  font-size: 14px;
 }
 
 body {
