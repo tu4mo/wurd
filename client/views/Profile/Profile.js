@@ -3,11 +3,7 @@ import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logOut } from '~/actions/auth'
-import {
-  fetchUserByUsername,
-  followUser,
-  unfollowUser
-} from '~/actions/users'
+import { fetchUserByUsername, followUser, unfollowUser } from '~/actions/users'
 import { fetchPostById, fetchPostsByUsername } from '~/actions/posts'
 import { isAuthenticated } from '~/selectors/auth'
 import { getPostById, getPostsByUsername } from '~/selectors/posts'
