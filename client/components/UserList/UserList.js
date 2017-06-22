@@ -4,9 +4,14 @@ import { Link } from 'react-router-dom'
 import FollowButton from '../FollowButton'
 import { Table, Tr, Td } from '../Table'
 import ProfilePhoto from '../ProfilePhoto'
+import Spinner from '../Spinner'
 import './UserList.scss'
 
-const UserList = ({ users }) => {
+const UserList = ({ isPending, users }) => {
+  if (!isPending) {
+    return <Spinner />
+  }
+
   if (!users || users.length === 0) {
     return null
   }
@@ -33,6 +38,7 @@ const UserList = ({ users }) => {
 }
 
 UserList.propTypes = {
+  isPending: PropTypes.bool,
   users: PropTypes.array
 }
 

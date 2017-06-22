@@ -9,7 +9,7 @@ import './Users.scss'
 class Users extends Component {
   static propTypes = {
     fetchUsers: PropTypes.func.isRequired,
-    users: PropTypes.array.isRequired
+    users: PropTypes.object.isRequired
   }
 
   componentDidMount() {
@@ -17,10 +17,12 @@ class Users extends Component {
   }
 
   render() {
+    const { users } = this.props
+
     return (
       <div className="users">
         <div className="container">
-          <UserList users={this.props.users} />
+          <UserList isPending={users.isPending} users={users.data} />
         </div>
       </div>
     )
