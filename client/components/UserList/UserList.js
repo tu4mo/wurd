@@ -8,7 +8,7 @@ import Spinner from '../Spinner'
 import './UserList.scss'
 
 const UserList = ({ isPending, users }) => {
-  if (!isPending) {
+  if (isPending) {
     return <Spinner />
   }
 
