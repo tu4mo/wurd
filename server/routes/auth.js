@@ -31,7 +31,7 @@ const post = async (req, res) => {
 
     if (isMatch) {
       const token = jwt.sign({ sub: user._id }, process.env.JWT_SECRET, {
-        expiresIn: '7 days'
+        expiresIn: '14 days'
       })
 
       return res.status(200).json({
