@@ -59,8 +59,8 @@ class Header extends Component {
           <header className="header">
             <div className="container container--full-height">
               <nav className="navbar">
-                <NavItem to="/" className="navbar__item">
-                  <img alt="Wurd" className="logo" src={logo} title="Wurd" />
+                <NavItem to="/" className="header__logo navbar__item">
+                  <img alt="Wurd" src={logo} title="Wurd" />
                 </NavItem>
                 {user &&
                   <NavItem to="/users" className="header__users navbar__item">
