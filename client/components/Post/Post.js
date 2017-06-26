@@ -49,6 +49,8 @@ class Post extends Component {
       }
     } = this.props
 
+    const { isMenuOpen } = this.state
+
     const postTime = new Date(createdAt) < Date.now() - 1000 * 60 * 60 * 24
       ? moment(createdAt).format('LL')
       : moment(createdAt).fromNow()
@@ -78,9 +80,15 @@ class Post extends Component {
         </div>
         <div className="post__footer">
           <Like liked={liked} likes={likes} postId={id} />
-          <Icon name="menu" onClick={this.onMenuClick} />
+          <Icon
+            className={`post__menu-toggle ${isMenuOpen
+              ? 'post__menu-toggle--open'
+              : ''}`}
+            name="menu"
+            onClick={this.onMenuClick}
+          />
         </div>
-        {this.state.isMenuOpen &&
+        {isMenuOpen &&
           <div className="post__menu">
             <PostMenu postId={id} />
           </div>}
