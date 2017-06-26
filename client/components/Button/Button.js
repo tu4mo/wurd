@@ -9,7 +9,8 @@ class Button extends PureComponent {
     disabled: PropTypes.bool,
     link: PropTypes.bool,
     onClick: PropTypes.func,
-    secondary: PropTypes.bool
+    secondary: PropTypes.bool,
+    type: PropTypes.string
   }
 
   render() {
@@ -19,7 +20,8 @@ class Button extends PureComponent {
       disabled,
       link,
       onClick,
-      secondary
+      secondary,
+      type
     } = this.props
 
     const classNames = ['button']
@@ -41,6 +43,7 @@ class Button extends PureComponent {
         className={classNames.join(' ')}
         disabled={disabled}
         onClick={onClick}
+        type={type}
       >
         {children}
       </button>
