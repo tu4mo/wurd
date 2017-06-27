@@ -18,7 +18,9 @@ class NavItem extends Component {
         >
           {children}
         </NavLink>
-      : <div className={classNames}>{children}</div>
+      : <div className={classNames}>
+          {children}
+        </div>
   }
 }
 

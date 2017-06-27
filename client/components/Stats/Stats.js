@@ -13,7 +13,9 @@ const Stats = ({ followers, following, posts, username }) => {
         to={`/${username}`}
       >
         <div className="stat__text">posts</div>
-        <div className="stat__number">{posts}</div>
+        <div className="stat__number">
+          {posts}
+        </div>
       </NavLink>
       <NavLink
         activeClassName="stat--active"
@@ -21,7 +23,9 @@ const Stats = ({ followers, following, posts, username }) => {
         to={`/${username}/followers`}
       >
         <div className="stat__text">followers</div>
-        <div className="stat__number">{followers}</div>
+        <div className="stat__number">
+          {followers}
+        </div>
       </NavLink>
       <NavLink
         activeClassName="stat--active"
@@ -29,7 +33,9 @@ const Stats = ({ followers, following, posts, username }) => {
         to={`/${username}/following`}
       >
         <div className="stat__text">following</div>
-        <div className="stat__number">{following}</div>
+        <div className="stat__number">
+          {following}
+        </div>
       </NavLink>
     </div>
   )

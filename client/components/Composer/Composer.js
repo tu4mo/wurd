@@ -63,12 +63,8 @@ class Composer extends Component {
           />
           <ColorPicker onChange={this.onColorChange} value={color} />
           <div className="composer__buttons">
-            <Button onClick={this.onSaveClick}>
-              Save
-            </Button>
-            <Button onClick={onCloseClick}>
-              Cancel
-            </Button>
+            <Button onClick={this.onSaveClick}>Save</Button>
+            <Button onClick={onCloseClick}>Cancel</Button>
           </div>
         </div>
       </div>

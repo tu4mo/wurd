@@ -51,9 +51,10 @@ class Post extends Component {
 
     const { isMenuOpen } = this.state
 
-    const postTime = new Date(createdAt) < Date.now() - 1000 * 60 * 60 * 24
-      ? moment(createdAt).format('LL')
-      : moment(createdAt).fromNow()
+    const postTime =
+      new Date(createdAt) < Date.now() - 1000 * 60 * 60 * 24
+        ? moment(createdAt).format('LL')
+        : moment(createdAt).fromNow()
 
     return (
       <div className="post">

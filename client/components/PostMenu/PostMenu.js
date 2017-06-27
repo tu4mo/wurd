@@ -22,7 +22,9 @@ class PostMenu extends Component {
 
     return (
       <div className="post-menu">
-        <Button className="post-menu__button" disabled link>Share</Button>
+        <Button className="post-menu__button" disabled link>
+          Share
+        </Button>
         {isMine &&
           <Button
             className="post-menu__button"
