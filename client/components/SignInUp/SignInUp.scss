@@ -23,7 +23,9 @@ $color-transparent-white: rgba(255, 255, 255, 0.1);
     text-align: center;
 
     &--active {
-      border-color: $color-transparent-white $color-transparent-white transparent $color-transparent-white;
+      /* stylelint-disable-next-line */
+      border-color: $color-transparent-white $color-transparent-white
+        transparent $color-transparent-white;
       color: #fff;
     }
   }
