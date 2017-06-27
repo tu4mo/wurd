@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import Spinner from '../Spinner'
 import './Button.scss'
 
 class Button extends PureComponent {
@@ -8,6 +9,7 @@ class Button extends PureComponent {
     className: PropTypes.string,
     disabled: PropTypes.bool,
     link: PropTypes.bool,
+    loading: PropTypes.bool,
     onClick: PropTypes.func,
     secondary: PropTypes.bool,
     type: PropTypes.string
@@ -19,6 +21,7 @@ class Button extends PureComponent {
       className,
       disabled,
       link,
+      loading,
       onClick,
       secondary,
       type
@@ -46,6 +49,10 @@ class Button extends PureComponent {
         type={type}
       >
         {children}
+        {loading &&
+          <div className="button__spinner">
+            <Spinner />
+          </div>}
       </button>
     )
   }

@@ -10,6 +10,7 @@
   line-height: 1;
   outline: none;
   padding: 0 $spacing-sm;
+  position: relative;
   text-transform: uppercase;
   transition: transform 0.05s ease-in-out;
   white-space: nowrap;
@@ -21,6 +22,13 @@
   &:disabled {
     cursor: default;
     opacity: 0.5;
+  }
+
+  &__spinner {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 
   &--link {
