@@ -1,6 +1,10 @@
 .alert {
-  color: #fff;
+  @include rounded;
+
+  background-color: #f2dede;
+  color: #a94442;
   display: flex;
   justify-content: center;
-  padding: $spacing-sm;
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm);
 }
