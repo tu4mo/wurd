@@ -1,15 +1,104 @@
-import React from 'react'
-// import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { propTypes, reduxForm } from 'redux-form'
+import { fetchAccount, saveAccount } from '~/actions/account'
+import { getAccount } from '~/selectors/account'
+import Alert from '../Alert'
+import Button from '../Button'
+import FormControl from '../FormControl'
 import './Settings.scss'
 
-const Settings = () => {
-  return (
-    <div className="settings">
-      <div className="container">
-        Settings
+class Settings extends Component {
+  static propTypes = {
+    accountError: PropTypes.string,
+    ...propTypes
+  }
+
+  componentDidMount() {
+    this.props.fetchAccount()
+  }
+
+  submit = values => {
+    this.props.saveAccount(values, account => {
+      this.props.history.push(`/${account.username}`)
+    })
+  }
+
+  render() {
+    const {
+      accountError,
+      handleSubmit,
+      invalid,
+      isSaving,
+      pristine,
+      submitting
+    } = this.props
+
+    return (
+      <div className="settings container">
+        <form
+          className="settings__content"
+          onSubmit={handleSubmit(this.submit)}
+        >
+          <FormControl label="Username" name="username" />
+          <FormControl label="E-mail" name="email" />
+          <FormControl
+            label="Current Password"
+            name="currentPassword"
+            type="password"
+          />
+          <FormControl label="New Password" name="password" type="password" />
+          {accountError && <Alert message={accountError} />}
+          <Button
+            disabled={invalid || pristine || submitting || isSaving}
+            loading={isSaving}
+            type="submit"
+          >
+            Save
+          </Button>
+        </form>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
-export default Settings
+const mapStateToProps = state => {
+  const account = getAccount(state)
+
+  return {
+    accountError: account.error,
+    initialValues: {
+      ...account
+    },
+    isSaving: account.isSaving
+  }
+}
+
+const validate = values => {
+  const errors = {}
+
+  if (!values.username) {
+    errors.username = 'Required'
+  }
+
+  if (!values.email) {
+    errors.email = 'Required'
+  }
+
+  if (!values.currentPassword) {
+    errors.currentPassword = 'Required'
+  }
+
+  return errors
+}
+
+export default withRouter(
+  connect(mapStateToProps, { fetchAccount, saveAccount })(
+    reduxForm({
+      form: 'settings',
+      validate
+    })(Settings)
+  )
+)

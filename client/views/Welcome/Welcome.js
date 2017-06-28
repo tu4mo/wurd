@@ -17,8 +17,8 @@ class Welcome extends Component {
     this.props.logIn(email, password)
   }
 
-  onSignUpSubmit = ({ email, password, passwordConfirm, username }) => {
-    this.props.signUp(username, email, password, passwordConfirm)
+  onSignUpSubmit = ({ email, password, username }) => {
+    this.props.signUp(username, email, password)
   }
 
   render() {

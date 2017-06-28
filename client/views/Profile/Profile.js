@@ -33,10 +33,6 @@ class Profile extends Component {
     user: PropTypes.object.isRequired
   }
 
-  state = {
-    isSettingsOpen: false
-  }
-
   componentDidMount() {
     const { username, postId } = this.props.match.params
     this.getUserForProfile(username, postId)
@@ -56,7 +52,7 @@ class Profile extends Component {
       }
     })
 
-    if (postId && postId !== 'followers' && postId !== 'following') {
+    if (postId && !['followers', 'following', 'settings'].includes(postId)) {
       this.props.fetchPostById(postId)
     } else {
       this.props.fetchPostsByUsername(username)
@@ -64,9 +60,7 @@ class Profile extends Component {
   }
 
   onSettingsClick = () => {
-    this.setState(prevState => ({
-      isSettingsOpen: !prevState.isSettingsOpen
-    }))
+    this.props.history.push(`/${this.props.user.username}/settings`)
   }
 
   onLogOutClick = () => {
@@ -98,9 +92,14 @@ class Profile extends Component {
                 !isMe &&
                 <FollowButton username={user.username} />}
               {isMe &&
-                <Button onClick={this.onSettingsClick} secondary>
-                  Settings
-                </Button>}
+                <Route
+                  path="/:username/settings"
+                  children={({ match }) =>
+                    !match &&
+                    <Button onClick={this.onSettingsClick} secondary>
+                      Settings
+                    </Button>}
+                />}
               {isMe &&
                 <Button onClick={this.onLogOutClick} secondary>
                   Log Out
@@ -108,35 +107,41 @@ class Profile extends Component {
             </div>
           </div>
         </div>
-        {this.state.isSettingsOpen && <Settings />}
-        <div className="profile-body">
-          <div className="profile-body__tabs">
-            {user.followers &&
-              user.following &&
-              <Stats
-                followers={user.followers.length}
-                following={user.following.length}
-                posts={user.posts}
-                username={user.username}
-              />}
-          </div>
-          <div className="container">
-            <Switch>
-              <Route exact path="/:username">
-                <Posts posts={posts} />
-              </Route>
-              <Route path="/:username/followers">
-                <UserList users={user.followers} />
-              </Route>
-              <Route path="/:username/following">
-                <UserList users={user.following} />
-              </Route>
-              <Route path="/:username/:postId">
-                <Posts posts={singlePost} />
-              </Route>
-            </Switch>
-          </div>
-        </div>
+        <Switch>
+          <Route path="/:username/settings">
+            <Settings />
+          </Route>
+          <Route>
+            <div className="profile-body">
+              <div className="profile-body__tabs">
+                {user.followers &&
+                  user.following &&
+                  <Stats
+                    followers={user.followers.length}
+                    following={user.following.length}
+                    posts={user.posts}
+                    username={user.username}
+                  />}
+              </div>
+              <div className="container">
+                <Switch>
+                  <Route exact path="/:username">
+                    <Posts posts={posts} />
+                  </Route>
+                  <Route path="/:username/followers">
+                    <UserList users={user.followers} />
+                  </Route>
+                  <Route path="/:username/following">
+                    <UserList users={user.following} />
+                  </Route>
+                  <Route path="/:username/:postId">
+                    <Posts posts={singlePost} />
+                  </Route>
+                </Switch>
+              </div>
+            </div>
+          </Route>
+        </Switch>
       </div>
     )
   }

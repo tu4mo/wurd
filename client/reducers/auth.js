@@ -6,6 +6,7 @@ import {
 } from '~/actions'
 
 const INITIAL_STATE = {
+  error: null,
   id: null,
   token: null,
   username: null
@@ -21,22 +22,21 @@ const auth = (state = INITIAL_STATE, action) => {
 
     case AUTH_SET_ERROR:
       return {
-        ...state,
+        ...INITIAL_STATE,
         error: action.error
       }
 
     case AUTH_SET_TOKEN:
       return {
-        ...state,
-        error: null,
-        token: action.token,
-        username: null
+        ...INITIAL_STATE,
+        token: action.token
       }
 
     case AUTH_SET_USER:
       return {
         ...state,
         id: action.id,
+        email: action.email,
         error: null,
         username: action.username
       }

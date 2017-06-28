@@ -1,5 +1,6 @@
 import { AUTH_CLEAR, AUTH_SET_ERROR, AUTH_SET_TOKEN, AUTH_SET_USER } from '.'
 
+import { fetchAccount } from './account'
 import { fetchUserByUsername } from './users'
 
 export const authenticateUser = () => async (dispatch, getState, api) => {
@@ -13,6 +14,7 @@ export const authenticateUser = () => async (dispatch, getState, api) => {
       username
     })
 
+    dispatch(fetchAccount())
     dispatch(fetchUserByUsername(username))
   } catch (err) {
     dispatch(logOut())
@@ -44,17 +46,17 @@ export const logOut = () => ({
   type: AUTH_CLEAR
 })
 
-export const signUp = (username, email, password, passwordConfirm) => async (
+// TODO: Move to account.js
+export const signUp = (username, email, password) => async (
   dispatch,
   getState,
   api
 ) => {
   try {
-    await api('post', 'users', {
+    await api('post', 'account', {
       email,
       username,
-      password,
-      passwordConfirm
+      password
     })
 
     dispatch(logIn(email, password))

@@ -1,5 +1,10 @@
 .settings {
-  background-color: #fff;
   border-top: 1px solid $color-ultra-light-gray;
-  padding: $spacing-md;
+  padding-bottom: var(--spacing-md);
+  padding-top: var(--spacing-md);
+
+  &__content {
+    margin: 0 auto;
+    max-width: 640px;
+  }
 }

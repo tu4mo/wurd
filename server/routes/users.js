@@ -1,5 +1,4 @@
 // Require dependencies
-const bcrypt = require('bcrypt')
 const md5 = require('md5')
 
 // Require models
@@ -75,52 +74,8 @@ const getSingle = async (req, res) => {
   }
 }
 
-const post = (req, res) => {
-  const { email, username, password, passwordConfirm } = req.body
-
-  if (!email || !username || !password) {
-    return res.status(400).json({ error: 'Fill in the required fields' })
-  }
-
-  if (password.length < 8) {
-    return res.status(400).json({
-      error: 'Password must be at least 8 characters'
-    })
-  }
-
-  if (password !== passwordConfirm) {
-    return res.status(400).json({
-      error: 'Passwords do not match'
-    })
-  }
-
-  // Create hashed password
-  const salt = bcrypt.genSaltSync(10)
-  const hash = bcrypt.hashSync(password, salt)
-
-  // Create new user
-  const newUser = new User({
-    email,
-    username,
-    password: hash
-  })
-
-  // Save new user
-  newUser.save((err, user) => {
-    if (err) {
-      console.error(err)
-
-      const firstError = err.errors[Object.keys(err.errors)[0]]
-      return res.status(400).json({ error: firstError.message })
-    }
-
-    res.sendStatus(201)
-  })
-}
-
 module.exports = {
   get,
   getSingle,
-  getProfileUrl,
-  post
+  getProfileUrl
 }

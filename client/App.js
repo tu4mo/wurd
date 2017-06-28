@@ -47,7 +47,7 @@ class App extends Component {
       <BrowserRouter>
         <ScrollToTop>
           <div className="app">
-            <Route path="/" component={Header} />
+            <Header />
             <main className="main">
               <Switch>
                 <Route

@@ -15,7 +15,6 @@ class SignInUp extends Component {
     email: '',
     error: '',
     password: '',
-    passwordConfirm: '',
     username: '',
     tab: 'login'
   }
@@ -36,14 +35,13 @@ class SignInUp extends Component {
       this.props.onSignUpSubmit({
         email: this.state.email,
         password: this.state.password,
-        passwordConfirm: this.state.passwordConfirm,
         username: this.state.username
       })
     }
   }
 
   render() {
-    const { email, password, passwordConfirm, tab, username } = this.state
+    const { email, password, tab, username } = this.state
     const { errorMessage } = this.props
 
     const renderTab = (id, label) => {
@@ -97,14 +95,6 @@ class SignInUp extends Component {
             placeholder="password"
             value={password}
           />
-          {tab === 'signup' &&
-            <input
-              className="sign-in-up__input sign-in-up__input--bottom"
-              type="password"
-              onChange={this.onInputChange('passwordConfirm')}
-              placeholder="confirm password"
-              value={passwordConfirm}
-            />}
           <Button className="sign-in-up__button">
             {tab === 'signup' ? 'Sign Up' : 'Log In'}
           </Button>
