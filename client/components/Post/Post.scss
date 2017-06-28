@@ -82,12 +82,6 @@
       transform: rotate(90deg);
     }
   }
-
-  &__menu {
-    animation: reveal-post-menu 0.5s;
-    border-top: 1px solid $color-ultra-light-gray;
-    overflow: hidden;
-  }
 }
 
 @keyframes post-placeholder-animation {
@@ -97,15 +91,5 @@
 
   100% {
     opacity: 1;
-  }
-}
-
-@keyframes reveal-post-menu {
-  0% {
-    max-height: 0;
-  }
-
-  100% {
-    max-height: 100px;
   }
 }

@@ -1,8 +1,19 @@
 .post-menu {
-  display: flex;
-  justify-content: space-around;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+
+  &__content {
+    border-top: 1px solid $color-ultra-light-gray;
+    display: flex;
+    justify-content: space-around;
+  }
 
   &__button {
     display: block;
+  }
+
+  &--active {
+    max-height: 100px;
   }
 }

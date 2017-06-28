@@ -89,10 +89,9 @@ class Post extends Component {
             onClick={this.onMenuClick}
           />
         </div>
-        {isMenuOpen &&
-          <div className="post__menu">
-            <PostMenu postId={id} />
-          </div>}
+        <div className="post__menu">
+          <PostMenu isOpen={isMenuOpen} postId={id} />
+        </div>
       </div>
     )
   }

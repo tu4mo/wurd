@@ -10,6 +10,7 @@ class PostMenu extends Component {
   static propTypes = {
     deletePost: PropTypes.func.isRequired,
     isMine: PropTypes.bool.isRequired,
+    isOpen: PropTypes.bool,
     postId: PropTypes.string.isRequired
   }
 
@@ -18,21 +19,23 @@ class PostMenu extends Component {
   }
 
   render() {
-    const { isMine } = this.props
+    const { isMine, isOpen } = this.props
 
     return (
-      <div className="post-menu">
-        <Button className="post-menu__button" disabled link>
-          Share
-        </Button>
-        {isMine &&
-          <Button
-            className="post-menu__button"
-            link
-            onClick={this.onDeleteClick}
-          >
-            Delete
-          </Button>}
+      <div className={`post-menu ${isOpen ? 'post-menu--active' : ''}`}>
+        <div className="post-menu__content">
+          <Button className="post-menu__button" disabled link>
+            Share
+          </Button>
+          {isMine &&
+            <Button
+              className="post-menu__button"
+              link
+              onClick={this.onDeleteClick}
+            >
+              Delete
+            </Button>}
+        </div>
       </div>
     )
   }
