@@ -1,16 +1,16 @@
 import {
-  FETCH_USER,
-  FETCH_USERS_PENDING,
-  FETCH_USERS_FULFILLED,
-  FETCH_USERS_REJECTED,
-  FOLLOW_USER,
-  UNFOLLOW_USER
+  USER_FETCH,
+  USERS_FETCH_PENDING,
+  USERS_FETCH_FULFILLED,
+  USERS_FETCH_REJECTED,
+  USER_FOLLOW,
+  USER_UNFOLLOW
 } from '.'
 
 export const fetchUserByUsername = username => (dispatch, getState, api) => {
   return api('get', `users/${username}`).then(response => {
     dispatch({
-      type: FETCH_USER,
+      type: USER_FETCH,
       user: response.data
     })
   })
@@ -19,25 +19,25 @@ export const fetchUserByUsername = username => (dispatch, getState, api) => {
 export const fetchUsers = () => async (dispatch, getState, api) => {
   try {
     dispatch({
-      type: FETCH_USERS_PENDING
+      type: USERS_FETCH_PENDING
     })
 
     const response = await api('get', 'users')
 
     dispatch({
-      type: FETCH_USERS_FULFILLED,
+      type: USERS_FETCH_FULFILLED,
       users: response.data.users
     })
   } catch (err) {
     dispatch({
-      type: FETCH_USERS_REJECTED
+      type: USERS_FETCH_REJECTED
     })
   }
 }
 
 export const followUser = username => (dispatch, getState, api) => {
   dispatch({
-    type: FOLLOW_USER,
+    type: USER_FOLLOW,
     username: getState().auth.username,
     following: username
   })
@@ -51,7 +51,7 @@ export const followUser = username => (dispatch, getState, api) => {
 
 export const unfollowUser = username => (dispatch, getState, api) => {
   dispatch({
-    type: UNFOLLOW_USER,
+    type: USER_UNFOLLOW,
     username: getState().auth.username,
     following: username
   })

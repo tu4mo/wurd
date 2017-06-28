@@ -1,8 +1,8 @@
 import {
-  FETCH_ACCOUNT,
-  SAVE_ACCOUNT_FULFILLED,
-  SAVE_ACCOUNT_PENDING,
-  SAVE_ACCOUNT_REJECTED
+  ACCOUNT_FETCH,
+  ACCOUNT_SAVE_FULFILLED,
+  ACCOUNT_SAVE_PENDING,
+  ACCOUNT_SAVE_REJECTED
 } from '.'
 
 export const fetchAccount = () => async (dispatch, getState, api) => {
@@ -10,7 +10,7 @@ export const fetchAccount = () => async (dispatch, getState, api) => {
     const response = await api('get', 'account')
 
     dispatch({
-      type: FETCH_ACCOUNT,
+      type: ACCOUNT_FETCH,
       account: response.data
     })
   } catch (err) {
@@ -25,20 +25,20 @@ export const saveAccount = (account, onSuccess) => async (
 ) => {
   try {
     dispatch({
-      type: SAVE_ACCOUNT_PENDING
+      type: ACCOUNT_SAVE_PENDING
     })
 
     const response = await api('put', 'account', account)
 
     dispatch({
-      type: SAVE_ACCOUNT_FULFILLED,
+      type: ACCOUNT_SAVE_FULFILLED,
       account: response.data
     })
 
     onSuccess(response.data)
   } catch (err) {
     dispatch({
-      type: SAVE_ACCOUNT_REJECTED,
+      type: ACCOUNT_SAVE_REJECTED,
       error: err.response.data.error
     })
   }

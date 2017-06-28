@@ -1,16 +1,16 @@
 import {
-  CREATE_POST,
-  DELETE_POST,
-  FETCH_POST,
-  FETCH_POSTS,
-  LIKE_POST,
-  UNLIKE_POST
+  POST_CREATE,
+  POST_DELETE,
+  POST_FETCH,
+  POSTS_FETCH,
+  POST_LIKE,
+  POST_UNLIKE
 } from '.'
 
 export const fetchHomePosts = () => (dispatch, getState, api) => {
   api('get', 'posts?filter=following').then(response => {
     dispatch({
-      type: FETCH_POSTS,
+      type: POSTS_FETCH,
       posts: response.data
     })
   })
@@ -19,7 +19,7 @@ export const fetchHomePosts = () => (dispatch, getState, api) => {
 export const fetchPostById = id => (dispatch, getState, api) => {
   api('get', `posts/${id}`).then(response => {
     dispatch({
-      type: FETCH_POST,
+      type: POST_FETCH,
       post: response.data
     })
   })
@@ -28,7 +28,7 @@ export const fetchPostById = id => (dispatch, getState, api) => {
 export const fetchPostsByUsername = username => (dispatch, getState, api) => {
   api('get', `posts?username=${username}`).then(response => {
     dispatch({
-      type: FETCH_POSTS,
+      type: POSTS_FETCH,
       posts: response.data
     })
   })
@@ -37,7 +37,7 @@ export const fetchPostsByUsername = username => (dispatch, getState, api) => {
 export const createPost = post => (dispatch, getState, api) => {
   return api('post', 'posts', post).then(response => {
     dispatch({
-      type: CREATE_POST,
+      type: POST_CREATE,
       post
     })
   })
@@ -45,13 +45,13 @@ export const createPost = post => (dispatch, getState, api) => {
 
 export const likePost = id => (dispatch, getState, api) => {
   dispatch({
-    type: LIKE_POST,
+    type: POST_LIKE,
     id
   })
 
   return api('post', `posts/${id}/likes`).then(response => {
     dispatch({
-      type: FETCH_POST,
+      type: POST_FETCH,
       post: response.data
     })
   })
@@ -59,13 +59,13 @@ export const likePost = id => (dispatch, getState, api) => {
 
 export const unlikePost = id => (dispatch, getState, api) => {
   dispatch({
-    type: UNLIKE_POST,
+    type: POST_UNLIKE,
     id
   })
 
   return api('delete', `posts/${id}/likes`).then(response => {
     dispatch({
-      type: FETCH_POST,
+      type: POST_FETCH,
       post: response.data
     })
   })
@@ -73,7 +73,7 @@ export const unlikePost = id => (dispatch, getState, api) => {
 
 export const deletePost = id => (dispatch, getState, api) => {
   dispatch({
-    type: DELETE_POST,
+    type: POST_DELETE,
     id
   })
 

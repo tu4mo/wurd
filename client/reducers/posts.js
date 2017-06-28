@@ -1,9 +1,9 @@
 import {
-  DELETE_POST,
-  FETCH_POST,
-  FETCH_POSTS,
-  LIKE_POST,
-  UNLIKE_POST
+  POST_DELETE,
+  POST_FETCH,
+  POSTS_FETCH,
+  POST_LIKE,
+  POST_UNLIKE
 } from '~/actions'
 
 const toObjByKey = (arr, key) =>
@@ -17,23 +17,23 @@ const toObjByKey = (arr, key) =>
 
 const posts = (state = {}, action) => {
   switch (action.type) {
-    case DELETE_POST:
+    case POST_DELETE:
       const { [action.id]: omit, ...rest } = state
       return rest
 
-    case FETCH_POST:
+    case POST_FETCH:
       return {
         ...state,
         [action.post.id]: action.post
       }
 
-    case FETCH_POSTS:
+    case POSTS_FETCH:
       return {
         ...state,
         ...toObjByKey(action.posts, 'id')
       }
 
-    case LIKE_POST: {
+    case POST_LIKE: {
       const post = state[action.id]
 
       if (!post.liked) {
@@ -50,7 +50,7 @@ const posts = (state = {}, action) => {
       return state
     }
 
-    case UNLIKE_POST: {
+    case POST_UNLIKE: {
       const post = state[action.id]
 
       if (post.liked) {

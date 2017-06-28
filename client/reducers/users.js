@@ -1,14 +1,14 @@
 import {
-  FETCH_USER,
-  FETCH_USERS_PENDING,
-  FETCH_USERS_FULFILLED,
-  FOLLOW_USER,
-  UNFOLLOW_USER
+  USER_FETCH,
+  USERS_FETCH_PENDING,
+  USERS_FETCH_FULFILLED,
+  USER_FOLLOW,
+  USER_UNFOLLOW
 } from '~/actions'
 
 const users = (state = { isPending: false, data: {} }, action) => {
   switch (action.type) {
-    case FETCH_USER:
+    case USER_FETCH:
       return {
         ...state,
         isPending: false,
@@ -18,13 +18,13 @@ const users = (state = { isPending: false, data: {} }, action) => {
         }
       }
 
-    case FETCH_USERS_PENDING:
+    case USERS_FETCH_PENDING:
       return {
         ...state,
         isPending: true
       }
 
-    case FETCH_USERS_FULFILLED:
+    case USERS_FETCH_FULFILLED:
       return {
         ...state,
         isPending: false,
@@ -40,7 +40,7 @@ const users = (state = { isPending: false, data: {} }, action) => {
         }
       }
 
-    case FOLLOW_USER:
+    case USER_FOLLOW:
       return {
         ...state,
         data: {
@@ -55,7 +55,7 @@ const users = (state = { isPending: false, data: {} }, action) => {
         }
       }
 
-    case UNFOLLOW_USER:
+    case USER_UNFOLLOW:
       return {
         ...state,
         data: {
