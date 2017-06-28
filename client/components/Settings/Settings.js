@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import { propTypes, reduxForm } from 'redux-form'
 import { fetchAccount, saveAccount } from '~/actions/account'
 import { getAccount } from '~/selectors/account'
@@ -12,8 +11,9 @@ import './Settings.scss'
 
 class Settings extends Component {
   static propTypes = {
+    ...propTypes,
     accountError: PropTypes.string,
-    ...propTypes
+    history: PropTypes.object.isRequired
   }
 
   componentDidMount() {
@@ -94,11 +94,9 @@ const validate = values => {
   return errors
 }
 
-export default withRouter(
-  connect(mapStateToProps, { fetchAccount, saveAccount })(
-    reduxForm({
-      form: 'settings',
-      validate
-    })(Settings)
-  )
+export default connect(mapStateToProps, { fetchAccount, saveAccount })(
+  reduxForm({
+    form: 'settings',
+    validate
+  })(Settings)
 )

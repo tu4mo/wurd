@@ -108,9 +108,7 @@ class Profile extends Component {
           </div>
         </div>
         <Switch>
-          <Route path="/:username/settings">
-            <Settings />
-          </Route>
+          <Route path="/:username/settings" component={Settings} />
           <Route>
             <div className="profile-body">
               <div className="profile-body__tabs">
