@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Textfit } from 'react-textfit'
 import './PostBody.scss'
 
-const Post = ({ content, gradientEnd, gradientStart }) =>
+const PostBody = ({ content, gradientEnd, gradientStart }) =>
   <div
     className="post-body"
     style={{
@@ -15,10 +15,10 @@ const Post = ({ content, gradientEnd, gradientStart }) =>
     </Textfit>
   </div>
 
-Post.propTypes = {
+PostBody.propTypes = {
   content: PropTypes.string,
   gradientEnd: PropTypes.string,
   gradientStart: PropTypes.string
 }
 
-export default Post
+export default PostBody
