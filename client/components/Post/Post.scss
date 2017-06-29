@@ -44,31 +44,6 @@
     text-decoration: none;
   }
 
-  &__body {
-    color: #fff;
-    position: relative;
-
-    &::before {
-      content: '';
-      display: block;
-      padding-top: 40%;
-    }
-  }
-
-  &__content {
-    align-items: center;
-    bottom: 0;
-    display: flex;
-    left: 0;
-    line-height: 1;
-    justify-content: center;
-    padding: $spacing-md;
-    position: absolute;
-    text-transform: uppercase;
-    top: 0;
-    right: 0;
-  }
-
   &__footer {
     display: flex;
     justify-content: space-between;

@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
-import { Textfit } from 'react-textfit'
 import Icon from '../Icon'
 import Like from '../Like'
+import PostBody from '../PostBody'
 import PostMenu from '../PostMenu'
 import ProfilePhoto from '../ProfilePhoto'
 import './Post.scss'
@@ -29,9 +29,13 @@ class Post extends Component {
     if (!this.props.post || this.props.isPlaceholder) {
       return (
         <div className="post post--placeholder">
-          <div className="post__header" />
-          <div className="post__body" />
-          <div className="post__footer" />
+          <div className="post__header">
+            <div style={{ height: '40px' }} />
+          </div>
+          <div style={{ paddingTop: '40%' }} />
+          <div className="post__footer">
+            <div style={{ height: '24px' }} />
+          </div>
         </div>
       )
     }
@@ -69,16 +73,11 @@ class Post extends Component {
             {postTime}
           </Link>
         </div>
-        <div
-          className="post__body"
-          style={{
-            backgroundImage: `linear-gradient(45deg, ${gradientStart}, ${gradientEnd})`
-          }}
-        >
-          <Textfit className="post__content" mode="single">
-            {content}
-          </Textfit>
-        </div>
+        <PostBody
+          content={content}
+          gradientStart={gradientStart}
+          gradientEnd={gradientEnd}
+        />
         <div className="post__footer">
           <Like liked={liked} likes={likes} postId={id} />
           <Icon
@@ -89,9 +88,7 @@ class Post extends Component {
             onClick={this.onMenuClick}
           />
         </div>
-        <div className="post__menu">
-          <PostMenu isOpen={isMenuOpen} postId={id} />
-        </div>
+        <PostMenu isOpen={isMenuOpen} postId={id} />
       </div>
     )
   }
