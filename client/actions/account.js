@@ -7,7 +7,7 @@ import {
 
 export const fetchAccount = () => async (dispatch, getState, api) => {
   try {
-    const response = await api('get', 'account')
+    const response = await api({ method: 'get', endpoint: 'account' })
 
     dispatch({
       type: ACCOUNT_FETCH,
@@ -28,7 +28,11 @@ export const saveAccount = (account, onSuccess) => async (
       type: ACCOUNT_SAVE_PENDING
     })
 
-    const response = await api('put', 'account', account)
+    const response = await api({
+      method: 'put',
+      endpoint: 'account',
+      data: account
+    })
 
     dispatch({
       type: ACCOUNT_SAVE_FULFILLED,

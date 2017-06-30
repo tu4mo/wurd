@@ -8,7 +8,10 @@ import {
 } from '.'
 
 export const fetchUserByUsername = username => (dispatch, getState, api) => {
-  return api('get', `users/${username}`).then(response => {
+  return api({
+    method: 'get',
+    endpoint: `users/${username}`
+  }).then(response => {
     dispatch({
       type: USER_FETCH,
       user: response.data
@@ -22,7 +25,7 @@ export const fetchUsers = () => async (dispatch, getState, api) => {
       type: USERS_FETCH_PENDING
     })
 
-    const response = await api('get', 'users')
+    const response = await api({ method: 'get', endpoint: 'users' })
 
     dispatch({
       type: USERS_FETCH_FULFILLED,
@@ -42,7 +45,13 @@ export const followUser = username => (dispatch, getState, api) => {
     following: username
   })
 
-  return api('post', `relationships?username=${username}`).then(response => {
+  return api({
+    method: 'post',
+    endpoint: `relationships`,
+    params: {
+      username
+    }
+  }).then(response => {
     // TODO: Instead of fetching the user separately,
     // make API return the user after following
     dispatch(fetchUserByUsername(username))
@@ -56,7 +65,13 @@ export const unfollowUser = username => (dispatch, getState, api) => {
     following: username
   })
 
-  return api('delete', `relationships?username=${username}`).then(response => {
+  return api({
+    method: 'delete',
+    endpoint: 'relationships',
+    params: {
+      username
+    }
+  }).then(response => {
     // TODO: Instead of fetching the user separately,
     // make API return the user after following
     dispatch(fetchUserByUsername(username))

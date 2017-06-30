@@ -7,8 +7,15 @@ import {
   POST_UNLIKE
 } from '.'
 
-export const fetchHomePosts = () => (dispatch, getState, api) => {
-  api('get', 'posts?filter=following').then(response => {
+export const fetchPosts = ({ filter, limit }) => (dispatch, getState, api) => {
+  api({
+    method: 'get',
+    endpoint: 'posts',
+    params: {
+      filter,
+      limit
+    }
+  }).then(response => {
     dispatch({
       type: POSTS_FETCH,
       posts: response.data
@@ -17,7 +24,7 @@ export const fetchHomePosts = () => (dispatch, getState, api) => {
 }
 
 export const fetchPostById = id => (dispatch, getState, api) => {
-  api('get', `posts/${id}`).then(response => {
+  api({ method: 'get', endpoint: `posts/${id}` }).then(response => {
     dispatch({
       type: POST_FETCH,
       post: response.data
@@ -26,7 +33,13 @@ export const fetchPostById = id => (dispatch, getState, api) => {
 }
 
 export const fetchPostsByUsername = username => (dispatch, getState, api) => {
-  api('get', `posts?username=${username}`).then(response => {
+  api({
+    method: 'get',
+    endpoint: 'posts',
+    params: {
+      username
+    }
+  }).then(response => {
     dispatch({
       type: POSTS_FETCH,
       posts: response.data
@@ -35,7 +48,11 @@ export const fetchPostsByUsername = username => (dispatch, getState, api) => {
 }
 
 export const createPost = post => (dispatch, getState, api) => {
-  return api('post', 'posts', post).then(response => {
+  return api({
+    method: 'post',
+    endpoint: 'posts',
+    data: post
+  }).then(response => {
     dispatch({
       type: POST_CREATE,
       post
@@ -49,7 +66,10 @@ export const likePost = id => (dispatch, getState, api) => {
     id
   })
 
-  return api('post', `posts/${id}/likes`).then(response => {
+  return api({
+    method: 'post',
+    endpoint: `posts/${id}/likes`
+  }).then(response => {
     dispatch({
       type: POST_FETCH,
       post: response.data
@@ -63,7 +83,10 @@ export const unlikePost = id => (dispatch, getState, api) => {
     id
   })
 
-  return api('delete', `posts/${id}/likes`).then(response => {
+  return api({
+    method: 'delete',
+    endpoint: `posts/${id}/likes`
+  }).then(response => {
     dispatch({
       type: POST_FETCH,
       post: response.data
@@ -77,5 +100,5 @@ export const deletePost = id => (dispatch, getState, api) => {
     id
   })
 
-  return api('delete', `posts/${id}`).then(() => {})
+  return api({ method: 'delete', endpoint: `posts/${id}` }).then(() => {})
 }

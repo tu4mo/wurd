@@ -5,7 +5,7 @@ import { fetchUserByUsername } from './users'
 
 export const authenticateUser = () => async (dispatch, getState, api) => {
   try {
-    const response = await api('get', 'auth')
+    const response = await api({ method: 'get', endpoint: 'auth' })
     const { data: { id, username } } = response
 
     dispatch({
@@ -23,9 +23,13 @@ export const authenticateUser = () => async (dispatch, getState, api) => {
 
 export const logIn = (email, password) => async (dispatch, getState, api) => {
   try {
-    const response = await api('post', 'auth', {
-      email,
-      password
+    const response = await api({
+      method: 'post',
+      endpoint: 'auth',
+      data: {
+        email,
+        password
+      }
     })
 
     dispatch({
@@ -53,10 +57,14 @@ export const signUp = (username, email, password) => async (
   api
 ) => {
   try {
-    await api('post', 'account', {
-      email,
-      username,
-      password
+    await api({
+      method: 'post',
+      endpoint: 'account',
+      data: {
+        email,
+        username,
+        password
+      }
     })
 
     dispatch(logIn(email, password))
