@@ -1,7 +1,7 @@
 import axios from 'axios'
 import store from './store'
 
-export default ({ method, endpoint, data, params }) => {
+export default ({ data, method, params, url }) => {
   const auth = store.getState().auth
   const token = auth.token
 
@@ -13,6 +13,6 @@ export default ({ method, endpoint, data, params }) => {
     },
     method,
     params,
-    url: endpoint
+    url
   })
 }

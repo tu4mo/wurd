@@ -6,6 +6,7 @@ import {
 } from '~/actions'
 
 const INITIAL_STATE = {
+  email: null,
   error: null,
   id: null,
   token: null,
@@ -35,9 +36,9 @@ const auth = (state = INITIAL_STATE, action) => {
     case AUTH_SET_USER:
       return {
         ...state,
-        id: action.id,
         email: action.email,
         error: null,
+        id: action.id,
         username: action.username
       }
 

@@ -22,8 +22,8 @@ const Icon = ({ className, name, onClick, title }) => {
     <img
       className={`icon ${className || ''}`}
       onClick={onClick}
-      title={title}
       src={getIcon(name)}
+      title={title}
     />
   )
 }

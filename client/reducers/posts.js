@@ -6,7 +6,7 @@ import {
   POST_UNLIKE
 } from '~/actions'
 
-const toObjByKey = (arr, key) =>
+const toObjectByKey = (arr, key) =>
   arr.reduce(
     (acc, val) => ({
       ...acc,
@@ -30,7 +30,7 @@ const posts = (state = {}, action) => {
     case POSTS_FETCH:
       return {
         ...state,
-        ...toObjByKey(action.posts, 'id')
+        ...toObjectByKey(action.posts, 'id')
       }
 
     case POST_LIKE: {

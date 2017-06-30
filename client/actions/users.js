@@ -10,7 +10,7 @@ import {
 export const fetchUserByUsername = username => (dispatch, getState, api) => {
   return api({
     method: 'get',
-    endpoint: `users/${username}`
+    url: `users/${username}`
   }).then(response => {
     dispatch({
       type: USER_FETCH,
@@ -25,7 +25,7 @@ export const fetchUsers = () => async (dispatch, getState, api) => {
       type: USERS_FETCH_PENDING
     })
 
-    const response = await api({ method: 'get', endpoint: 'users' })
+    const response = await api({ method: 'get', url: 'users' })
 
     dispatch({
       type: USERS_FETCH_FULFILLED,
@@ -47,7 +47,7 @@ export const followUser = username => (dispatch, getState, api) => {
 
   return api({
     method: 'post',
-    endpoint: `relationships`,
+    url: `relationships`,
     params: {
       username
     }
@@ -67,7 +67,7 @@ export const unfollowUser = username => (dispatch, getState, api) => {
 
   return api({
     method: 'delete',
-    endpoint: 'relationships',
+    url: 'relationships',
     params: {
       username
     }

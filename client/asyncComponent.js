@@ -2,12 +2,9 @@ import React, { Component } from 'react'
 
 export default loader =>
   class AsyncComponent extends Component {
-    constructor(props) {
-      super(props)
+    Component = null
 
-      this.Component = null
-      this.state = { Component: AsyncComponent.Component }
-    }
+    state = { Component: AsyncComponent.Component }
 
     componentWillMount() {
       if (!this.state.Component) {

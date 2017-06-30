@@ -10,7 +10,7 @@ import {
 export const fetchPosts = ({ filter, limit }) => (dispatch, getState, api) => {
   api({
     method: 'get',
-    endpoint: 'posts',
+    url: 'posts',
     params: {
       filter,
       limit
@@ -24,7 +24,7 @@ export const fetchPosts = ({ filter, limit }) => (dispatch, getState, api) => {
 }
 
 export const fetchPostById = id => (dispatch, getState, api) => {
-  api({ method: 'get', endpoint: `posts/${id}` }).then(response => {
+  api({ method: 'get', url: `posts/${id}` }).then(response => {
     dispatch({
       type: POST_FETCH,
       post: response.data
@@ -35,7 +35,7 @@ export const fetchPostById = id => (dispatch, getState, api) => {
 export const fetchPostsByUsername = username => (dispatch, getState, api) => {
   api({
     method: 'get',
-    endpoint: 'posts',
+    url: 'posts',
     params: {
       username
     }
@@ -50,7 +50,7 @@ export const fetchPostsByUsername = username => (dispatch, getState, api) => {
 export const createPost = post => (dispatch, getState, api) => {
   return api({
     method: 'post',
-    endpoint: 'posts',
+    url: 'posts',
     data: post
   }).then(response => {
     dispatch({
@@ -68,7 +68,7 @@ export const likePost = id => (dispatch, getState, api) => {
 
   return api({
     method: 'post',
-    endpoint: `posts/${id}/likes`
+    url: `posts/${id}/likes`
   }).then(response => {
     dispatch({
       type: POST_FETCH,
@@ -85,7 +85,7 @@ export const unlikePost = id => (dispatch, getState, api) => {
 
   return api({
     method: 'delete',
-    endpoint: `posts/${id}/likes`
+    url: `posts/${id}/likes`
   }).then(response => {
     dispatch({
       type: POST_FETCH,
@@ -100,5 +100,5 @@ export const deletePost = id => (dispatch, getState, api) => {
     id
   })
 
-  return api({ method: 'delete', endpoint: `posts/${id}` }).then(() => {})
+  return api({ method: 'delete', url: `posts/${id}` }).then(() => {})
 }

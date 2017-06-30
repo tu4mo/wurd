@@ -7,7 +7,7 @@ import {
 
 export const fetchAccount = () => async (dispatch, getState, api) => {
   try {
-    const response = await api({ method: 'get', endpoint: 'account' })
+    const response = await api({ method: 'get', url: 'account' })
 
     dispatch({
       type: ACCOUNT_FETCH,
@@ -30,7 +30,7 @@ export const saveAccount = (account, onSuccess) => async (
 
     const response = await api({
       method: 'put',
-      endpoint: 'account',
+      url: 'account',
       data: account
     })
 

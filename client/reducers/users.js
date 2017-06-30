@@ -6,7 +6,12 @@ import {
   USER_UNFOLLOW
 } from '~/actions'
 
-const users = (state = { isPending: false, data: {} }, action) => {
+const INITIAL_STATE = {
+  data: {},
+  isPending: false
+}
+
+const users = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case USER_FETCH:
       return {

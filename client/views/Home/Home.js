@@ -20,11 +20,9 @@ class Home extends Component {
     const { posts } = this.props
 
     return (
-      <div className="home">
-        <div className="container">
-          <div className="home__content">
-            <Posts posts={posts} />
-          </div>
+      <div className="home container">
+        <div className="home__content">
+          <Posts posts={posts} />
         </div>
       </div>
     )

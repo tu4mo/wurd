@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import './Table.scss'
 
 const Table = ({ children, className }) =>
-  <table className={`table ${className}`}>
+  <table className={`table ${className || ''}`}>
     <tbody>
       {children}
     </tbody>

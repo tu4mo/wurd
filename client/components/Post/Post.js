@@ -9,6 +9,12 @@ import PostMenu from '../PostMenu'
 import ProfilePhoto from '../ProfilePhoto'
 import './Post.scss'
 
+const placeholderStyles = {
+  header: { height: '40px' },
+  body: { paddingTop: '40%' },
+  footer: { height: '24px' }
+}
+
 class Post extends Component {
   static propTypes = {
     isPlaceholder: PropTypes.bool,
@@ -30,11 +36,11 @@ class Post extends Component {
       return (
         <div className="post post--placeholder">
           <div className="post__header">
-            <div style={{ height: '40px' }} />
+            <div style={placeholderStyles.header} />
           </div>
-          <div style={{ paddingTop: '40%' }} />
+          <div style={placeholderStyles.body} />
           <div className="post__footer">
-            <div style={{ height: '24px' }} />
+            <div style={placeholderStyles.footer} />
           </div>
         </div>
       )
