@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { fetchUserByUsername } from '~/actions/users'
 import { createPost, fetchPostsByUsername } from '~/actions/posts'
 import { getAuthenticatedUser } from '~/selectors/users'
+import { isAuthenticated } from '~/selectors/auth'
 import Button from '~/components/Button'
 import Composer from '~/components/Composer'
 import NavItem from '~/components/NavItem'
@@ -16,6 +17,7 @@ class Header extends Component {
     createPost: PropTypes.func.isRequired,
     fetchPostsByUsername: PropTypes.func.isRequired,
     fetchUserByUsername: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
     user: PropTypes.object
   }
 
@@ -46,7 +48,7 @@ class Header extends Component {
   }
 
   render() {
-    const { user } = this.props
+    const { isAuthenticated, user } = this.props
     const { isComposerOpen } = this.state
 
     return (
@@ -62,15 +64,15 @@ class Header extends Component {
                 <NavItem to="/" className="header__logo navbar__item">
                   <img alt="Wurd" src={logo} title="Wurd" />
                 </NavItem>
-                {user &&
+                {isAuthenticated &&
                   <NavItem to="/users" className="header__users navbar__item">
                     Users
                   </NavItem>}
-                {user &&
+                {isAuthenticated &&
                   <NavItem className="header__new-post">
                     <Button onClick={this.onNewPostClick}>New Post</Button>
                   </NavItem>}
-                {user &&
+                {isAuthenticated &&
                   <NavItem className="header__profile" to={`/${user.username}`}>
                     <ProfilePhoto size="small" url={user.profileUrl} />
                   </NavItem>}
@@ -89,6 +91,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => ({
+  isAuthenticated: isAuthenticated(state),
   user: getAuthenticatedUser(state)
 })
 
