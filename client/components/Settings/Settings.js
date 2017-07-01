@@ -43,7 +43,7 @@ class Settings extends Component {
           onSubmit={handleSubmit(this.submit)}
         >
           <FormControl hasSpacer label="Username" name="username" />
-          <FormControl hasSpacer label="E-mail" name="email" />
+          <FormControl hasSpacer label="Email" name="email" />
           <FormControl
             hasSpacer
             label="Current Password"
