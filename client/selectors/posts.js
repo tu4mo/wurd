@@ -1,5 +1,4 @@
 import { getAuthenticatedUsername } from './auth'
-import { getAuthenticatedUser } from './users'
 
 const sortPostsByCreatedAt = posts => {
   const entries = Object.entries(posts)
@@ -35,15 +34,11 @@ export const getPostsByUsername = username => state => {
 
 export const getPostsForHome = state => sortPostsByCreatedAt(state.posts)
 
-export const getFollowedPosts = state => {
-  const { auth: { username }, posts } = state
+export const getFollowedPosts = (state, user) => {
+  if (!user.following) return {}
 
-  const user = getAuthenticatedUser(state)
-
-  if (!user) return {}
-
+  const { auth: { username }, posts = {} } = state
   const followedUsers = [...user.following.map(user => user.username), username]
-
   const filteredPosts = Object.keys(posts).reduce((acc, val) => {
     return followedUsers.includes(posts[val].user.username)
       ? {

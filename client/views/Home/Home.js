@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchPosts } from '~/actions/posts'
+import { getAuthenticatedUser } from '~/selectors/users'
 import { getFollowedPosts } from '~/selectors/posts'
 import Posts from '~/components/Posts'
 import './Home.scss'
@@ -29,8 +30,12 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  posts: getFollowedPosts(state)
-})
+const mapStateToProps = state => {
+  const user = getAuthenticatedUser(state)
+
+  return {
+    posts: getFollowedPosts(state, user)
+  }
+}
 
 export default connect(mapStateToProps, { fetchPosts })(Home)
