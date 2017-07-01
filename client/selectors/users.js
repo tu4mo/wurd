@@ -1,5 +1,5 @@
 export const getAuthenticatedUser = state =>
-  state.users.data[state.auth.username]
+  state.users.data[state.auth.username] || {}
 
 export const getUser = username => state => state.users.data[username]
 
