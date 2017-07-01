@@ -41,7 +41,7 @@ const FormControl = ({ color, hasSpacer, label, maxLength, name, type }) =>
 
 FormControl.propTypes = {
   color: PropTypes.string,
-  hasSpacer: PropTypes.boolean,
+  hasSpacer: PropTypes.bool,
   label: PropTypes.string,
   maxLength: PropTypes.string,
   name: PropTypes.string,
