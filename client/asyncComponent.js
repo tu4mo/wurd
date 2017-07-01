@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Spinner from './components/Spinner'
 
 export default loader =>
   class AsyncComponent extends Component {
@@ -21,6 +22,10 @@ export default loader =>
         return <this.state.Component {...this.props} />
       }
 
-      return null
+      return (
+        <div className="container container--with-y-padding">
+          <Spinner />
+        </div>
+      )
     }
   }
