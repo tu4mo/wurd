@@ -42,14 +42,15 @@ class Settings extends Component {
           className="settings__content"
           onSubmit={handleSubmit(this.submit)}
         >
-          <FormControl label="Username" name="username" />
-          <FormControl label="E-mail" name="email" />
+          <FormControl hasSpacer label="Username" name="username" />
+          <FormControl hasSpacer label="E-mail" name="email" />
           <FormControl
+            hasSpacer
             label="Current Password"
             name="currentPassword"
             type="password"
           />
-          <FormControl label="New Password" name="password" type="password" />
+          <FormControl hasSpacer label="New Password" name="password" type="password" />
           {accountError && <Alert message={accountError} />}
           <Button
             disabled={invalid || pristine || submitting || isSaving}

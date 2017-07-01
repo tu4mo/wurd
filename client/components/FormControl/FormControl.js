@@ -3,26 +3,47 @@ import PropTypes from 'prop-types'
 import { Field } from 'redux-form'
 import './FormControl.scss'
 
-const renderField = field =>
-  <div className="form-control__input">
-    <input className="input" {...field.input} type={field.type} />
-    {field.meta.touched &&
-      field.meta.error &&
-      <span className="error">
-        {field.meta.error}
-      </span>}
-  </div>
+const renderField = field => {
+  const classNames = ['input']
 
-const FormControl = ({ label, name, type }) =>
-  <div className="form-control">
+  if (field.color === 'gray') {
+    classNames.push('input--gray')
+  }
+
+  return (
+    <div className="form-control__input">
+      <input
+        {...field.input}
+        className={classNames.join(' ')}
+        maxLength={field.maxLength}
+        type={field.type}
+      />
+      {field.meta.touched &&
+        field.meta.error &&
+        <span className="error">
+          {field.meta.error}
+        </span>}
+    </div>
+  )
+}
+
+const FormControl = ({ color, hasSpacer, label, maxLength, name, type }) =>
+  <div className={`form-control ${hasSpacer ? 'form-control--spacer' : ''}`}>
     <label className="form-control__label">
       {label}
     </label>
-    <Field component={renderField} name={name} props={{ type }} />
+    <Field
+      component={renderField}
+      name={name}
+      props={{ color, maxLength, type }}
+    />
   </div>
 
 FormControl.propTypes = {
+  color: PropTypes.string,
+  hasSpacer: PropTypes.boolean,
   label: PropTypes.string,
+  maxLength: PropTypes.string,
   name: PropTypes.string,
   type: PropTypes.string
 }

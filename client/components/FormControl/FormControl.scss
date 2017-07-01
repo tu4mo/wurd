@@ -1,17 +1,20 @@
 .form-control {
-  margin-bottom: var(--spacing-md);
-
   &__label {
     color: $color-gray;
     display: block;
     font-size: var(--font-size-sm);
     margin-bottom: var(--spacing-xs);
   }
+
+  &--spacer {
+    margin-bottom: var(--spacing-md);
+  }
 }
 
 .input {
   @include rounded;
 
+  background-color: #fff;
   border: 2px solid transparent;
   display: block;
   height: 40px;
@@ -21,5 +24,9 @@
 
   &:focus {
     border-color: $color-light-gray;
+  }
+
+  &--gray {
+    background-color: $color-background;
   }
 }
