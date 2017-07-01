@@ -14,19 +14,30 @@ class Like extends Component {
     unlikePost: PropTypes.func.isRequired
   }
 
+  state = {
+    didClickLike: false
+  }
+
   onLikeClick = () => {
     if (this.props.liked) {
       this.props.unlikePost(this.props.postId)
+      this.setState({
+        didClickLike: false
+      })
     } else {
       this.props.likePost(this.props.postId)
+      this.setState({
+        didClickLike: true
+      })
     }
   }
 
   render() {
     const { liked, likes } = this.props
+    const { didClickLike } = this.state
 
     return (
-      <div className={`like ${liked ? 'like--liked' : ''}`}>
+      <div className={`like ${didClickLike ? 'like--liked' : ''}`}>
         <Icon
           className="like__icon"
           name={liked ? 'liked' : 'like'}
