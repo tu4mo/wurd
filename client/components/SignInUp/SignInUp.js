@@ -10,6 +10,11 @@ import FormControl from '../FormControl'
 import Spacer from '../Spacer'
 import './SignInUp.scss'
 
+const LABELS = {
+  login: 'Log In',
+  signup: 'Sign Up'
+}
+
 class SignInUp extends Component {
   static propTypes = {
     ...propTypes,
@@ -54,8 +59,8 @@ class SignInUp extends Component {
     return (
       <form className="sign-in-up" onSubmit={handleSubmit(this.onSubmit)}>
         <div className="sign-in-up__tabs">
-          {this.renderTab('login', 'Log In')}
-          {this.renderTab('signup', 'Sign Up')}
+          {this.renderTab('login', LABELS.login)}
+          {this.renderTab('signup', LABELS.signup)}
         </div>
         <div className="sign-in-up__panel">
           <Spacer>
@@ -74,7 +79,7 @@ class SignInUp extends Component {
               type="password"
             />
             <Button className="sign-in-up__button" type="submit">
-              {tab === 'signup' ? 'Sign Up' : 'Log In'}
+              {tab === 'signup' ? LABELS.signup : LABELS.login}
             </Button>
             {errorMessage && <Alert message={errorMessage} />}
           </Spacer>
