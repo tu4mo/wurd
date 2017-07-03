@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { Textfit } from 'react-textfit'
 import './PostBody.scss'
 
-const PostBody = ({ content, gradientEnd, gradientStart }) =>
+const PostBody = ({ content, fill, gradientEnd, gradientStart }) =>
   <div
-    className="post-body"
+    className={`post-body ${fill ? 'post-body--fill' : ''}`}
     style={{
       backgroundImage: `linear-gradient(45deg, ${gradientStart}, ${gradientEnd})`
     }}
@@ -17,6 +17,7 @@ const PostBody = ({ content, gradientEnd, gradientStart }) =>
 
 PostBody.propTypes = {
   content: PropTypes.string,
+  fill: PropTypes.bool,
   gradientEnd: PropTypes.string,
   gradientStart: PropTypes.string
 }

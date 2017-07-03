@@ -7,6 +7,7 @@ import { getAccount } from '~/selectors/account'
 import Alert from '../Alert'
 import Button from '../Button'
 import FormControl from '../FormControl'
+import Spacer from '../Spacer'
 import './Settings.scss'
 
 class Settings extends Component {
@@ -42,23 +43,24 @@ class Settings extends Component {
           className="settings__content"
           onSubmit={handleSubmit(this.submit)}
         >
-          <FormControl hasSpacer label="Username" name="username" />
-          <FormControl hasSpacer label="Email" name="email" />
-          <FormControl
-            hasSpacer
-            label="Current Password"
-            name="currentPassword"
-            type="password"
-          />
-          <FormControl hasSpacer label="New Password" name="password" type="password" />
-          {accountError && <Alert message={accountError} />}
-          <Button
-            disabled={invalid || pristine || submitting || isSaving}
-            loading={isSaving}
-            type="submit"
-          >
-            Save
-          </Button>
+          <Spacer>
+            {accountError && <Alert message={accountError} />}
+            <FormControl label="Username" name="username" />
+            <FormControl label="Email" name="email" />
+            <FormControl
+              label="Current Password"
+              name="currentPassword"
+              type="password"
+            />
+            <FormControl label="New Password" name="password" type="password" />
+            <Button
+              disabled={invalid || pristine || submitting || isSaving}
+              loading={isSaving}
+              type="submit"
+            >
+              Save
+            </Button>
+          </Spacer>
         </form>
       </div>
     )

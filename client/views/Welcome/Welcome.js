@@ -1,41 +1,97 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { logIn, signUp } from '~/actions/auth'
-import { getAuthenticationError } from '~/selectors/auth'
+import { fetchPosts } from '~/actions/posts'
+import { getAllPosts } from '~/selectors/posts'
+import PostBody from '~/components/PostBody'
 import SignInUp from '~/components/SignInUp'
 import './Welcome.scss'
 
+const POSTS = 36
+
+const randomNumber = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min
+
+const getRandomPost = posts => {
+  const keys = Object.keys(posts)
+  const randomKey = keys[Math.floor(Math.random() * keys.length)]
+  return randomNumber(1, 5) > 2 ? posts[randomKey] : null
+}
+
+const getRandomPosts = posts =>
+  [...new Array(POSTS)].map(() => {
+    return getRandomPost(posts)
+  })
+
 class Welcome extends Component {
   static propTypes = {
-    error: PropTypes.string,
-    logIn: PropTypes.func.isRequired,
-    signUp: PropTypes.func.isRequired
+    fetchPosts: PropTypes.func.isRequired,
+    posts: PropTypes.object
   }
 
-  onLogInSubmit = ({ email, password }) => {
-    this.props.logIn(email, password)
+  state = {
+    animate: false,
+    randomPosts: []
   }
 
-  onSignUpSubmit = ({ email, password, username }) => {
-    this.props.signUp(username, email, password)
+  animationTimer = null
+
+  componentDidMount() {
+    this.props.fetchPosts({ limit: 100 })
+  }
+
+  componentWillUnmount() {
+    if (this.animationTimer) clearInterval(this.animationTimer)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (Object.keys(nextProps.posts).length) {
+      this.setState(
+        {
+          randomPosts: getRandomPosts(nextProps.posts)
+        },
+        () => {
+          this.animationTimer = setInterval(this.randomizePost, 500)
+        }
+      )
+    }
+  }
+
+  randomizePost = () => {
+    this.setState(prevState => ({
+      randomPosts: Object.assign([], prevState.randomPosts, {
+        [randomNumber(0, POSTS - 1)]: getRandomPost(this.props.posts)
+      })
+    }))
+  }
+
+  renderPosts = () => {
+    return this.state.randomPosts.map((post, i) =>
+      <div className="welcome__item" key={i}>
+        <div className="welcome__post">
+          {post &&
+            <PostBody
+              content={post.content}
+              fill
+              gradientEnd={post.gradientEnd}
+              gradientStart={post.gradientStart}
+            />}
+        </div>
+        <div className="welcome__post-background" />
+      </div>
+    )
   }
 
   render() {
-    const { error } = this.props
-
     return (
-      <div className="welcome">
-        <div className="container">
-          <h2 className="welcome__tagline">
-            The one-word nanoblogging<br />
-            social networking service
-          </h2>
-          <SignInUp
-            errorMessage={error}
-            onLoginSubmit={this.onLogInSubmit}
-            onSignUpSubmit={this.onSignUpSubmit}
-          />
+      <div>
+        <div className="welcome">
+          <div className="welcome__content">
+            {this.renderPosts()}
+          </div>
+        </div>
+        <div className="welcome-form">
+          <SignInUp />
         </div>
       </div>
     )
@@ -43,7 +99,7 @@ class Welcome extends Component {
 }
 
 const mapStateToProps = state => ({
-  error: getAuthenticationError(state)
+  posts: getAllPosts(state)
 })
 
-export default connect(mapStateToProps, { logIn, signUp })(Welcome)
+export default connect(mapStateToProps, { fetchPosts })(Welcome)

@@ -27,8 +27,8 @@ const renderField = field => {
   )
 }
 
-const FormControl = ({ color, hasSpacer, label, maxLength, name, type }) =>
-  <div className={`form-control ${hasSpacer ? 'form-control--spacer' : ''}`}>
+const FormControl = ({ color, label, maxLength, name, type }) =>
+  <div className="form-control">
     <label className="form-control__label">
       {label}
     </label>
@@ -41,7 +41,6 @@ const FormControl = ({ color, hasSpacer, label, maxLength, name, type }) =>
 
 FormControl.propTypes = {
   color: PropTypes.string,
-  hasSpacer: PropTypes.bool,
   label: PropTypes.string,
   maxLength: PropTypes.string,
   name: PropTypes.string,

@@ -16,7 +16,7 @@ const getFirstError = err => {
   }
 
   if (err.code === 11000) {
-    return 'Username already exists'
+    return 'User already exists'
   }
 }
 

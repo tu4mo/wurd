@@ -16,7 +16,7 @@ const get = (req, res) => {
 
 const post = async (req, res) => {
   const { email, password } = req.body
-  const errorResponse = { error: 'The user name or password is incorrect' }
+  const errorResponse = { error: 'The username or password is incorrect' }
 
   try {
     const user = await User.findOne({

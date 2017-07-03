@@ -45,7 +45,7 @@ const get = async (req, res) => {
 
     const posts = await Post.find(query, null)
       .sort({ createdAt: -1 })
-      .limit(limit)
+      .limit(parseInt(limit))
       .populate('user')
 
     const json = posts.map(post => decoratePostJSON(post, req.userId))
