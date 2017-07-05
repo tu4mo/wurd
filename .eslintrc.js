@@ -7,5 +7,8 @@ module.exports = {
   parser: 'babel-eslint',
   rules: {
     'jsx-quotes': ['error', 'prefer-double']
+  },
+  settings: {
+    'import/resolver': 'webpack'
   }
 }
