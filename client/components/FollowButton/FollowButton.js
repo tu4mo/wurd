@@ -6,6 +6,14 @@ import { getAuthenticatedUser, isFollowingUsername } from '~/selectors/users'
 import Button from '../Button'
 
 class FollowButton extends Component {
+  static propTypes = {
+    authenticatedUser: PropTypes.object.isRequired,
+    followUser: PropTypes.func.isRequired,
+    isFollowed: PropTypes.bool.isRequired,
+    unfollowUser: PropTypes.func.isRequired,
+    username: PropTypes.string.isRequired
+  }
+
   onFollowClick = () => {
     this.props.followUser(this.props.username)
   }
@@ -27,14 +35,6 @@ class FollowButton extends Component {
       </Button>
     )
   }
-}
-
-FollowButton.propTypes = {
-  authenticatedUser: PropTypes.object.isRequired,
-  followUser: PropTypes.func.isRequired,
-  isFollowed: PropTypes.bool.isRequired,
-  unfollowUser: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => ({

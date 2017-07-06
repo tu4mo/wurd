@@ -17,16 +17,13 @@ const getIcon = name => {
   }
 }
 
-const Icon = ({ className, name, onClick, title }) => {
-  return (
-    <img
-      className={`icon ${className || ''}`}
-      onClick={onClick}
-      src={getIcon(name)}
-      title={title}
-    />
-  )
-}
+const Icon = ({ className, name, onClick, title }) =>
+  <img
+    className={`icon ${className || ''}`}
+    onClick={onClick}
+    src={getIcon(name)}
+    title={title}
+  />
 
 Icon.propTypes = {
   className: PropTypes.string,

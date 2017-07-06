@@ -19,13 +19,15 @@ class Like extends Component {
   }
 
   onLikeClick = () => {
+    const { postId } = this.props
+
     if (this.props.liked) {
-      this.props.unlikePost(this.props.postId)
+      this.props.unlikePost(postId)
       this.setState({
         didClickLike: false
       })
     } else {
-      this.props.likePost(this.props.postId)
+      this.props.likePost(postId)
       this.setState({
         didClickLike: true
       })
