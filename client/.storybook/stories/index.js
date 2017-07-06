@@ -10,7 +10,13 @@ const stories = storiesOf('Button', module)
 stories.addDecorator(withKnobs)
 
 stories.add('with text', () =>
-  <Button disabled={boolean('Disabled', false)} onClick={action('clicked')}>
+  <Button
+    disabled={boolean('disabled', false)}
+    link={boolean('link', false)}
+    loading={boolean('loading', false)}
+    onClick={action('clicked')}
+    secondary={boolean('secondary', false)}
+  >
     Button
   </Button>
 )
