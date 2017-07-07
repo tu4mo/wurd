@@ -16,7 +16,9 @@ export const getUsers = state => ({
 export const isFollowingUsername = username => state => {
   const authenticatedUser = getAuthenticatedUser(state)
 
-  if (!authenticatedUser) return false
+  if (!authenticatedUser || !authenticatedUser.following) {
+    return false
+  }
 
   return (
     authenticatedUser.following.findIndex(
