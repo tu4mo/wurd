@@ -75,7 +75,7 @@ class Profile extends Component {
 
     return (
       <div>
-        <div className="container">
+        <div className="container container--with-y-padding">
           <div className="profile">
             <div className="profile__photo">
               <ProfilePhoto

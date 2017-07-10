@@ -5,7 +5,6 @@ import { fetchPosts } from '~/actions/posts'
 import { getAuthenticatedUser } from '~/selectors/users'
 import { getFollowedPosts } from '~/selectors/posts'
 import Posts from '~/components/Posts'
-import './Home.scss'
 
 class Home extends Component {
   static propTypes = {
@@ -21,10 +20,8 @@ class Home extends Component {
     const { posts } = this.props
 
     return (
-      <div className="home container">
-        <div className="home__content">
-          <Posts posts={posts} />
-        </div>
+      <div className="container container--with-y-padding">
+        <Posts posts={posts} />
       </div>
     )
   }

@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: var(--spacing-md) 0;
 
   @include breakpoint($breakpoint-md) {
     flex-direction: row;

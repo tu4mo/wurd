@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { fetchUsers } from '~/actions/users'
 import { getUsers } from '~/selectors/users'
 import UserList from '~/components/UserList'
-import './Users.scss'
 
 class Users extends Component {
   static propTypes = {
@@ -20,10 +19,8 @@ class Users extends Component {
     const { users } = this.props
 
     return (
-      <div className="users">
-        <div className="container">
-          <UserList isPending={users.isPending} users={users.data} />
-        </div>
+      <div className="container container--with-y-padding">
+        <UserList isPending={users.isPending} users={users.data} />
       </div>
     )
   }
