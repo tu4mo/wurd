@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { propTypes, reduxForm } from 'redux-form'
+import { propTypes as reduxFormPropTypes, reduxForm } from 'redux-form'
 import { logIn, signUp } from '~/actions/auth'
 import { getAuthenticationError } from '~/selectors/auth'
 import Alert from '../Alert'
@@ -17,7 +17,7 @@ const LABELS = {
 
 class SignInUp extends Component {
   static propTypes = {
-    ...propTypes,
+    ...reduxFormPropTypes,
     errorMessage: PropTypes.string
   }
 

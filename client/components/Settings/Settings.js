@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { propTypes, reduxForm } from 'redux-form'
+import { propTypes as reduxFormPropTypes, reduxForm } from 'redux-form'
 import { fetchAccount, saveAccount } from '~/actions/account'
 import { getAccount } from '~/selectors/account'
 import Alert from '../Alert'
@@ -12,7 +12,7 @@ import './Settings.scss'
 
 class Settings extends Component {
   static propTypes = {
-    ...propTypes,
+    ...reduxFormPropTypes,
     accountError: PropTypes.string,
     history: PropTypes.object.isRequired
   }
