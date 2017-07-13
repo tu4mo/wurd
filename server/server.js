@@ -1,3 +1,5 @@
+const isDev = process.env.NODE_ENV === 'development'
+
 // Load environment variables
 require('dotenv').config()
 
@@ -22,11 +24,13 @@ app.use(morgan('dev'))
 app.use(helmet())
 
 // Force HTTPS
-app.use((req, res, next) => {
-  req.headers['x-forwarded-proto'] === 'https'
-    ? next()
-    : res.redirect('https://' + req.headers.host + req.url)
-})
+if (!isDev) {
+  app.use((req, res, next) => {
+    req.headers['x-forwarded-proto'] === 'https'
+      ? next()
+      : res.redirect('https://' + req.headers.host + req.url)
+  })
+}
 
 // Set up body parser
 app.use(bodyParser.json())
