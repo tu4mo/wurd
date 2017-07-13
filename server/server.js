@@ -21,6 +21,13 @@ app.use(morgan('dev'))
 // Set up Helmet
 app.use(helmet())
 
+// Force HTTPS
+app.use((req, res, next) => {
+  req.headers['x-forwarded-proto'] === 'https'
+    ? next()
+    : res.redirect('https://' + req.headers.host + req.url)
+})
+
 // Set up body parser
 app.use(bodyParser.json())
 
