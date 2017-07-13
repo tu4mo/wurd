@@ -4,6 +4,7 @@ require('dotenv').config()
 // Import dependencies
 const bodyParser = require('body-parser')
 const express = require('express')
+const helmet = require('helmet')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const path = require('path')
@@ -16,6 +17,9 @@ const app = express()
 
 // Use Morgan to log requests to the console
 app.use(morgan('dev'))
+
+// Set up Helmet
+app.use(helmet())
 
 // Set up body parser
 app.use(bodyParser.json())
