@@ -1,5 +1,3 @@
-import { getAuthenticatedUsername } from './auth'
-
 const sortPostsByCreatedAt = posts => {
   const entries = Object.entries(posts)
   const sorted = entries
@@ -58,7 +56,10 @@ export const getPostById = postId => state => {
   return allPosts[postId]
 }
 
-export const isPostMine = postId => state => {
+export const isPostByUser = (state, postId, username = '') => {
   const post = getPostById(postId)(state)
-  return post.user.username === getAuthenticatedUsername(state)
+
+  if (!post) return false
+
+  return post.user.username === username
 }

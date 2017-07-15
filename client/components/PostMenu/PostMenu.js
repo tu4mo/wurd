@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { deletePost } from '~/actions/posts'
-import { isPostMine } from '~/selectors/posts'
+import { getAuthenticatedUsername } from '~/selectors/auth'
+import { isPostByUser } from '~/selectors/posts'
 import Button from '../Button'
 import './PostMenu.scss'
 
@@ -41,8 +42,12 @@ class PostMenu extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  isMine: isPostMine(ownProps.postId)(state)
-})
+const mapStateToProps = (state, ownProps) => {
+  const username = getAuthenticatedUsername(state)
+
+  return {
+    isMine: isPostByUser(state, ownProps.postId, username)
+  }
+}
 
 export default connect(mapStateToProps, { deletePost })(PostMenu)
