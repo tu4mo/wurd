@@ -42,21 +42,26 @@
 
   &__color-picker {
     align-items: center;
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-color: $color-ultra-light-gray;
+    border-style: solid;
     display: flex;
-    height: 100px;
+    height: 100%;
+    padding: var(--spacing-md) 0;
     width: 100%;
 
     @include breakpoint($breakpoint-sm) {
-      border-right: 1px solid $color-ultra-light-gray;
+      border-bottom-width: 0;
+      border-right-width: 1px;
     }
   }
 
   &__buttons {
     align-items: center;
     display: flex;
-    height: 100px;
     justify-content: center;
-    margin: 0 var(--spacing-md);
+    margin: var(--spacing-md);
 
     & > * {
       width: 100px;
