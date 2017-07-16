@@ -1,15 +1,20 @@
 .color-picker {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 550px;
+  overflow: auto;
+  width: 100%;
+
+  &::after,
+  &::before {
+    content: '';
+    flex: 0 0 var(--spacing-sm);
+  }
 
   &__color {
     border-radius: 20px;
+    flex: 0 0 40px;
     height: 40px;
     margin: 5px;
     position: relative;
-    width: 40px;
 
     &--active {
       &::after {

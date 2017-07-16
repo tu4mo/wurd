@@ -39,7 +39,7 @@ app.use(bodyParser.json())
 const port = process.env.PORT || 3000
 
 // Connect to database
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(isDev ? process.env.MONGODB_DEV_URI : process.env.MONGODB_URI)
 
 // Serve static files
 app.use(express.static(path.resolve(__dirname, '../dist')))

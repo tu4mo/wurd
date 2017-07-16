@@ -37,7 +37,7 @@ stories.add('Button', () =>
 stories.add('Post', () =>
   <Post
     post={{
-      content: 'hello',
+      content: text('content', 'Post can be five words'),
       gradientEnd: '#eeeeee',
       gradientStart: '#dddddd',
       createdAt: Date.now(),

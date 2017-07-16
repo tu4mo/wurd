@@ -4,6 +4,8 @@ import Button from '../Button'
 import ColorPicker from '../ColorPicker'
 import './Composer.scss'
 
+const countWords = str => str.split(' ').length
+
 class Composer extends Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
@@ -23,11 +25,15 @@ class Composer extends Component {
   }
 
   onContentChange = event => {
+    const content = event.target.value
+      .replace(/\s\s+/g, ' ')
+
+    if (countWords(content) > 5) {
+      return false
+    }
+
     this.setState({
-      content: event.target.value.replace(
-        /[^A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff]/,
-        ''
-      )
+      content
     })
   }
 
@@ -52,7 +58,7 @@ class Composer extends Component {
         <div className="composer">
           <input
             className="composer__input"
-            maxLength="30"
+            maxLength="50"
             onChange={this.onContentChange}
             placeholder="write here"
             ref={ref => (this.input = ref)}
@@ -61,10 +67,14 @@ class Composer extends Component {
             }}
             value={content}
           />
-          <ColorPicker onChange={this.onColorChange} value={color} />
-          <div className="composer__buttons">
-            <Button onClick={this.onSaveClick}>Save</Button>
-            <Button onClick={onCloseClick}>Cancel</Button>
+          <div className="composer__toolbar">
+            <div className="composer__color-picker">
+              <ColorPicker onChange={this.onColorChange} value={color} />
+            </div>
+            <div className="composer__buttons">
+              <Button onClick={this.onSaveClick}>Save</Button>
+              <Button onClick={onCloseClick}>Cancel</Button>
+            </div>
           </div>
         </div>
       </div>
