@@ -25,8 +25,7 @@ class Composer extends Component {
   }
 
   onContentChange = event => {
-    const content = event.target.value
-      .replace(/\s\s+/g, ' ')
+    const content = event.target.value.replace(/\s\s+/g, ' ')
 
     if (countWords(content) > 5) {
       return false
