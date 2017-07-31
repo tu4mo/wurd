@@ -14,7 +14,7 @@
     ],
     "syntax-dynamic-import",
     "transform-class-properties",
-    "transform-object-rest-spread",
+    ["transform-object-rest-spread", { "useBuiltIns": true }],
     "react-hot-loader/babel"
   ]
 }
