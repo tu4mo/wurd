@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { withKnobs, text, boolean, number } from '@storybook/addon-knobs'
+import { color, withKnobs, text, boolean, number } from '@storybook/addon-knobs'
 import { MemoryRouter } from 'react-router'
 import { Provider } from 'react-redux'
 import store from '../../store'
@@ -38,12 +38,12 @@ stories.add('Post', () =>
   <Post
     post={{
       content: text('content', 'Post can be five words'),
-      gradientEnd: '#eeeeee',
-      gradientStart: '#dddddd',
+      gradientEnd: color('gradientEnd', '#eeeeee'),
+      gradientStart: color('gradientStart', '#dddddd'),
       createdAt: Date.now(),
       id: '123',
-      liked: true,
-      likes: 5,
+      liked: boolean('liked', true),
+      likes: number('likes', 5),
       user: { username: 'tu4mo', profileUrl: 'test' }
     }}
   />
