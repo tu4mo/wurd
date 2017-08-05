@@ -15,10 +15,11 @@ const PostBody = ({ content, fill, gradientEnd, gradientStart }) => {
       }}
     >
       <div className="post-body__content">
-        {words.map(word =>
+        {words.map((word, i) =>
           <Textfit
             className="post-body__row"
             forceSingleModeWidth
+            key={i}
             max={140}
             mode="single"
           >
