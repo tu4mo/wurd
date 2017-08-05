@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import throttle from '~/utils/throttle'
 import { fetchUserByUsername } from '~/actions/users'
 import { createPost, fetchPostsByUsername } from '~/actions/posts'
 import { getAuthenticatedUser } from '~/selectors/users'
@@ -29,7 +30,7 @@ class Header extends Component {
   previousScrollPosition = null
 
   componentDidMount() {
-    window.addEventListener('scroll', this.onScroll)
+    window.addEventListener('scroll', throttle(this.onScroll, 200))
     this.previousScrollPosition = window.pageYOffset
   }
 
@@ -39,8 +40,6 @@ class Header extends Component {
 
   onScroll = () => {
     const scrollPosition = window.pageYOffset
-
-    console.log(scrollPosition, this.previousScrollPosition)
 
     if (scrollPosition > 100 && this.previousScrollPosition < scrollPosition) {
       this.setState({
