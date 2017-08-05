@@ -22,7 +22,37 @@ class Header extends Component {
   }
 
   state = {
-    isComposerOpen: false
+    isComposerOpen: false,
+    isHidden: false
+  }
+
+  previousScrollPosition = null
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.onScroll)
+    this.previousScrollPosition = window.pageYOffset
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll)
+  }
+
+  onScroll = () => {
+    const scrollPosition = window.pageYOffset
+
+    console.log(scrollPosition, this.previousScrollPosition)
+
+    if (scrollPosition > 100 && this.previousScrollPosition < scrollPosition) {
+      this.setState({
+        isHidden: true
+      })
+    } else {
+      this.setState({
+        isHidden: false
+      })
+    }
+
+    this.previousScrollPosition = scrollPosition
   }
 
   onNewPostClick = () => {
@@ -49,14 +79,16 @@ class Header extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props
-    const { isComposerOpen } = this.state
+    const { isComposerOpen, isHidden } = this.state
+
+    const withComposerClass = isComposerOpen
+      ? 'header-container--with-composer'
+      : ''
+    const isHiddenClass =
+      isHidden && !isComposerOpen ? 'header-container--hidden' : ''
 
     return (
-      <div
-        className={`header-container ${isComposerOpen
-          ? 'header-container--with-composer'
-          : ''}`}
-      >
+      <div className={`header-container ${withComposerClass} ${isHiddenClass}`}>
         <div className="header-container__shadow">
           <header className="header">
             <div className="container container--full-height">

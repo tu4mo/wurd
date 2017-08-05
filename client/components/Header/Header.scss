@@ -3,6 +3,7 @@
   position: fixed;
   right: 0;
   top: 0;
+  transition: top 0.2s ease-in-out;
   z-index: 1;
 
   &__shadow {
@@ -13,6 +14,10 @@
     animation: header-background-fade 4s forwards ease-out;
     background-color: transparent;
     bottom: 0;
+  }
+
+  &--hidden {
+    top: calc(var(--header-height) * -1);
   }
 }
 
