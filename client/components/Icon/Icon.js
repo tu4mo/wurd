@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 import './Icon.scss'
 
 import likeIcon from './svg/like.svg'
@@ -19,7 +20,7 @@ const getIcon = name => {
 
 const Icon = ({ className, name, onClick, title }) =>
   <img
-    className={`icon ${className || ''}`}
+    className={classnames('icon', className)}
     onClick={onClick}
     src={getIcon(name)}
     title={title}

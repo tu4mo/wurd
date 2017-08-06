@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { propTypes as reduxFormPropTypes, reduxForm } from 'redux-form'
+import classnames from 'classnames'
 import { logIn, signUp } from '~/actions/auth'
 import { getAuthenticationError } from '~/selectors/auth'
 import Alert from '../Alert'
@@ -42,9 +43,9 @@ class SignInUp extends Component {
 
     return (
       <div
-        className={`sign-in-up__tab ${id === this.state.tab
-          ? 'sign-in-up__tab--active'
-          : ''}`}
+        className={classnames('sign-in-up__tab', {
+          'sign-in-up__tab--active': id === this.state.tab
+        })}
         onClick={() => changeTab(id)}
       >
         {label}

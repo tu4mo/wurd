@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 import './ColorPicker.scss'
 
 const GRADIENTS = [
@@ -47,9 +48,9 @@ class ColorPicker extends Component {
       <div className="color-picker">
         {GRADIENTS.map((gradient, i) =>
           <div
-            className={`color-picker__color ${gradient === value
-              ? 'color-picker__color--active'
-              : ''}`}
+            className={classnames('color-picker__color', {
+              'color-picker__color--active': gradient === value
+            })}
             key={i}
             onClick={() => onChange(gradient)}
             style={{

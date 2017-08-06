@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 import { NavLink } from 'react-router-dom'
 import './NavItem.scss'
 
 const NavItem = ({ children, className, to }) => {
-  const classNames = `nav-item ${className || ''}`
+  const classNames = classnames('nav-item', className)
 
   return to
     ? <NavLink

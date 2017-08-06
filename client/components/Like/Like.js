@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import classnames from 'classnames'
 import { likePost, unlikePost } from '~/actions/posts'
 import Icon from '../Icon'
 import './Like.scss'
@@ -39,7 +40,7 @@ class Like extends Component {
     const { didClickLike } = this.state
 
     return (
-      <div className={`like ${didClickLike ? 'like--liked' : ''}`}>
+      <div className={classnames('like', { 'like--liked': didClickLike })}>
         <Icon
           className="like__icon"
           name={liked ? 'liked' : 'like'}

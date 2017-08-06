@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 import Spinner from '../Spinner'
 import './Button.scss'
 
@@ -27,23 +28,19 @@ class Button extends PureComponent {
       type
     } = this.props
 
-    const classNames = ['button']
-
-    if (secondary) {
-      classNames.push('button--secondary')
-    } else if (link) {
-      classNames.push('button--link')
-    } else {
-      classNames.push('button--outline')
-    }
-
-    if (className) {
-      classNames.push(className)
-    }
+    const classNames = classnames(
+      'button',
+      {
+        'button--secondary': secondary,
+        'button--link': link,
+        'button--outline': !secondary && !link
+      },
+      className
+    )
 
     return (
       <button
-        className={classNames.join(' ')}
+        className={classNames}
         disabled={disabled}
         onClick={onClick}
         type={type}

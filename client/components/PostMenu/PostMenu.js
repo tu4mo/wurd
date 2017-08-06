@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import classnames from 'classnames'
 import { deletePost } from '~/actions/posts'
 import { getAuthenticatedUsername } from '~/selectors/auth'
 import { isPostByUser } from '~/selectors/posts'
@@ -23,7 +24,7 @@ class PostMenu extends Component {
     const { isMine, isOpen } = this.props
 
     return (
-      <div className={`post-menu ${isOpen ? 'post-menu--active' : ''}`}>
+      <div className={classnames('post-menu', { 'post-menu--active': isOpen })}>
         <div className="post-menu__content">
           <Button className="post-menu__button" disabled link>
             Share

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import classnames from 'classnames'
 import throttle from '~/utils/throttle'
 import { fetchUserByUsername } from '~/actions/users'
 import { createPost, fetchPostsByUsername } from '~/actions/posts'
@@ -80,14 +81,13 @@ class Header extends Component {
     const { isAuthenticated, user } = this.props
     const { isComposerOpen, isHidden } = this.state
 
-    const withComposerClass = isComposerOpen
-      ? 'header-container--with-composer'
-      : ''
-    const isHiddenClass =
-      isHidden && !isComposerOpen ? 'header-container--hidden' : ''
+    const classNames = classnames('header-container', {
+      'header-container--with-composer': isComposerOpen,
+      'header-container--hidden': isHidden && !isComposerOpen
+    })
 
     return (
-      <div className={`header-container ${withComposerClass} ${isHiddenClass}`}>
+      <div className={classNames}>
         <div className="header-container__shadow">
           <header className="header">
             <div className="container container--full-height">

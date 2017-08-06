@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 import './Table.scss'
 
 const Table = ({ children, className }) =>
-  <table className={`table ${className || ''}`}>
+  <table className={classnames('table', className)}>
     <tbody>
       {children}
     </tbody>

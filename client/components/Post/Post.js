@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import classnames from 'classnames'
 import moment from 'moment'
 import Icon from '../Icon'
 import Like from '../Like'
@@ -87,9 +88,9 @@ class Post extends Component {
         <div className="post__footer">
           <Like liked={liked} likes={likes} postId={id} />
           <Icon
-            className={`post__menu-toggle ${isMenuOpen
-              ? 'post__menu-toggle--open'
-              : ''}`}
+            className={classnames('post__menu-toggle', {
+              'post__menu-toggle--open': isMenuOpen
+            })}
             name="menu"
             onClick={this.onMenuClick}
           />
