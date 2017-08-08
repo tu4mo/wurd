@@ -83,18 +83,16 @@ class Welcome extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <div className="welcome">
-          <div className="welcome__content">
-            {this.renderPosts()}
-          </div>
+    return [
+      <div className="welcome" key="1">
+        <div className="welcome__content">
+          {this.renderPosts()}
         </div>
-        <div className="welcome-form">
-          <SignInUp />
-        </div>
+      </div>,
+      <div className="welcome-form" key="2">
+        <SignInUp />
       </div>
-    )
+    ]
   }
 }
 
