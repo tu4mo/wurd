@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { Textfit } from 'react-textfit'
-import wordwrap from 'wordwrapjs/es5/lib/wordwrapjs'
+import wordwrap from 'wordwrapjs'
 import './PostBody.scss'
 
 const PostBody = ({ content, fill, gradientEnd, gradientStart }) => {
