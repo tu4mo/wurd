@@ -3,7 +3,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack -p",
     "dev": "NODE_ENV=development nodemon --watch server server/server.js & webpack-dev-server --hot",
-    "format": "prettier --no-semi --single-quote --write \"{client,server}/**/*.{js,scss}\"",
+    "format": "prettier --no-semi --single-quote --write \"{,client/**/,server/**/}*.{js,scss}\"",
     "heroku-postbuild": "npm run build",
     "lint": "eslint . && stylelint \"client/**/*.scss\" --syntax scss",
     "start": "node server/server.js",
