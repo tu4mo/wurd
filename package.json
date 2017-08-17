@@ -5,7 +5,7 @@
     "dev": "NODE_ENV=development nodemon --watch server server/server.js & webpack-dev-server --hot",
     "format": "prettier --no-semi --single-quote --write \"{,client/**/,server/**/}*.{js,scss}\"",
     "heroku-postbuild": "npm run build",
-    "lint": "eslint . && stylelint \"client/**/*.scss\" --syntax scss",
+    "lint": "eslint . && stylelint \"client/**/*.scss\"",
     "start": "node server/server.js",
     "storybook": "start-storybook -p 9001 -c client/.storybook"
   },
