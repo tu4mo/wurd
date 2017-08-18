@@ -15,7 +15,6 @@ const postSchema = new mongoose.Schema(
       }
     },
     gradientEnd: {
-      maxlength: 7,
       required: true,
       type: String,
       validate: {
