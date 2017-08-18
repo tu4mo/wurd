@@ -20,7 +20,11 @@ const decoratePostJSON = (post, userId) => ({
 })
 
 const get = async (req, res) => {
-  const { filter, limit = 10000, username } = req.query
+  const { filter, limit = 100, username } = req.query
+
+  if (limit > 100) {
+    return res.sendStatus(400)
+  }
 
   try {
     const query = {}
