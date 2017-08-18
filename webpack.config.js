@@ -88,7 +88,7 @@ if (!isDev) {
       algorithm: 'gzip',
       asset: '[path].gz[query]',
       minRatio: 0.8,
-      test: /\.(css|html|js)$/,
+      test: /\.(css|html|js|svg)$/,
       threshold: 10240
     }),
     new CleanWebpackPlugin('dist'),
