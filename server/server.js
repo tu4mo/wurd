@@ -6,6 +6,7 @@ require('dotenv').config()
 // Import dependencies
 const bodyParser = require('body-parser')
 const express = require('express')
+const gzipStatic = require('connect-gzip-static')
 const helmet = require('helmet')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
@@ -47,7 +48,7 @@ mongoose.connect(
 )
 
 // Serve static files
-app.use(express.static(path.resolve(__dirname, '../dist')))
+app.use(gzipStatic(path.resolve(__dirname, '../dist')))
 app.use(express.static(path.resolve(__dirname, '../public')))
 app.use('/assets', express.static(path.join(__dirname, 'assets')))
 
