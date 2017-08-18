@@ -1,6 +1,7 @@
 const isDev = process.env.NODE_ENV !== 'production'
 
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
@@ -83,6 +84,13 @@ const config = {
 
 if (!isDev) {
   config.plugins.push(
+    new CompressionPlugin({
+      algorithm: 'gzip',
+      asset: '[path].gz[query]',
+      minRatio: 0.8,
+      test: /\.(js|html)$/,
+      threshold: 10240
+    }),
     new CleanWebpackPlugin('dist'),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.UglifyJsPlugin({
