@@ -20,7 +20,7 @@ const decoratePostJSON = (post, userId) => ({
 })
 
 const get = async (req, res) => {
-  const { filter, limit = 100, username } = req.query
+  const { filter, limit = 100, page = 0, username } = req.query
 
   if (limit > 100) {
     return res.sendStatus(400)
@@ -50,6 +50,7 @@ const get = async (req, res) => {
     const posts = await Post.find(query, null)
       .sort({ createdAt: -1 })
       .limit(parseInt(limit))
+      .skip(parseInt(page) * limit)
       .populate('user')
 
     const json = posts.map(post => decoratePostJSON(post, req.userId))
