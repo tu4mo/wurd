@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { isAuthenticated } from '~/selectors/auth'
 import { followUser, unfollowUser } from '~/actions/users'
 import { getAuthenticatedUser, isFollowingUsername } from '~/selectors/users'
 import Button from '../Button'
@@ -9,6 +10,7 @@ class FollowButton extends Component {
   static propTypes = {
     authenticatedUser: PropTypes.object.isRequired,
     followUser: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
     isFollowed: PropTypes.bool.isRequired,
     unfollowUser: PropTypes.func.isRequired,
     username: PropTypes.string.isRequired
@@ -23,9 +25,12 @@ class FollowButton extends Component {
   }
 
   render() {
-    const { isFollowed } = this.props
+    const { isAuthenticated, isFollowed } = this.props
 
-    if (this.props.username === this.props.authenticatedUser.username) {
+    if (
+      this.props.username === this.props.authenticatedUser.username ||
+      !isAuthenticated
+    ) {
       return null
     }
 
@@ -39,6 +44,7 @@ class FollowButton extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   authenticatedUser: getAuthenticatedUser(state),
+  isAuthenticated: isAuthenticated(state),
   isFollowed: isFollowingUsername(ownProps.username)(state)
 })
 
