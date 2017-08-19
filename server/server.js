@@ -47,10 +47,8 @@ mongoose.connect(
   }
 )
 
-// Serve static files
+// Serve static (gzip) files
 app.use(gzipStatic(path.resolve(__dirname, '../dist')))
-app.use(express.static(path.resolve(__dirname, '../public')))
-app.use('/assets', express.static(path.join(__dirname, 'assets')))
 
 // Set up routes
 const api = require('./routes')

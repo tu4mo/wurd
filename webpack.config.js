@@ -2,6 +2,7 @@ const isDev = process.env.NODE_ENV !== 'production'
 
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
@@ -61,6 +62,9 @@ const config = {
   },
 
   plugins: [
+    new CopyWebpackPlugin([
+      { from: 'client/assets' }
+    ]),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: 'body',

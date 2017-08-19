@@ -11,7 +11,7 @@ import Button from '~/components/Button'
 import Composer from '~/components/Composer'
 import NavItem from '~/components/NavItem'
 import ProfilePhoto from '~/components/ProfilePhoto'
-import logo from '~/assets/wurd.svg'
+import logo from './svg/wurd.svg'
 import './Header.scss'
 
 class Header extends Component {
