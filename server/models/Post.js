@@ -12,6 +12,7 @@ const postSchema = new mongoose.Schema(
       maxlength: 50,
       minlength: 1,
       required: true,
+      trim: true,
       type: String,
       validate: {
         validator: v => v.split(' ').length < 6,
