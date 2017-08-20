@@ -2,8 +2,14 @@
   margin: 0 auto;
   max-width: 640px;
 
+  &__user {
+    align-items: center;
+    display: flex;
+  }
+
   &__username {
     margin-left: var(--spacing-sm);
     text-decoration: none;
+    word-break: break-all;
   }
 }

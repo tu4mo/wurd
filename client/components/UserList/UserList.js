@@ -21,12 +21,14 @@ const UserList = ({ isPending, users }) => {
       {users.map(({ username, profileUrl }) =>
         <Tr key={username}>
           <Td>
-            <Link to={`/${username}`}>
-              <ProfilePhoto size="small" url={profileUrl} username={username} />
-            </Link>
-            <Link className="user-list__username" to={`/${username}`}>
-              {username}
-            </Link>
+            <div className="user-list__user">
+              <Link to={`/${username}`}>
+                <ProfilePhoto size="small" url={profileUrl} username={username} />
+              </Link>
+              <Link className="user-list__username" to={`/${username}`}>
+                {username}
+              </Link>
+            </div>
           </Td>
           <Td style={{ textAlign: 'right', width: '1%' }}>
             <FollowButton username={username} />
