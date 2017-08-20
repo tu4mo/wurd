@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+const INVALID_USERNAMES = ['home', 'users']
+
 const userSchema = new mongoose.Schema(
   {
     email: {
@@ -21,7 +23,8 @@ const userSchema = new mongoose.Schema(
       unique: true,
       required: true,
       validate: {
-        validator: v => /^[a-z0-9_]+$/i.test(v),
+        validator: v =>
+          /^[a-z0-9_]+$/i.test(v) && !INVALID_USERNAMES.includes(v),
         message: 'Invalid username'
       }
     },
