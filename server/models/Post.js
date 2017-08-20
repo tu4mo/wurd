@@ -4,6 +4,10 @@ const hexColorRegExp = /^#[0-9a-f]{6}$/i
 
 const postSchema = new mongoose.Schema(
   {
+    comments: {
+      ref: 'Comment',
+      type: [mongoose.Schema.Types.ObjectId]
+    },
     content: {
       maxlength: 50,
       minlength: 1,
