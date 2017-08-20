@@ -1,20 +1,30 @@
+// Import dependencies
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Route, Switch } from 'react-router-dom'
+import { Link, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
+
+// Import actions
 import { logOut } from '~/actions/auth'
 import { fetchUserByUsername, followUser, unfollowUser } from '~/actions/users'
 import { fetchPostById, fetchPostsByUsername } from '~/actions/posts'
+
+// Import selectors
 import { isAuthenticated } from '~/selectors/auth'
 import { getPostById, getPostsByUsername } from '~/selectors/posts'
 import { getAuthenticatedUser, getUser } from '~/selectors/users'
+
+// Import components
 import Button from '~/components/Button'
 import FollowButton from '~/components/FollowButton'
+import Icon from '~/components/Icon'
 import Posts from '~/components/Posts'
 import ProfilePhoto from '~/components/ProfilePhoto'
 import Settings from '~/components/Settings'
 import Stats from '~/components/Stats'
 import UserList from '~/components/UserList'
+
+// Import styles
 import './Profile.scss'
 
 class Profile extends Component {
@@ -59,10 +69,6 @@ class Profile extends Component {
     }
   }
 
-  onSettingsClick = () => {
-    this.props.history.push(`/${this.props.user.username}/settings`)
-  }
-
   onLogOutClick = () => {
     this.props.logOut()
     this.props.history.push('/')
@@ -95,9 +101,9 @@ class Profile extends Component {
                 path="/:username/settings"
                 children={({ match }) =>
                   !match &&
-                  <Button onClick={this.onSettingsClick} secondary>
-                    Settings
-                  </Button>}
+                  <Link to={`/${user.username}/settings`}>
+                    <Icon name="settings" />
+                  </Link>}
               />}
             {isMe &&
               <Button onClick={this.onLogOutClick} secondary>

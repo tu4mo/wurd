@@ -48,7 +48,6 @@ class Like extends Component {
             className="like__icon"
             name={liked ? 'liked' : 'like'}
             onClick={this.onLikeClick}
-            title={`Like${liked ? 'd' : ''}`}
           />}
         <div className="like__count">
           {likes || 'No'} like{likes !== 1 && 's'}

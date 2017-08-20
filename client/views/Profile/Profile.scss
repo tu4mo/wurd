@@ -29,6 +29,9 @@
   }
 
   &__buttons {
+    align-items: center;
+    display: flex;
+
     @include breakpoint($breakpoint-md) {
       margin-left: auto;
     }
