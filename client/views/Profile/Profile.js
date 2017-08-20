@@ -7,11 +7,9 @@ import { connect } from 'react-redux'
 // Import actions
 import { logOut } from '~/actions/auth'
 import { fetchUserByUsername, followUser, unfollowUser } from '~/actions/users'
-import { fetchPostById, fetchPostsByUsername } from '~/actions/posts'
 
 // Import selectors
 import { isAuthenticated } from '~/selectors/auth'
-import { getPostById, getPostsByUsername } from '~/selectors/posts'
 import { getAuthenticatedUser, getUser } from '~/selectors/users'
 
 // Import components
@@ -29,8 +27,6 @@ import './Profile.scss'
 
 class Profile extends Component {
   static propTypes = {
-    fetchPostById: PropTypes.func.isRequired,
-    fetchPostsByUsername: PropTypes.func.isRequired,
     fetchUserByUsername: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
@@ -38,35 +34,27 @@ class Profile extends Component {
     location: PropTypes.object.isRequired,
     logOut: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
-    posts: PropTypes.object.isRequired,
-    singlePost: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired
   }
 
   componentDidMount() {
-    const { username, postId } = this.props.match.params
-    this.getUserForProfile(username, postId)
+    const { username } = this.props.match.params
+    this.getUserForProfile(username)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {
-      const { postId, username } = nextProps.match.params
-      this.getUserForProfile(username, postId)
+      const { username } = nextProps.match.params
+      this.getUserForProfile(username)
     }
   }
 
-  getUserForProfile = (username, postId) => {
+  getUserForProfile = username => {
     this.props.fetchUserByUsername(username).catch(err => {
       if (err.response.status === 404) {
         this.props.history.push('/404')
       }
     })
-
-    if (postId && !['followers', 'following', 'settings'].includes(postId)) {
-      this.props.fetchPostById(postId)
-    } else {
-      this.props.fetchPostsByUsername(username)
-    }
   }
 
   onLogOutClick = () => {
@@ -75,7 +63,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { isAuthenticated, isMe, posts, singlePost, user } = this.props
+    const { isAuthenticated, isMe, match, user } = this.props
 
     if (!Object.keys(user).length) return null
 
@@ -129,7 +117,7 @@ class Profile extends Component {
             <div className="container">
               <Switch>
                 <Route exact path="/:username">
-                  <Posts posts={posts} />
+                  <Posts from={user.username} />
                 </Route>
                 <Route path="/:username/followers">
                   <UserList users={user.followers} />
@@ -138,7 +126,7 @@ class Profile extends Component {
                   <UserList users={user.following} />
                 </Route>
                 <Route path="/:username/:postId">
-                  <Posts posts={singlePost} />
+                  <Posts from={user.username} single={match.params.postId} />
                 </Route>
               </Switch>
             </div>
@@ -151,20 +139,16 @@ class Profile extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const user = getAuthenticatedUser(state) || {}
-  const { postId, username: userFromUrl } = ownProps.match.params
+  const { username: userFromUrl } = ownProps.match.params
 
   return {
     isAuthenticated: isAuthenticated(state),
     isMe: user.username === userFromUrl,
-    posts: getPostsByUsername(userFromUrl)(state),
-    singlePost: { [postId]: getPostById(postId)(state) },
     user: getUser(userFromUrl)(state) || {}
   }
 }
 
 export default connect(mapStateToProps, {
-  fetchPostById,
-  fetchPostsByUsername,
   fetchUserByUsername,
   followUser,
   logOut,

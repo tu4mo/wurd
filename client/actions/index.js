@@ -8,6 +8,8 @@ export const AUTH_SET_ERROR = 'AUTH_SET_ERROR'
 export const AUTH_SET_TOKEN = 'AUTH_SET_TOKEN'
 export const AUTH_SET_USER = 'AUTH_SET_USER'
 
+export const PAGE_SET = 'PAGE_SET'
+
 export const POST_CREATE = 'POST_CREATE'
 export const POST_DELETE = 'POST_DELETE'
 export const POST_FETCH = 'POST_FETCH'

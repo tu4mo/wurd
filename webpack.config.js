@@ -62,9 +62,7 @@ const config = {
   },
 
   plugins: [
-    new CopyWebpackPlugin([
-      { from: 'client/assets' }
-    ]),
+    new CopyWebpackPlugin([{ from: 'client/assets' }]),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: 'body',

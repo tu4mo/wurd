@@ -7,13 +7,18 @@ import {
   POST_UNLIKE
 } from '.'
 
-export const fetchPosts = ({ filter, limit }) => (dispatch, getState, api) => {
+export const fetchPosts = ({ filter, limit, page }) => (
+  dispatch,
+  getState,
+  api
+) => {
   api({
     method: 'get',
     url: 'posts',
     params: {
       filter,
-      limit
+      limit,
+      page
     }
   }).then(response => {
     dispatch({

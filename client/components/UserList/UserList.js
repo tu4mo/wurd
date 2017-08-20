@@ -23,7 +23,11 @@ const UserList = ({ isPending, users }) => {
           <Td>
             <div className="user-list__user">
               <Link to={`/${username}`}>
-                <ProfilePhoto size="small" url={profileUrl} username={username} />
+                <ProfilePhoto
+                  size="small"
+                  url={profileUrl}
+                  username={username}
+                />
               </Link>
               <Link className="user-list__username" to={`/${username}`}>
                 {username}
