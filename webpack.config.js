@@ -25,7 +25,7 @@ const styleLoaders = [
 const entry = ['babel-polyfill', './client/index.js']
 
 const config = {
-  devtool: isDev ? 'cheap-module-source-map' : '',
+  devtool: isDev ? 'eval-source-map' : '',
 
   entry: isDev ? ['react-hot-loader/patch', ...entry] : entry,
 
