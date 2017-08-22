@@ -90,7 +90,7 @@ class Header extends Component {
       <div className={classNames}>
         <div className="header-container__shadow">
           <header className="header">
-            <div className="container container--full-height">
+            <div className="container container--full-height container--without-padding">
               <nav className="navbar">
                 <NavItem to="/" className="header__logo navbar__item">
                   <img alt="Wurd" src={logo} title="Wurd" />
@@ -100,7 +100,7 @@ class Header extends Component {
                     Users
                   </NavItem>}
                 {isAuthenticated &&
-                  <NavItem className="header__new-post">
+                  <NavItem className="header__new-post" disableHover>
                     <Button onClick={this.onNewPostClick}>New Post</Button>
                   </NavItem>}
                 {isAuthenticated &&

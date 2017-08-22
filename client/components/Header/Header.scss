@@ -64,7 +64,6 @@
 
     @include breakpoint($breakpoint-sm) {
       display: flex;
-      margin-left: var(--spacing-md);
     }
   }
 }
@@ -72,10 +71,6 @@
 .navbar {
   display: flex;
   height: 100%;
-
-  &__item {
-    margin-right: var(--spacing-md);
-  }
 }
 
 @keyframes header-background-fade {

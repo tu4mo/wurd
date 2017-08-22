@@ -2,10 +2,18 @@
   align-items: center;
   border-bottom: 2px solid transparent;
   display: flex;
+  padding-left: $spacing-sm;
+  padding-right: $spacing-sm;
   padding-top: 2px;
   text-decoration: none;
 
   &--active {
     border-color: $color-dark-gray;
+  }
+
+  &--has-hover {
+    &:hover {
+      border-color: $color-dark-gray;
+    }
   }
 }
