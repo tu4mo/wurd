@@ -72,7 +72,8 @@ const config = {
       allChunks: true,
       filename: 'wurd.[hash].css'
     }),
-    new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/)
+    new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/),
+    new webpack.NamedModulesPlugin()
   ],
 
   devServer: {

@@ -67,73 +67,75 @@ class Profile extends Component {
 
     if (!Object.keys(user).length) return null
 
-    return [
-      <div className="container container--with-y-padding" key="1">
-        <div className="profile">
-          <div className="profile__photo">
-            <ProfilePhoto
-              isMe={isMe}
-              url={user.profileUrl}
-              username={user.username}
-            />
-          </div>
-          <div className="profile__user">
-            {user.username}
-          </div>
-          <div className="profile__buttons">
-            {isAuthenticated &&
-              !isMe &&
-              <FollowButton username={user.username} />}
-            {isMe &&
-              <Route
-                path="/:username/settings"
-                children={({ match }) =>
-                  !match &&
-                  <Link to={`/${user.username}/settings`}>
-                    <Icon name="settings" />
-                  </Link>}
-              />}
-            {isMe &&
-              <Button onClick={this.onLogOutClick} secondary>
-                Log Out
-              </Button>}
+    return (
+      <div>
+        <div className="container container--with-y-padding">
+          <div className="profile">
+            <div className="profile__photo">
+              <ProfilePhoto
+                isMe={isMe}
+                url={user.profileUrl}
+                username={user.username}
+              />
+            </div>
+            <div className="profile__user">
+              {user.username}
+            </div>
+            <div className="profile__buttons">
+              {isAuthenticated &&
+                !isMe &&
+                <FollowButton username={user.username} />}
+              {isMe &&
+                <Route
+                  path="/:username/settings"
+                  children={({ match }) =>
+                    !match &&
+                    <Link to={`/${user.username}/settings`}>
+                      <Icon name="settings" />
+                    </Link>}
+                />}
+              {isMe &&
+                <Button onClick={this.onLogOutClick} secondary>
+                  Log Out
+                </Button>}
+            </div>
           </div>
         </div>
-      </div>,
-      <Switch key="2">
-        <Route path="/:username/settings" component={Settings} />
-        <Route>
-          <div className="profile-body">
-            <div className="profile-body__tabs">
-              {user.followers &&
-                user.following &&
-                <Stats
-                  followers={user.followers.length}
-                  following={user.following.length}
-                  posts={user.posts}
-                  username={user.username}
-                />}
+        <Switch>
+          <Route path="/:username/settings" component={Settings} />
+          <Route>
+            <div className="profile-body">
+              <div className="profile-body__tabs">
+                {user.followers &&
+                  user.following &&
+                  <Stats
+                    followers={user.followers.length}
+                    following={user.following.length}
+                    posts={user.posts}
+                    username={user.username}
+                  />}
+              </div>
+              <div className="container">
+                <Switch>
+                  <Route exact path="/:username">
+                    <Posts from={user.username} />
+                  </Route>
+                  <Route path="/:username/followers">
+                    <UserList users={user.followers} />
+                  </Route>
+                  <Route path="/:username/following">
+                    <UserList users={user.following} />
+                  </Route>
+                  <Route path="/:username/:postId">
+                    <Posts from={user.username} single={match.params.postId} />
+                  </Route>
+                </Switch>
+              </div>
             </div>
-            <div className="container">
-              <Switch>
-                <Route exact path="/:username">
-                  <Posts from={user.username} />
-                </Route>
-                <Route path="/:username/followers">
-                  <UserList users={user.followers} />
-                </Route>
-                <Route path="/:username/following">
-                  <UserList users={user.following} />
-                </Route>
-                <Route path="/:username/:postId">
-                  <Posts from={user.username} single={match.params.postId} />
-                </Route>
-              </Switch>
-            </div>
-          </div>
-        </Route>
-      </Switch>
-    ]
+          </Route>
+        </Switch>
+      </div>
+    )
   }
 }
 
