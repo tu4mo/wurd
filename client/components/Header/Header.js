@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 import throttle from '~/utils/throttle'
 import { fetchUserByUsername } from '~/actions/users'
-import { createPost, fetchPostsByUsername } from '~/actions/posts'
+import { createPost } from '~/actions/posts'
 import { getAuthenticatedUser } from '~/selectors/users'
 import { isAuthenticated } from '~/selectors/auth'
 import Button from '~/components/Button'
@@ -17,7 +17,6 @@ import './Header.scss'
 class Header extends Component {
   static propTypes = {
     createPost: PropTypes.func.isRequired,
-    fetchPostsByUsername: PropTypes.func.isRequired,
     fetchUserByUsername: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
     user: PropTypes.object
@@ -73,7 +72,6 @@ class Header extends Component {
         isComposerOpen: false
       })
       this.props.fetchUserByUsername(this.props.user.username)
-      this.props.fetchPostsByUsername(this.props.user.username)
     })
   }
 
@@ -128,6 +126,5 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   createPost,
-  fetchPostsByUsername,
   fetchUserByUsername
 })(Header)

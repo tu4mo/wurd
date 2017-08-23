@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 import moment from 'moment'
+
+// Import selectors
+import { getPostById } from '~/selectors/posts'
+
+// Import components
 import Icon from '../Icon'
 import Like from '../Like'
 import PostBody from '../PostBody'
 import PostMenu from '../PostMenu'
 import ProfilePhoto from '../ProfilePhoto'
+
+// Import styles
 import './Post.scss'
 
 const placeholderStyles = {
@@ -101,4 +109,8 @@ class Post extends Component {
   }
 }
 
-export default Post
+const mapStateToProps = (state, ownProps) => ({
+  post: getPostById(ownProps.postId)(state)
+})
+
+export default connect(mapStateToProps)(Post)

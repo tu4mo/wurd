@@ -1,8 +1,8 @@
 import {
   POST_DELETE,
-  POST_FETCH,
   POSTS_FETCH,
   POST_LIKE,
+  POST_SAVE,
   POST_UNLIKE
 } from '~/actions'
 
@@ -21,7 +21,7 @@ const posts = (state = {}, action) => {
       const { [action.id]: omit, ...rest } = state
       return rest
 
-    case POST_FETCH:
+    case POST_SAVE:
       return {
         ...state,
         [action.post.id]: action.post
@@ -30,7 +30,7 @@ const posts = (state = {}, action) => {
     case POSTS_FETCH:
       return {
         ...state,
-        ...toObjectByKey(action.posts, 'id')
+        ...toObjectByKey(action.posts.data, 'id')
       }
 
     case POST_LIKE: {

@@ -3,21 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 // Import actions
-import { setPage } from '~/actions/pagination'
-import {
-  fetchPosts,
-  fetchPostById,
-  fetchPostsByUsername
-} from '~/actions/posts'
+import { fetchPostById, fetchPosts } from '~/actions/posts'
 
 // Import selectors
-import { getPage } from '~/selectors/pagination'
-import {
-  getFollowedPosts,
-  getPostById,
-  getPostsByUsername
-} from '~/selectors/posts'
-import { getAuthenticatedUser } from '~/selectors/users'
+import { getPostIdsFromTimeline, getHasMore } from '~/selectors/timelines'
 
 // Import components
 import Post from '../Post'
@@ -27,43 +16,41 @@ import './Posts.scss'
 
 class Posts extends Component {
   componentDidMount() {
-    this._fetch()
+    this._fetchPosts()
   }
 
   componentWillReceiveProps(nextProps) {
     const { from, single } = this.props
 
     if (from !== nextProps.from || single !== nextProps.single) {
-      this._fetch()
+      this._fetchPosts()
     }
   }
 
-  _fetch() {
-    const {
-      fetchPostById,
-      fetchPosts,
-      fetchPostsByUsername,
-      from,
-      page,
-      setPage,
-      single
-    } = this.props
-
-    setPage(from, 0)
+  _fetchPosts() {
+    const { fetchPostById, fetchPosts, from, single } = this.props
 
     if (from === 'home') {
-      fetchPosts({ filter: 'following', limit: 10, page })
+      fetchPosts({
+        filter: 'following',
+        timeline: 'home'
+      })
     } else if (single) {
       fetchPostById(single)
     } else {
-      fetchPostsByUsername(from)
+      fetchPosts({
+        timeline: from,
+        username: from
+      })
     }
   }
 
-  render() {
-    const { posts } = this.props
+  loadMore = () => {}
 
-    if (!Object.keys(posts).length) {
+  render() {
+    const { hasMore, postIds } = this.props
+
+    if (!postIds.length) {
       return (
         <div className="posts">
           <Post isPlaceholder />
@@ -77,10 +64,8 @@ class Posts extends Component {
 
     return (
       <div className="posts">
-        {Object.keys(posts).map(key => {
-          const post = posts[key]
-          return <Post post={post} key={key} />
-        })}
+        {postIds.map(id => <Post postId={id} key={id} />)}
+        {hasMore && <div onClick={this.loadMore}>More</div>}
       </div>
     )
   }
@@ -89,11 +74,9 @@ class Posts extends Component {
 Posts.propTypes = {
   fetchPostById: PropTypes.func.isRequired,
   fetchPosts: PropTypes.func.isRequired,
-  fetchPostsByUsername: PropTypes.func.isRequired,
-  from: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
-  page: PropTypes.number.isRequired,
-  posts: PropTypes.object,
-  setPage: PropTypes.func.isRequired,
+  from: PropTypes.string.isRequired,
+  hasMore: PropTypes.bool,
+  postIds: PropTypes.array,
   single: PropTypes.string
 }
 
@@ -104,24 +87,15 @@ Posts.defaultProps = {
 const mapStateToProps = (state, ownProps) => {
   const { from, single } = ownProps
 
-  const user = getAuthenticatedUser(state)
-
-  const posts =
-    from === 'home'
-      ? getFollowedPosts(state, user)
-      : single
-        ? { [single]: getPostById(single)(state) }
-        : getPostsByUsername(from)(state)
+  const postIds = single ? [single] : getPostIdsFromTimeline(state, from)
 
   return {
-    page: getPage(state, from),
-    posts
+    hasMore: getHasMore(state, from),
+    postIds
   }
 }
 
 export default connect(mapStateToProps, {
   fetchPostById,
-  fetchPosts,
-  fetchPostsByUsername,
-  setPage
+  fetchPosts
 })(Posts)

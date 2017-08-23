@@ -7,6 +7,7 @@ const { getProfileUrl } = require('../users')
 const decoratePostJSON = (post, userId) => ({
   id: post._id,
   content: post.content,
+  comments: post.comments,
   createdAt: post.createdAt,
   gradientEnd: post.gradientEnd,
   gradientStart: post.gradientStart,
@@ -20,7 +21,9 @@ const decoratePostJSON = (post, userId) => ({
 })
 
 const get = async (req, res) => {
-  const { filter, limit = 100, page = 0, username } = req.query
+  const { filter, username } = req.query
+  const limit = Number(req.query.limit)
+  const page = Number(req.query.page)
 
   if (limit > 100) {
     return res.sendStatus(400)
@@ -47,13 +50,18 @@ const get = async (req, res) => {
       query.user = user._id
     }
 
+    const count = await Post.count(query)
+
     const posts = await Post.find(query, null)
       .sort({ createdAt: -1 })
-      .limit(parseInt(limit))
-      .skip(parseInt(page) * limit)
+      .limit(limit)
+      .skip(page * limit)
       .populate('user')
 
-    const json = posts.map(post => decoratePostJSON(post, req.userId))
+    const json = {
+      data: posts.map(post => decoratePostJSON(post, req.userId)),
+      hasMore: count > page * limit + limit
+    }
 
     return res.status(200).json(json)
   } catch (err) {

@@ -32,21 +32,9 @@ export const getPostsByUsername = username => state => {
 
 export const getPostsForHome = state => sortPostsByCreatedAt(state.posts)
 
-export const getFollowedPosts = (state, user) => {
-  if (!user.following) return {}
-
-  const { auth: { username }, posts = {} } = state
-  const followedUsers = [...user.following.map(user => user.username), username]
-  const filteredPosts = Object.keys(posts).reduce((acc, val) => {
-    return followedUsers.includes(posts[val].user.username)
-      ? {
-          ...acc,
-          [val]: posts[val]
-        }
-      : acc
-  }, {})
-
-  return sortPostsByCreatedAt(filteredPosts)
+export const getPostsByIds = (state, ids) => {
+  const postIds = Object.keys(state.posts)
+  return postIds.filter(id => (ids.includes(id) ? state.posts[id] : null))
 }
 
 export const getAllPosts = state => state.posts
