@@ -21,9 +21,8 @@ const decoratePostJSON = (post, userId) => ({
 })
 
 const get = async (req, res) => {
-  const { filter, username } = req.query
+  const { after, before, filter, username } = req.query
   const limit = Number(req.query.limit)
-  const page = Number(req.query.page)
 
   if (limit > 100) {
     return res.sendStatus(400)
@@ -31,6 +30,14 @@ const get = async (req, res) => {
 
   try {
     const query = {}
+
+    if (after) {
+      query._id = { $gt: after }
+    }
+
+    if (before) {
+      query._id = { $lt: before }
+    }
 
     if (filter === 'following') {
       const followedUsers = await Relationship.find({
@@ -55,12 +62,11 @@ const get = async (req, res) => {
     const posts = await Post.find(query, null)
       .sort({ createdAt: -1 })
       .limit(limit)
-      .skip(page * limit)
       .populate('user')
 
     const json = {
       data: posts.map(post => decoratePostJSON(post, req.userId)),
-      hasMore: count > page * limit + limit
+      hasMore: count > limit
     }
 
     return res.status(200).json(json)

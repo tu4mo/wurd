@@ -10,15 +10,22 @@ import {
 import { setHasMore, setPosts } from './timelines'
 
 export const fetchPosts = (options = {}) => (dispatch, getState, api) => {
-  const { filter = '', page = 0, timeline = '', username = '' } = options
+  const {
+    after,
+    before = null,
+    filter = null,
+    timeline = null,
+    username = null
+  } = options
 
   api({
     method: 'get',
     url: 'posts',
     params: {
+      after,
+      before,
       filter,
       limit: 10,
-      page,
       username
     }
   }).then(response => {

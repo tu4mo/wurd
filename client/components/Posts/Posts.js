@@ -9,6 +9,7 @@ import { fetchPostById, fetchPosts } from '~/actions/posts'
 import { getPostIdsFromTimeline, getHasMore } from '~/selectors/timelines'
 
 // Import components
+import Button from '../Button'
 import Post from '../Post'
 
 // Import styles
@@ -16,36 +17,32 @@ import './Posts.scss'
 
 class Posts extends Component {
   componentDidMount() {
-    this._fetchPosts()
+    this.loadPosts()
   }
 
   componentWillReceiveProps(nextProps) {
-    const { from, single } = this.props
+    const { timeline, single } = this.props
 
-    if (from !== nextProps.from || single !== nextProps.single) {
-      this._fetchPosts()
+    if (timeline !== nextProps.timeline || single !== nextProps.single) {
+      this.loadPosts()
     }
   }
 
-  _fetchPosts() {
-    const { fetchPostById, fetchPosts, from, single } = this.props
+  loadPosts = () => {
+    const { fetchPostById, fetchPosts, postIds, single, timeline } = this.props
 
-    if (from === 'home') {
+    if (!single) {
       fetchPosts({
-        filter: 'following',
-        timeline: 'home'
+        after: postIds[0] || null,
+        before: postIds[postIds.length - 1] || null,
+        filter: timeline === 'home' ? 'following' : null,
+        timeline,
+        username: timeline === 'home' ? null : timeline
       })
-    } else if (single) {
-      fetchPostById(single)
     } else {
-      fetchPosts({
-        timeline: from,
-        username: from
-      })
+      fetchPostById(single)
     }
   }
-
-  loadMore = () => {}
 
   render() {
     const { hasMore, postIds } = this.props
@@ -65,7 +62,7 @@ class Posts extends Component {
     return (
       <div className="posts">
         {postIds.map(id => <Post postId={id} key={id} />)}
-        {hasMore && <div onClick={this.loadMore}>More</div>}
+        {hasMore && <Button onClick={this.loadPosts}>More</Button>}
       </div>
     )
   }
@@ -74,9 +71,9 @@ class Posts extends Component {
 Posts.propTypes = {
   fetchPostById: PropTypes.func.isRequired,
   fetchPosts: PropTypes.func.isRequired,
-  from: PropTypes.string.isRequired,
   hasMore: PropTypes.bool,
   postIds: PropTypes.array,
+  timeline: PropTypes.string,
   single: PropTypes.string
 }
 
@@ -85,12 +82,12 @@ Posts.defaultProps = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { from, single } = ownProps
+  const { timeline, single } = ownProps
 
-  const postIds = single ? [single] : getPostIdsFromTimeline(state, from)
+  const postIds = single ? [single] : getPostIdsFromTimeline(state, timeline)
 
   return {
-    hasMore: getHasMore(state, from),
+    hasMore: getHasMore(state, timeline),
     postIds
   }
 }

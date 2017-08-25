@@ -7,7 +7,7 @@ class Home extends Component {
   render() {
     return (
       <div className="container container--with-y-padding">
-        <Posts from="home" />
+        <Posts timeline="home" />
       </div>
     )
   }
