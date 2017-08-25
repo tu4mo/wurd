@@ -4,21 +4,29 @@ const Relationship = require('../../models/Relationship')
 const User = require('../../models/User')
 const { getProfileUrl } = require('../users')
 
+const decorateUserJSON = user => ({
+  id: user._id,
+  username: user.username,
+  profileUrl: getProfileUrl(user.email)
+})
+
 const decoratePostJSON = (post, userId) => ({
   id: post._id,
   content: post.content,
-  comments: post.comments,
+  comments: post.comments.map(comment => ({
+    content: comment.content,
+    user: decorateUserJSON(comment.user),
+    id: comment._id
+  })),
   createdAt: post.createdAt,
   gradientEnd: post.gradientEnd,
   gradientStart: post.gradientStart,
   liked: post.likes.indexOf(userId) !== -1,
   likes: post.likes.length,
-  user: {
-    id: post.user._id,
-    username: post.user.username,
-    profileUrl: getProfileUrl(post.user.email)
-  }
+  user: decorateUserJSON(post.user)
 })
+
+const POPULATED_PATHS = ['user', 'comments', 'comments.user']
 
 const get = async (req, res) => {
   const { after, before, filter, username } = req.query
@@ -62,7 +70,7 @@ const get = async (req, res) => {
     const posts = await Post.find(query, null)
       .sort({ createdAt: -1 })
       .limit(limit)
-      .populate('user')
+      .populate(POPULATED_PATHS)
 
     const json = {
       data: posts.map(post => decoratePostJSON(post, req.userId)),
@@ -80,7 +88,7 @@ const getSingle = async (req, res) => {
   const { id } = req.params
 
   try {
-    const post = await Post.findById(id).populate('user')
+    const post = await Post.findById(id).populate(POPULATED_PATHS)
 
     return res.status(200).json(decoratePostJSON(post, req.userId))
   } catch (err) {
@@ -103,7 +111,7 @@ const post = async (req, res) => {
   // Save new post
   try {
     const post = await newPost.save()
-    const populatedPost = await Post.findOne(post).populate('user')
+    const populatedPost = await Post.findOne(post).populate(POPULATED_PATHS)
     return res.status(201).json(decoratePostJSON(populatedPost))
   } catch (err) {
     console.error(err)
@@ -128,6 +136,7 @@ const deletePost = async (req, res) => {
 }
 
 module.exports = {
+  POPULATED_PATHS,
   decoratePostJSON,
   get,
   getSingle,
