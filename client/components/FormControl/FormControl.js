@@ -1,49 +1,58 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Field } from 'redux-form'
+import classnames from 'classnames'
+import Input from '../Input'
 import './FormControl.scss'
 
 const renderField = field => {
-  const classNames = ['input']
-
-  if (field.color === 'gray') {
-    classNames.push('input--gray')
-  }
-
   return (
     <div className="form-control__input">
-      <input
+      <Input
         {...field.input}
-        className={classNames.join(' ')}
+        color={field.color}
+        error={field.meta.touched && field.meta.error ? field.meta.error : null}
         maxLength={field.maxLength}
+        placeholder={field.placeholder}
         type={field.type}
       />
-      {field.meta.touched &&
-        field.meta.error &&
-        <span className="error">
-          {field.meta.error}
-        </span>}
     </div>
   )
 }
 
-const FormControl = ({ color, label, maxLength, name, type }) =>
-  <div className="form-control">
-    <label className="form-control__label">
-      {label}
-    </label>
-    <Field
-      component={renderField}
-      name={name}
-      props={{ color, maxLength, type }}
-    />
-  </div>
+const FormControl = ({
+  className,
+  color,
+  label,
+  maxLength,
+  name,
+  placeholder,
+  type
+}) => {
+  const classNames = classnames('form-control', className)
+
+  return (
+    <div className={classNames}>
+      {label &&
+        <label className="form-control__label">
+          {label}
+        </label>}
+      <Field
+        component={renderField}
+        name={name}
+        props={{ color, maxLength, placeholder, type }}
+      />
+    </div>
+  )
+}
 
 FormControl.propTypes = {
+  className: PropTypes.string,
   color: PropTypes.string,
   label: PropTypes.string,
   maxLength: PropTypes.string,
   name: PropTypes.string,
+  placeholder: PropTypes.string,
   type: PropTypes.string
 }
 
