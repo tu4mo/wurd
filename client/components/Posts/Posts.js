@@ -73,8 +73,8 @@ Posts.propTypes = {
   fetchPosts: PropTypes.func.isRequired,
   hasMore: PropTypes.bool,
   postIds: PropTypes.array,
-  timeline: PropTypes.string,
-  single: PropTypes.string
+  single: PropTypes.string,
+  timeline: PropTypes.string
 }
 
 Posts.defaultProps = {

@@ -34,14 +34,8 @@ class Welcome extends Component {
     randomPosts: []
   }
 
-  animationTimer = null
-
   componentDidMount() {
     this.props.fetchPosts({ limit: 100 })
-  }
-
-  componentWillUnmount() {
-    if (this.animationTimer) clearInterval(this.animationTimer)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -56,6 +50,12 @@ class Welcome extends Component {
       )
     }
   }
+
+  componentWillUnmount() {
+    if (this.animationTimer) clearInterval(this.animationTimer)
+  }
+
+  animationTimer = null
 
   randomizePost = () => {
     this.setState(prevState => ({

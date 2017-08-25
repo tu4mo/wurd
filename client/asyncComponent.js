@@ -3,8 +3,6 @@ import Spinner from './components/Spinner'
 
 export default loader =>
   class AsyncComponent extends Component {
-    Component = null
-
     state = { Component: AsyncComponent.Component }
 
     componentWillMount() {
@@ -16,6 +14,8 @@ export default loader =>
         })
       }
     }
+
+    Component = null
 
     render() {
       if (this.state.Component) {

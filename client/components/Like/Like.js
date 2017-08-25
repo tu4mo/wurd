@@ -10,9 +10,9 @@ import './Like.scss'
 class Like extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
+    likePost: PropTypes.func.isRequired,
     liked: PropTypes.bool,
     likes: PropTypes.number,
-    likePost: PropTypes.func.isRequired,
     postId: PropTypes.string,
     unlikePost: PropTypes.func.isRequired
   }

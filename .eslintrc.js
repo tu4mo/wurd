@@ -6,7 +6,9 @@ module.exports = {
   extends: ['standard', 'standard-react', 'prettier', 'prettier/react'],
   parser: 'babel-eslint',
   rules: {
-    'jsx-quotes': ['error', 'prefer-double']
+    'jsx-quotes': ['error', 'prefer-double'],
+    'react/sort-comp': 'error',
+    'react/sort-prop-types': 'error'
   },
   settings: {
     'import/resolver': 'webpack'

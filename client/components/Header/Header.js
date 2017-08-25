@@ -27,8 +27,6 @@ class Header extends Component {
     isHidden: false
   }
 
-  previousScrollPosition = null
-
   componentDidMount() {
     window.addEventListener('scroll', throttle(this.onScroll, 200))
     this.previousScrollPosition = window.pageYOffset
@@ -37,6 +35,8 @@ class Header extends Component {
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll)
   }
+
+  previousScrollPosition = null
 
   onScroll = () => {
     const scrollPosition = window.pageYOffset
