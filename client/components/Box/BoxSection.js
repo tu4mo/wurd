@@ -19,7 +19,7 @@ const BoxSection = ({ children, className, hasPadding }) => {
 BoxSection.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  hasPadding: PropTypes.boolean
+  hasPadding: PropTypes.bool
 }
 
 export default BoxSection
