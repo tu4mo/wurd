@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const INVALID_USERNAMES = ['home', 'users']
+const INVALID_USERNAMES = ['about', 'home', 'search', 'users']
 
 const userSchema = new mongoose.Schema(
   {
