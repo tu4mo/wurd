@@ -16,6 +16,21 @@ const decorateFollowingUser = user => ({
   profileUrl: getProfileUrl(user.email)
 })
 
+const sortByUsername = (a, b) => {
+  const usernameA = a.username.toUpperCase()
+  const usernameB = b.username.toUpperCase()
+
+  if (usernameA < usernameB) {
+    return -1
+  }
+
+  if (usernameA > usernameB) {
+    return 1
+  }
+
+  return 0
+}
+
 const decorateUser = async user => {
   const posts = await Post.count({ user: user._id })
 
@@ -32,10 +47,10 @@ const decorateUser = async user => {
   return {
     followers: followers.map(relationship =>
       decorateFollowingUser(relationship.user)
-    ),
+    ).sort(sortByUsername),
     following: following.map(relationship =>
       decorateFollowingUser(relationship.following)
-    ),
+    ).sort(sortByUsername),
     id: user._id,
     posts,
     profileUrl: getProfileUrl(user.email),
