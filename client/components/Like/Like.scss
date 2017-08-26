@@ -6,8 +6,11 @@
   &__icon {
     cursor: pointer;
     height: 22px;
-    margin-right: $spacing-sm;
     width: 24px;
+  }
+
+  &__count {
+    margin-right: $spacing-sm;
   }
 
   &--liked {

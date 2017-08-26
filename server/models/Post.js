@@ -5,15 +5,11 @@ const hexColorRegExp = /^#[0-9a-f]{6}$/i
 const commentSchema = new mongoose.Schema(
   {
     content: {
-      maxlength: 50,
+      maxlength: 500,
       minlength: 1,
       required: true,
       trim: true,
-      type: String,
-      validate: {
-        validator: v => v.split(' ').length < 6,
-        message: 'Comment validation failed'
-      }
+      type: String
     },
     user: {
       ref: 'User',

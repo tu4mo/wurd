@@ -22,4 +22,12 @@
   &--gray {
     background-color: $color-background;
   }
+
+  &--none {
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    height: auto;
+    padding: 0;
+  }
 }

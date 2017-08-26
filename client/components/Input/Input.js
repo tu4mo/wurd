@@ -9,13 +9,16 @@ const Input = props => {
     color,
     error,
     maxLength,
+    onChange,
     placeholder,
     type,
+    value,
     ...rest
   } = props
 
   const classNames = classnames('input', {
-    'input--gray': color === 'gray'
+    'input--gray': color === 'gray',
+    'input--none': color === 'none'
   })
 
   return (
@@ -24,8 +27,10 @@ const Input = props => {
         {...rest}
         className={classNames}
         maxLength={maxLength}
+        onChange={onChange}
         placeholder={placeholder}
         type={type}
+        value={value}
       />
       {error &&
         <span className="input__error">
@@ -40,8 +45,10 @@ Input.propTypes = {
   color: PropTypes.string,
   error: PropTypes.string,
   maxLength: PropTypes.string,
+  onChange: PropTypes.func,
   placeholder: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
+  value: PropTypes.string
 }
 
 export default Input

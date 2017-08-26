@@ -1,0 +1,14 @@
+.post-comments {
+  &__comment:not(:last-child) {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  &__username {
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  &__content {
+    color: $color-gray;
+  }
+}

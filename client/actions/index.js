@@ -8,6 +8,7 @@ export const AUTH_SET_ERROR = 'AUTH/SET_ERROR'
 export const AUTH_SET_TOKEN = 'AUTH/SET_TOKEN'
 export const AUTH_SET_USER = 'AUTH/SET_USER'
 
+export const POST_COMMENT = 'POST/COMMENT'
 export const POST_CREATE = 'POST/CREATE'
 export const POST_DELETE = 'POST/DELETE'
 export const POST_LIKE = 'POST/LIKE'

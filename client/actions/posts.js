@@ -1,4 +1,5 @@
 import {
+  POST_COMMENT,
   POST_CREATE,
   POST_DELETE,
   POST_LIKE,
@@ -61,6 +62,30 @@ export const createPost = post => (dispatch, getState, api) => {
     dispatch(setPosts(response.data.user.username, [response.data.id]))
     dispatch(setPosts('home', [response.data.id]))
   })
+}
+
+export const createComment = (id, content) => async (
+  dispatch,
+  getState,
+  api
+) => {
+  dispatch({
+    type: POST_COMMENT,
+    id,
+    content
+  })
+
+  try {
+    const response = await api({
+      method: 'post',
+      url: `posts/${id}/comments`,
+      data: { content }
+    })
+
+    dispatch(savePost(response.data))
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 export const likePost = id => async (dispatch, getState, api) => {

@@ -44,10 +44,26 @@
     text-decoration: none;
   }
 
+  &__comments {
+    border-bottom: 1px solid $color-ultra-light-gray;
+    padding: var(--spacing-md);
+  }
+
   &__footer {
+    align-items: center;
     display: flex;
     justify-content: space-between;
     padding: var(--spacing-md);
+  }
+
+  &__comment {
+    flex: 1 1 auto;
+    margin-right: var(--spacing-md);
+  }
+
+  &__like {
+    flex: 0 0 auto;
+    margin-right: var(--spacing-sm);
   }
 
   &__menu-toggle {

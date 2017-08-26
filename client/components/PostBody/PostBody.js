@@ -6,7 +6,7 @@ import wordwrap from 'wordwrapjs'
 import './PostBody.scss'
 
 const PostBody = ({ content, fill, gradientEnd, gradientStart }) => {
-  const words = wordwrap.lines(content, { break: true, width: 20 })
+  const words = wordwrap.lines(content, { break: true, width: 25 })
 
   return (
     <div
@@ -22,6 +22,7 @@ const PostBody = ({ content, fill, gradientEnd, gradientStart }) => {
             forceSingleModeWidth
             key={i}
             max={140}
+            min={10}
             mode="single"
           >
             {word}

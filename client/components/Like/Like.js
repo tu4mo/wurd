@@ -9,6 +9,7 @@ import './Like.scss'
 
 class Like extends Component {
   static propTypes = {
+    className: PropTypes.string,
     isAuthenticated: PropTypes.bool.isRequired,
     likePost: PropTypes.func.isRequired,
     liked: PropTypes.bool,
@@ -38,20 +39,26 @@ class Like extends Component {
   }
 
   render() {
-    const { isAuthenticated, liked, likes } = this.props
+    const { className, isAuthenticated, liked, likes } = this.props
     const { didClickLike } = this.state
 
     return (
-      <div className={classnames('like', { 'like--liked': didClickLike })}>
+      <div
+        className={classnames(
+          'like',
+          { 'like--liked': didClickLike },
+          className
+        )}
+      >
+        <div className="like__count">
+          {likes || 'No'} like{likes !== 1 && 's'}
+        </div>
         {isAuthenticated &&
           <Icon
             className="like__icon"
             name={liked ? 'liked' : 'like'}
             onClick={this.onLikeClick}
           />}
-        <div className="like__count">
-          {likes || 'No'} like{likes !== 1 && 's'}
-        </div>
       </div>
     )
   }

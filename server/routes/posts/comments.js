@@ -15,7 +15,7 @@ const post = async (req, res) => {
     const post = await Post.findByIdAndUpdate(
       id,
       { $push: { comments: newComment } },
-      { new: true }
+      { new: true, runValidators: true }
     ).populate(POPULATED_PATHS)
 
     return res.status(201).json(decoratePostJSON(post, req.userId))

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
-import moment from 'moment'
+import time from '~/utils/time'
 
 // Import selectors
 import { getPostById } from '~/selectors/posts'
@@ -12,6 +12,8 @@ import { getPostById } from '~/selectors/posts'
 import Icon from '../Icon'
 import Like from '../Like'
 import PostBody from '../PostBody'
+import PostComment from '../PostComment'
+import PostComments from '../PostComments'
 import PostMenu from '../PostMenu'
 import ProfilePhoto from '../ProfilePhoto'
 
@@ -57,6 +59,7 @@ class Post extends Component {
 
     const {
       post: {
+        comments,
         content,
         gradientEnd,
         gradientStart,
@@ -70,11 +73,6 @@ class Post extends Component {
 
     const { isMenuOpen } = this.state
 
-    const postTime =
-      new Date(createdAt) < Date.now() - 1000 * 60 * 60 * 24
-        ? moment(createdAt).format('LL')
-        : moment(createdAt).fromNow()
-
     return (
       <div className="post">
         <div className="post__header">
@@ -85,7 +83,7 @@ class Post extends Component {
             {username}
           </Link>
           <Link className="post__time" to={`/${username}/${id}`}>
-            {postTime}
+            {time(createdAt)}
           </Link>
         </div>
         <PostBody
@@ -93,8 +91,18 @@ class Post extends Component {
           gradientStart={gradientStart}
           gradientEnd={gradientEnd}
         />
+        {comments.length > 0 &&
+          <div className="post__comments">
+            <PostComments comments={comments} />
+          </div>}
         <div className="post__footer">
-          <Like liked={liked} likes={likes} postId={id} />
+          <PostComment postId={id} />
+          <Like
+            className="post__like"
+            liked={liked}
+            likes={likes}
+            postId={id}
+          />
           <Icon
             className={classnames('post__menu-toggle', {
               'post__menu-toggle--open': isMenuOpen
