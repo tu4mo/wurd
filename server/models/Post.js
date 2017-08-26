@@ -2,28 +2,33 @@ const mongoose = require('mongoose')
 
 const hexColorRegExp = /^#[0-9a-f]{6}$/i
 
+const commentSchema = new mongoose.Schema(
+  {
+    content: {
+      maxlength: 50,
+      minlength: 1,
+      required: true,
+      trim: true,
+      type: String,
+      validate: {
+        validator: v => v.split(' ').length < 6,
+        message: 'Comment validation failed'
+      }
+    },
+    user: {
+      ref: 'User',
+      required: true,
+      type: mongoose.Schema.Types.ObjectId
+    }
+  },
+  {
+    timestamps: true
+  }
+)
+
 const postSchema = new mongoose.Schema(
   {
-    comments: [
-      {
-        content: {
-          maxlength: 50,
-          minlength: 1,
-          required: true,
-          trim: true,
-          type: String,
-          validate: {
-            validator: v => v.split(' ').length < 6,
-            message: 'Comment validation failed'
-          }
-        },
-        user: {
-          ref: 'User',
-          required: true,
-          type: mongoose.Schema.Types.ObjectId
-        }
-      }
-    ],
+    comments: [commentSchema],
     content: {
       maxlength: 50,
       minlength: 1,

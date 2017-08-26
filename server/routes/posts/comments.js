@@ -14,7 +14,7 @@ const post = async (req, res) => {
   try {
     const post = await Post.findByIdAndUpdate(
       id,
-      { $addToSet: { comments: newComment } },
+      { $push: { comments: newComment } },
       { new: true }
     ).populate(POPULATED_PATHS)
 

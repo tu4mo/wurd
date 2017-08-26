@@ -15,6 +15,7 @@ const decoratePostJSON = (post, userId) => ({
   content: post.content,
   comments: post.comments.map(comment => ({
     content: comment.content,
+    createdAt: comment.createdAt,
     user: decorateUserJSON(comment.user),
     id: comment._id
   })),
