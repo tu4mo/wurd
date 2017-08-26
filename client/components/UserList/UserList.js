@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import FollowButton from '../FollowButton'
-import { Table, Tr, Td } from '../Table'
+import { Box, BoxSection } from '../Box'
 import ProfilePhoto from '../ProfilePhoto'
 import Spinner from '../Spinner'
 import './UserList.scss'
@@ -17,10 +17,10 @@ const UserList = ({ isPending, users }) => {
   }
 
   return (
-    <Table className="user-list">
+    <Box className="user-list">
       {users.map(({ username, profileUrl }) =>
-        <Tr key={username}>
-          <Td>
+        <BoxSection hasPadding key={username}>
+          <div className="user-list__row">
             <div className="user-list__user">
               <Link to={`/${username}`}>
                 <ProfilePhoto
@@ -33,13 +33,11 @@ const UserList = ({ isPending, users }) => {
                 {username}
               </Link>
             </div>
-          </Td>
-          <Td style={{ textAlign: 'right', width: '1%' }}>
             <FollowButton username={username} />
-          </Td>
-        </Tr>
+          </div>
+        </BoxSection>
       )}
-    </Table>
+    </Box>
   )
 }
 

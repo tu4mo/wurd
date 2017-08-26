@@ -2,9 +2,15 @@
   margin: 0 auto;
   max-width: 640px;
 
+  &__row {
+    display: flex;
+  }
+
   &__user {
     align-items: center;
     display: flex;
+    margin-right: auto;
+    padding-right: var(--spacing-sm);
   }
 
   &__username {
