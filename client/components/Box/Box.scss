@@ -1,0 +1,16 @@
+.box {
+  @include rounded();
+
+  background-color: #fff;
+  box-shadow: var(--shadow);
+
+  &__section {
+    &--has-padding {
+      padding: var(--spacing-md);
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-ultra-light-gray;
+    }
+  }
+}

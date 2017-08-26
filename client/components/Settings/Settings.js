@@ -5,6 +5,7 @@ import { propTypes as reduxFormPropTypes, reduxForm } from 'redux-form'
 import { fetchAccount, saveAccount } from '~/actions/account'
 import { getAccount } from '~/selectors/account'
 import Alert from '../Alert'
+import { Box, BoxSection } from '../Box'
 import Button from '../Button'
 import FormControl from '../FormControl'
 import Spacer from '../Spacer'
@@ -38,30 +39,41 @@ class Settings extends Component {
     } = this.props
 
     return (
-      <div className="settings container">
-        <form
-          className="settings__content"
-          onSubmit={handleSubmit(this.submit)}
-        >
-          <Spacer>
-            {accountError && <Alert message={accountError} />}
-            <FormControl label="Username" name="username" />
-            <FormControl label="Email" name="email" />
-            <FormControl
-              label="Current Password"
-              name="currentPassword"
-              type="password"
-            />
-            <FormControl label="New Password" name="password" type="password" />
-            <Button
-              disabled={invalid || pristine || submitting || isSaving}
-              loading={isSaving}
-              type="submit"
-            >
-              Save
-            </Button>
-          </Spacer>
-        </form>
+      <div className="settings">
+        <div className="container">
+          <Box className="settings__content">
+            <form onSubmit={handleSubmit(this.submit)}>
+              <BoxSection hasPadding>
+                <Spacer>
+                  {accountError && <Alert message={accountError} />}
+                  <FormControl color="gray" label="Username" name="username" />
+                  <FormControl color="gray" label="Email" name="email" />
+                  <FormControl
+                    color="gray"
+                    label="Current Password"
+                    name="currentPassword"
+                    type="password"
+                  />
+                  <FormControl
+                    color="gray"
+                    label="New Password"
+                    name="password"
+                    type="password"
+                  />
+                </Spacer>
+              </BoxSection>
+              <BoxSection hasPadding>
+                <Button
+                  disabled={invalid || pristine || submitting || isSaving}
+                  loading={isSaving}
+                  type="submit"
+                >
+                  Save
+                </Button>
+              </BoxSection>
+            </form>
+          </Box>
+        </div>
       </div>
     )
   }
