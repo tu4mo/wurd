@@ -46,10 +46,11 @@ class Button extends PureComponent {
         type={type}
       >
         {children}
-        {loading &&
+        {loading && (
           <div className="button__spinner">
             <Spinner />
-          </div>}
+          </div>
+        )}
       </button>
     )
   }

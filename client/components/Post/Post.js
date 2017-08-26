@@ -91,10 +91,11 @@ class Post extends Component {
           gradientStart={gradientStart}
           gradientEnd={gradientEnd}
         />
-        {comments.length > 0 &&
+        {comments.length > 0 && (
           <div className="post__comments">
             <PostComments comments={comments} />
-          </div>}
+          </div>
+        )}
         <div className="post__footer">
           <PostComment postId={id} />
           <Like

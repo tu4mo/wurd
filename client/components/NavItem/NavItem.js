@@ -11,18 +11,18 @@ const NavItem = ({ children, className, disableHover, to }) => {
     className
   )
 
-  return to
-    ? <NavLink
-        activeClassName="nav-item--active"
-        className={classNames}
-        exact={to === '/'}
-        to={to}
-      >
-        {children}
-      </NavLink>
-    : <div className={classNames}>
-        {children}
-      </div>
+  return to ? (
+    <NavLink
+      activeClassName="nav-item--active"
+      className={classNames}
+      exact={to === '/'}
+      to={to}
+    >
+      {children}
+    </NavLink>
+  ) : (
+    <div className={classNames}>{children}</div>
+  )
 }
 
 NavItem.propTypes = {

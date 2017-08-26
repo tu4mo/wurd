@@ -45,12 +45,12 @@ const decorateUser = async user => {
   ).populate('following')
 
   return {
-    followers: followers.map(relationship =>
-      decorateFollowingUser(relationship.user)
-    ).sort(sortByUsername),
-    following: following.map(relationship =>
-      decorateFollowingUser(relationship.following)
-    ).sort(sortByUsername),
+    followers: followers
+      .map(relationship => decorateFollowingUser(relationship.user))
+      .sort(sortByUsername),
+    following: following
+      .map(relationship => decorateFollowingUser(relationship.following))
+      .sort(sortByUsername),
     id: user._id,
     posts,
     profileUrl: getProfileUrl(user.email),

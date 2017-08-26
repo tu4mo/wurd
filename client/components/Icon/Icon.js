@@ -37,13 +37,14 @@ const ICONS = {
   }
 }
 
-const Icon = ({ className, name, onClick, title }) =>
+const Icon = ({ className, name, onClick, title }) => (
   <img
     className={classnames('icon', className)}
     onClick={onClick}
     src={ICONS[name].src}
     title={title || ICONS[name].title}
   />
+)
 
 Icon.propTypes = {
   className: PropTypes.string,

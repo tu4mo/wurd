@@ -33,10 +33,7 @@ const FormControl = ({
 
   return (
     <div className={classNames}>
-      {label &&
-        <label className="form-control__label">
-          {label}
-        </label>}
+      {label && <label className="form-control__label">{label}</label>}
       <Field
         component={renderField}
         name={name}

@@ -53,12 +53,13 @@ class Like extends Component {
         <div className="like__count">
           {likes || 'No'} like{likes !== 1 && 's'}
         </div>
-        {isAuthenticated &&
+        {isAuthenticated && (
           <Icon
             className="like__icon"
             name={liked ? 'liked' : 'like'}
             onClick={this.onLikeClick}
-          />}
+          />
+        )}
       </div>
     )
   }

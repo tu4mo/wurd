@@ -9,11 +9,7 @@ const BoxSection = ({ children, className, hasPadding }) => {
     className
   )
 
-  return (
-    <div className={classNames}>
-      {children}
-    </div>
-  )
+  return <div className={classNames}>{children}</div>
 }
 
 BoxSection.propTypes = {

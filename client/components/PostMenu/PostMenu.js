@@ -29,14 +29,15 @@ class PostMenu extends Component {
           <Button className="post-menu__button" disabled link>
             Share
           </Button>
-          {isMine &&
+          {isMine && (
             <Button
               className="post-menu__button"
               link
               onClick={this.onDeleteClick}
             >
               Delete
-            </Button>}
+            </Button>
+          )}
         </div>
       </div>
     )

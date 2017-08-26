@@ -78,26 +78,26 @@ class Profile extends Component {
                 username={user.username}
               />
             </div>
-            <div className="profile__user">
-              {user.username}
-            </div>
+            <div className="profile__user">{user.username}</div>
             <div className="profile__buttons">
               {isAuthenticated &&
-                !isMe &&
-                <FollowButton username={user.username} />}
-              {isMe &&
+              !isMe && <FollowButton username={user.username} />}
+              {isMe && (
                 <Route
                   path="/:username/settings"
                   children={({ match }) =>
-                    !match &&
-                    <Link to={`/${user.username}/settings`}>
-                      <Icon name="settings" />
-                    </Link>}
-                />}
-              {isMe &&
+                    !match && (
+                      <Link to={`/${user.username}/settings`}>
+                        <Icon name="settings" />
+                      </Link>
+                    )}
+                />
+              )}
+              {isMe && (
                 <Button onClick={this.onLogOutClick} secondary>
                   Log Out
-                </Button>}
+                </Button>
+              )}
             </div>
           </div>
         </div>
@@ -107,13 +107,14 @@ class Profile extends Component {
             <div className="profile-body">
               <div className="profile-body__tabs">
                 {user.followers &&
-                  user.following &&
+                user.following && (
                   <Stats
                     followers={user.followers.length}
                     following={user.following.length}
                     posts={user.posts}
                     username={user.username}
-                  />}
+                  />
+                )}
               </div>
               <div className="container">
                 <Switch>

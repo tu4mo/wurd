@@ -65,13 +65,14 @@ class SignInUp extends Component {
         </div>
         <div className="sign-in-up__panel">
           <Spacer>
-            {tab === 'signup' &&
+            {tab === 'signup' && (
               <FormControl
                 color="gray"
                 label="Username"
                 maxLength="15"
                 name="username"
-              />}
+              />
+            )}
             <FormControl color="gray" label="Email" name="email" />
             <FormControl
               color="gray"

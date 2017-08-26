@@ -14,15 +14,13 @@ import '../../App.scss'
 const stories = storiesOf('Components', module)
 
 stories.addDecorator(withKnobs)
-stories.addDecorator(story =>
+stories.addDecorator(story => (
   <Provider store={store}>
-    <MemoryRouter initialEntries={['/']}>
-      {story()}
-    </MemoryRouter>
+    <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
   </Provider>
-)
+))
 
-stories.add('Button', () =>
+stories.add('Button', () => (
   <Button
     disabled={boolean('disabled', false)}
     link={boolean('link', false)}
@@ -32,9 +30,9 @@ stories.add('Button', () =>
   >
     Button
   </Button>
-)
+))
 
-stories.add('Post', () =>
+stories.add('Post', () => (
   <Post
     post={{
       content: text('content', 'Post can be five words'),
@@ -47,4 +45,4 @@ stories.add('Post', () =>
       user: { username: 'tu4mo', profileUrl: 'test' }
     }}
   />
-)
+))

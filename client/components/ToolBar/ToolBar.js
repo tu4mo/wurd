@@ -8,23 +8,23 @@ import ProfilePhoto from '../ProfilePhoto'
 import './ToolBar.scss'
 
 const ToolBar = ({ user }) =>
-  user
-    ? <div className="tool-bar">
-        <NavItem to="/">
-          <Icon name="home" />
-        </NavItem>
-        <NavItem to="/users">
-          <Icon name="users" />
-        </NavItem>
-        <NavItem to={`/${user.username}`}>
-          <ProfilePhoto
-            url={user.profileUrl}
-            username={user.username}
-            size="tiny"
-          />
-        </NavItem>
-      </div>
-    : null
+  user ? (
+    <div className="tool-bar">
+      <NavItem to="/">
+        <Icon name="home" />
+      </NavItem>
+      <NavItem to="/users">
+        <Icon name="users" />
+      </NavItem>
+      <NavItem to={`/${user.username}`}>
+        <ProfilePhoto
+          url={user.profileUrl}
+          username={user.username}
+          size="tiny"
+        />
+      </NavItem>
+    </div>
+  ) : null
 
 ToolBar.propTypes = {
   user: PropTypes.object

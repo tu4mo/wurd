@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import './ProfilePhoto.scss'
 
-const ProfilePhoto = ({ isMe, size, url, username }) =>
+const ProfilePhoto = ({ isMe, size, url, username }) => (
   <div
     className={classnames('profile-photo', {
       [`profile-photo--${size}`]: size
@@ -15,15 +15,17 @@ const ProfilePhoto = ({ isMe, size, url, username }) =>
       src={url}
       title={username}
     />
-    {isMe &&
+    {isMe && (
       <a
         className="profile-photo__change"
         href="https://www.gravatar.com"
         target="_blank"
       >
         Change Gravatar
-      </a>}
+      </a>
+    )}
   </div>
+)
 
 ProfilePhoto.propTypes = {
   isMe: PropTypes.bool,

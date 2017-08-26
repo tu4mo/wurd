@@ -66,29 +66,28 @@ class Welcome extends Component {
   }
 
   renderPosts = () => {
-    return this.state.randomPosts.map((post, i) =>
+    return this.state.randomPosts.map((post, i) => (
       <div className="welcome__item" key={i}>
         <div className="welcome__post">
-          {post &&
+          {post && (
             <PostBody
               content={post.content}
               fill
               gradientEnd={post.gradientEnd}
               gradientStart={post.gradientStart}
-            />}
+            />
+          )}
         </div>
         <div className="welcome__post-background" />
       </div>
-    )
+    ))
   }
 
   render() {
     return (
       <div>
         <div className="welcome" key="1">
-          <div className="welcome__content">
-            {this.renderPosts()}
-          </div>
+          <div className="welcome__content">{this.renderPosts()}</div>
         </div>
         <div className="welcome-form" key="2">
           <SignInUp />

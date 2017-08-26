@@ -32,10 +32,7 @@ const Input = props => {
         type={type}
         value={value}
       />
-      {error &&
-        <span className="input__error">
-          {error}
-        </span>}
+      {error && <span className="input__error">{error}</span>}
     </div>
   )
 }

@@ -93,18 +93,21 @@ class Header extends Component {
                 <NavItem to="/" className="header__logo navbar__item">
                   <img alt="Wurd" src={logo} title="Wurd" />
                 </NavItem>
-                {isAuthenticated &&
+                {isAuthenticated && (
                   <NavItem to="/users" className="header__users navbar__item">
                     Users
-                  </NavItem>}
-                {isAuthenticated &&
+                  </NavItem>
+                )}
+                {isAuthenticated && (
                   <NavItem className="header__new-post" disableHover>
                     <Button onClick={this.onNewPostClick}>New Post</Button>
-                  </NavItem>}
-                {isAuthenticated &&
+                  </NavItem>
+                )}
+                {isAuthenticated && (
                   <NavItem className="header__profile" to={`/${user.username}`}>
                     <ProfilePhoto size="small" url={user.profileUrl} />
-                  </NavItem>}
+                  </NavItem>
+                )}
               </nav>
             </div>
           </header>

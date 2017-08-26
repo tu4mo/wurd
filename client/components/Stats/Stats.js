@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import './Stats.scss'
 
-const Stats = ({ followers, following, posts, username }) =>
+const Stats = ({ followers, following, posts, username }) => (
   <div className="stats">
     <NavLink
       activeClassName="stat--active"
@@ -12,9 +12,7 @@ const Stats = ({ followers, following, posts, username }) =>
       to={`/${username}`}
     >
       <div className="stat__text">Posts</div>
-      <div className="stat__number">
-        {posts}
-      </div>
+      <div className="stat__number">{posts}</div>
     </NavLink>
     <NavLink
       activeClassName="stat--active"
@@ -22,9 +20,7 @@ const Stats = ({ followers, following, posts, username }) =>
       to={`/${username}/followers`}
     >
       <div className="stat__text">Followers</div>
-      <div className="stat__number">
-        {followers}
-      </div>
+      <div className="stat__number">{followers}</div>
     </NavLink>
     <NavLink
       activeClassName="stat--active"
@@ -32,11 +28,10 @@ const Stats = ({ followers, following, posts, username }) =>
       to={`/${username}/following`}
     >
       <div className="stat__text">Following</div>
-      <div className="stat__number">
-        {following}
-      </div>
+      <div className="stat__number">{following}</div>
     </NavLink>
   </div>
+)
 
 Stats.propTypes = {
   followers: PropTypes.number,

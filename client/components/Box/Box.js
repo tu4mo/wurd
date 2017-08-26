@@ -6,11 +6,7 @@ import './Box.scss'
 const Box = ({ children, className }) => {
   const classNames = classnames('box', className)
 
-  return (
-    <div className={classNames}>
-      {children}
-    </div>
-  )
+  return <div className={classNames}>{children}</div>
 }
 
 Box.propTypes = {

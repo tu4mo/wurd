@@ -18,7 +18,7 @@ const UserList = ({ isPending, users }) => {
 
   return (
     <Box className="user-list">
-      {users.map(({ username, profileUrl }) =>
+      {users.map(({ username, profileUrl }) => (
         <BoxSection hasPadding key={username}>
           <div className="user-list__row">
             <div className="user-list__user">
@@ -36,7 +36,7 @@ const UserList = ({ isPending, users }) => {
             <FollowButton username={username} />
           </div>
         </BoxSection>
-      )}
+      ))}
     </Box>
   )
 }

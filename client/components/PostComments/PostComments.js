@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import './PostComments.scss'
 
-const PostComments = ({ comments }) =>
+const PostComments = ({ comments }) => (
   <div className="post-comments">
-    {comments.map(comment =>
+    {comments.map(comment => (
       <div className="post-comments__comment" key={comment.id}>
         <Link
           className="post-comments__username"
@@ -15,8 +15,9 @@ const PostComments = ({ comments }) =>
         </Link>{' '}
         <span className="post-comments__content">{comment.content}</span>
       </div>
-    )}
+    ))}
   </div>
+)
 
 PostComments.propTypes = {
   comments: PropTypes.array
