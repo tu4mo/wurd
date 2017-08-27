@@ -15,6 +15,7 @@ import { getAuthenticatedUser, getUser } from '~/selectors/users'
 // Import components
 import Button from '~/components/Button'
 import FollowButton from '~/components/FollowButton'
+import Head from '~/components/Head'
 import Icon from '~/components/Icon'
 import Posts from '~/components/Posts'
 import ProfilePhoto from '~/components/ProfilePhoto'
@@ -69,6 +70,9 @@ class Profile extends Component {
 
     return (
       <div>
+        <Head>
+          <title>{user.username}</title>
+        </Head>
         <div className="container container--with-y-padding">
           <div className="profile">
             <div className="profile__photo">

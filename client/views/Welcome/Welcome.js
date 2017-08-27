@@ -3,8 +3,12 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchPosts } from '~/actions/posts'
 import { getAllPosts } from '~/selectors/posts'
+
+// Import components
+import Head from '~/components/Head'
 import PostBody from '~/components/PostBody'
 import SignInUp from '~/components/SignInUp'
+
 import './Welcome.scss'
 
 const POSTS = 36
@@ -86,6 +90,7 @@ class Welcome extends Component {
   render() {
     return (
       <div>
+        <Head />
         <div className="welcome" key="1">
           <div className="welcome__content">{this.renderPosts()}</div>
         </div>

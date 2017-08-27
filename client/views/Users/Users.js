@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchUsers } from '~/actions/users'
 import { getUsers } from '~/selectors/users'
+
+// Import components
+import Head from '~/components/Head'
 import UserList from '~/components/UserList'
 
 class Users extends Component {
@@ -20,6 +23,9 @@ class Users extends Component {
 
     return (
       <div className="container container--with-y-padding">
+        <Head>
+          <title>Users</title>
+        </Head>
         <UserList isPending={users.isPending} users={users.data} />
       </div>
     )
