@@ -18,25 +18,17 @@ const post = async (req, res) => {
   const errorResponse = { error: 'The username or password is incorrect' }
 
   try {
-    const user = await User.findOne({
-      email
+    const user = await User.findOne({ email })
+
+    if (!user || !user.isValidPassword(password)) {
+      return res.status(401).json(errorResponse)
+    }
+
+    const token = jwt.sign({ sub: user._id }, process.env.JWT_SECRET, {
+      expiresIn: '14 days'
     })
 
-    if (!user) {
-      return res.status(401).json(errorResponse)
-    }
-
-    if (user.isValidPassword(password)) {
-      const token = jwt.sign({ sub: user._id }, process.env.JWT_SECRET, {
-        expiresIn: '14 days'
-      })
-
-      return res.status(200).json({
-        token
-      })
-    } else {
-      return res.status(401).json(errorResponse)
-    }
+    return res.status(200).json({ token })
   } catch (err) {
     res.sendStatus(500)
     throw err
