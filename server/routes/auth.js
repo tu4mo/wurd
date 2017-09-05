@@ -1,5 +1,4 @@
 // Require dependencies
-const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 // Require models
@@ -27,9 +26,7 @@ const post = async (req, res) => {
       return res.status(401).json(errorResponse)
     }
 
-    const isMatch = await bcrypt.compare(password, user.password)
-
-    if (isMatch) {
+    if (user.isValidPassword(password)) {
       const token = jwt.sign({ sub: user._id }, process.env.JWT_SECRET, {
         expiresIn: '14 days'
       })

@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 
 const INVALID_USERNAMES = ['about', 'home', 'search', 'users']
@@ -42,5 +43,9 @@ const userSchema = new mongoose.Schema(
     timestamps: true
   }
 )
+
+userSchema.methods.isValidPassword = function(password) {
+  return bcrypt.compareSync(password, this.password)
+}
 
 module.exports = mongoose.model('User', userSchema)
