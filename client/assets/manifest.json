@@ -2,6 +2,10 @@
   "background_color": "#fff",
   "description": "The 5-word nanoblogging social networking service.",
   "display": "standalone",
+  "icons": {
+    "128": "wurd-128.png",
+    "512": "wurd-512.png",
+  },
   "name": "Wurd",
   "short_name": "Wurd",
   "start_url": ".",
