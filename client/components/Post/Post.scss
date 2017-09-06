@@ -1,7 +1,6 @@
 .post {
-  @include rounded();
-
   background-color: #fff;
+  border-radius: $radius-sm;
   box-shadow: var(--shadow);
   max-width: 640px;
   width: 100%;

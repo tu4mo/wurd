@@ -1,6 +1,5 @@
 .button {
-  @include rounded;
-
+  border-radius: $radius-lg;
   color: $color-dark-gray;
   cursor: pointer;
   font-family: $font;

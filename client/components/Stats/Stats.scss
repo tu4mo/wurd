@@ -34,9 +34,8 @@
   }
 
   &__number {
-    @include rounded;
-
     background-color: $color-ultra-light-gray;
+    border-radius: $radius-sm;
     color: $color-light-gray;
     margin-left: var(--spacing-sm);
     padding: 0 var(--spacing-xs);
@@ -47,9 +46,8 @@
   }
 
   &--active {
-    @include rounded;
-
     background-color: #fff;
+    border-radius: $radius-sm;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     color: $color-dark-gray;

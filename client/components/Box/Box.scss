@@ -1,7 +1,6 @@
 .box {
-  @include rounded();
-
   background-color: #fff;
+  border-radius: $radius-sm;
   box-shadow: var(--shadow);
 
   &__section {

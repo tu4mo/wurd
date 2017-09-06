@@ -1,7 +1,6 @@
 .alert {
-  @include rounded;
-
   background-color: #f2dede;
+  border-radius: $radius-sm;
   color: #a94442;
   display: flex;
   justify-content: center;

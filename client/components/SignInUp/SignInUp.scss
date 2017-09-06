@@ -1,9 +1,8 @@
 $color-transparent-white: rgba(0, 0, 0, 0.1);
 
 .sign-in-up {
-  @include rounded;
-
   background-color: #fff;
+  border-radius: $radius-sm;
   box-shadow: var(--shadow);
   margin: 0 auto;
   max-width: 400px;

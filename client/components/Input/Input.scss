@@ -1,8 +1,7 @@
 .input {
-  @include rounded;
-
   background-color: #fff;
   border: 2px solid transparent;
+  border-radius: $radius-sm;
   display: block;
   font-family: inherit;
   font-size: var(--font-size-lg);
