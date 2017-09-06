@@ -43,6 +43,10 @@
       background-color: $color-dark-gray;
       color: #fff;
     }
+
+    &:focus {
+      box-shadow: 0 0 0 2px #fff, 0 0 0 4px $color-dark-gray;
+    }
   }
 
   &--secondary {
@@ -53,6 +57,14 @@
     &:hover {
       background-color: $color-dark-gray;
       border-color: $color-dark-gray;
+
+      &:focus {
+        box-shadow: 0 0 0 2px #fff, 0 0 0 4px $color-dark-gray;
+      }
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px #fff, 0 0 0 4px $color-gray;
     }
   }
 }
