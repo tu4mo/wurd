@@ -3,7 +3,11 @@ import thunk from 'redux-thunk'
 import reducers from './reducers'
 import api from './api'
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const composeEnhancers =
+  process.env.NODE_ENV === 'production'
+    ? compose
+    : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+
 const persistedState = localStorage.getItem('token')
   ? { auth: { token: JSON.parse(localStorage.getItem('token')) } }
   : {}
