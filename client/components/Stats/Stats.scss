@@ -13,6 +13,7 @@
 }
 
 .stat {
+  color: $color-gray;
   display: flex;
   flex: 0 0 auto;
   padding: var(--spacing-sm);
@@ -22,6 +23,10 @@
 
   &:first-child {
     margin-left: auto;
+  }
+
+  &:hover {
+    color: $color-dark-gray;
   }
 
   &:last-child {
@@ -38,7 +43,6 @@
   }
 
   &__text {
-    color: $color-gray;
     text-transform: uppercase;
   }
 
@@ -48,5 +52,6 @@
     background-color: #fff;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    color: $color-dark-gray;
   }
 }
