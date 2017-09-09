@@ -48,4 +48,8 @@ userSchema.methods.isValidPassword = function(password) {
   return bcrypt.compareSync(password, this.password)
 }
 
+userSchema.methods.setPassword = function(password) {
+  this.password = bcrypt.hashSync(password, 10)
+}
+
 module.exports = mongoose.model('User', userSchema)

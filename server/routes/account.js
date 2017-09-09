@@ -1,13 +1,11 @@
-// Require dependencies
-const bcrypt = require('bcrypt')
-
 // Require models
 const User = require('../models/User')
 
 const getUserAsJSON = user => ({
   email: user.email,
   id: user._id,
-  username: user.username
+  username: user.username,
+  verified: user.verified
 })
 
 const getFirstError = err => {
@@ -18,12 +16,6 @@ const getFirstError = err => {
   if (err.code === 11000) {
     return 'User already exists'
   }
-}
-
-const hashPassword = password => {
-  const salt = bcrypt.genSaltSync(10)
-  const hash = bcrypt.hashSync(password, salt)
-  return hash
 }
 
 module.exports.get = (req, res) => {
@@ -48,9 +40,10 @@ module.exports.post = (req, res) => {
   // Create new user
   const newUser = new User({
     email,
-    username,
-    password: hashPassword(password)
+    username
   })
+
+  newUser.setPassword(password)
 
   // Save new user
   newUser.save((err, user) => {
@@ -68,7 +61,7 @@ module.exports.put = async (req, res) => {
 
   try {
     const user = await User.findById(req.userId)
-    const isMatch = await bcrypt.compare(currentPassword, user.password)
+    const isMatch = user.isValidPassword(currentPassword)
 
     if (isMatch) {
       user.email = email
@@ -81,7 +74,7 @@ module.exports.put = async (req, res) => {
           })
         }
 
-        user.password = hashPassword(password)
+        user.setPassword(password)
       }
 
       const savedUser = await user.save()
