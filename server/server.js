@@ -5,8 +5,8 @@ require('dotenv').config()
 
 // Import dependencies
 const bodyParser = require('body-parser')
+const compression = require('compression')
 const express = require('express')
-const gzipStatic = require('connect-gzip-static')
 const helmet = require('helmet')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
@@ -20,6 +20,9 @@ const app = express()
 
 // Use Morgan to log requests to the console
 app.use(morgan('dev'))
+
+// Set up compression
+app.use(compression())
 
 // Set up Helmet
 app.use(helmet())
@@ -48,7 +51,7 @@ mongoose.connect(
 )
 
 // Serve static (gzip) files
-app.use(gzipStatic(path.resolve(__dirname, '../dist')))
+app.use(express.static(path.resolve(__dirname, '../dist')))
 
 // Set up routes
 const api = require('./routes')
