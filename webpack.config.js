@@ -5,6 +5,7 @@ const CompressionPlugin = require('compression-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const OfflinePlugin = require('offline-plugin')
 const path = require('path')
 const webpack = require('webpack')
 
@@ -100,8 +101,13 @@ if (!isDev) {
       output: {
         comments: false
       }
-    })
+    }),
   )
 }
+
+config.plugins.push(
+  // It's always better if OfflinePlugin is the last plugin added
+  new OfflinePlugin()
+)
 
 module.exports = config
