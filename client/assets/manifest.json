@@ -16,7 +16,6 @@
   ],
   "name": "Wurd",
   ​​"orientation": "portrait-primary",
-  "short_name": "Wurd",
   "start_url": ".",
   "theme_color": "#ffffff"
 }
