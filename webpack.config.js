@@ -101,7 +101,7 @@ if (!isDev) {
       output: {
         comments: false
       }
-    }),
+    })
   )
 }
 
