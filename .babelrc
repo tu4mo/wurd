@@ -16,5 +16,13 @@
     "transform-class-properties",
     ["transform-object-rest-spread", { "useBuiltIns": true }],
     "react-hot-loader/babel"
-  ]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        "env",
+        "react"
+      ]
+    }
+  }
 }
