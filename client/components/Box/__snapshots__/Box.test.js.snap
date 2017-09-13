@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="box test"
+>
+  <div
+    className="box__section box__section--has-padding test"
+  >
+    Test
+  </div>
+</div>
+`;
