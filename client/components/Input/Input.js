@@ -8,6 +8,7 @@ const Input = props => {
     className,
     color,
     error,
+    id,
     maxLength,
     onChange,
     placeholder,
@@ -26,6 +27,7 @@ const Input = props => {
       <input
         {...rest}
         className={classNames}
+        id={id}
         maxLength={maxLength}
         onChange={onChange}
         placeholder={placeholder}
@@ -41,6 +43,7 @@ Input.propTypes = {
   className: PropTypes.string,
   color: PropTypes.string,
   error: PropTypes.string,
+  id: PropTypes.string.isRequired,
   maxLength: PropTypes.string,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,

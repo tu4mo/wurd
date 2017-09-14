@@ -11,6 +11,7 @@ const renderField = field => {
       <Input
         {...field.input}
         color={field.color}
+        id={field.id}
         error={field.meta.touched && field.meta.error ? field.meta.error : null}
         maxLength={field.maxLength}
         placeholder={field.placeholder}
@@ -30,16 +31,17 @@ const FormControl = ({
   type
 }) => {
   const classNames = classnames('form-control', className)
+  const id = `input-${name}`
 
   return (
-    <div className={classNames}>
-      {label && <label className="form-control__label">{label}</label>}
+    <label className={classNames} htmlFor={id}>
+      {label && <div className="form-control__label">{label}</div>}
       <Field
         component={renderField}
         name={name}
-        props={{ color, maxLength, placeholder, type }}
+        props={{ color, id, maxLength, placeholder, type }}
       />
-    </div>
+    </label>
   )
 }
 
