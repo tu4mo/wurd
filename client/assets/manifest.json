@@ -15,7 +15,7 @@
     }
   ],
   "name": "Wurd",
-  ​​"orientation": "portrait-primary",
+  "orientation": "portrait-primary",
   "start_url": ".",
   "theme_color": "#ffffff"
 }
