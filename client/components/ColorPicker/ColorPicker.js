@@ -47,7 +47,7 @@ class ColorPicker extends Component {
     return (
       <div className="color-picker">
         {GRADIENTS.map((gradient, i) => (
-          <div
+          <button
             className={classnames('color-picker__color', {
               'color-picker__color--active': gradient === value
             })}

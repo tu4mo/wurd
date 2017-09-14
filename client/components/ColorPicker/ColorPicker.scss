@@ -11,9 +11,12 @@
   }
 
   &__color {
+    border: 0;
     border-radius: 20px;
+    cursor: pointer;
     flex: 0 0 40px;
     height: 40px;
+    outline: none;
     position: relative;
 
     &--active {
