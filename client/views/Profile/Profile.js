@@ -85,7 +85,7 @@ class Profile extends Component {
             <div className="profile__user">{user.username}</div>
             <div className="profile__buttons">
               {isAuthenticated &&
-              !isMe && <FollowButton username={user.username} />}
+                !isMe && <FollowButton username={user.username} />}
               {isMe && (
                 <Route
                   path="/:username/settings"
@@ -111,14 +111,14 @@ class Profile extends Component {
             <div className="profile-body">
               <div className="profile-body__tabs">
                 {user.followers &&
-                user.following && (
-                  <Stats
-                    followers={user.followers.length}
-                    following={user.following.length}
-                    posts={user.posts}
-                    username={user.username}
-                  />
-                )}
+                  user.following && (
+                    <Stats
+                      followers={user.followers.length}
+                      following={user.following.length}
+                      posts={user.posts}
+                      username={user.username}
+                    />
+                  )}
               </div>
               <div className="container">
                 <Switch>
