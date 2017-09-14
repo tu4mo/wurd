@@ -29,12 +29,14 @@ class PostComment extends Component {
   }
 
   render() {
+    const { postId } = this.props
     const { comment } = this.state
 
     return (
       <form className="post__comment" onSubmit={this.onCommentSubmit}>
         <Input
           color="none"
+          id={`input-comment-${postId}`}
           maxLength="500"
           name="username"
           onChange={this.onCommentChange}
