@@ -1,6 +1,7 @@
 {
   "name": "wurd",
   "scripts": {
+    "analyze": "npm run build -s -- --profile --json > stats.json && webpack-bundle-analyzer stats.json",
     "build": "NODE_ENV=production webpack -p",
     "dev": "NODE_ENV=development nodemon --watch server server/server.js & webpack-dev-server --hot",
     "format": "prettier --write \"{,client/**/,server/**/}*.{js,scss}\"",
@@ -85,6 +86,7 @@
     "react-test-renderer": "^15.6.1",
     "stylelint": "^8.1.1",
     "stylelint-config-standard": "^17.0.0",
+    "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.8.1"
   },
   "jest": {
