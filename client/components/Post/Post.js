@@ -9,6 +9,7 @@ import time from '~/utils/time'
 import { getPostById } from '~/selectors/posts'
 
 // Import components
+import Button from '../Button'
 import Icon from '../Icon'
 import Like from '../Like'
 import PostBody from '../PostBody'
@@ -104,13 +105,14 @@ class Post extends Component {
             likes={likes}
             postId={id}
           />
-          <Icon
-            className={classnames('post__menu-toggle', {
-              'post__menu-toggle--open': isMenuOpen
-            })}
-            name="menu"
-            onClick={this.onMenuClick}
-          />
+          <Button onClick={this.onMenuClick} textOnly>
+            <Icon
+              className={classnames('post__menu-toggle', {
+                'post__menu-toggle--open': isMenuOpen
+              })}
+              name="menu"
+            />
+          </Button>
         </div>
         <PostMenu isOpen={isMenuOpen} postId={id} />
       </div>

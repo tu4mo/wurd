@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 import { isAuthenticated } from '~/selectors/auth'
 import { likePost, unlikePost } from '~/actions/posts'
+import Button from '../Button'
 import Icon from '../Icon'
 import './Like.scss'
 
@@ -54,11 +55,9 @@ class Like extends Component {
           {likes || 'No'} like{likes !== 1 && 's'}
         </div>
         {isAuthenticated && (
-          <Icon
-            className="like__icon"
-            name={liked ? 'liked' : 'like'}
-            onClick={this.onLikeClick}
-          />
+          <Button onClick={this.onLikeClick} textOnly>
+            <Icon className="like__icon" name={liked ? 'liked' : 'like'} />
+          </Button>
         )}
       </div>
     )

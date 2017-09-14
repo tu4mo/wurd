@@ -37,10 +37,10 @@ const ICONS = {
   }
 }
 
-const Icon = ({ className, name, onClick, title }) => (
+const Icon = ({ className, name, title }) => (
   <img
+    alt={title}
     className={classnames('icon', className)}
-    onClick={onClick}
     src={ICONS[name].src}
     title={title || ICONS[name].title}
   />
@@ -49,7 +49,6 @@ const Icon = ({ className, name, onClick, title }) => (
 Icon.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
   title: PropTypes.string
 }
 

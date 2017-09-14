@@ -42,14 +42,15 @@ class SignInUp extends Component {
     }
 
     return (
-      <div
+      <Button
         className={classnames('sign-in-up__tab', {
           'sign-in-up__tab--active': id === this.state.tab
         })}
+        link
         onClick={() => changeTab(id)}
       >
         {label}
-      </div>
+      </Button>
     )
   }
 

@@ -16,9 +16,8 @@ $color-transparent-white: rgba(0, 0, 0, 0.1);
     border-style: solid;
     border-width: 0;
     border-bottom-width: 2px;
-    cursor: pointer;
     flex: 1 1 0;
-    padding: $spacing-sm;
+    height: 50px;
     text-align: center;
 
     &--active {

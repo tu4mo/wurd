@@ -27,6 +27,7 @@ stories.add('Button', () => (
     loading={boolean('loading', false)}
     onClick={action('clicked')}
     secondary={boolean('secondary', false)}
+    textOnly={boolean('textOnly', false)}
   >
     Button
   </Button>

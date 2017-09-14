@@ -1,7 +1,11 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+
+// Import components
 import Spinner from '../Spinner'
+
+// Import styles
 import './Button.scss'
 
 class Button extends PureComponent {
@@ -13,7 +17,12 @@ class Button extends PureComponent {
     loading: PropTypes.bool,
     onClick: PropTypes.func,
     secondary: PropTypes.bool,
+    textOnly: PropTypes.bool,
     type: PropTypes.string
+  }
+
+  static defaultProps = {
+    type: 'button'
   }
 
   render() {
@@ -25,15 +34,17 @@ class Button extends PureComponent {
       loading,
       onClick,
       secondary,
+      textOnly,
       type
     } = this.props
 
     const classNames = classnames(
       'button',
       {
-        'button--secondary': secondary,
         'button--link': link,
-        'button--outline': !secondary && !link
+        'button--outline': !link && !secondary && !textOnly,
+        'button--secondary': secondary,
+        'button--text-only': textOnly
       },
       className
     )
