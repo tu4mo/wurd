@@ -9,12 +9,12 @@ module.exports = {
     'standard-react',
     'prettier',
     'prettier/react',
+    'prettier/standard',
     'plugin:jsx-a11y/recommended'
   ],
   parser: 'babel-eslint',
   plugins: ['jsx-a11y'],
   rules: {
-    'jsx-quotes': ['error', 'prefer-double'],
     'react/sort-comp': 'error',
     'react/sort-prop-types': 'error'
   },
