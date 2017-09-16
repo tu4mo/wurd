@@ -4,7 +4,7 @@
     "analyze": "npm run build -s -- --profile --json > stats.json && webpack-bundle-analyzer stats.json",
     "build": "NODE_ENV=production webpack -p",
     "dev": "NODE_ENV=development nodemon --watch server server/server.js & webpack-dev-server --hot",
-    "format": "prettier --write \"{,client/**/,server/**/}*.{js,scss}\"",
+    "format": "prettier --write \"{,__mocks__/**/,client/**/,server/**/}*.{js,scss}\"",
     "heroku-postbuild": "npm run build",
     "lint": "eslint . && stylelint \"client/**/*.scss\"",
     "start": "node server/server.js",
@@ -88,12 +88,6 @@
     "stylelint-config-standard": "^17.0.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.8.2"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|scss)$": "<rootDir>/client/.mocks/styleMock.js"
-    }
   },
   "private": true
 }

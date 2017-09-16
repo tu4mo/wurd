@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `null`;
+
+exports[`renders correctly 2`] = `
+<div
+  className="spinner"
+/>
+`;
+
+exports[`renders correctly 3`] = `
+<div
+  className="box user-list"
+>
+  <div
+    className="box__section box__section--has-padding"
+  >
+    <div
+      className="user-list__row"
+    >
+      <div
+        className="user-list__user"
+      >
+        <a
+          href="/tu4mo"
+          onClick={[Function]}
+        >
+          <div
+            className="profile-photo profile-photo--small"
+          >
+            <img
+              alt="tu4mo"
+              className="profile-photo__image"
+              src="https://www.domain.com/profile.jpg"
+              title="tu4mo"
+            />
+          </div>
+        </a>
+        <a
+          className="user-list__username"
+          href="/tu4mo"
+          onClick={[Function]}
+        >
+          tu4mo
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;

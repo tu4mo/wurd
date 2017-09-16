@@ -4,7 +4,7 @@ import reducers from './reducers'
 import api from './api'
 
 const composeEnhancers =
-  process.env.NODE_ENV === 'production'
+  process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test'
     ? compose
     : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 
