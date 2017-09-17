@@ -16,11 +16,11 @@ const users = (state = INITIAL_STATE, action) => {
     case USER_FETCH:
       return {
         ...state,
-        isPending: false,
         data: {
           ...state.data,
           [action.user.username]: action.user
-        }
+        },
+        isPending: false
       }
 
     case USERS_FETCH_PENDING:
@@ -32,7 +32,6 @@ const users = (state = INITIAL_STATE, action) => {
     case USERS_FETCH_FULFILLED:
       return {
         ...state,
-        isPending: false,
         data: {
           ...state.data,
           ...action.users.reduce(
@@ -42,7 +41,8 @@ const users = (state = INITIAL_STATE, action) => {
             }),
             {}
           )
-        }
+        },
+        isPending: false
       }
 
     case USER_FOLLOW:

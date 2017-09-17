@@ -12,8 +12,8 @@ const getProfileUrl = email =>
   )}?default=identicon&size=256`
 
 const decorateFollowingUser = user => ({
-  username: user.username,
-  profileUrl: getProfileUrl(user.email)
+  profileUrl: getProfileUrl(user.email),
+  username: user.username
 })
 
 const sortByUsername = (a, b) => {
@@ -91,6 +91,6 @@ const getSingle = async (req, res) => {
 
 module.exports = {
   get,
-  getSingle,
-  getProfileUrl
+  getProfileUrl,
+  getSingle
 }

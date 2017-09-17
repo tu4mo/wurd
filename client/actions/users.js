@@ -40,17 +40,17 @@ export const fetchUsers = () => async (dispatch, getState, api) => {
 
 export const followUser = username => (dispatch, getState, api) => {
   dispatch({
+    following: username,
     type: USER_FOLLOW,
-    username: getState().auth.username,
-    following: username
+    username: getState().auth.username
   })
 
   return api({
     method: 'post',
-    url: `relationships`,
     params: {
       username
-    }
+    },
+    url: `relationships`
   }).then(response => {
     // TODO: Instead of fetching the user separately,
     // make API return the user after following
@@ -60,17 +60,17 @@ export const followUser = username => (dispatch, getState, api) => {
 
 export const unfollowUser = username => (dispatch, getState, api) => {
   dispatch({
+    following: username,
     type: USER_UNFOLLOW,
-    username: getState().auth.username,
-    following: username
+    username: getState().auth.username
   })
 
   return api({
     method: 'delete',
-    url: 'relationships',
     params: {
       username
-    }
+    },
+    url: 'relationships'
   }).then(response => {
     // TODO: Instead of fetching the user separately,
     // make API return the user after following

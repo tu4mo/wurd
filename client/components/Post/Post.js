@@ -22,9 +22,9 @@ import ProfilePhoto from '../ProfilePhoto'
 import './Post.scss'
 
 const placeholderStyles = {
-  header: { height: '40px' },
   body: { paddingTop: '40%' },
-  footer: { height: '24px' }
+  footer: { height: '24px' },
+  header: { height: '40px' }
 }
 
 class Post extends Component {

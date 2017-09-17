@@ -9,8 +9,8 @@ export const authenticateUser = () => async (dispatch, getState, api) => {
     const { data: { id, username } } = response
 
     dispatch({
-      type: AUTH_SET_USER,
       id,
+      type: AUTH_SET_USER,
       username
     })
 
@@ -24,24 +24,24 @@ export const authenticateUser = () => async (dispatch, getState, api) => {
 export const logIn = (email, password) => async (dispatch, getState, api) => {
   try {
     const response = await api({
-      method: 'post',
-      url: 'auth',
       data: {
         email,
         password
-      }
+      },
+      method: 'post',
+      url: 'auth'
     })
 
     dispatch({
-      type: AUTH_SET_TOKEN,
-      token: response.data.token
+      token: response.data.token,
+      type: AUTH_SET_TOKEN
     })
 
     dispatch(authenticateUser())
   } catch (err) {
     dispatch({
-      type: AUTH_SET_ERROR,
-      error: err.response.data.error
+      error: err.response.data.error,
+      type: AUTH_SET_ERROR
     })
   }
 }
@@ -58,20 +58,20 @@ export const signUp = (username, email, password) => async (
 ) => {
   try {
     await api({
-      method: 'post',
-      url: 'account',
       data: {
         email,
-        username,
-        password
-      }
+        password,
+        username
+      },
+      method: 'post',
+      url: 'account'
     })
 
     dispatch(logIn(email, password))
   } catch (err) {
     dispatch({
-      type: AUTH_SET_ERROR,
-      error: err.response.data.error
+      error: err.response.data.error,
+      type: AUTH_SET_ERROR
     })
   }
 }

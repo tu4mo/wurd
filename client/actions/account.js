@@ -10,8 +10,8 @@ export const fetchAccount = () => async (dispatch, getState, api) => {
     const response = await api({ method: 'get', url: 'account' })
 
     dispatch({
-      type: ACCOUNT_FETCH,
-      account: response.data
+      account: response.data,
+      type: ACCOUNT_FETCH
     })
   } catch (err) {
     // TODO
@@ -29,21 +29,21 @@ export const saveAccount = (account, onSuccess) => async (
     })
 
     const response = await api({
+      data: account,
       method: 'put',
-      url: 'account',
-      data: account
+      url: 'account'
     })
 
     dispatch({
-      type: ACCOUNT_SAVE_FULFILLED,
-      account: response.data
+      account: response.data,
+      type: ACCOUNT_SAVE_FULFILLED
     })
 
     onSuccess(response.data)
   } catch (err) {
     dispatch({
-      type: ACCOUNT_SAVE_REJECTED,
-      error: err.response.data.error
+      error: err.response.data.error,
+      type: ACCOUNT_SAVE_REJECTED
     })
   }
 }

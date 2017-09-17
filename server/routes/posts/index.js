@@ -6,22 +6,22 @@ const { getProfileUrl } = require('../users')
 
 const decorateUserJSON = user => ({
   id: user._id,
-  username: user.username,
-  profileUrl: getProfileUrl(user.email)
+  profileUrl: getProfileUrl(user.email),
+  username: user.username
 })
 
 const decoratePostJSON = (post, userId) => ({
-  id: post._id,
-  content: post.content,
   comments: post.comments.map(comment => ({
     content: comment.content,
     createdAt: comment.createdAt,
-    user: decorateUserJSON(comment.user),
-    id: comment._id
+    id: comment._id,
+    user: decorateUserJSON(comment.user)
   })),
+  content: post.content,
   createdAt: post.createdAt,
   gradientEnd: post.gradientEnd,
   gradientStart: post.gradientStart,
+  id: post._id,
   liked: post.likes.indexOf(userId) !== -1,
   likes: post.likes.length,
   user: decorateUserJSON(post.user)
@@ -139,8 +139,8 @@ const deletePost = async (req, res) => {
 module.exports = {
   POPULATED_PATHS,
   decoratePostJSON,
+  deletePost,
   get,
   getSingle,
-  post,
-  deletePost
+  post
 }

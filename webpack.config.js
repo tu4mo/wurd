@@ -26,22 +26,24 @@ const styleLoaders = [
 const entry = ['babel-polyfill', './client/index.js']
 
 const config = {
+  devServer: {
+    historyApiFallback: true,
+    open: true,
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
+  },
+
   devtool: isDev ? 'eval-source-map' : '',
 
   entry: isDev ? ['react-hot-loader/patch', ...entry] : entry,
 
-  output: {
-    path: path.join(__dirname, 'dist'),
-    publicPath: '/',
-    filename: isDev ? 'wurd.js' : 'wurd.[hash].js'
-  },
-
   module: {
     rules: [
       {
-        test: /\.js$/,
         exclude: /node_modules\/(?!(wordwrapjs)\/).*/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        test: /\.js$/
       },
       {
         test: /\.scss$/,
@@ -53,13 +55,19 @@ const config = {
             })
       },
       {
-        test: /\.(jpg|png|svg)$/,
         loader: 'file-loader',
         options: {
           name: './images/[name].[hash].[ext]'
-        }
+        },
+        test: /\.(jpg|png|svg)$/
       }
     ]
+  },
+
+  output: {
+    filename: isDev ? 'wurd.js' : 'wurd.[hash].js',
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/'
   },
 
   plugins: [
@@ -75,15 +83,7 @@ const config = {
     }),
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/),
     new webpack.NamedModulesPlugin()
-  ],
-
-  devServer: {
-    historyApiFallback: true,
-    open: true,
-    proxy: {
-      '/api': 'http://localhost:3000'
-    }
-  }
+  ]
 }
 
 if (!isDev) {

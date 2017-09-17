@@ -21,18 +21,18 @@ export const fetchPosts = (options = {}) => (dispatch, getState, api) => {
 
   api({
     method: 'get',
-    url: 'posts',
     params: {
       after,
       before,
       filter,
       limit: 10,
       username
-    }
+    },
+    url: 'posts'
   }).then(response => {
     dispatch({
-      type: POSTS_FETCH,
-      posts: response.data
+      posts: response.data,
+      type: POSTS_FETCH
     })
 
     dispatch(setHasMore(timeline, response.data.hasMore))
@@ -49,13 +49,13 @@ export const fetchPostById = id => (dispatch, getState, api) => {
 
 export const createPost = post => (dispatch, getState, api) => {
   return api({
+    data: post,
     method: 'post',
-    url: 'posts',
-    data: post
+    url: 'posts'
   }).then(response => {
     dispatch({
-      type: POST_CREATE,
-      post
+      post,
+      type: POST_CREATE
     })
 
     dispatch(savePost(response.data))
@@ -70,16 +70,16 @@ export const createComment = (id, content) => async (
   api
 ) => {
   dispatch({
-    type: POST_COMMENT,
+    content,
     id,
-    content
+    type: POST_COMMENT
   })
 
   try {
     const response = await api({
+      data: { content },
       method: 'post',
-      url: `posts/${id}/comments`,
-      data: { content }
+      url: `posts/${id}/comments`
     })
 
     dispatch(savePost(response.data))
@@ -90,8 +90,8 @@ export const createComment = (id, content) => async (
 
 export const likePost = id => async (dispatch, getState, api) => {
   dispatch({
-    type: POST_LIKE,
-    id
+    id,
+    type: POST_LIKE
   })
 
   try {
@@ -106,8 +106,8 @@ export const likePost = id => async (dispatch, getState, api) => {
 
 export const unlikePost = id => async (dispatch, getState, api) => {
   dispatch({
-    type: POST_UNLIKE,
-    id
+    id,
+    type: POST_UNLIKE
   })
 
   try {
@@ -122,8 +122,8 @@ export const unlikePost = id => async (dispatch, getState, api) => {
 
 export const deletePost = id => async (dispatch, getState, api) => {
   dispatch({
-    type: POST_DELETE,
-    id
+    id,
+    type: POST_DELETE
   })
 
   try {
@@ -137,6 +137,6 @@ export const deletePost = id => async (dispatch, getState, api) => {
 }
 
 export const savePost = post => ({
-  type: POST_SAVE,
-  post
+  post,
+  type: POST_SAVE
 })

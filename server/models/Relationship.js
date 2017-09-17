@@ -3,14 +3,14 @@ const mongoose = require('mongoose')
 const relationshipSchema = new mongoose.Schema(
   {
     following: {
-      type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true
+      required: true,
+      type: mongoose.Schema.Types.ObjectId
     },
     user: {
-      type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true
+      required: true,
+      type: mongoose.Schema.Types.ObjectId
     }
   },
   {

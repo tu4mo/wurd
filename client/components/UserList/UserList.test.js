@@ -18,8 +18,8 @@ it('renders correctly', () => {
           <UserList
             users={[
               {
-                username: 'tu4mo',
-                profileUrl: 'https://www.domain.com/profile.jpg'
+                profileUrl: 'https://www.domain.com/profile.jpg',
+                username: 'tu4mo'
               }
             ]}
           />

@@ -6,32 +6,32 @@ const INVALID_USERNAMES = ['about', 'home', 'search', 'users']
 const userSchema = new mongoose.Schema(
   {
     email: {
-      type: String,
-      lowercase: true,
-      required: true,
       index: true,
+      lowercase: true,
       maxlength: 50,
-      unique: true,
-      validate: {
-        validator: v => /^\S+@\S+$/.test(v),
-        message: 'Invalid e-mail'
-      }
-    },
-    username: {
-      maxlength: 15,
-      minlength: 1,
+      required: true,
       type: String,
       unique: true,
-      required: true,
       validate: {
-        validator: v =>
-          /^[a-z0-9_]+$/i.test(v) && !INVALID_USERNAMES.includes(v),
-        message: 'Invalid username'
+        message: 'Invalid e-mail',
+        validator: v => /^\S+@\S+$/.test(v)
       }
     },
     password: {
       required: true,
       type: String
+    },
+    username: {
+      maxlength: 15,
+      minlength: 1,
+      required: true,
+      type: String,
+      unique: true,
+      validate: {
+        message: 'Invalid username',
+        validator: v =>
+          /^[a-z0-9_]+$/i.test(v) && !INVALID_USERNAMES.includes(v)
+      }
     },
     verified: {
       default: false,

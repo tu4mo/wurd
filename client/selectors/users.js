@@ -4,13 +4,13 @@ export const getAuthenticatedUser = state =>
 export const getUser = username => state => state.users.data[username]
 
 export const getUsers = state => ({
-  isPending: state.users.isPending,
   data: Object.keys(state.users.data)
     .map(username => ({
-      username,
-      profileUrl: state.users.data[username].profileUrl
+      profileUrl: state.users.data[username].profileUrl,
+      username
     }))
-    .sort((a, b) => a.username.localeCompare(b.username))
+    .sort((a, b) => a.username.localeCompare(b.username)),
+  isPending: state.users.isPending
 })
 
 export const isFollowingUsername = username => state => {

@@ -15,8 +15,10 @@ module.exports = {
   parser: 'babel-eslint',
   plugins: ['jsx-a11y'],
   rules: {
+    'comma-dangle': ['error', 'never'],
     'react/sort-comp': 'error',
-    'react/sort-prop-types': 'error'
+    'react/sort-prop-types': 'error',
+    'sort-keys': ['error', 'asc', { caseSensitive: true, natural: false }]
   },
   settings: {
     'import/resolver': 'webpack'

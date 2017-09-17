@@ -32,24 +32,24 @@ const postSchema = new mongoose.Schema(
       trim: true,
       type: String,
       validate: {
-        validator: v => v.split(' ').length < 6,
-        message: 'Post validation failed'
+        message: 'Post validation failed',
+        validator: v => v.split(' ').length < 6
       }
     },
     gradientEnd: {
       required: true,
       type: String,
       validate: {
-        validator: v => hexColorRegExp.test(v),
-        message: 'Invalid gradient'
+        message: 'Invalid gradient',
+        validator: v => hexColorRegExp.test(v)
       }
     },
     gradientStart: {
       required: true,
       type: String,
       validate: {
-        validator: v => hexColorRegExp.test(v),
-        message: 'Invalid gradient'
+        message: 'Invalid gradient',
+        validator: v => hexColorRegExp.test(v)
       }
     },
     likes: [

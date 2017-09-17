@@ -80,8 +80,8 @@ class Header extends Component {
     const { isComposerOpen, isHidden } = this.state
 
     const classNames = classnames('header-container', {
-      'header-container--with-composer': isComposerOpen,
-      'header-container--hidden': isHidden && !isComposerOpen
+      'header-container--hidden': isHidden && !isComposerOpen,
+      'header-container--with-composer': isComposerOpen
     })
 
     return (
