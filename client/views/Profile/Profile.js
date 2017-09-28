@@ -13,6 +13,7 @@ import { isAuthenticated } from '~/selectors/auth'
 import { getAuthenticatedUser, getUser } from '~/selectors/users'
 
 // Import components
+import Aux from '~/components/Aux'
 import Button from '~/components/Button'
 import FollowButton from '~/components/FollowButton'
 import Head from '~/components/Head'
@@ -69,7 +70,7 @@ class Profile extends Component {
     if (!Object.keys(user).length) return null
 
     return (
-      <div>
+      <Aux>
         <Head>
           <title>{user.username}</title>
         </Head>
@@ -139,7 +140,7 @@ class Profile extends Component {
             </div>
           </Route>
         </Switch>
-      </div>
+      </Aux>
     )
   }
 }
