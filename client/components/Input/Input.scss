@@ -1,7 +1,7 @@
 .input {
   background-color: #fff;
   border: 2px solid transparent;
-  border-radius: $radius-sm;
+  border-radius: var(--radius-sm);
   display: block;
   font-family: inherit;
   font-size: var(--font-size-lg);
@@ -11,15 +11,15 @@
   width: 100%;
 
   &:focus {
-    border-color: $color-light-gray;
+    border-color: var(--color-light-gray);
   }
 
   &::-webkit-input-placeholder {
-    color: $color-light-gray;
+    color: var(--color-light-gray);
   }
 
   &--gray {
-    background-color: $color-background;
+    background-color: var(--color-background);
   }
 
   &--none {

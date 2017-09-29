@@ -16,10 +16,10 @@
     border: 0;
     border-radius: 0;
     color: #fff;
-    font-family: $font;
+    font-family: var(--font);
     font-size: 3rem;
     outline: none;
-    padding: $spacing-md;
+    padding: var(--spacing-md);
     text-align: center;
     width: 100%;
 
@@ -44,10 +44,10 @@
     align-items: center;
     border-width: 0;
     border-bottom-width: 1px;
-    border-color: $color-ultra-light-gray;
+    border-color: var(--color-ultra-light-gray);
     border-style: solid;
     display: flex;
-    padding: var(--spacing-md) 0;
+    padding: var(--spacing-responsive-md) 0;
     width: 100%;
 
     @include breakpoint($breakpoint-sm) {
@@ -60,13 +60,13 @@
     align-items: center;
     display: flex;
     justify-content: center;
-    margin: var(--spacing-md);
+    margin: var(--spacing-responsive-md);
 
     & > * {
       width: 100px;
 
       &:not(:last-child) {
-        margin-right: $spacing-sm;
+        margin-right: var(--spacing-sm);
       }
     }
   }

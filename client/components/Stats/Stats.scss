@@ -13,7 +13,7 @@
 }
 
 .stat {
-  color: $color-gray;
+  color: var(--color-gray);
   display: flex;
   flex: 0 0 auto;
   padding: var(--spacing-sm);
@@ -34,9 +34,9 @@
   }
 
   &__number {
-    background-color: $color-ultra-light-gray;
-    border-radius: $radius-sm;
-    color: $color-light-gray;
+    background-color: var(--color-ultra-light-gray);
+    border-radius: var(--radius-sm);
+    color: var(--color-light-gray);
     margin-left: var(--spacing-sm);
     padding: 0 var(--spacing-xs);
   }
@@ -47,7 +47,7 @@
 
   &--active {
     background-color: #fff;
-    border-radius: $radius-sm;
+    border-radius: var(--radius-sm);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     color: $color-dark-gray;

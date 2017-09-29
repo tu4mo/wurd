@@ -24,7 +24,7 @@
       align-items: flex-start;
       flex: 0 0 auto;
       margin: 0;
-      margin-left: $spacing-md;
+      margin-left: var(--spacing-md);
     }
   }
 
@@ -37,14 +37,14 @@
     }
 
     & > *:not(:last-child) {
-      margin-right: $spacing-sm;
+      margin-right: var(--spacing-sm);
     }
   }
 
   &__stats {
     flex: 0 0 100%;
     justify-content: center;
-    margin-top: var(--spacing-md);
+    margin-top: var(--spacing-responsive-md);
 
     @include breakpoint($breakpoint-lg) {
       flex: 0 0 auto;
@@ -55,10 +55,10 @@
 }
 
 .profile-body {
-  padding-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-responsive-md);
 
   &__tabs {
     border-bottom: 2px solid #fff;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-responsive-md);
   }
 }

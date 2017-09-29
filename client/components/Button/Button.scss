@@ -1,15 +1,15 @@
 .button {
   background-color: transparent;
-  border-radius: $radius-lg;
+  border-radius: var(--radius-lg);
   color: $color-dark-gray;
   cursor: pointer;
-  font-family: $font;
+  font-family: var(--font);
   font-size: 1rem;
   font-weight: 500;
   height: 40px;
   line-height: 1;
   outline: none;
-  padding: 0 $spacing-sm;
+  padding: 0 var(--spacing-sm);
   position: relative;
   text-transform: uppercase;
   transition: transform 0.05s ease-in-out;
@@ -51,8 +51,8 @@
   }
 
   &--secondary {
-    background-color: $color-gray;
-    border: 2px solid $color-gray;
+    background-color: var(--color-gray);
+    border: 2px solid var(--color-gray);
     color: #fff;
 
     &:hover {
@@ -65,7 +65,7 @@
     }
 
     &:focus {
-      box-shadow: 0 0 0 2px #fff, 0 0 0 4px $color-gray;
+      box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--color-gray);
     }
   }
 

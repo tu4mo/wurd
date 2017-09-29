@@ -1,7 +1,7 @@
 .settings {
-  border-top: 1px solid $color-ultra-light-gray;
-  padding-bottom: var(--spacing-md);
-  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-ultra-light-gray);
+  padding-bottom: var(--spacing-responsive-md);
+  padding-top: var(--spacing-responsive-md);
 
   &__content {
     margin: 0 auto;

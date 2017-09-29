@@ -42,8 +42,8 @@
 
 .welcome-form {
   left: 0;
-  padding: var(--spacing-md);
+  padding: var(--spacing-responsive-md);
   position: absolute;
-  top: calc(var(--header-height) * 2 - var(--spacing-md));
+  top: calc(var(--header-height) * 2 - var(--spacing-responsive-md));
   width: 100%;
 }

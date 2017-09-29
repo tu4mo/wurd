@@ -2,7 +2,7 @@
   display: block;
 
   &__label {
-    color: $color-gray;
+    color: var(--color-gray);
     font-size: var(--font-size-sm);
     margin-bottom: var(--spacing-xs);
   }

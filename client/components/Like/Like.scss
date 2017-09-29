@@ -1,6 +1,6 @@
 .like {
   align-items: center;
-  color: $color-light-gray;
+  color: var(--color-light-gray);
   display: flex;
 
   &__icon {
@@ -10,7 +10,7 @@
   }
 
   &__count {
-    margin-right: $spacing-sm;
+    margin-right: var(--spacing-sm);
   }
 
   &--liked {

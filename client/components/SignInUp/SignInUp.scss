@@ -2,7 +2,7 @@ $color-transparent-white: rgba(0, 0, 0, 0.1);
 
 .sign-in-up {
   background-color: #fff;
-  border-radius: $radius-sm;
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow);
   margin: 0 auto;
   max-width: 400px;
@@ -26,7 +26,7 @@ $color-transparent-white: rgba(0, 0, 0, 0.1);
   }
 
   &__panel {
-    padding: $spacing-md;
+    padding: var(--spacing-md);
   }
 
   &__button {
@@ -36,7 +36,7 @@ $color-transparent-white: rgba(0, 0, 0, 0.1);
 
   &__link {
     color: #fff;
-    margin-top: $spacing-md;
+    margin-top: var(--spacing-md);
     text-align: center;
     text-decoration: none;
   }

@@ -34,7 +34,7 @@
     }
 
     &::after {
-      color: $color-light-gray;
+      color: var(--color-light-gray);
       content: 'beta';
       font-size: 0.6rem;
       left: 0;
