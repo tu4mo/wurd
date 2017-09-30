@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
@@ -14,12 +14,13 @@ import ProfilePhoto from '~/components/ProfilePhoto'
 import logo from './svg/wurd.svg'
 import './Header.scss'
 
-class Header extends Component {
+class Header extends PureComponent {
   static propTypes = {
     createPost: PropTypes.func.isRequired,
     fetchUserByUsername: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
-    user: PropTypes.object
+    profileUrl: PropTypes.string,
+    username: PropTypes.string
   }
 
   state = {
@@ -71,12 +72,12 @@ class Header extends Component {
       this.setState({
         isComposerOpen: false
       })
-      this.props.fetchUserByUsername(this.props.user.username)
+      this.props.fetchUserByUsername(this.props.username)
     })
   }
 
   render() {
-    const { isAuthenticated, user } = this.props
+    const { isAuthenticated, profileUrl, username } = this.props
     const { isComposerOpen, isHidden } = this.state
 
     const classNames = classnames('header-container', {
@@ -104,8 +105,8 @@ class Header extends Component {
                   </NavItem>
                 )}
                 {isAuthenticated && (
-                  <NavItem className="header__profile" to={`/${user.username}`}>
-                    <ProfilePhoto size="small" url={user.profileUrl} />
+                  <NavItem className="header__profile" to={`/${username}`}>
+                    <ProfilePhoto size="small" url={profileUrl} />
                   </NavItem>
                 )}
               </nav>
@@ -122,10 +123,15 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isAuthenticated: isAuthenticated(state),
-  user: getAuthenticatedUser(state)
-})
+const mapStateToProps = state => {
+  const user = getAuthenticatedUser(state)
+
+  return {
+    isAuthenticated: isAuthenticated(state),
+    profileUrl: user.profileUrl,
+    username: user.username
+  }
+}
 
 export default connect(mapStateToProps, {
   createPost,
