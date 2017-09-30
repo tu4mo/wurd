@@ -4,7 +4,7 @@
     "analyze": "npm run build -s -- --profile --json > stats.json && webpack-bundle-analyzer stats.json",
     "build": "NODE_ENV=production webpack -p",
     "dev": "NODE_ENV=development nodemon --watch server server/server.js & webpack-dev-server --hot",
-    "format": "prettier --write \"{,__mocks__/**/,client/**/,server/**/}*.{js,scss}\"",
+    "format": "prettier --write \"{,__mocks__/**/,client/**/,server/**/}*.{js,json,scss}\"",
     "heroku-postbuild": "npm run build",
     "lint": "eslint . && stylelint \"client/**/*.scss\"",
     "start": "node server/server.js",
