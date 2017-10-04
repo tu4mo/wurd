@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import FullWidthText from '../FullWidthText'
 import classnames from 'classnames'
-import { Textfit } from 'react-textfit'
 import wordwrap from 'wordwrapjs'
 import './PostBody.scss'
 
@@ -17,16 +17,9 @@ const PostBody = ({ content, fill, gradientEnd, gradientStart }) => {
     >
       <div className="post-body__content">
         {words.map((word, i) => (
-          <Textfit
-            className="post-body__row"
-            forceSingleModeWidth
-            key={i}
-            max={140}
-            min={10}
-            mode="single"
-          >
+          <FullWidthText className="post-body__row" key={i}>
             {word}
-          </Textfit>
+          </FullWidthText>
         ))}
       </div>
     </div>
