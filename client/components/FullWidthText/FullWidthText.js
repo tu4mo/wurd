@@ -19,12 +19,13 @@ class FullWidthText extends Component {
   }
 
   scaleHeader = () => {
+    const MAX_SCALE = 20
     const scalable = this.element
     const scalableContainer = scalable.parentNode
 
     scalable.style.transform = 'scale(1)'
-    scalable.style.transform =
-      'scale(' + scalableContainer.offsetWidth / scalable.offsetWidth + ')'
+    const scale = scalableContainer.offsetWidth / scalable.offsetWidth
+    scalable.style.transform = `scale(${scale < MAX_SCALE ? scale : MAX_SCALE})`
     scalableContainer.style.height =
       scalable.getBoundingClientRect().height + 'px'
   }
