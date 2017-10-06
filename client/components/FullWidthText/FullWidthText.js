@@ -9,14 +9,16 @@ class FullWidthText extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', throttle(this.scaleHeader))
+    window.addEventListener('resize', this.scaleHeaderThrottled)
 
     this.scaleHeader()
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.scaleHeader)
+    window.removeEventListener('resize', this.scaleHeaderThrottled)
   }
+
+  scaleHeaderThrottled = throttle(() => this.scaleHeader(), 50)
 
   scaleHeader = () => {
     const MAX_SCALE = 20

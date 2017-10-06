@@ -29,15 +29,17 @@ class Header extends PureComponent {
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', throttle(this.onScroll, 200))
+    window.addEventListener('scroll', this.onScrollThrottled)
     this.previousScrollPosition = window.pageYOffset
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll)
+    window.removeEventListener('scroll', this.onScrollThrottled)
   }
 
   previousScrollPosition = null
+
+  onScrollThrottled = throttle(() => this.onScroll(), 50)
 
   onScroll = () => {
     const scrollPosition = window.pageYOffset
