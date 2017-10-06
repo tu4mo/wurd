@@ -28,6 +28,9 @@ const post = async (req, res) => {
       expiresIn: '14 days'
     })
 
+    user.set({ lastLogged: Date.now() })
+    await user.save()
+
     return res.status(200).json({ token })
   } catch (err) {
     res.sendStatus(500)

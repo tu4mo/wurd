@@ -17,6 +17,10 @@ const userSchema = new mongoose.Schema(
         validator: v => /^\S+@\S+$/.test(v)
       }
     },
+    lastLogged: {
+      default: Date.now,
+      type: Date
+    },
     password: {
       required: true,
       type: String
