@@ -96,6 +96,11 @@ if (!isDev) {
       threshold: 10240
     }),
     new CleanWebpackPlugin('dist'),
+    new webpack.optimize.CommonsChunkPlugin({
+      async: true,
+      children: true,
+      minChunks: 2
+    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       output: {
