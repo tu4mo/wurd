@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="alert"
+  className="sc-bdVaJa jFQRdS"
 >
   Hello World!
 </div>
