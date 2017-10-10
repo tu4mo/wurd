@@ -2,10 +2,10 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="box test"
+  className="test sc-bdVaJa kEgatI"
 >
   <div
-    className="box__section box__section--has-padding test"
+    className="test sc-bwzfXH ekItIQ"
   >
     Test
   </div>

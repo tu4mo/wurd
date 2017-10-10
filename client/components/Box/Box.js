@@ -1,17 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
-import './Box.scss'
+import styled from 'styled-components'
 
-const Box = ({ children, className }) => {
-  const classNames = classnames('box', className)
-
-  return <div className={classNames}>{children}</div>
-}
+const Box = ({ children, className }) => (
+  <div className={className}>{children}</div>
+)
 
 Box.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string
 }
 
-export default Box
+const StyledBox = styled(Box)`
+  background-color: #fff;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+`
+
+export default StyledBox

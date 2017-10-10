@@ -10,10 +10,10 @@ exports[`renders correctly 2`] = `
 
 exports[`renders correctly 3`] = `
 <div
-  className="box user-list"
+  className="user-list sc-bdVaJa kEgatI"
 >
   <div
-    className="box__section box__section--has-padding"
+    className="sc-bwzfXH ekItIQ"
   >
     <div
       className="user-list__row"
