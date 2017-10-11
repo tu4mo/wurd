@@ -46,6 +46,39 @@ export const logIn = (email, password) => async (dispatch, getState, api) => {
   }
 }
 
+export const logInWithToken = (token, callback) => async (
+  dispatch,
+  getState,
+  api
+) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await api({
+        data: {
+          token
+        },
+        method: 'post',
+        url: 'auth/token'
+      })
+
+      dispatch({
+        token: response.data.token,
+        type: AUTH_SET_TOKEN
+      })
+
+      dispatch(authenticateUser())
+
+      resolve()
+    } catch (err) {
+      dispatch({
+        error: err.response.data.error,
+        type: AUTH_SET_ERROR
+      })
+
+      reject(err)
+    }
+  })
+
 export const logOut = () => ({
   type: AUTH_CLEAR
 })

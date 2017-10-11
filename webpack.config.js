@@ -85,7 +85,7 @@ const config = {
     }),
 
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/),
-    
+
     new webpack.NamedModulesPlugin()
   ]
 }

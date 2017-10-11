@@ -1,8 +1,5 @@
-// Require dependencies
-const jwt = require('jsonwebtoken')
-
 // Require models
-const User = require('../models/User')
+const User = require('../../models/User')
 
 const get = (req, res) => {
   User.findById(req.userId).then(user => {
@@ -24,14 +21,12 @@ const post = async (req, res) => {
       return res.status(401).json(errorResponse)
     }
 
-    const token = jwt.sign({ sub: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '14 days'
-    })
+    const jwt = user.getJWT()
 
     user.set({ lastLogged: Date.now() })
     await user.save()
 
-    return res.status(200).json({ token })
+    return res.status(200).json({ token: jwt })
   } catch (err) {
     res.sendStatus(500)
     throw err

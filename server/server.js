@@ -11,6 +11,7 @@ const helmet = require('helmet')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const path = require('path')
+const session = require('express-session')
 
 // Set mongoose to use ES6 promises
 mongoose.Promise = global.Promise
@@ -26,6 +27,15 @@ app.use(compression())
 
 // Set up Helmet
 app.use(helmet())
+
+// Set up session
+app.use(
+  session({ resave: true, saveUninitialized: true, secret: 'keyboard cat' })
+)
+
+// Set up passport
+const passport = require('./middleware/passport')
+app.use(passport.initialize())
 
 // Force HTTPS
 if (!isDev) {

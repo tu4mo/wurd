@@ -84,6 +84,14 @@ class SignInUp extends Component {
             <Button className="sign-in-up__button" type="submit">
               {tab === 'signup' ? LABELS.signup : LABELS.login}
             </Button>
+            {tab === 'login' && (
+              <Button
+                className="sign-in-up__button--twitter"
+                onClick={() => (location.href = '/api/auth/twitter')}
+              >
+                Log In with Twitter
+              </Button>
+            )}
             {errorMessage && <Alert message={errorMessage} />}
           </Spacer>
         </div>

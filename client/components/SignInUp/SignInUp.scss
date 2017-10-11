@@ -32,6 +32,16 @@ $color-transparent-white: rgba(0, 0, 0, 0.1);
   &__button {
     border: 0;
     width: 100%;
+
+    &--twitter {
+      border-color: #1da1f2;
+      color: #1da1f2;
+      width: 100%;
+
+      &:not(:disabled):hover {
+        background-color: #1da1f2;
+      }
+    }
   }
 
   &__link {

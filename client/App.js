@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { authenticateUser } from './actions/auth'
 import { isAuthenticated } from './selectors/auth'
 import asyncComponent from './asyncComponent'
+import AuthenticateToken from './AuthenticateToken'
 import Header from './components/Header'
 import ScrollToTop from './components/ScrollToTop'
 import ToolBar from './components/ToolBar'
@@ -55,8 +56,13 @@ class App extends Component {
                   path="/"
                   component={isAuthenticated ? Home : Welcome}
                 />
-                <Route path="/users" component={Users} />
                 <Route path="/404" component={NotFound} />
+                <Route
+                  exact
+                  path="/auth/:token"
+                  component={AuthenticateToken}
+                />
+                <Route path="/users" component={Users} />
                 <Route exact path="/:username" component={Profile} />
                 <Route path="/:username/:postId" component={Profile} />
               </Switch>
@@ -73,6 +79,4 @@ const mapStateToProps = state => ({
   isAuthenticated: isAuthenticated(state)
 })
 
-export default connect(mapStateToProps, {
-  authenticateUser
-})(App)
+export default connect(mapStateToProps, { authenticateUser })(App)
