@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="test sc-bdVaJa gUwqsU"
+>
+  <img
+    alt="test"
+    className="image"
+    src="https://www.test.com"
+    title="test"
+  />
+  <a
+    className="change"
+    href="https://www.gravatar.com"
+    target="_blank"
+  >
+    Change Gravatar
+  </a>
+</div>
+`;

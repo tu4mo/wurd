@@ -26,11 +26,11 @@ exports[`renders correctly 3`] = `
           onClick={[Function]}
         >
           <div
-            className="profile-photo profile-photo--small"
+            className="sc-htpNat kwxbnS"
           >
             <img
               alt="tu4mo"
-              className="profile-photo__image"
+              className="image"
               src="https://www.domain.com/profile.jpg"
               title="tu4mo"
             />

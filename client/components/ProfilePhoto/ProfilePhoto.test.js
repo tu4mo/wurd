@@ -1,17 +1,18 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import Box from './Box'
-import BoxSection from './BoxSection'
+import ProfilePhoto from './ProfilePhoto'
 
 it('renders correctly', () => {
   const tree = renderer
     .create(
-      <Box className="test">
-        <BoxSection className="test" hasPadding>
-          Test
-        </BoxSection>
-      </Box>
+      <ProfilePhoto
+        className="test"
+        isMe
+        size="small"
+        url="https://www.test.com"
+        username="test"
+      />
     )
     .toJSON()
 
