@@ -7,9 +7,11 @@ const Post = require('../models/Post')
 const Relationship = require('../models/Relationship')
 
 const getProfileUrl = email =>
-  `https://www.gravatar.com/avatar/${md5(
-    email.trim()
-  )}?default=identicon&size=256`
+  email
+    ? `https://www.gravatar.com/avatar/${md5(
+        email.trim()
+      )}?default=identicon&size=256`
+    : null
 
 const decorateFollowingUser = user => ({
   profileUrl: getProfileUrl(user.email),
@@ -67,6 +69,7 @@ const get = async (req, res) => {
       users: decoratedUsers
     })
   } catch (err) {
+    console.error(err)
     return res.sendStatus(500)
   }
 }
