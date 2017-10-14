@@ -41,7 +41,6 @@ const StyledProfilePhoto = styled(ProfilePhoto)`
     height: 40px;
     width: 40px;
   `}
-
   ${props => props.size === 'tiny' && css`
     height: 30px;
     width: 30px;
