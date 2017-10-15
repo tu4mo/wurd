@@ -72,16 +72,20 @@ const config = {
 
   plugins: [
     new CopyWebpackPlugin([{ from: 'client/assets' }]),
+
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: 'body',
       template: path.join(__dirname, '/client/index.html')
     }),
+
     new ExtractTextPlugin({
       allChunks: true,
       filename: 'wurd.[hash].css'
     }),
+
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/),
+    
     new webpack.NamedModulesPlugin()
   ]
 }
@@ -95,13 +99,17 @@ if (!isDev) {
       test: /\.(css|html|js|svg)$/,
       threshold: 10240
     }),
+
     new CleanWebpackPlugin('dist'),
+
     new webpack.optimize.CommonsChunkPlugin({
       async: true,
       children: true,
       minChunks: 2
     }),
+
     new webpack.optimize.ModuleConcatenationPlugin(),
+
     new webpack.optimize.UglifyJsPlugin({
       output: {
         comments: false
