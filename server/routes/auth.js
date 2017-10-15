@@ -18,7 +18,7 @@ const post = async (req, res) => {
   const errorResponse = { error: 'The username or password is incorrect' }
 
   try {
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ email: email.toLowerCase() })
 
     if (!user || !user.isValidPassword(password)) {
       return res.status(401).json(errorResponse)
