@@ -1,8 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
+.c0 {
+  background-color: #f2dede;
+  border-radius: var(--radius-sm);
+  color: #a94442;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: var(--spacing-sm);
+}
+
 <div
-  className="sc-bdVaJa jFQRdS"
+  className="c0"
 >
   Hello World!
 </div>
