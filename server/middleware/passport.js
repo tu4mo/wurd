@@ -6,7 +6,6 @@ const User = require('../models/User')
 passport.use(
   new TwitterStrategy(
     {
-      callbackURL: 'http://localhost:8080/api/auth/twitter/callback',
       consumerKey: process.env.TWITTER_CONSUMER_KEY,
       consumerSecret: process.env.TWITTER_CONSUMER_SECRET
     },
