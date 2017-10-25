@@ -30,7 +30,11 @@ app.use(helmet())
 
 // Set up session
 app.use(
-  session({ resave: true, saveUninitialized: true, secret: 'keyboard cat' })
+  session({
+    resave: true,
+    saveUninitialized: true,
+    secret: process.env.SESSION_SECRET
+  })
 )
 
 // Set up passport
