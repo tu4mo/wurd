@@ -4,7 +4,6 @@ const isDev = process.env.NODE_ENV === 'development'
 require('dotenv').config()
 
 // Import dependencies
-const bodyParser = require('body-parser')
 const compression = require('compression')
 const express = require('express')
 const helmet = require('helmet')
@@ -50,8 +49,8 @@ if (!isDev) {
   })
 }
 
-// Set up body parser
-app.use(bodyParser.json())
+// Set up JSON parser
+app.use(express.json())
 
 // Set up port
 const port = process.env.PORT || 3000
