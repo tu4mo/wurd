@@ -48,9 +48,11 @@ const decorateUser = async user => {
 
   return {
     followers: followers
+      .filter(relationship => relationship.user !== null)
       .map(relationship => decorateFollowingUser(relationship.user))
       .sort(sortByUsername),
     following: following
+      .filter(relationship => relationship.following !== null)
       .map(relationship => decorateFollowingUser(relationship.following))
       .sort(sortByUsername),
     id: user._id,
