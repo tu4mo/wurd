@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema(
       index: true,
       lowercase: true,
       maxlength: 50,
+      required: true,
       type: String,
       unique: true,
       validate: {
@@ -55,17 +56,6 @@ const userSchema = new mongoose.Schema(
     timestamps: true
   }
 )
-
-userSchema.statics.findOneOrCreate = async function({ query, user }) {
-  const foundUser = await this.findOne(query)
-
-  if (foundUser) {
-    return foundUser
-  }
-
-  const createdUser = this.create(user)
-  return createdUser
-}
 
 userSchema.methods.generateOneTimeToken = function() {
   return this.set({
