@@ -8,6 +8,7 @@ module.exports = {
       }
     ],
     'declaration-colon-newline-after': null,
+    'declaration-empty-line-before': null,
     'value-list-comma-newline-after': null
   }
 }
