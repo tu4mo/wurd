@@ -5,11 +5,12 @@ import { getAuthenticatedUser } from '~/selectors/users'
 import Icon from '../Icon'
 import NavItem from '../NavItem'
 import ProfilePhoto from '../ProfilePhoto'
-import './ToolBar.scss'
+import styled from 'styled-components'
+import { media } from '~/utils/style'
 
-const ToolBar = ({ user }) =>
+const ToolBar = ({ className, user }) =>
   user ? (
-    <div className="tool-bar">
+    <div className={className}>
       <NavItem to="/">
         <Icon name="home" />
       </NavItem>
@@ -27,11 +28,34 @@ const ToolBar = ({ user }) =>
   ) : null
 
 ToolBar.propTypes = {
+  className: PropTypes.string,
   user: PropTypes.object
 }
+
+// prettier-ignore
+const StyledBox = styled(ToolBar)`
+  background-color: var(--header-background-color);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  bottom: 0;
+  display: flex;
+  height: var(--toolbar-height);
+  left: 0;
+  position: fixed;
+  right: 0;
+
+  ${media.sm`
+    display: none;
+  `}
+
+  & > * {
+    flex-grow: 1;
+    flex-basis: 0;
+    justify-content: center;
+  }
+`
 
 const mapStateToProps = state => ({
   user: getAuthenticatedUser(state)
 })
 
-export default connect(mapStateToProps)(ToolBar)
+export default connect(mapStateToProps)(StyledBox)
