@@ -40,9 +40,9 @@
     "jsonwebtoken": "^8.1.0",
     "md5": "^2.2.1",
     "moment": "^2.19.1",
-    "mongoose": "^4.12.6",
+    "mongoose": "^4.13.0",
     "morgan": "^1.9.0",
-    "node-sass": "^4.5.3",
+    "node-sass": "^4.6.0",
     "passport": "^0.4.0",
     "passport-twitter": "^1.0.4",
     "prop-types": "^15.6.0",
@@ -72,7 +72,7 @@
     "compression-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^4.2.0",
     "eslint": "^4.10.0",
-    "eslint-config-prettier": "^2.6.0",
+    "eslint-config-prettier": "^2.7.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-config-standard-react": "^5.0.0",
     "eslint-plugin-import": "^2.8.0",
@@ -92,7 +92,7 @@
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.0.0",
     "webpack-bundle-analyzer": "^2.9.0",
-    "webpack-dev-server": "^2.9.3"
+    "webpack-dev-server": "^2.9.4"
   },
   "private": true
 }
