@@ -45,7 +45,7 @@ UserList.propTypes = {
   isPending: PropTypes.bool,
   users: PropTypes.arrayOf(
     PropTypes.shape({
-      profileUrl: PropTypes.string.isRequired,
+      profileUrl: PropTypes.string,
       username: PropTypes.string.isRequired
     })
   )

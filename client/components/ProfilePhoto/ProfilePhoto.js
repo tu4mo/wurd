@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 
 const ProfilePhoto = ({ className, isMe, size, url, username }) => (
   <div className={className}>
-    <img alt={username} className="image" src={url} title={username} />
+    {url && <img alt={username} className="image" src={url} title={username} />}
     {isMe && (
       <a className="change" href="https://www.gravatar.com" target="_blank">
         Change Gravatar
@@ -41,6 +41,7 @@ const StyledProfilePhoto = styled(ProfilePhoto)`
     height: 40px;
     width: 40px;
   `}
+
   ${props => props.size === 'tiny' && css`
     height: 30px;
     width: 30px;
