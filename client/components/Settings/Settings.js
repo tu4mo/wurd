@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { propTypes as reduxFormPropTypes, reduxForm } from 'redux-form'
 import { fetchAccount, saveAccount } from '~/actions/account'
+import { authenticateUser } from '~/actions/auth'
 import { getAccount } from '~/selectors/account'
 import Alert from '../Alert'
 import { Box, BoxSection } from '../Box'
@@ -15,6 +16,7 @@ class Settings extends Component {
   static propTypes = {
     ...reduxFormPropTypes,
     accountError: PropTypes.string,
+    authenticateUser: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
   }
 
@@ -24,6 +26,7 @@ class Settings extends Component {
 
   submit = values => {
     this.props.saveAccount(values, account => {
+      this.props.authenticateUser()
       this.props.history.push(`/${account.username}`)
     })
   }
@@ -109,7 +112,11 @@ const validate = values => {
   return errors
 }
 
-export default connect(mapStateToProps, { fetchAccount, saveAccount })(
+export default connect(mapStateToProps, {
+  authenticateUser,
+  fetchAccount,
+  saveAccount
+})(
   reduxForm({
     form: 'settings',
     validate
