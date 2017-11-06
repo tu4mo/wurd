@@ -1,5 +1,10 @@
+const router = require('express').Router()
+
+// Require middleware
+const resolveToken = require('../../middleware/resolveToken')
+
 // Require models
-const User = require('../models/User')
+const User = require('../../models/User')
 
 const getUserAsJSON = user => ({
   email: user.email,
@@ -18,13 +23,13 @@ const getFirstError = err => {
   }
 }
 
-module.exports.get = (req, res) => {
+router.get('/', resolveToken(true), (req, res) => {
   User.findById(req.userId).then(user => {
     return res.status(200).json(getUserAsJSON(user))
   })
-}
+})
 
-module.exports.post = (req, res) => {
+router.post('/', resolveToken(false), (req, res) => {
   const { email, username, password } = req.body
 
   if (!email || !username || !password) {
@@ -54,9 +59,9 @@ module.exports.post = (req, res) => {
 
     res.sendStatus(201)
   })
-}
+})
 
-module.exports.put = async (req, res) => {
+router.put('/', resolveToken(true), async (req, res) => {
   const { email, username, currentPassword, password } = req.body
 
   try {
@@ -87,4 +92,6 @@ module.exports.put = async (req, res) => {
     console.error(err)
     res.status(400).json({ error: getFirstError(err) })
   }
-}
+})
+
+module.exports = router

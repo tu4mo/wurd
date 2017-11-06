@@ -1,8 +1,13 @@
+const router = require('express').Router()
+
 const Post = require('../../models/Post')
 
-const { POPULATED_PATHS, decoratePostJSON } = require('.')
+// Require middleware
+const resolveToken = require('../../middleware/resolveToken')
 
-const post = async (req, res) => {
+const { POPULATED_PATHS } = require('.')
+
+router.post('/:id', resolveToken(true), async (req, res) => {
   const { content } = req.body
   const { id } = req.params
 
@@ -18,13 +23,11 @@ const post = async (req, res) => {
       { new: true, runValidators: true }
     ).populate(POPULATED_PATHS)
 
-    return res.status(201).json(decoratePostJSON(post, req.userId))
+    return res.status(201).json(post.getDecorated(req.userId))
   } catch (err) {
     console.error(err)
     return res.sendStatus(400)
   }
-}
+})
 
-module.exports = {
-  post
-}
+module.exports = router

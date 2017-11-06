@@ -1,22 +1,13 @@
 // Require dependencies
-const md5 = require('md5')
+const router = require('express').Router()
+
+// Require middleware
+const resolveToken = require('../../middleware/resolveToken')
 
 // Require models
-const User = require('../models/User')
-const Post = require('../models/Post')
-const Relationship = require('../models/Relationship')
-
-const getProfileUrl = email =>
-  email
-    ? `https://www.gravatar.com/avatar/${md5(
-        email.trim()
-      )}?default=identicon&size=256`
-    : null
-
-const decorateFollowingUser = user => ({
-  profileUrl: getProfileUrl(user.email),
-  username: user.username
-})
+const User = require('../../models/User')
+const Post = require('../../models/Post')
+const Relationship = require('../../models/Relationship')
 
 const sortByUsername = (a, b) => {
   const usernameA = a.username.toUpperCase()
@@ -34,35 +25,29 @@ const sortByUsername = (a, b) => {
 }
 
 const decorateUser = async user => {
-  const posts = await Post.count({ user: user._id })
-
-  const followers = await Relationship.find(
-    { following: user._id },
-    'user'
-  ).populate('user')
-
-  const following = await Relationship.find(
-    { user: user._id },
-    'following'
-  ).populate('following')
+  const [posts, followers, following] = await Promise.all([
+    Post.count({ user: user._id }),
+    Relationship.find({ following: user._id }, 'user').populate('user'),
+    Relationship.find({ user: user._id }, 'following').populate('following')
+  ])
 
   return {
     followers: followers
       .filter(relationship => relationship.user !== null)
-      .map(relationship => decorateFollowingUser(relationship.user))
+      .map(relationship => relationship.user.getDecorated())
       .sort(sortByUsername),
     following: following
       .filter(relationship => relationship.following !== null)
-      .map(relationship => decorateFollowingUser(relationship.following))
+      .map(relationship => relationship.following.getDecorated())
       .sort(sortByUsername),
     id: user._id,
     posts,
-    profileUrl: getProfileUrl(user.email),
+    profileUrl: user.profileUrl,
     username: user.username
   }
 }
 
-const get = async (req, res) => {
+router.get('/', resolveToken(false), async (req, res) => {
   try {
     const users = await User.find().sort('username')
     const decoratedUsers = await Promise.all(users.map(decorateUser))
@@ -74,9 +59,9 @@ const get = async (req, res) => {
     console.error(err)
     return res.sendStatus(500)
   }
-}
+})
 
-const getSingle = async (req, res) => {
+router.get('/:username', resolveToken(false), async (req, res) => {
   const { username } = req.params
 
   try {
@@ -92,10 +77,6 @@ const getSingle = async (req, res) => {
   } catch (err) {
     return res.sendStatus(500)
   }
-}
+})
 
-module.exports = {
-  get,
-  getProfileUrl,
-  getSingle
-}
+module.exports = router

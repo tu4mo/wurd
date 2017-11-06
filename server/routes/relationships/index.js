@@ -1,10 +1,14 @@
+// Require dependencies
+const router = require('express').Router()
+
+// Require middleware
+const resolveToken = require('../../middleware/resolveToken')
+
 // Require models
-const Relationship = require('../models/Relationship')
-const User = require('../models/User')
+const Relationship = require('../../models/Relationship')
+const User = require('../../models/User')
 
-const get = async (req, res) => {}
-
-const post = async (req, res) => {
+router.post('/', resolveToken(true), async (req, res) => {
   const { username } = req.query
 
   try {
@@ -23,9 +27,9 @@ const post = async (req, res) => {
     console.error(err)
     return res.sendStatus(400)
   }
-}
+})
 
-const deleteRelationship = async (req, res) => {
+router.delete('/', resolveToken(true), async (req, res) => {
   const { username } = req.query
 
   try {
@@ -41,10 +45,6 @@ const deleteRelationship = async (req, res) => {
     console.log(err)
     return res.sendStatus(400)
   }
-}
+})
 
-module.exports = {
-  deleteRelationship,
-  get,
-  post
-}
+module.exports = router

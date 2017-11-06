@@ -1,16 +1,29 @@
+const router = require('express').Router()
+
+const token = require('./token')
+const twitter = require('./twitter')
+
+// Require middleware
+const resolveToken = require('../../middleware/resolveToken')
+
 // Require models
 const User = require('../../models/User')
 
-const get = (req, res) => {
-  User.findById(req.userId).then(user => {
+router.get('/', resolveToken(true), async (req, res) => {
+  try {
+    const user = await User.findById(req.userId)
+
     return res.status(200).json({
       id: user._id,
       username: user.username
     })
-  })
-}
+  } catch (err) {
+    res.sendStatus(500)
+    throw err
+  }
+})
 
-const post = async (req, res) => {
+router.post('/', resolveToken(false), async (req, res) => {
   const { email, password } = req.body
   const errorResponse = { error: 'The username or password is incorrect' }
 
@@ -31,9 +44,9 @@ const post = async (req, res) => {
     res.sendStatus(500)
     throw err
   }
-}
+})
 
-module.exports = {
-  get,
-  post
-}
+router.use('/token', token)
+router.use('/twitter', twitter)
+
+module.exports = router

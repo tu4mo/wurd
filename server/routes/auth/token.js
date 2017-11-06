@@ -1,7 +1,10 @@
+const express = require('express')
+const router = express.Router()
+
 // Require models
 const User = require('../../models/User')
 
-const post = async (req, res) => {
+router.post('/', async (req, res) => {
   const { token } = req.body
   const errorResponse = { error: 'Invalid token' }
 
@@ -22,8 +25,6 @@ const post = async (req, res) => {
     res.sendStatus(500)
     throw err
   }
-}
+})
 
-module.exports = {
-  post
-}
+module.exports = router

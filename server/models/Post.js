@@ -69,4 +69,23 @@ const postSchema = new mongoose.Schema(
   }
 )
 
+postSchema.methods.getDecorated = function(userId) {
+  return {
+    comments: this.comments.map(comment => ({
+      content: comment.content,
+      createdAt: comment.createdAt,
+      id: comment._id,
+      user: comment.user.getDecorated()
+    })),
+    content: this.content,
+    createdAt: this.createdAt,
+    gradientEnd: this.gradientEnd,
+    gradientStart: this.gradientStart,
+    id: this._id,
+    liked: this.likes.indexOf(userId) !== -1,
+    likes: this.likes.length,
+    user: this.user.getDecorated()
+  }
+}
+
 module.exports = mongoose.model('Post', postSchema)

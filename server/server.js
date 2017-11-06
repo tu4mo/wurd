@@ -67,8 +67,8 @@ mongoose.connect(
 app.use(express.static(path.resolve(__dirname, '../dist')))
 
 // Set up routes
-const api = require('./routes')
-app.use('/api', api)
+const routes = require('./routes')
+app.use('/api', routes)
 
 // Serve index.html
 app.get('*', (req, res) => {

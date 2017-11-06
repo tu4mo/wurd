@@ -1,35 +1,20 @@
+const router = require('express').Router()
+
+// Require routes
+const comments = require('./comments')
+const likes = require('./likes')
+
+// Require middleware
+const resolveToken = require('../../middleware/resolveToken')
+
 // Require models
 const Post = require('../../models/Post')
 const Relationship = require('../../models/Relationship')
 const User = require('../../models/User')
-const { getProfileUrl } = require('../users')
-
-const decorateUserJSON = user => ({
-  id: user._id,
-  profileUrl: getProfileUrl(user.email),
-  username: user.username
-})
-
-const decoratePostJSON = (post, userId) => ({
-  comments: post.comments.map(comment => ({
-    content: comment.content,
-    createdAt: comment.createdAt,
-    id: comment._id,
-    user: decorateUserJSON(comment.user)
-  })),
-  content: post.content,
-  createdAt: post.createdAt,
-  gradientEnd: post.gradientEnd,
-  gradientStart: post.gradientStart,
-  id: post._id,
-  liked: post.likes.indexOf(userId) !== -1,
-  likes: post.likes.length,
-  user: decorateUserJSON(post.user)
-})
 
 const POPULATED_PATHS = ['user', 'comments', 'comments.user']
 
-const get = async (req, res) => {
+router.get('/', resolveToken(false), async (req, res) => {
   const { after, before, filter, username } = req.query
   const limit = Number(req.query.limit)
 
@@ -74,7 +59,7 @@ const get = async (req, res) => {
       .populate(POPULATED_PATHS)
 
     const json = {
-      data: posts.map(post => decoratePostJSON(post, req.userId)),
+      data: posts.map(post => post.getDecorated(req.userId)),
       hasMore: count > limit
     }
 
@@ -83,22 +68,22 @@ const get = async (req, res) => {
     res.sendStatus(500)
     throw err
   }
-}
+})
 
-const getSingle = async (req, res) => {
+router.get('/:id', resolveToken(false), async (req, res) => {
   const { id } = req.params
 
   try {
     const post = await Post.findById(id).populate(POPULATED_PATHS)
 
-    return res.status(200).json(decoratePostJSON(post, req.userId))
+    return res.status(200).json(post.getDecorated(req.userId))
   } catch (err) {
     res.sendStatus(500)
     throw err
   }
-}
+})
 
-const post = async (req, res) => {
+router.post('/', resolveToken(true), async (req, res) => {
   const { content, gradientEnd, gradientStart } = req.body
 
   // Create new post
@@ -113,14 +98,14 @@ const post = async (req, res) => {
   try {
     const post = await newPost.save()
     const populatedPost = await Post.findOne(post).populate(POPULATED_PATHS)
-    return res.status(201).json(decoratePostJSON(populatedPost))
+    return res.status(201).json(populatedPost.getDecorated(req.userId))
   } catch (err) {
     console.error(err)
     return res.sendStatus(400)
   }
-}
+})
 
-const deletePost = async (req, res) => {
+router.delete('/:id', resolveToken(true), async (req, res) => {
   const { id } = req.params
 
   try {
@@ -134,13 +119,9 @@ const deletePost = async (req, res) => {
     console.log(err)
     return res.sendStatus(400)
   }
-}
+})
 
-module.exports = {
-  POPULATED_PATHS,
-  decoratePostJSON,
-  deletePost,
-  get,
-  getSingle,
-  post
-}
+router.use('/:id/comments', comments)
+router.use('/:id/likes', likes)
+
+module.exports = router

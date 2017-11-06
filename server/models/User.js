@@ -1,6 +1,7 @@
 // Require dependencies
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const md5 = require('md5')
 const mongoose = require('mongoose')
 
 const INVALID_USERNAMES = ['about', 'home', 'search', 'users']
@@ -12,6 +13,7 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       maxlength: 50,
       required: true,
+      trim: true,
       type: String,
       unique: true,
       validate: {
@@ -38,6 +40,7 @@ const userSchema = new mongoose.Schema(
       maxlength: 15,
       minlength: 1,
       required: true,
+      trim: true,
       type: String,
       unique: true,
       validate: {
@@ -57,10 +60,26 @@ const userSchema = new mongoose.Schema(
   }
 )
 
+userSchema.virtual('profileUrl').get(function() {
+  return this.email
+    ? `https://www.gravatar.com/avatar/${md5(
+        this.email
+      )}?default=identicon&size=256`
+    : null
+})
+
 userSchema.methods.generateOneTimeToken = function() {
   return this.set({
     token: String(Math.floor(Math.random() * 9e15))
   }).save()
+}
+
+userSchema.methods.getDecorated = function() {
+  return {
+    id: this._id,
+    profileUrl: this.profileUrl,
+    username: this.username
+  }
 }
 
 userSchema.methods.getJWT = function() {
