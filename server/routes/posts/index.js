@@ -12,7 +12,7 @@ const Post = require('../../models/Post')
 const Relationship = require('../../models/Relationship')
 const User = require('../../models/User')
 
-const POPULATED_PATHS = ['user', 'comments', 'comments.user']
+const { POPULATED_PATHS } = require('./_consts')
 
 router.get('/', resolveToken(false), async (req, res) => {
   const { after, before, filter, username } = req.query

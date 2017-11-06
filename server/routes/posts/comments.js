@@ -1,13 +1,13 @@
-const router = require('express').Router()
+const router = require('express').Router({ mergeParams: true })
 
 const Post = require('../../models/Post')
 
 // Require middleware
 const resolveToken = require('../../middleware/resolveToken')
 
-const { POPULATED_PATHS } = require('.')
+const { POPULATED_PATHS } = require('./_consts')
 
-router.post('/:id', resolveToken(true), async (req, res) => {
+router.post('/', resolveToken(true), async (req, res) => {
   const { content } = req.body
   const { id } = req.params
 

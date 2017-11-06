@@ -1,5 +1,5 @@
 // Require dependencies
-const router = require('express').Router()
+const router = require('express').Router({ mergeParams: true })
 
 // Require middleware
 const resolveToken = require('../../middleware/resolveToken')
