@@ -95,7 +95,8 @@ class Profile extends Component {
                       <Link to={`/${user.username}/settings`}>
                         <Icon name="settings" />
                       </Link>
-                    )}
+                    )
+                  }
                 />
               )}
               {isMe && (

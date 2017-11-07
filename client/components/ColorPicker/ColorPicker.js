@@ -46,18 +46,22 @@ class ColorPicker extends Component {
 
     return (
       <div className="color-picker">
-        {GRADIENTS.map((gradient, i) => (
-          <button
-            className={classnames('color-picker__color', {
-              'color-picker__color--active': gradient === value
-            })}
-            key={i}
-            onClick={() => onChange(gradient)}
-            style={{
-              backgroundImage: `linear-gradient(45deg, ${gradient.from}, ${gradient.to}`
-            }}
-          />
-        ))}
+        {GRADIENTS.map((gradient, i) => {
+          const { from, to } = gradient
+
+          return (
+            <button
+              className={classnames('color-picker__color', {
+                'color-picker__color--active': gradient === value
+              })}
+              key={i}
+              onClick={() => onChange(gradient)}
+              style={{
+                backgroundImage: `linear-gradient(45deg, ${from}, ${to}`
+              }}
+            />
+          )
+        })}
       </div>
     )
   }

@@ -12,7 +12,9 @@ const PostBody = ({ content, fill, gradientEnd, gradientStart }) => {
     <div
       className={classnames('post-body', { 'post-body--fill': fill })}
       style={{
-        backgroundImage: `linear-gradient(45deg, ${gradientStart}, ${gradientEnd})`
+        backgroundImage: `linear-gradient(45deg, ${gradientStart}, ${
+          gradientEnd
+        })`
       }}
     >
       <div className="post-body__content">
