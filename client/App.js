@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
+
 import { authenticateUser } from './actions/auth'
 import { isAuthenticated } from './selectors/auth'
 import asyncComponent from './asyncComponent'
@@ -10,6 +12,17 @@ import Header from './components/Header'
 import ScrollToTop from './components/ScrollToTop'
 import ToolBar from './components/ToolBar'
 import './App.scss'
+
+const Main = styled.main`
+  padding-bottom: var(--toolbar-height);
+  padding-top: var(--header-height);
+  position: relative;
+  z-index: 0;
+
+  @media (min-width: ${props => props.theme.breakpoints.sm}) {
+    padding-bottom: 0;
+  }
+`
 
 class App extends Component {
   static propTypes = {
@@ -49,7 +62,7 @@ class App extends Component {
         <ScrollToTop>
           <div className="app">
             <Route component={Header} />
-            <main className="main">
+            <Main>
               <Switch>
                 <Route
                   exact
@@ -66,7 +79,7 @@ class App extends Component {
                 <Route exact path="/:username" component={Profile} />
                 <Route path="/:username/:postId" component={Profile} />
               </Switch>
-            </main>
+            </Main>
             {isAuthenticated && <Route path="/" component={ToolBar} />}
           </div>
         </ScrollToTop>
