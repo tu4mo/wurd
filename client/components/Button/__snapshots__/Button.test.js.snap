@@ -5,6 +5,7 @@ exports[`renders correctly 1`] = `
   className="button button--outline test"
   disabled={undefined}
   onClick={undefined}
+  style={undefined}
   type="button"
 >
   Test
