@@ -17,6 +17,7 @@ class Button extends PureComponent {
     loading: PropTypes.bool,
     onClick: PropTypes.func,
     secondary: PropTypes.bool,
+    style: PropTypes.object,
     textOnly: PropTypes.bool,
     type: PropTypes.string
   }
@@ -34,6 +35,7 @@ class Button extends PureComponent {
       loading,
       onClick,
       secondary,
+      style,
       textOnly,
       type
     } = this.props
@@ -54,6 +56,7 @@ class Button extends PureComponent {
         className={classNames}
         disabled={disabled}
         onClick={onClick}
+        style={style}
         type={type}
       >
         {children}
