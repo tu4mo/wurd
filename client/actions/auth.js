@@ -73,9 +73,13 @@ export const logInWithToken = (token, callback) => async (
     }
   })
 
-export const logOut = () => ({
-  type: AUTH_CLEAR
-})
+export const logOut = () => {
+  localStorage.removeItem('token')
+
+  return {
+    type: AUTH_CLEAR
+  }
+}
 
 // TODO: Move to account.js
 export const signUp = (username, email, password) => async (
