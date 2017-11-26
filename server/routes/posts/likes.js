@@ -7,6 +7,8 @@ const resolveToken = require('../../middleware/resolveToken')
 // Require models
 const Post = require('../../models/Post')
 
+const { POPULATED_PATHS } = require('./_consts')
+
 router.delete('/', resolveToken(true), async (req, res) => {
   const { id } = req.params
 
@@ -15,7 +17,7 @@ router.delete('/', resolveToken(true), async (req, res) => {
       id,
       { $pull: { likes: req.userId } },
       { new: true }
-    ).populate('user')
+    ).populate(POPULATED_PATHS)
 
     return res.status(201).json(post.getDecorated(req.userId))
   } catch (err) {
@@ -32,7 +34,7 @@ router.post('/', resolveToken(true), async (req, res) => {
       id,
       { $addToSet: { likes: req.userId } },
       { new: true }
-    ).populate('user')
+    ).populate(POPULATED_PATHS)
 
     return res.status(201).json(post.getDecorated(req.userId))
   } catch (err) {

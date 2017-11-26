@@ -10,7 +10,7 @@ import { fetchUserByUsername, followUser, unfollowUser } from '~/actions/users'
 
 // Import selectors
 import { isAuthenticated } from '~/selectors/auth'
-import { getAuthenticatedUser, getUser } from '~/selectors/users'
+import { getMe, getUser } from '~/selectors/users'
 
 // Import components
 import Aux from '~/components/Aux'
@@ -147,13 +147,13 @@ class Profile extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const user = getAuthenticatedUser(state) || {}
+  const me = getMe(state)
   const { username: userFromUrl } = ownProps.match.params
 
   return {
     isAuthenticated: isAuthenticated(state),
-    isMe: user.username === userFromUrl,
-    user: getUser(userFromUrl)(state) || {}
+    isMe: me.username === userFromUrl,
+    user: getUser(userFromUrl)(state)
   }
 }
 

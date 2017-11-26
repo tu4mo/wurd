@@ -1,4 +1,4 @@
-import { AUTH_CLEAR, AUTH_SET_ERROR, AUTH_SET_TOKEN, AUTH_SET_USER } from '.'
+import { AUTH_CLEAR, AUTH_SET_AUTHENTICATED, AUTH_SET_ERROR } from '.'
 
 import { fetchAccount } from './account'
 import { fetchUserByUsername } from './users'
@@ -10,7 +10,7 @@ export const authenticateUser = () => async (dispatch, getState, api) => {
 
     dispatch({
       id,
-      type: AUTH_SET_USER,
+      type: AUTH_SET_AUTHENTICATED,
       username
     })
 
@@ -32,10 +32,7 @@ export const logIn = (email, password) => async (dispatch, getState, api) => {
       url: 'auth'
     })
 
-    dispatch({
-      token: response.data.token,
-      type: AUTH_SET_TOKEN
-    })
+    localStorage.setItem('token', response.data.token)
 
     dispatch(authenticateUser())
   } catch (err) {
@@ -61,10 +58,7 @@ export const logInWithToken = (token, callback) => async (
         url: 'auth/token'
       })
 
-      dispatch({
-        token: response.data.token,
-        type: AUTH_SET_TOKEN
-      })
+      localStorage.setItem('token', response.data.token)
 
       dispatch(authenticateUser())
 

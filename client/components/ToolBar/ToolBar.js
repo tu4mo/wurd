@@ -1,15 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getAuthenticatedUser } from '~/selectors/users'
+import { getMe } from '~/selectors/users'
 import Icon from '../Icon'
 import NavItem from '../NavItem'
 import ProfilePhoto from '../ProfilePhoto'
 import styled from 'styled-components'
 import { media } from '~/utils/style'
 
-const ToolBar = ({ className, user }) =>
-  user ? (
+const ToolBar = ({ className, me }) =>
+  me ? (
     <div className={className}>
       <NavItem to="/">
         <Icon name="home" />
@@ -17,19 +17,15 @@ const ToolBar = ({ className, user }) =>
       <NavItem to="/users">
         <Icon name="users" />
       </NavItem>
-      <NavItem to={`/${user.username}`}>
-        <ProfilePhoto
-          url={user.profileUrl}
-          username={user.username}
-          size="tiny"
-        />
+      <NavItem to={`/${me.username}`}>
+        <ProfilePhoto url={me.profileUrl} username={me.username} size="tiny" />
       </NavItem>
     </div>
   ) : null
 
 ToolBar.propTypes = {
   className: PropTypes.string,
-  user: PropTypes.object
+  me: PropTypes.object
 }
 
 // prettier-ignore
@@ -55,7 +51,7 @@ const StyledBox = styled(ToolBar)`
 `
 
 const mapStateToProps = state => ({
-  user: getAuthenticatedUser(state)
+  me: getMe(state)
 })
 
 export default connect(mapStateToProps)(StyledBox)

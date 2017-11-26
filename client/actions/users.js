@@ -7,6 +7,8 @@ import {
   USER_UNFOLLOW
 } from '.'
 
+import { getMe } from '~/selectors/users'
+
 export const fetchUserByUsername = username => (dispatch, getState, api) => {
   return api({
     method: 'get',
@@ -42,7 +44,7 @@ export const followUser = username => (dispatch, getState, api) => {
   dispatch({
     following: username,
     type: USER_FOLLOW,
-    username: getState().auth.username
+    username: getMe(getState()).username
   })
 
   return api({
@@ -62,7 +64,7 @@ export const unfollowUser = username => (dispatch, getState, api) => {
   dispatch({
     following: username,
     type: USER_UNFOLLOW,
-    username: getState().auth.username
+    username: getMe(getState()).username
   })
 
   return api({

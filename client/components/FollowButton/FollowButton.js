@@ -3,15 +3,15 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { isAuthenticated } from '~/selectors/auth'
 import { followUser, unfollowUser } from '~/actions/users'
-import { getAuthenticatedUser, isFollowingUsername } from '~/selectors/users'
+import { getMe, isFollowingUsername } from '~/selectors/users'
 import Button from '../Button'
 
 class FollowButton extends Component {
   static propTypes = {
-    authenticatedUser: PropTypes.object.isRequired,
     followUser: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
     isFollowed: PropTypes.bool.isRequired,
+    me: PropTypes.object.isRequired,
     unfollowUser: PropTypes.func.isRequired,
     username: PropTypes.string.isRequired
   }
@@ -25,12 +25,9 @@ class FollowButton extends Component {
   }
 
   render() {
-    const { isAuthenticated, isFollowed } = this.props
+    const { isAuthenticated, isFollowed, me, username } = this.props
 
-    if (
-      this.props.username === this.props.authenticatedUser.username ||
-      !isAuthenticated
-    ) {
+    if (username === me.username || !isAuthenticated) {
       return null
     }
 
@@ -43,9 +40,9 @@ class FollowButton extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  authenticatedUser: getAuthenticatedUser(state),
   isAuthenticated: isAuthenticated(state),
-  isFollowed: isFollowingUsername(ownProps.username)(state)
+  isFollowed: isFollowingUsername(ownProps.username)(state),
+  me: getMe(state)
 })
 
 export default connect(mapStateToProps, { followUser, unfollowUser })(

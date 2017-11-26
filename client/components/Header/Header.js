@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import throttle from '~/utils/throttle'
 import { fetchUserByUsername } from '~/actions/users'
 import { createPost } from '~/actions/posts'
-import { getAuthenticatedUser } from '~/selectors/users'
+import { getMe } from '~/selectors/users'
 import { isAuthenticated } from '~/selectors/auth'
 import Button from '~/components/Button'
 import Composer from '~/components/Composer'
@@ -126,12 +126,12 @@ class Header extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  const user = getAuthenticatedUser(state)
+  const me = getMe(state)
 
   return {
     isAuthenticated: isAuthenticated(state),
-    profileUrl: user.profileUrl,
-    username: user.username
+    profileUrl: me.profileUrl,
+    username: me.username
   }
 }
 

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 import { deletePost } from '~/actions/posts'
-import { getAuthenticatedUsername } from '~/selectors/auth'
 import { isPostByUser } from '~/selectors/posts'
+import { getMe } from '~/selectors/users'
 import Button from '../Button'
 import './PostMenu.scss'
 
@@ -45,10 +45,10 @@ class PostMenu extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const username = getAuthenticatedUsername(state)
+  const me = getMe(state)
 
   return {
-    isMine: isPostByUser(state, ownProps.postId, username)
+    isMine: isPostByUser(state, ownProps.postId, me.username)
   }
 }
 

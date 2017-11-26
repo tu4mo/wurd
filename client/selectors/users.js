@@ -1,7 +1,6 @@
-export const getAuthenticatedUser = state =>
-  state.users.data[state.auth.username] || {}
+export const getMe = state => state.users.data[state.account.username] || {}
 
-export const getUser = username => state => state.users.data[username]
+export const getUser = username => state => state.users.data[username] || {}
 
 export const getUsers = state => ({
   data: Object.keys(state.users.data)
@@ -14,15 +13,11 @@ export const getUsers = state => ({
 })
 
 export const isFollowingUsername = username => state => {
-  const authenticatedUser = getAuthenticatedUser(state)
+  const me = getMe(state)
 
-  if (!authenticatedUser || !authenticatedUser.following) {
+  if (!me || !me.following) {
     return false
   }
 
-  return (
-    authenticatedUser.following.findIndex(
-      user => username === user.username
-    ) !== -1
-  )
+  return me.following.findIndex(user => username === user.username) !== -1
 }
