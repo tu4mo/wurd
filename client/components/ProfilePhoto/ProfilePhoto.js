@@ -31,12 +31,6 @@ const StyledProfilePhoto = styled(ProfilePhoto)`
   vertical-align: middle;
   width: 160px;
 
-  &:hover {
-    .change {
-      visibility: visible;
-    }
-  }
-
   ${props => props.size === 'small' && css`
     height: 40px;
     width: 40px;
@@ -67,6 +61,12 @@ const StyledProfilePhoto = styled(ProfilePhoto)`
     display: block;
     height: 100%;
     width: 100%;
+  }
+
+  &:hover {
+    .change {
+      visibility: visible;
+    }
   }
 `
 
