@@ -10,26 +10,28 @@ import {
 
 import { setHasMore, setPosts } from './timelines'
 
-export const fetchPosts = (options = {}) => (dispatch, getState, api) => {
-  const {
-    after,
-    before = null,
-    filter = null,
-    timeline = null,
-    username = null
-  } = options
-
-  api({
-    method: 'get',
-    params: {
+export const fetchPosts = (options = {}) => async (dispatch, getState, api) => {
+  try {
+    const {
       after,
-      before,
-      filter,
-      limit: 10,
-      username
-    },
-    url: 'posts'
-  }).then(response => {
+      before = null,
+      filter = null,
+      timeline = null,
+      username = null
+    } = options
+
+    const response = await api({
+      method: 'get',
+      params: {
+        after,
+        before,
+        filter,
+        limit: 10,
+        username
+      },
+      url: 'posts'
+    })
+
     dispatch({
       posts: response.data,
       type: POSTS_FETCH
@@ -37,7 +39,9 @@ export const fetchPosts = (options = {}) => (dispatch, getState, api) => {
 
     dispatch(setHasMore(timeline, response.data.hasMore))
     dispatch(setPosts(timeline, response.data.data.map(post => post.id)))
-  })
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 export const fetchPostById = id => (dispatch, getState, api) => {
