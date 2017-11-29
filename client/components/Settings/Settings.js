@@ -28,18 +28,17 @@ class Settings extends Component {
     this.props.fetchAccount()
   }
 
-  submit = values => {
-    this.props.saveAccount(values, account => {
+  submit = values =>
+    this.props.saveAccount(values).then(account => {
       this.props.authenticateUser()
       this.props.history.push(`/${account.username}`)
     })
-  }
 
   render() {
     const {
       accountError,
-      anyTouched,
       className,
+      dirty,
       handleSubmit,
       invalid,
       isSaving,
@@ -83,7 +82,7 @@ class Settings extends Component {
             </form>
           </Box>
         </div>
-        <NavigationPrompt when={anyTouched}>
+        <NavigationPrompt when={dirty && !submitting}>
           {({ onCancel, onConfirm }) => (
             <Modal>
               <Dialog onCancel={onCancel} onConfirm={onConfirm}>
@@ -98,14 +97,15 @@ class Settings extends Component {
 }
 
 const mapStateToProps = state => {
-  const account = getAccount(state)
+  const { email, error, isSaving, username } = getAccount(state)
 
   return {
-    accountError: account.error,
+    accountError: error,
     initialValues: {
-      ...account
+      email,
+      username
     },
-    isSaving: account.isSaving
+    isSaving: isSaving
   }
 }
 

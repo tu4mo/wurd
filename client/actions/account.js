@@ -18,11 +18,7 @@ export const fetchAccount = () => async (dispatch, getState, api) => {
   }
 }
 
-export const saveAccount = (account, onSuccess) => async (
-  dispatch,
-  getState,
-  api
-) => {
+export const saveAccount = account => async (dispatch, getState, api) => {
   try {
     dispatch({
       type: ACCOUNT_SAVE_PENDING
@@ -39,11 +35,13 @@ export const saveAccount = (account, onSuccess) => async (
       type: ACCOUNT_SAVE_FULFILLED
     })
 
-    onSuccess(response.data)
+    return response.data
   } catch (err) {
     dispatch({
       error: err.response.data.error,
       type: ACCOUNT_SAVE_REJECTED
     })
+
+    throw err
   }
 }
