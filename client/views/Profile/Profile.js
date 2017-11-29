@@ -1,5 +1,5 @@
 // Import dependencies
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Link, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -13,7 +13,6 @@ import { isAuthenticated } from '~/selectors/auth'
 import { getMe, getUser } from '~/selectors/users'
 
 // Import components
-import Aux from '~/components/Aux'
 import Button from '~/components/Button'
 import FollowButton from '~/components/FollowButton'
 import Head from '~/components/Head'
@@ -70,7 +69,7 @@ class Profile extends Component {
     if (!Object.keys(user).length) return null
 
     return (
-      <Aux>
+      <Fragment>
         <Head>
           <title>{user.username}</title>
         </Head>
@@ -141,7 +140,7 @@ class Profile extends Component {
             </div>
           </Route>
         </Switch>
-      </Aux>
+      </Fragment>
     )
   }
 }

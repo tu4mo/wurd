@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchPosts } from '~/actions/posts'
 import { getAllPosts } from '~/selectors/posts'
 
 // Import components
-import Aux from '~/components/Aux'
 import Head from '~/components/Head'
 import PostBody from '~/components/PostBody'
 import SignInUp from '~/components/SignInUp'
@@ -90,7 +89,7 @@ class Welcome extends Component {
 
   render() {
     return (
-      <Aux>
+      <Fragment>
         <Head />
         <div className="welcome">
           <div className="welcome__content">{this.renderPosts()}</div>
@@ -98,7 +97,7 @@ class Welcome extends Component {
         <div className="welcome-form">
           <SignInUp />
         </div>
-      </Aux>
+      </Fragment>
     )
   }
 }
