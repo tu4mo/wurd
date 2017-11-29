@@ -13,10 +13,6 @@ exports[`renders correctly 1`] = `
   width: 40px;
 }
 
-.c0:hover .change {
-  visibility: visible;
-}
-
 .c0 .change {
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -46,6 +42,10 @@ exports[`renders correctly 1`] = `
   display: block;
   height: 100%;
   width: 100%;
+}
+
+.c0:hover .change {
+  visibility: visible;
 }
 
 <div
