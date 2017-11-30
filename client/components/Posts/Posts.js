@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 
 // Import actions
 import { fetchPostById, fetchPosts } from '~/actions/posts'
@@ -12,8 +13,11 @@ import { getPostIdsFromTimeline, getHasMore } from '~/selectors/timelines'
 import Button from '../Button'
 import Post from '../Post'
 
-// Import styles
-import './Posts.scss'
+const Wrapper = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+`
 
 class Posts extends Component {
   componentDidMount() {
@@ -49,21 +53,21 @@ class Posts extends Component {
 
     if (!postIds.length) {
       return (
-        <div className="posts">
+        <Wrapper>
           <Post isPlaceholder />
           <Post isPlaceholder />
           <Post isPlaceholder />
           <Post isPlaceholder />
           <Post isPlaceholder />
-        </div>
+        </Wrapper>
       )
     }
 
     return (
-      <div className="posts">
+      <Wrapper>
         {postIds.map(id => <Post postId={id} key={id} />)}
         {hasMore && <Button onClick={this.loadPosts}>More</Button>}
-      </div>
+      </Wrapper>
     )
   }
 }
