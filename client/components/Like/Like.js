@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import classnames from 'classnames'
-import { isAuthenticated } from '~/selectors/auth'
-import { likePost, unlikePost } from '~/actions/posts'
+
 import Button from '../Button'
 import Icon from '../Icon'
 import './Like.scss'
@@ -64,8 +62,4 @@ class Like extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isAuthenticated: isAuthenticated(state)
-})
-
-export default connect(mapStateToProps, { likePost, unlikePost })(Like)
+export default Like

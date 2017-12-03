@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { createComment } from '~/actions/posts'
+
 import Input from '../Input'
 
 class PostComment extends Component {
   static propTypes = {
-    createComment: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
     postId: PropTypes.string.isRequired
   }
 
@@ -21,9 +20,9 @@ class PostComment extends Component {
   onCommentSubmit = e => {
     e.preventDefault()
 
-    const { createComment, postId } = this.props
+    const { onSubmit, postId } = this.props
 
-    createComment(postId, this.state.comment)
+    onSubmit(postId, this.state.comment)
 
     this.setState({ comment: '' })
   }
@@ -48,4 +47,4 @@ class PostComment extends Component {
   }
 }
 
-export default connect(null, { createComment })(PostComment)
+export default PostComment

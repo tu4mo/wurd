@@ -1,1 +1,1 @@
-export { default } from './Like'
+export { default } from './LikeContainer'

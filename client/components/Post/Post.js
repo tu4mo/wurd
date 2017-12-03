@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 import time from '~/utils/time'
-
-// Import selectors
-import { getPostById } from '~/selectors/posts'
 
 // Import components
 import Button from '../Button'
@@ -29,6 +25,7 @@ const placeholderStyles = {
 
 class Post extends Component {
   static propTypes = {
+    createComment: PropTypes.func,
     isPlaceholder: PropTypes.bool,
     post: PropTypes.object
   }
@@ -59,6 +56,7 @@ class Post extends Component {
     }
 
     const {
+      createComment,
       post: {
         comments,
         content,
@@ -94,7 +92,7 @@ class Post extends Component {
         />
         {comments.length > 0 && (
           <div className="post__comments">
-            <PostComments comments={comments} />
+            <PostComments comments={comments} onSubmit={createComment} />
           </div>
         )}
         <div className="post__footer">
@@ -120,8 +118,4 @@ class Post extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  post: getPostById(ownProps.postId)(state)
-})
-
-export default connect(mapStateToProps)(Post)
+export default Post

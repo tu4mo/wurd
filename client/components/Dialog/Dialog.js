@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Box, BoxSection } from '../Box'
+import Box from '../Box'
+import BoxSection from '../BoxSection'
 import Button from '../Button'
 
 const Dialog = ({ children, className, onCancel, onConfirm }) => (

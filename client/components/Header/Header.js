@@ -1,12 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import classnames from 'classnames'
+
 import throttle from '~/utils/throttle'
-import { fetchUserByUsername } from '~/actions/users'
-import { createPost } from '~/actions/posts'
-import { getMe } from '~/selectors/users'
-import { isAuthenticated } from '~/selectors/auth'
 import Button from '~/components/Button'
 import Composer from '~/components/Composer'
 import NavItem from '~/components/NavItem'
@@ -70,11 +66,13 @@ class Header extends PureComponent {
   }
 
   onComposerSaveClick = data => {
-    this.props.createPost(data).then(() => {
+    const { createPost, fetchUserByUsername, username } = this.props
+
+    createPost(data).then(() => {
       this.setState({
         isComposerOpen: false
       })
-      this.props.fetchUserByUsername(this.props.username)
+      fetchUserByUsername(username)
     })
   }
 
@@ -125,17 +123,4 @@ class Header extends PureComponent {
   }
 }
 
-const mapStateToProps = state => {
-  const me = getMe(state)
-
-  return {
-    isAuthenticated: isAuthenticated(state),
-    profileUrl: me.profileUrl,
-    username: me.username
-  }
-}
-
-export default connect(mapStateToProps, {
-  createPost,
-  fetchUserByUsername
-})(Header)
+export default Header

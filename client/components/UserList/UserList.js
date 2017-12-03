@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+
+import Box from '../Box'
+import BoxSection from '../BoxSection'
 import FollowButton from '../FollowButton'
-import { Box, BoxSection } from '../Box'
 import ProfilePhoto from '../ProfilePhoto'
 import Spinner from '../Spinner'
 import './UserList.scss'

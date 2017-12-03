@@ -2,16 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const Alert = ({ className, message }) => (
-  <div className={className}>{message}</div>
-)
-
-Alert.propTypes = {
-  className: PropTypes.string,
-  message: PropTypes.string
-}
-
-const StyledAlert = styled(Alert)`
+const StyledAlert = styled.div`
   background-color: #f2dede;
   border-radius: var(--radius-sm);
   color: #a94442;
@@ -20,4 +11,10 @@ const StyledAlert = styled(Alert)`
   padding: var(--spacing-sm);
 `
 
-export default StyledAlert
+const Alert = ({ message }) => <StyledAlert>{message}</StyledAlert>
+
+Alert.propTypes = {
+  message: PropTypes.string
+}
+
+export default Alert
