@@ -2,9 +2,11 @@
 
 exports[`renders correctly 1`] = `
 .c0 {
-  background-color: #fff;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow);
+  padding: var(--spacing-responsive-md);
+}
+
+.c0:not(:last-child) {
+  border-bottom: 1px solid var(--color-ultra-light-gray);
 }
 
 <div
