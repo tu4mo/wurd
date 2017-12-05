@@ -25,7 +25,7 @@ const placeholderStyles = {
 
 class Post extends Component {
   static propTypes = {
-    createComment: PropTypes.func,
+    createComment: PropTypes.func.isRequired,
     isPlaceholder: PropTypes.bool,
     post: PropTypes.object
   }
@@ -92,11 +92,11 @@ class Post extends Component {
         />
         {comments.length > 0 && (
           <div className="post__comments">
-            <PostComments comments={comments} onSubmit={createComment} />
+            <PostComments comments={comments} />
           </div>
         )}
         <div className="post__footer">
-          <PostComment postId={id} />
+          <PostComment onSubmit={createComment} postId={id} />
           <Like
             className="post__like"
             liked={liked}
