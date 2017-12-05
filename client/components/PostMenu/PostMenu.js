@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   position: relative;
   transition: max-height 0.5s ease-in-out;
 
-  &:before {
+  &::before {
     border-top: 1px solid var(--color-ultra-light-gray);
     content: '';
     display: block;
