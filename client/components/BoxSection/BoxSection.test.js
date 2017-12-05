@@ -6,11 +6,7 @@ import BoxSection from './BoxSection'
 
 it('renders correctly', () => {
   const tree = renderer
-    .create(
-      <BoxSection hasPadding>
-        Test
-      </BoxSection>
-    )
+    .create(<BoxSection hasPadding>Test</BoxSection>)
     .toJSON()
 
   expect(tree).toMatchSnapshot()
