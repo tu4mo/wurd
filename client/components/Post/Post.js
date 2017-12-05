@@ -87,8 +87,8 @@ class Post extends Component {
         </div>
         <PostBody
           content={content}
-          gradientStart={gradientStart}
           gradientEnd={gradientEnd}
+          gradientStart={gradientStart}
         />
         {comments.length > 0 && (
           <div className="post__comments">

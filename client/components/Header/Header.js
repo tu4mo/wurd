@@ -91,11 +91,11 @@ class Header extends PureComponent {
           <header className="header">
             <div className="container container--full-height container--without-padding">
               <nav className="navbar">
-                <NavItem to="/" className="header__logo navbar__item">
+                <NavItem className="header__logo navbar__item" to="/">
                   <img alt="Wurd" src={logo} title="Wurd" />
                 </NavItem>
                 {isAuthenticated && (
-                  <NavItem to="/users" className="header__users navbar__item">
+                  <NavItem className="header__users navbar__item" to="/users">
                     Users
                   </NavItem>
                 )}

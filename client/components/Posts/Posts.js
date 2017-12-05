@@ -65,7 +65,7 @@ class Posts extends Component {
 
     return (
       <Wrapper>
-        {postIds.map(id => <Post postId={id} key={id} />)}
+        {postIds.map(id => <Post key={id} postId={id} />)}
         {hasMore && <Button onClick={this.loadPosts}>More</Button>}
       </Wrapper>
     )

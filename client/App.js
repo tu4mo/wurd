@@ -65,22 +65,22 @@ class App extends Component {
             <Main>
               <Switch>
                 <Route
+                  component={isAuthenticated ? Home : Welcome}
                   exact
                   path="/"
-                  component={isAuthenticated ? Home : Welcome}
                 />
-                <Route path="/404" component={NotFound} />
+                <Route component={NotFound} path="/404" />
                 <Route
+                  component={AuthenticateToken}
                   exact
                   path="/auth/:token"
-                  component={AuthenticateToken}
                 />
-                <Route path="/users" component={Users} />
-                <Route exact path="/:username" component={Profile} />
-                <Route path="/:username/:postId" component={Profile} />
+                <Route component={Users} path="/users" />
+                <Route component={Profile} exact path="/:username" />
+                <Route component={Profile} path="/:username/:postId" />
               </Switch>
             </Main>
-            {isAuthenticated && <Route path="/" component={ToolBar} />}
+            {isAuthenticated && <Route component={ToolBar} path="/" />}
           </div>
         </ScrollToTop>
       </BrowserRouter>

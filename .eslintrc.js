@@ -16,6 +16,7 @@ module.exports = {
   plugins: ['jsx-a11y'],
   rules: {
     'comma-dangle': ['error', 'never'],
+    'react/jsx-sort-props': 'error',
     'react/sort-comp': 'error',
     'react/sort-prop-types': 'error',
     'sort-keys': ['error', 'asc', { caseSensitive: true, natural: false }]

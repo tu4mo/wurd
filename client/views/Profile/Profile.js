@@ -88,7 +88,6 @@ class Profile extends Component {
                 !isMe && <FollowButton username={user.username} />}
               {isMe && (
                 <Route
-                  path="/:username/settings"
                   children={({ match }) =>
                     !match && (
                       <Link to={`/${user.username}/settings`}>
@@ -96,6 +95,7 @@ class Profile extends Component {
                       </Link>
                     )
                   }
+                  path="/:username/settings"
                 />
               )}
               {isMe && (
@@ -107,7 +107,7 @@ class Profile extends Component {
           </div>
         </div>
         <Switch>
-          {isMe && <Route path="/:username/settings" component={Settings} />}
+          {isMe && <Route component={Settings} path="/:username/settings" />}
           <Route>
             <div className="profile-body">
               <div className="profile-body__tabs">

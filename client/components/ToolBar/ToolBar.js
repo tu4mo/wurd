@@ -18,7 +18,7 @@ const ToolBar = ({ className, me }) =>
         <Icon name="users" />
       </NavItem>
       <NavItem to={`/${me.username}`}>
-        <ProfilePhoto url={me.profileUrl} username={me.username} size="tiny" />
+        <ProfilePhoto size="tiny" url={me.profileUrl} username={me.username} />
       </NavItem>
     </div>
   ) : null

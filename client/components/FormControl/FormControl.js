@@ -11,8 +11,8 @@ const renderField = field => {
       <Input
         {...field.input}
         color={field.color}
-        id={field.id}
         error={field.meta.touched && field.meta.error ? field.meta.error : null}
+        id={field.id}
         maxLength={field.maxLength}
         placeholder={field.placeholder}
         type={field.type}
