@@ -7,10 +7,10 @@ import styled from 'styled-components'
 import { authenticateUser } from './actions/auth'
 import { isAuthenticated } from './selectors/auth'
 import asyncComponent from './asyncComponent'
-import AuthenticateToken from './AuthenticateToken'
 import Header from './components/Header'
 import ScrollToTop from './components/ScrollToTop'
 import ToolBar from './components/ToolBar'
+
 import './App.scss'
 
 const Main = styled.main`
@@ -35,6 +35,10 @@ class App extends Component {
   }
 
   render() {
+    const AuthenticateToken = asyncComponent(() =>
+      import('./views/AuthenticateToken').then(module => module.default)
+    )
+
     const Home = asyncComponent(() =>
       import('./views/Home').then(module => module.default)
     )

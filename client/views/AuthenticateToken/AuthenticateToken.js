@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { logInWithToken } from './actions/auth'
+import { logInWithToken } from '~/actions/auth'
 
-import Spinner from './components/Spinner'
+import Spinner from '~/components/Spinner'
 
 class AuthenticateToken extends Component {
   static propTypes = {

@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import { fetchAccount, saveAccount } from '~/actions/account'
 import { authenticateUser } from '~/actions/auth'
 import { getAccount } from '~/selectors/account'
+
 import Alert from '../Alert'
 import Box from '../Box'
 import BoxSection from '../BoxSection'
