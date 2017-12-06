@@ -6,6 +6,7 @@
 
 :root {
   --color-background: #f4f4f8;
+  --color-dark-gray: #333337;
   --color-gray: #66666a;
   --color-light-gray: #99999d;
   --color-ultra-light-gray: #eeeef2;
@@ -40,7 +41,7 @@
 
 body {
   background: var(--color-background);
-  color: $color-dark-gray;
+  color: var(--color-dark-gray);
   font-family: var(--font);
 }
 
@@ -67,5 +68,5 @@ body {
 }
 
 a {
-  color: $color-dark-gray;
+  color: var(--color-dark-gray);
 }

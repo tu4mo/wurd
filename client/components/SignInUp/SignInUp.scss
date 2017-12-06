@@ -21,7 +21,7 @@ $color-transparent-white: rgba(0, 0, 0, 0.1);
     text-align: center;
 
     &--active {
-      border-color: $color-dark-gray;
+      border-color: var(--color-dark-gray);
     }
   }
 

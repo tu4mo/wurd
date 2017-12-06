@@ -1,11 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import './Spacer.scss'
+import styled from 'styled-components'
 
-const Spacer = ({ children }) => <div className="spacer">{children}</div>
-
-Spacer.propTypes = {
-  children: PropTypes.node
-}
+const Spacer = styled.div`
+  & > *:not(:last-child) {
+    margin-bottom: var(--spacing-sm);
+  }
+`
 
 export default Spacer

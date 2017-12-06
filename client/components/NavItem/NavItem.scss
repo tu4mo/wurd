@@ -8,12 +8,12 @@
   text-decoration: none;
 
   &--active {
-    border-color: $color-dark-gray;
+    border-color: var(--color-dark-gray);
   }
 
   &--has-hover {
     &:hover {
-      border-color: $color-dark-gray;
+      border-color: var(--color-dark-gray);
     }
   }
 }

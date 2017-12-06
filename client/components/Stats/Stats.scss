@@ -26,7 +26,7 @@
   }
 
   &:hover {
-    color: $color-dark-gray;
+    color: var(--color-dark-gray);
   }
 
   &:last-child {
@@ -50,6 +50,6 @@
     border-radius: var(--radius-sm);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    color: $color-dark-gray;
+    color: var(--color-dark-gray);
   }
 }

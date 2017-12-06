@@ -20,7 +20,7 @@
   }
 
   &__user {
-    color: $color-dark-gray;
+    color: var(--color-dark-gray);
     font-weight: 600;
     text-decoration: none;
   }
