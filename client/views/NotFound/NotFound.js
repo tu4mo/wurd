@@ -1,14 +1,23 @@
 import React from 'react'
+import styled from 'styled-components'
+
 import Head from '~/components/Head'
-import './NotFound.scss'
+
+const Wrapper = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  margin-top: calc(var(--header-height) * -1);
+`
 
 const NotFound = () => (
-  <div className="not-found">
+  <Wrapper>
     <Head>
       <title>Page not found</title>
     </Head>
     <h1>404</h1>
-  </div>
+  </Wrapper>
 )
 
 export default NotFound
