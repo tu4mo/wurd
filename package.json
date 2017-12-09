@@ -9,7 +9,8 @@
     "lint": "eslint . && stylelint \"client/**/*.scss\" && stylelint \"client/**/*.js\" --config stylelint.js.config.js",
     "start": "node server/server.js",
     "storybook": "start-storybook -p 9001 -c client/.storybook",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "engines": {
     "node": "9.2.1"

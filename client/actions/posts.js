@@ -8,7 +8,7 @@ import {
   POSTS_FETCH
 } from '.'
 
-import { setHasMore, setPosts } from './timelines'
+import { removePost, setHasMore, setPosts } from './timelines'
 
 export const fetchPosts = (options = {}) => async (dispatch, getState, api) => {
   try {
@@ -129,6 +129,8 @@ export const deletePost = id => async (dispatch, getState, api) => {
     id,
     type: POST_DELETE
   })
+
+  dispatch(removePost(id))
 
   try {
     await api({
