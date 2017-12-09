@@ -4,7 +4,7 @@ exports[`renders correctly 1`] = `null`;
 
 exports[`renders correctly 2`] = `
 <div
-  className="spinner"
+  className="sc-htpNat epCarF"
 />
 `;
 
@@ -26,7 +26,7 @@ exports[`renders correctly 3`] = `
           onClick={[Function]}
         >
           <div
-            className="sc-htpNat gFouoP"
+            className="sc-bxivhb eZsYtS"
           >
             <img
               alt="tu4mo"
