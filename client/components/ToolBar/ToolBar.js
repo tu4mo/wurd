@@ -34,9 +34,9 @@ const StyledBox = styled(ToolBar)`
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   bottom: 0;
   display: flex;
-  height: var(--toolbar-height);
   left: 0;
   position: fixed;
+  padding-bottom: env(safe-area-inset-bottom);
   right: 0;
 
   ${media.sm`
@@ -46,6 +46,7 @@ const StyledBox = styled(ToolBar)`
   & > * {
     flex-grow: 1;
     flex-basis: 0;
+    height: var(--toolbar-height);
     justify-content: center;
   }
 `
