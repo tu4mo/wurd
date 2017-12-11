@@ -74,7 +74,7 @@ class SignInUp extends Component {
                 name="username"
               />
             )}
-            <FormControl color="gray" label="Email" name="email" />
+            <FormControl color="gray" label="Email" name="email" type="email" />
             <FormControl
               color="gray"
               label="Password"
