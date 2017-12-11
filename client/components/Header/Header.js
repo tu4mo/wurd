@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import throttle from '~/utils/throttle'
+
 import Button from '~/components/Button'
 import Composer from '~/components/Composer'
+import Container from '~/components/Container'
 import NavItem from '~/components/NavItem'
 import ProfilePhoto from '~/components/ProfilePhoto'
 import logo from './svg/wurd.svg'
@@ -89,7 +91,7 @@ class Header extends PureComponent {
       <div className={classNames}>
         <div className="header-container__shadow">
           <header className="header">
-            <div className="container container--full-height container--without-padding">
+            <Container disablePadding fullHeight>
               <nav className="navbar">
                 <NavItem className="header__logo navbar__item" to="/">
                   <img alt="Wurd" src={logo} title="Wurd" />
@@ -110,7 +112,7 @@ class Header extends PureComponent {
                   </NavItem>
                 )}
               </nav>
-            </div>
+            </Container>
           </header>
           <Composer
             isOpen={isComposerOpen}

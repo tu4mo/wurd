@@ -13,6 +13,7 @@ import Alert from '../Alert'
 import Box from '../Box'
 import BoxSection from '../BoxSection'
 import Button from '../Button'
+import Container from '~/components/Container'
 import Dialog from '../Dialog'
 import FormControl from '../FormControl'
 import Modal from '../Modal'
@@ -50,7 +51,7 @@ class Settings extends Component {
 
     return (
       <div className={className}>
-        <div className="container">
+        <Container>
           <Box className="settings__content">
             <form onSubmit={handleSubmit(this.submit)}>
               <BoxSection hasPadding>
@@ -83,7 +84,7 @@ class Settings extends Component {
               </BoxSection>
             </form>
           </Box>
-        </div>
+        </Container>
         <NavigationPrompt when={dirty && !submitting}>
           {({ onCancel, onConfirm }) => (
             <Modal>

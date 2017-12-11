@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom'
 
 import { logInWithToken } from '~/actions/auth'
 
+import Container from '~/components/Container'
 import Spinner from '~/components/Spinner'
 
 class AuthenticateToken extends Component {
@@ -29,9 +30,9 @@ class AuthenticateToken extends Component {
     return this.state.redirect ? (
       <Redirect to="/" />
     ) : (
-      <div className="container container--with-y-padding">
+      <Container withYPadding>
         <Spinner />
-      </div>
+      </Container>
     )
   }
 }

@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+
+import Container from './components/Container'
 import Spinner from './components/Spinner'
 
 export default loader =>
@@ -32,9 +34,9 @@ export default loader =>
       }
 
       return (
-        <div className="container container--with-y-padding">
+        <Container withYPadding>
           <Spinner />
-        </div>
+        </Container>
       )
     }
   }

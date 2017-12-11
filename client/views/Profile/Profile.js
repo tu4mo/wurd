@@ -16,6 +16,7 @@ import { getMe, getUser } from '~/selectors/users'
 
 // Import components
 import Button from '~/components/Button'
+import Container from '~/components/Container'
 import FollowButton from '~/components/FollowButton'
 import Head from '~/components/Head'
 import Icon from '~/components/Icon'
@@ -78,7 +79,7 @@ class Profile extends Component {
         <Head>
           <title>{user.username}</title>
         </Head>
-        <div className="container container--with-y-padding">
+        <Container withYPadding>
           <div className="profile">
             <div className="profile__photo">
               <ProfilePhoto
@@ -110,7 +111,7 @@ class Profile extends Component {
               )}
             </div>
           </div>
-        </div>
+        </Container>
         <Switch>
           {isMe && <Route component={Settings} path="/:username/settings" />}
           <Route>
@@ -126,7 +127,7 @@ class Profile extends Component {
                     />
                   )}
               </div>
-              <div className="container">
+              <Container>
                 <Switch>
                   <Route exact path="/:username">
                     <Posts timeline={user.username} />
@@ -141,7 +142,7 @@ class Profile extends Component {
                     <Posts single={match.params.postId} />
                   </Route>
                 </Switch>
-              </div>
+              </Container>
             </div>
           </Route>
         </Switch>
