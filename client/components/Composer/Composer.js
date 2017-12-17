@@ -1,8 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
 import Button from '../Button'
 import ColorPicker from '../ColorPicker'
-import './Composer.scss'
+
+import {
+  StyledColorPicker,
+  StyledComposer,
+  StyledComposerButtons,
+  StyledComposerInput,
+  StyledComposerToolBar,
+  StyledPerspective
+} from './styles'
 
 const countWords = str => str.split(' ').length
 
@@ -53,30 +62,28 @@ class Composer extends Component {
     }
 
     return (
-      <div className="composer-perspective">
-        <div className="composer">
-          <input
-            className="composer__input"
+      <StyledPerspective>
+        <StyledComposer>
+          <StyledComposerInput
+            gradientFrom={from}
+            gradientTo={to}
             maxLength="50"
             onChange={this.onContentChange}
             placeholder="write here"
             ref={ref => (this.input = ref)}
-            style={{
-              backgroundImage: `linear-gradient(45deg, ${from}, ${to})`
-            }}
             value={content}
           />
-          <div className="composer__toolbar">
-            <div className="composer__color-picker">
+          <StyledComposerToolBar>
+            <StyledColorPicker>
               <ColorPicker onChange={this.onColorChange} value={color} />
-            </div>
-            <div className="composer__buttons">
+            </StyledColorPicker>
+            <StyledComposerButtons>
               <Button onClick={this.onSaveClick}>Save</Button>
               <Button onClick={onCloseClick}>Cancel</Button>
-            </div>
-          </div>
-        </div>
-      </div>
+            </StyledComposerButtons>
+          </StyledComposerToolBar>
+        </StyledComposer>
+      </StyledPerspective>
     )
   }
 }
