@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+
 import { fetchPosts } from '~/actions/posts'
 import { getAllPosts } from '~/selectors/posts'
 

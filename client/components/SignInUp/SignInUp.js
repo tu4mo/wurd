@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { propTypes as reduxFormPropTypes, reduxForm } from 'redux-form'
 import classnames from 'classnames'
+import { FormattedMessage } from 'react-intl'
+
 import { logIn, signUp } from '~/actions/auth'
 import { getAuthenticationError } from '~/selectors/auth'
 import Alert from '../Alert'
@@ -10,11 +12,6 @@ import Button from '../Button'
 import FormControl from '../FormControl'
 import Spacer from '../Spacer'
 import './SignInUp.scss'
-
-const LABELS = {
-  login: 'Log In',
-  signup: 'Sign Up'
-}
 
 class SignInUp extends Component {
   static propTypes = {
@@ -34,7 +31,7 @@ class SignInUp extends Component {
     }
   }
 
-  renderTab = (id, label) => {
+  renderTab = id => {
     const changeTab = tab => {
       this.setState({
         tab
@@ -49,7 +46,7 @@ class SignInUp extends Component {
         link
         onClick={() => changeTab(id)}
       >
-        {label}
+        <FormattedMessage id={id} />
       </Button>
     )
   }
@@ -61,8 +58,8 @@ class SignInUp extends Component {
     return (
       <form className="sign-in-up" onSubmit={handleSubmit(this.onSubmit)}>
         <div className="sign-in-up__tabs">
-          {this.renderTab('login', LABELS.login)}
-          {this.renderTab('signup', LABELS.signup)}
+          {this.renderTab('login')}
+          {this.renderTab('signup')}
         </div>
         <div className="sign-in-up__panel">
           <Spacer>
@@ -82,14 +79,14 @@ class SignInUp extends Component {
               type="password"
             />
             <Button className="sign-in-up__button" type="submit">
-              {tab === 'signup' ? LABELS.signup : LABELS.login}
+              <FormattedMessage id={tab} />
             </Button>
             {tab === 'login' && (
               <Button
                 className="sign-in-up__button--twitter"
                 onClick={() => (location.href = '/api/auth/twitter')}
               >
-                Log In with Twitter
+                <FormattedMessage id="loginWithTwitter" />
               </Button>
             )}
             {errorMessage && <Alert message={errorMessage} />}
