@@ -24,6 +24,30 @@ const Main = styled.main`
   }
 `
 
+const AuthenticateToken = asyncComponent(() =>
+  import('./views/AuthenticateToken').then(module => module.default)
+)
+
+const Home = asyncComponent(() =>
+  import('./views/Home').then(module => module.default)
+)
+
+const NotFound = asyncComponent(() =>
+  import('./views/NotFound').then(module => module.default)
+)
+
+const Profile = asyncComponent(() =>
+  import('./views/Profile').then(module => module.default)
+)
+
+const Users = asyncComponent(() =>
+  import('./views/Users').then(module => module.default)
+)
+
+const Welcome = asyncComponent(() =>
+  import('./views/Welcome').then(module => module.default)
+)
+
 class App extends Component {
   static propTypes = {
     authenticateUser: PropTypes.func.isRequired,
@@ -35,30 +59,6 @@ class App extends Component {
   }
 
   render() {
-    const AuthenticateToken = asyncComponent(() =>
-      import('./views/AuthenticateToken').then(module => module.default)
-    )
-
-    const Home = asyncComponent(() =>
-      import('./views/Home').then(module => module.default)
-    )
-
-    const NotFound = asyncComponent(() =>
-      import('./views/NotFound').then(module => module.default)
-    )
-
-    const Profile = asyncComponent(() =>
-      import('./views/Profile').then(module => module.default)
-    )
-
-    const Users = asyncComponent(() =>
-      import('./views/Users').then(module => module.default)
-    )
-
-    const Welcome = asyncComponent(() =>
-      import('./views/Welcome').then(module => module.default)
-    )
-
     const { isAuthenticated } = this.props
 
     return (
