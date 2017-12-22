@@ -7,7 +7,7 @@ import {
   USER_UNFOLLOW
 } from '.'
 
-import { getMe } from '~/selectors/users'
+import { getMe } from '../selectors/users'
 
 export const fetchUserByUsername = username => (dispatch, getState, api) => {
   return api({

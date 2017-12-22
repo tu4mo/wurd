@@ -4,7 +4,7 @@ import {
   USERS_FETCH_FULFILLED,
   USER_FOLLOW,
   USER_UNFOLLOW
-} from '~/actions'
+} from '../actions'
 
 const INITIAL_STATE = {
   data: {},

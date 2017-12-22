@@ -3,7 +3,7 @@ import {
   ACCOUNT_SAVE_FULFILLED,
   ACCOUNT_SAVE_PENDING,
   ACCOUNT_SAVE_REJECTED
-} from '~/actions'
+} from '../actions'
 
 const auth = (state = {}, action) => {
   switch (action.type) {

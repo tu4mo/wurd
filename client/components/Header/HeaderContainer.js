@@ -1,10 +1,10 @@
 import Header from './Header'
 
 import { connect } from 'react-redux'
-import { fetchUserByUsername } from '~/actions/users'
-import { createPost } from '~/actions/posts'
-import { getMe } from '~/selectors/users'
-import { isAuthenticated } from '~/selectors/auth'
+import { fetchUserByUsername } from '../../actions/users'
+import { createPost } from '../../actions/posts'
+import { getMe } from '../../selectors/users'
+import { isAuthenticated } from '../../selectors/auth'
 
 const mapStateToProps = state => {
   const me = getMe(state)

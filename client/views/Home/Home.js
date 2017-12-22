@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
 // Import components
-import Container from '~/components/Container'
-import Head from '~/components/Head'
-import Posts from '~/components/Posts'
+import Container from '../../components/Container'
+import Head from '../../components/Head'
+import Posts from '../../components/Posts'
 
 class Home extends Component {
   render() {

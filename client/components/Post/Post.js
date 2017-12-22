@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
-import time from '~/utils/time'
+import time from '../../utils/time'
 
 // Import components
 import Button from '../Button'

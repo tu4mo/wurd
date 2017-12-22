@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { isAuthenticated } from '~/selectors/auth'
-import { followUser, unfollowUser } from '~/actions/users'
-import { getMe, isFollowingUsername } from '~/selectors/users'
+import { isAuthenticated } from '../../selectors/auth'
+import { followUser, unfollowUser } from '../../actions/users'
+import { getMe, isFollowingUsername } from '../../selectors/users'
 import Button from '../Button'
 
 class FollowButton extends Component {

@@ -1,4 +1,4 @@
-import { AUTH_CLEAR, AUTH_SET_AUTHENTICATED, AUTH_SET_ERROR } from '~/actions'
+import { AUTH_CLEAR, AUTH_SET_AUTHENTICATED, AUTH_SET_ERROR } from '../actions'
 
 const INITIAL_STATE = {
   authenticated: false,

@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getMe } from '~/selectors/users'
+import { getMe } from '../../selectors/users'
 import Icon from '../Icon'
 import NavItem from '../NavItem'
 import ProfilePhoto from '../ProfilePhoto'
 import styled from 'styled-components'
-import { media } from '~/utils/style'
+import { media } from '../../utils/style'
 
 const ToolBar = ({ className, me }) =>
   me ? (

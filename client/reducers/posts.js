@@ -4,7 +4,7 @@ import {
   POST_LIKE,
   POST_SAVE,
   POST_UNLIKE
-} from '~/actions'
+} from '../actions'
 
 const toObjectByKey = (arr, key) =>
   arr.reduce(

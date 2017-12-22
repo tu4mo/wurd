@@ -2,7 +2,7 @@ import {
   TIMELINES_REMOVE_POST,
   TIMELINES_SET_POSTS,
   TIMELINES_TOGGLE_HAS_MORE
-} from '~/actions'
+} from '../actions'
 
 const timelines = (state = {}, action) => {
   switch (action.type) {

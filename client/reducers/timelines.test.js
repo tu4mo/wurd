@@ -1,4 +1,4 @@
-import { TIMELINES_REMOVE_POST } from '~/actions'
+import { TIMELINES_REMOVE_POST } from '../actions'
 import reducer from './timelines'
 
 describe('timelines', () => {

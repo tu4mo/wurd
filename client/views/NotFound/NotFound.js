@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Head from '~/components/Head'
+import Head from '../../components/Head'
 
 const Wrapper = styled.div`
   align-items: center;

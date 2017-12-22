@@ -4,10 +4,10 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 // Import actions
-import { fetchPostById, fetchPosts } from '~/actions/posts'
+import { fetchPostById, fetchPosts } from '../../actions/posts'
 
 // Import selectors
-import { getPostIdsFromTimeline, getHasMore } from '~/selectors/timelines'
+import { getPostIdsFromTimeline, getHasMore } from '../../selectors/timelines'
 
 // Import components
 import Button from '../Button'

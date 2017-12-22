@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import throttle from '~/utils/throttle'
+import throttle from '../../utils/throttle'
 
 class FullWidthText extends Component {
   static propTypes = {

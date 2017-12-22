@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import { deletePost } from '~/actions/posts'
-import { isPostByUser } from '~/selectors/posts'
-import { getMe } from '~/selectors/users'
+import { deletePost } from '../../actions/posts'
+import { isPostByUser } from '../../selectors/posts'
+import { getMe } from '../../selectors/users'
 
 import Button from '../Button'
 

@@ -4,26 +4,30 @@ import PropTypes from 'prop-types'
 import { Link, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import asyncComponent from '~/asyncComponent'
+import asyncComponent from '../../asyncComponent'
 
 // Import actions
-import { logOut } from '~/actions/auth'
-import { fetchUserByUsername, followUser, unfollowUser } from '~/actions/users'
+import { logOut } from '../../actions/auth'
+import {
+  fetchUserByUsername,
+  followUser,
+  unfollowUser
+} from '../../actions/users'
 
 // Import selectors
-import { isAuthenticated } from '~/selectors/auth'
-import { getMe, getUser } from '~/selectors/users'
+import { isAuthenticated } from '../../selectors/auth'
+import { getMe, getUser } from '../../selectors/users'
 
 // Import components
-import Button from '~/components/Button'
-import Container from '~/components/Container'
-import FollowButton from '~/components/FollowButton'
-import Head from '~/components/Head'
-import Icon from '~/components/Icon'
-import Posts from '~/components/Posts'
-import ProfilePhoto from '~/components/ProfilePhoto'
-import Stats from '~/components/Stats'
-import UserList from '~/components/UserList'
+import Button from '../../components/Button'
+import Container from '../../components/Container'
+import FollowButton from '../../components/FollowButton'
+import Head from '../../components/Head'
+import Icon from '../../components/Icon'
+import Posts from '../../components/Posts'
+import ProfilePhoto from '../../components/ProfilePhoto'
+import Stats from '../../components/Stats'
+import UserList from '../../components/UserList'
 
 // Import styles
 import './Profile.scss'
