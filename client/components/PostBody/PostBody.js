@@ -40,18 +40,9 @@ class PostBody extends Component {
         <ContainerQuery query={query}>
           {params => (
             <StyledPostContent className={classNames(params)}>
-              {content.split(' ').map((word, i) => (
-                <PostWord
-                  key={i}
-                  style={{
-                    transform: `rotate(${Math.floor(
-                      Math.random() * 10 + -5
-                    )}deg`
-                  }}
-                >
-                  {word}
-                </PostWord>
-              ))}
+              {content
+                .split(' ')
+                .map((word, i) => <PostWord key={i}>{word}</PostWord>)}
             </StyledPostContent>
           )}
         </ContainerQuery>
