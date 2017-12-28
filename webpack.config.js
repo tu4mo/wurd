@@ -23,8 +23,6 @@ const styleLoaders = [
   }
 ]
 
-const entry = ['babel-polyfill', './client/index.js']
-
 const config = {
   devServer: {
     historyApiFallback: true,
@@ -36,12 +34,12 @@ const config = {
 
   devtool: isDev ? 'eval-source-map' : '',
 
-  entry: isDev ? ['react-hot-loader/patch', ...entry] : entry,
+  entry: ['babel-polyfill', './client/index.js'],
 
   module: {
     rules: [
       {
-        exclude: /node_modules\/(?!(wordwrapjs)\/).*/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
         test: /\.js$/
       },

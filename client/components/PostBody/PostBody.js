@@ -1,36 +1,46 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import FullWidthText from '../FullWidthText'
-import classnames from 'classnames'
-import wordwrap from 'wordwrapjs'
-import './PostBody.scss'
 
-const PostBody = ({ content, fill, gradientEnd, gradientStart }) => {
-  const words = wordwrap.lines(content, { break: true, width: 25 })
+import { StyledPostBody, StyledPostContent, StyledWord } from './styles'
 
-  return (
-    <div
-      className={classnames('post-body', { 'post-body--fill': fill })}
-      style={{
-        backgroundImage: `linear-gradient(45deg, ${gradientStart}, ${gradientEnd})`
-      }}
-    >
-      <div className="post-body__content">
-        {words.map((word, i) => (
-          <FullWidthText className="post-body__row" key={i}>
-            {word}
-          </FullWidthText>
-        ))}
-      </div>
-    </div>
-  )
-}
+class PostBody extends Component {
+  static propTypes = {
+    content: PropTypes.string,
+    fill: PropTypes.bool,
+    gradientEnd: PropTypes.string,
+    gradientStart: PropTypes.string
+  }
 
-PostBody.propTypes = {
-  content: PropTypes.string,
-  fill: PropTypes.bool,
-  gradientEnd: PropTypes.string,
-  gradientStart: PropTypes.string
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.content === this.props.content) {
+      return false
+    }
+  }
+
+  render() {
+    const { content, fill, gradientEnd, gradientStart } = this.props
+
+    return (
+      <StyledPostBody
+        fill={fill}
+        gradientEnd={gradientEnd}
+        gradientStart={gradientStart}
+      >
+        <StyledPostContent>
+          {content.split(' ').map((word, i) => (
+            <StyledWord
+              key={i}
+              style={{
+                transform: `rotate(${Math.floor(Math.random() * 10 + -5)}deg`
+              }}
+            >
+              {word}
+            </StyledWord>
+          ))}
+        </StyledPostContent>
+      </StyledPostBody>
+    )
+  }
 }
 
 export default PostBody
