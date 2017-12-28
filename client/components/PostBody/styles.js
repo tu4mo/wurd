@@ -49,15 +49,3 @@ export const StyledPostContent = styled.div`
   top: 0;
   width: 100%;
 `
-
-export const StyledWord = styled.div`
-  background-image: radial-gradient(
-    #fff 50%,
-    var(--color-ultra-light-gray) 100%
-  );
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-  color: var(--color-dark-gray);
-  margin: 0.3em;
-  padding: 0.3em;
-  text-transform: uppercase;
-`
