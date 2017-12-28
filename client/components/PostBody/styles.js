@@ -1,18 +1,37 @@
+import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-export const StyledPostBody = styled.div`
+const PostBody = ({ children, className }) => (
+  <div className={className}>{children}</div>
+)
+
+PostBody.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string
+}
+
+export const StyledPostBody = styled(PostBody)`
   background-image: linear-gradient(
     45deg,
     ${props => props.gradientStart},
     ${props => props.gradientEnd}
   );
+  overflow: hidden;
   position: relative;
-  min-height: 200px;
 
   &::before {
     content: '';
     display: block;
     padding-top: ${props => (props.fill ? '100%' : '50%')};
+  }
+
+  .post-body-md {
+    font-size: 20px;
+  }
+
+  .post-body-lg {
+    font-size: 30px;
   }
 `
 
@@ -38,7 +57,7 @@ export const StyledWord = styled.div`
   );
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   color: var(--color-dark-gray);
-  margin: var(--spacing-xs);
-  padding: var(--spacing-xs);
+  margin: 0.3em;
+  padding: 0.3em;
   text-transform: uppercase;
 `
