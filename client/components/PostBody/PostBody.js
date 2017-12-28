@@ -12,9 +12,7 @@ class PostBody extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    if (nextProps.content === this.props.content) {
-      return false
-    }
+    return nextProps.content !== this.props.content
   }
 
   render() {
