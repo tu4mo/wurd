@@ -2,7 +2,7 @@ import { TIMELINES_REMOVE_POST } from '../actions'
 import reducer from './timelines'
 
 describe('timelines', () => {
-  it('should handle TIMELINES_REMOVE_POST', () => {
+  it('TIMELINES_REMOVE_POST should remove post from home and timelines', () => {
     expect(
       reducer(
         {

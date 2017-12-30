@@ -63,6 +63,7 @@ class SignInUp extends Component {
         </div>
         <div className="sign-in-up__panel">
           <Spacer>
+            {errorMessage && <Alert message={errorMessage} />}
             {tab === 'signup' && (
               <FormControl
                 color="gray"
@@ -89,7 +90,6 @@ class SignInUp extends Component {
                 <FormattedMessage id="loginWithTwitter" />
               </Button>
             )}
-            {errorMessage && <Alert message={errorMessage} />}
           </Spacer>
         </div>
       </form>

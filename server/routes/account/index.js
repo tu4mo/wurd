@@ -32,23 +32,12 @@ router.get('/', resolveToken(true), (req, res) => {
 router.post('/', resolveToken(false), (req, res) => {
   const { email, username, password } = req.body
 
-  if (!email || !username || !password) {
-    return res.status(400).json({ error: 'Fill in the required fields' })
-  }
-
-  if (password.length < 8) {
-    return res.status(400).json({
-      error: 'Password must be at least 8 characters'
-    })
-  }
-
   // Create new user
   const newUser = new User({
     email,
+    password,
     username
   })
-
-  newUser.setPassword(password)
 
   // Save new user
   newUser.save((err, user) => {
@@ -66,20 +55,14 @@ router.put('/', resolveToken(true), async (req, res) => {
 
   try {
     const user = await User.findById(req.userId)
-    const isMatch = user.isValidPassword(currentPassword)
+    const isValid = user.isValidPassword(currentPassword)
 
-    if (isMatch) {
+    if (isValid) {
       user.email = email
       user.username = username
 
       if (password) {
-        if (password.length < 8) {
-          return res.status(400).json({
-            error: 'Password must be at least 8 characters'
-          })
-        }
-
-        user.setPassword(password)
+        user.password = password
       }
 
       const savedUser = await user.save()

@@ -24,7 +24,7 @@ router.get('/', resolveToken(true), async (req, res) => {
 })
 
 router.post('/', resolveToken(false), async (req, res) => {
-  const { email, password } = req.body
+  const { email = '', password } = req.body
   const errorResponse = { error: 'The username or password is incorrect' }
 
   try {

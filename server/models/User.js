@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema(
       index: true,
       lowercase: true,
       maxlength: 50,
-      required: true,
+      required: [true, 'Email is required'],
       trim: true,
       type: String,
       unique: true,
@@ -26,6 +26,8 @@ const userSchema = new mongoose.Schema(
       type: Date
     },
     password: {
+      minlength: [8, 'Password must be at least 8 characters'],
+      required: [true, 'Password is required'],
       type: String
     },
     token: {
@@ -37,9 +39,9 @@ const userSchema = new mongoose.Schema(
       unique: true
     },
     username: {
-      maxlength: 15,
+      maxlength: [15, 'Username is too long'],
       minlength: 1,
-      required: true,
+      required: [true, 'Username is required'],
       trim: true,
       type: String,
       unique: true,
@@ -59,6 +61,18 @@ const userSchema = new mongoose.Schema(
     timestamps: true
   }
 )
+
+userSchema.pre('save', function(next) {
+  const user = this
+
+  if (!user.isModified('password')) {
+    return next()
+  }
+
+  this.password = bcrypt.hashSync(user.password, 10)
+
+  next()
+})
 
 userSchema.virtual('profileUrl').get(function() {
   return this.email
@@ -90,10 +104,6 @@ userSchema.methods.getJWT = function() {
 
 userSchema.methods.isValidPassword = function(password) {
   return bcrypt.compareSync(password, this.password)
-}
-
-userSchema.methods.setPassword = function(password) {
-  this.password = bcrypt.hashSync(password, 10)
 }
 
 module.exports = mongoose.model('User', userSchema)

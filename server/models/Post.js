@@ -5,7 +5,7 @@ const hexColorRegExp = /^#[0-9a-f]{6}$/i
 const commentSchema = new mongoose.Schema(
   {
     content: {
-      maxlength: 500,
+      maxlength: [500, 'Comment is too long'],
       minlength: 1,
       required: true,
       trim: true,
@@ -26,7 +26,7 @@ const postSchema = new mongoose.Schema(
   {
     comments: [commentSchema],
     content: {
-      maxlength: 50,
+      maxlength: [50, 'Post is too long'],
       minlength: 1,
       required: true,
       trim: true,
