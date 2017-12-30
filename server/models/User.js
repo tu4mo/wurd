@@ -62,14 +62,12 @@ const userSchema = new mongoose.Schema(
   }
 )
 
-userSchema.pre('save', function(next) {
-  const user = this
-
-  if (!user.isModified('password')) {
+userSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) {
     return next()
   }
 
-  this.password = bcrypt.hashSync(user.password, 10)
+  this.password = await bcrypt.hash(this.password, 10)
 
   next()
 })
