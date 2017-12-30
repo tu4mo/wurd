@@ -31,7 +31,7 @@ class Word extends Component {
 
 const StyledWord = styled(Word)`
   background-image: radial-gradient(
-    #fff 50%,
+    #fff 75%,
     var(--color-ultra-light-gray) 100%
   );
   border-radius: 1px;
