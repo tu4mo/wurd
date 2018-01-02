@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 // Import actions
-import { fetchPostById, fetchPosts } from '../../actions/posts'
+import { fetchPostById, fetchPosts } from '../../ducks/posts'
 
 // Import selectors
 import { getPostIdsFromTimeline, getHasMore } from '../../selectors/timelines'

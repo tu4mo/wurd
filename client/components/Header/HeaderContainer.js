@@ -1,8 +1,8 @@
 import Header from './Header'
 
 import { connect } from 'react-redux'
-import { fetchUserByUsername } from '../../actions/users'
-import { createPost } from '../../actions/posts'
+import { fetchUserByUsername } from '../../ducks/users'
+import { createPost } from '../../ducks/posts'
 import { getMe } from '../../selectors/users'
 import { isAuthenticated } from '../../selectors/auth'
 

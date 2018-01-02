@@ -1,14 +1,12 @@
-import {
-  POST_COMMENT,
-  POST_CREATE,
-  POST_DELETE,
-  POST_LIKE,
-  POST_SAVE,
-  POST_UNLIKE,
-  POSTS_FETCH
-} from '.'
-
 import { removePost, setHasMore, setPosts } from './timelines'
+
+const POST_COMMENT = 'POST/COMMENT'
+const POST_CREATE = 'POST/CREATE'
+const POST_DELETE = 'POST/DELETE'
+const POST_LIKE = 'POST/LIKE'
+const POST_SAVE = 'POST/SAVE'
+const POST_UNLIKE = 'POST/UNLIKE'
+const POSTS_FETCH = 'POSTS/FETCH'
 
 export const fetchPosts = (options = {}) => async (dispatch, getState, api) => {
   try {
@@ -146,3 +144,69 @@ export const savePost = post => ({
   post,
   type: POST_SAVE
 })
+
+const toObjectByKey = (arr, key) =>
+  arr.reduce(
+    (acc, val) => ({
+      ...acc,
+      [val[key]]: val
+    }),
+    {}
+  )
+
+export default (state = {}, action) => {
+  switch (action.type) {
+    case POST_DELETE:
+      const { [action.id]: omit, ...rest } = state
+      return rest
+
+    case POST_SAVE:
+      return {
+        ...state,
+        [action.post.id]: action.post
+      }
+
+    case POSTS_FETCH:
+      return {
+        ...state,
+        ...toObjectByKey(action.posts.data, 'id')
+      }
+
+    case POST_LIKE: {
+      const post = state[action.id]
+
+      if (!post.liked) {
+        return {
+          ...state,
+          [action.id]: {
+            ...post,
+            liked: true,
+            likes: post.likes + 1
+          }
+        }
+      }
+
+      return state
+    }
+
+    case POST_UNLIKE: {
+      const post = state[action.id]
+
+      if (post.liked) {
+        return {
+          ...state,
+          [action.id]: {
+            ...post,
+            liked: false,
+            likes: post.likes - 1
+          }
+        }
+      }
+
+      return state
+    }
+
+    default:
+      return state
+  }
+}

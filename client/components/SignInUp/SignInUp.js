@@ -5,7 +5,7 @@ import { propTypes as reduxFormPropTypes, reduxForm } from 'redux-form'
 import classnames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
-import { logIn, signUp } from '../../actions/auth'
+import { logIn, signUp } from '../../ducks/auth'
 import { getAuthenticationError } from '../../selectors/auth'
 import Alert from '../Alert'
 import Button from '../Button'

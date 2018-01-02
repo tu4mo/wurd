@@ -1,5 +1,4 @@
-import { TIMELINES_REMOVE_POST } from '../actions'
-import reducer from './timelines'
+import reducer, { TIMELINES_REMOVE_POST } from './timelines'
 
 describe('timelines', () => {
   it('TIMELINES_REMOVE_POST should remove post from home and timelines', () => {

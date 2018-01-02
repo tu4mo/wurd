@@ -1,7 +1,9 @@
-import { AUTH_CLEAR, AUTH_SET_AUTHENTICATED, AUTH_SET_ERROR } from '.'
-
 import { fetchAccount } from './account'
 import { fetchUserByUsername } from './users'
+
+const AUTH_CLEAR = 'AUTH/CLEAR'
+const AUTH_SET_AUTHENTICATED = 'AUTH/SET_AUTHENTICATED'
+const AUTH_SET_ERROR = 'AUTH/SET_ERROR'
 
 export const authenticateUser = () => async (dispatch, getState, api) => {
   try {
@@ -104,5 +106,36 @@ export const signUp = (username, email, password) => async (
       error: err.response.data.error,
       type: AUTH_SET_ERROR
     })
+  }
+}
+
+const INITIAL_STATE = {
+  authenticated: false,
+  error: null
+}
+
+export default (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case AUTH_CLEAR:
+      return {
+        ...INITIAL_STATE,
+        error: state.error
+      }
+
+    case AUTH_SET_AUTHENTICATED:
+      return {
+        ...state,
+        authenticated: true,
+        error: null
+      }
+
+    case AUTH_SET_ERROR:
+      return {
+        ...INITIAL_STATE,
+        error: action.error
+      }
+
+    default:
+      return state
   }
 }

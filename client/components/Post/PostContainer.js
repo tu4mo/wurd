@@ -1,7 +1,7 @@
 import Post from './Post'
 
 import { connect } from 'react-redux'
-import { createComment } from '../../actions/posts'
+import { createComment } from '../../ducks/posts'
 import { getPostById } from '../../selectors/posts'
 
 const mapStateToProps = (state, ownProps) => ({

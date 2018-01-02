@@ -1,9 +1,7 @@
-import {
-  ACCOUNT_FETCH,
-  ACCOUNT_SAVE_FULFILLED,
-  ACCOUNT_SAVE_PENDING,
-  ACCOUNT_SAVE_REJECTED
-} from '.'
+const ACCOUNT_FETCH = 'ACCOUNT/FETCH'
+const ACCOUNT_SAVE_PENDING = 'ACCOUNT/SAVE_PENDING'
+const ACCOUNT_SAVE_FULFILLED = 'ACCOUNT/SAVE_FULFILLED'
+const ACCOUNT_SAVE_REJECTED = 'ACCOUNT/SAVE_REJECTED'
 
 export const fetchAccount = () => async (dispatch, getState, api) => {
   try {
@@ -43,5 +41,30 @@ export const saveAccount = account => async (dispatch, getState, api) => {
     })
 
     throw err
+  }
+}
+
+export default (state = {}, action) => {
+  switch (action.type) {
+    case ACCOUNT_FETCH:
+    case ACCOUNT_SAVE_FULFILLED:
+      return action.account
+
+    case ACCOUNT_SAVE_PENDING:
+      return {
+        ...state,
+        error: null,
+        isSaving: true
+      }
+
+    case ACCOUNT_SAVE_REJECTED:
+      return {
+        ...state,
+        error: action.error,
+        isSaving: false
+      }
+
+    default:
+      return state
   }
 }

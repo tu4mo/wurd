@@ -7,12 +7,12 @@ import { connect } from 'react-redux'
 import asyncComponent from '../../asyncComponent'
 
 // Import actions
-import { logOut } from '../../actions/auth'
+import { logOut } from '../../ducks/auth'
 import {
   fetchUserByUsername,
   followUser,
   unfollowUser
-} from '../../actions/users'
+} from '../../ducks/users'
 
 // Import selectors
 import { isAuthenticated } from '../../selectors/auth'

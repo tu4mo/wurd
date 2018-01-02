@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import { authenticateUser } from './actions/auth'
+import { authenticateUser } from './ducks/auth'
 import { isAuthenticated } from './selectors/auth'
 import asyncComponent from './asyncComponent'
 import Header from './components/Header'

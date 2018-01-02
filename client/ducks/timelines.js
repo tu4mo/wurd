@@ -1,10 +1,25 @@
-import {
-  TIMELINES_REMOVE_POST,
-  TIMELINES_SET_POSTS,
-  TIMELINES_TOGGLE_HAS_MORE
-} from '../actions'
+export const TIMELINES_REMOVE_POST = 'TIMELINES/REMOVE_POST'
+export const TIMELINES_SET_POSTS = 'TIMELINES/SET_POSTS'
+export const TIMELINES_TOGGLE_HAS_MORE = 'TIMELINES/TOGGLE_HAS_MORE'
 
-const timelines = (state = {}, action) => {
+export const removePost = id => ({
+  id,
+  type: TIMELINES_REMOVE_POST
+})
+
+export const setPosts = (id, posts) => ({
+  id,
+  posts,
+  type: TIMELINES_SET_POSTS
+})
+
+export const setHasMore = (id, hasMore) => ({
+  hasMore,
+  id,
+  type: TIMELINES_TOGGLE_HAS_MORE
+})
+
+export default (state = {}, action) => {
   switch (action.type) {
     case TIMELINES_REMOVE_POST:
       return Object.keys(state).reduce(
@@ -44,5 +59,3 @@ const timelines = (state = {}, action) => {
       return state
   }
 }
-
-export default timelines

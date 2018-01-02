@@ -5,8 +5,8 @@ import { propTypes as reduxFormPropTypes, reduxForm } from 'redux-form'
 import NavigationPrompt from 'react-router-navigation-prompt'
 import styled from 'styled-components'
 
-import { fetchAccount, saveAccount } from '../../actions/account'
-import { authenticateUser } from '../../actions/auth'
+import { fetchAccount, saveAccount } from '../../ducks/account'
+import { authenticateUser } from '../../ducks/auth'
 import { getAccount } from '../../selectors/account'
 
 import Alert from '../Alert'
