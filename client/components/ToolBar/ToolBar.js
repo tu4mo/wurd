@@ -28,7 +28,6 @@ ToolBar.propTypes = {
   me: PropTypes.object
 }
 
-// prettier-ignore
 const StyledBox = styled(ToolBar)`
   background-color: var(--header-background-color);
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
@@ -41,7 +40,7 @@ const StyledBox = styled(ToolBar)`
 
   ${media.sm`
     display: none;
-  `}
+  `};
 
   & > * {
     flex-grow: 1;

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+.c0 input {
+  background-color: #fff;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  display: block;
+  font-family: inherit;
+  font-size: var(--font-size-lg);
+  height: 40px;
+  outline: none;
+  padding: 0 var(--spacing-sm);
+  width: 100%;
+}
+
+.c0 input::-webkit-input-placeholder {
+  color: var(--color-light-gray);
+}
+
+.c0 input:focus {
+  border-color: var(--color-light-gray);
+}
+
+<div
+  className="c0"
+>
+  <input
+    id="test-id"
+    maxLength={undefined}
+    onChange={undefined}
+    placeholder={undefined}
+    type={undefined}
+    value={undefined}
+  />
+</div>
+`;
