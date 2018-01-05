@@ -133,18 +133,27 @@ class Profile extends Component {
               </div>
               <Container>
                 <Switch>
-                  <Route exact path="/:username">
-                    <Posts key="timeline" timeline={user.username} />
-                  </Route>
-                  <Route path="/:username/followers">
-                    <UserList users={user.followers} />
-                  </Route>
-                  <Route path="/:username/following">
-                    <UserList users={user.following} />
-                  </Route>
-                  <Route path="/:username/:postId">
-                    <Posts key="single" single={match.params.postId} />
-                  </Route>
+                  <Route
+                    component={() => (
+                      <Posts timeline={user.username} />
+                    )}
+                    exact
+                    path="/:username"
+                  />
+                  <Route
+                    component={() => <UserList users={user.followers} />}
+                    path="/:username/followers"
+                  />
+                  <Route
+                    component={() => <UserList users={user.following} />}
+                    path="/:username/following"
+                  />
+                  <Route
+                    component={() => (
+                      <Posts single={match.params.postId} />
+                    )}
+                    path="/:username/:postId"
+                  />
                 </Switch>
               </Container>
             </div>
