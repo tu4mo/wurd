@@ -3,7 +3,6 @@ const isDev = process.env.NODE_ENV !== 'production'
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OfflinePlugin = require('offline-plugin')
 const path = require('path')
@@ -45,12 +44,7 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: isDev
-          ? ['style-loader', ...styleLoaders]
-          : ExtractTextPlugin.extract({
-              fallback: 'style-loader',
-              use: styleLoaders
-            })
+        use: ['style-loader', ...styleLoaders]
       },
       {
         loader: 'file-loader',
@@ -75,11 +69,6 @@ const config = {
       filename: 'index.html',
       inject: 'body',
       template: path.join(__dirname, '/client/index.html')
-    }),
-
-    new ExtractTextPlugin({
-      allChunks: true,
-      filename: 'wurd.[hash].css'
     }),
 
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/),
