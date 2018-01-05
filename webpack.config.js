@@ -31,7 +31,7 @@ const config = {
     }
   },
 
-  devtool: isDev ? 'eval-source-map' : '',
+  devtool: isDev ? 'cheap-module-source-map' : 'source-map',
 
   entry: ['babel-polyfill', './client/index.js'],
 
@@ -100,7 +100,8 @@ if (!isDev) {
     new webpack.optimize.UglifyJsPlugin({
       output: {
         comments: false
-      }
+      },
+      sourceMap: true
     })
   )
 }
