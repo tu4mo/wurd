@@ -134,9 +134,7 @@ class Profile extends Component {
               <Container>
                 <Switch>
                   <Route
-                    component={() => (
-                      <Posts timeline={user.username} />
-                    )}
+                    component={() => <Posts timeline={user.username} />}
                     exact
                     path="/:username"
                   />
@@ -149,9 +147,7 @@ class Profile extends Component {
                     path="/:username/following"
                   />
                   <Route
-                    component={() => (
-                      <Posts single={match.params.postId} />
-                    )}
+                    component={() => <Posts single={match.params.postId} />}
                     path="/:username/:postId"
                   />
                 </Switch>
