@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 import { Link, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import asyncComponent from '../../asyncComponent'
-
 // Import actions
 import { logOut } from '../../ducks/auth'
 import {
@@ -24,6 +22,7 @@ import Container from '../../components/Container'
 import FollowButton from '../../components/FollowButton'
 import Head from '../../components/Head'
 import Icon from '../../components/Icon'
+import LoadableComponent from '../../components/LoadableComponent'
 import Posts from '../../components/Posts'
 import ProfilePhoto from '../../components/ProfilePhoto'
 import Stats from '../../components/Stats'
@@ -32,9 +31,7 @@ import UserList from '../../components/UserList'
 // Import styles
 import './Profile.scss'
 
-const Settings = asyncComponent(() =>
-  import('../../components/Settings').then(module => module.default)
-)
+const Settings = LoadableComponent(() => import('../../components/Settings'))
 
 class Profile extends Component {
   static propTypes = {

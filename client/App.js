@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 import { authenticateUser } from './ducks/auth'
 import { isAuthenticated } from './selectors/auth'
-import asyncComponent from './asyncComponent'
+import LoadableComponent from './components/LoadableComponent'
 import Header from './components/Header'
 import ScrollToTop from './components/ScrollToTop'
 import ToolBar from './components/ToolBar'
@@ -24,29 +24,19 @@ const Main = styled.main`
   }
 `
 
-const AuthenticateToken = asyncComponent(() =>
-  import('./views/AuthenticateToken').then(module => module.default)
+const AuthenticateToken = LoadableComponent(() =>
+  import('./views/AuthenticateToken')
 )
 
-const Home = asyncComponent(() =>
-  import('./views/Home').then(module => module.default)
-)
+const Home = LoadableComponent(() => import('./views/Home'))
 
-const NotFound = asyncComponent(() =>
-  import('./views/NotFound').then(module => module.default)
-)
+const NotFound = LoadableComponent(() => import('./views/NotFound'))
 
-const Profile = asyncComponent(() =>
-  import('./views/Profile').then(module => module.default)
-)
+const Profile = LoadableComponent(() => import('./views/Profile'))
 
-const Users = asyncComponent(() =>
-  import('./views/Users').then(module => module.default)
-)
+const Users = LoadableComponent(() => import('./views/Users'))
 
-const Welcome = asyncComponent(() =>
-  import('./views/Welcome').then(module => module.default)
-)
+const Welcome = LoadableComponent(() => import('./views/Welcome'))
 
 class App extends Component {
   static propTypes = {
