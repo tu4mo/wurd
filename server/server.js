@@ -70,6 +70,12 @@ app.use(express.static(path.resolve(__dirname, '../dist')))
 const routes = require('./routes')
 app.use('/api', routes)
 
+// Handle unknown errors
+app.use((err, req, res, next) => {
+  console.error(err)
+  res.status(500).send('WTF?!')
+})
+
 // Serve index.html
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../dist/index.html'))
