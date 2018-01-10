@@ -1,1 +1,1 @@
-export { default } from './LoadableComponent';
+export { default } from './LoadableComponent'

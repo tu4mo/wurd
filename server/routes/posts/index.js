@@ -46,6 +46,10 @@ router.get('/', resolveToken(false), async (req, res) => {
       ]
     }
 
+    if (filter === 'likes') {
+      query.likes = req.userId
+    }
+
     if (username) {
       const user = await User.findOne({ username }).select({ _id: 1 })
       query.user = user._id
