@@ -1,7 +1,6 @@
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { hot } from 'react-hot-loader'
 import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 import { IntlProvider } from 'react-intl'
@@ -23,6 +22,4 @@ const Index = () => (
   </Provider>
 )
 
-const HotIndex = hot(module)(Index)
-
-ReactDOM.render(<HotIndex />, document.getElementById('root'))
+ReactDOM.render(<Index />, document.getElementById('root'))

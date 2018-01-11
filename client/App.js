@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { hot } from 'react-hot-loader'
 
 import { authenticateUser } from './ducks/auth'
 import { isAuthenticated } from './selectors/auth'
@@ -75,4 +76,4 @@ const mapStateToProps = state => ({
   isAuthenticated: isAuthenticated(state)
 })
 
-export default connect(mapStateToProps, { authenticateUser })(App)
+export default connect(mapStateToProps, { authenticateUser })(hot(module)(App))
