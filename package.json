@@ -1,7 +1,7 @@
 {
   "name": "wurd",
   "scripts": {
-    "analyze": "npm run build -s -- --profile --json > stats.json && webpack-bundle-analyzer stats.json",
+    "analyze": "npm run build -s -- --profile --json > stats.json && webpack-bundle-analyzer stats.json dist",
     "build": "NODE_ENV=production webpack -p",
     "dev": "NODE_ENV=development nodemon --watch server server/server.js & webpack-dev-server --hot",
     "flow": "flow",
