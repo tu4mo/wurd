@@ -10,10 +10,11 @@ module.exports = {
     'prettier',
     'prettier/react',
     'prettier/standard',
-    'plugin:jsx-a11y/recommended'
+    'plugin:jsx-a11y/recommended',
+    'plugin:testcafe/recommended'
   ],
   parser: 'babel-eslint',
-  plugins: ['jsx-a11y'],
+  plugins: ['jsx-a11y', 'testcafe'],
   rules: {
     'comma-dangle': ['error', 'never'],
     'react/jsx-sort-props': 'error',

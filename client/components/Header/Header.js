@@ -108,7 +108,7 @@ class Header extends PureComponent {
                 )}
                 {isAuthenticated && (
                   <NavItem className="header__profile" to={`/${username}`}>
-                    <ProfilePhoto size="small" url={profileUrl} />
+                    <ProfilePhoto size="small" url={profileUrl} username={username} />
                   </NavItem>
                 )}
               </nav>
