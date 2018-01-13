@@ -33,19 +33,7 @@
     img {
       display: block;
       height: 24px;
-    }
-
-    &::after {
-      color: var(--color-light-gray);
-      content: 'beta';
-      font-size: 0.6rem;
-      left: 0;
-      margin-top: 10px;
-      position: absolute;
-      text-align: center;
-      text-transform: uppercase;
-      top: 50%;
-      right: 0;
+      margin-top: 8px;
     }
   }
 
