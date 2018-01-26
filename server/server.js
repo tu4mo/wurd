@@ -12,9 +12,6 @@ const morgan = require('morgan')
 const path = require('path')
 const session = require('express-session')
 
-// Set mongoose to use ES6 promises
-mongoose.Promise = global.Promise
-
 // Initialize Express
 const app = express()
 
@@ -56,12 +53,7 @@ app.use(express.json())
 const port = process.env.PORT || 3000
 
 // Connect to database
-mongoose.connect(
-  isDev ? process.env.MONGODB_DEV_URI : process.env.MONGODB_URI,
-  {
-    useMongoClient: true
-  }
-)
+mongoose.connect(isDev ? process.env.MONGODB_DEV_URI : process.env.MONGODB_URI)
 
 // Serve static (gzip) files
 app.use(express.static(path.resolve(__dirname, '../dist')))
