@@ -23,6 +23,12 @@ class SignInUp extends Component {
     tab: 'login'
   }
 
+  changeTab = tab => {
+    this.setState({
+      tab
+    })
+  }
+
   onSubmit = ({ email, password, username }) => {
     if (this.state.tab === 'login') {
       this.props.logIn(email, password)
@@ -31,25 +37,17 @@ class SignInUp extends Component {
     }
   }
 
-  renderTab = id => {
-    const changeTab = tab => {
-      this.setState({
-        tab
-      })
-    }
-
-    return (
-      <Button
-        className={classnames('sign-in-up__tab', {
-          'sign-in-up__tab--active': id === this.state.tab
-        })}
-        link
-        onClick={() => changeTab(id)}
-      >
-        <FormattedMessage id={id} />
-      </Button>
-    )
-  }
+  renderTab = id => (
+    <Button
+      className={classnames('sign-in-up__tab', {
+        'sign-in-up__tab--active': id === this.state.tab
+      })}
+      link
+      onClick={() => this.changeTab(id)}
+    >
+      <FormattedMessage id={id} />
+    </Button>
+  )
 
   render() {
     const { tab } = this.state
