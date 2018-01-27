@@ -10,7 +10,13 @@ import Head from '../../components/Head'
 import PostBody from '../../components/PostBody'
 import SignInUp from '../../components/SignInUp'
 
-import './Welcome.scss'
+import {
+  StyledWelcome,
+  StyledWelcomeContent,
+  StyledWelcomeForm,
+  StyledWelcomeItem,
+  StyledWelcomePost
+} from './styles'
 
 const POSTS = 36
 
@@ -70,10 +76,10 @@ class Welcome extends Component {
     }))
   }
 
-  renderPosts = () => {
-    return this.state.randomPosts.map((post, i) => (
-      <div className="welcome__item" key={i}>
-        <div className="welcome__post">
+  renderPosts = () =>
+    this.state.randomPosts.map((post, i) => (
+      <StyledWelcomeItem key={i}>
+        <StyledWelcomePost>
           {post && (
             <PostBody
               content={post.content}
@@ -82,22 +88,20 @@ class Welcome extends Component {
               gradientStart={post.gradientStart}
             />
           )}
-        </div>
-        <div className="welcome__post-background" />
-      </div>
+        </StyledWelcomePost>
+      </StyledWelcomeItem>
     ))
-  }
 
   render() {
     return (
       <Fragment>
         <Head />
-        <div className="welcome">
-          <div className="welcome__content">{this.renderPosts()}</div>
-        </div>
-        <div className="welcome-form">
+        <StyledWelcome>
+          <StyledWelcomeContent>{this.renderPosts()}</StyledWelcomeContent>
+        </StyledWelcome>
+        <StyledWelcomeForm>
           <SignInUp />
-        </div>
+        </StyledWelcomeForm>
       </Fragment>
     )
   }
