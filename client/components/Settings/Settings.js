@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { propTypes as reduxFormPropTypes, reduxForm } from 'redux-form'
+import { reduxForm, propTypes as reduxFormPropTypes } from 'redux-form'
 import NavigationPrompt from 'react-router-navigation-prompt'
 import styled from 'styled-components'
 

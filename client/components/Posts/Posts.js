@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { fetchPostById, fetchPosts } from '../../ducks/posts'
 
 // Import selectors
-import { getPostIdsFromTimeline, getHasMore } from '../../selectors/timelines'
+import { getHasMore, getPostIdsFromTimeline } from '../../selectors/timelines'
 
 // Import components
 import Button from '../Button'
