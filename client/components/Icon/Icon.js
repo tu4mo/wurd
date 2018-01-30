@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
-import './Icon.scss'
+import styled from 'styled-components'
 
 import homeIcon from './svg/home.svg'
 import likeIcon from './svg/like.svg'
@@ -37,10 +36,17 @@ const ICONS = {
   }
 }
 
+const StyledIcon = styled.img`
+  cursor: pointer;
+  display: block;
+  height: 24px;
+  width: 24px;
+`
+
 const Icon = ({ className, name, title }) => (
-  <img
+  <StyledIcon
     alt={title}
-    className={classnames('icon', className)}
+    className={className}
     src={ICONS[name].src}
     title={title || ICONS[name].title}
   />

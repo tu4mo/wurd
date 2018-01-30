@@ -3,12 +3,6 @@
   color: var(--color-light-gray);
   display: flex;
 
-  &__icon {
-    cursor: pointer;
-    height: 22px;
-    width: 24px;
-  }
-
   &__count {
     margin-right: var(--spacing-sm);
   }
