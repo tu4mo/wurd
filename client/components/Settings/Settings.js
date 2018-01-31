@@ -19,6 +19,17 @@ import FormControl from '../FormControl'
 import Modal from '../Modal'
 import Spacer from '../Spacer'
 
+const Wrapper = styled.div`
+  border-top: 1px solid var(--color-ultra-light-gray);
+  padding-bottom: var(--spacing-responsive-md);
+  padding-top: var(--spacing-responsive-md);
+`
+
+const StyledSettingsContent = styled.div`
+  margin: 0 auto;
+  max-width: 640px;
+`
+
 class Settings extends Component {
   static propTypes = {
     ...reduxFormPropTypes,
@@ -40,7 +51,6 @@ class Settings extends Component {
   render() {
     const {
       accountError,
-      className,
       dirty,
       handleSubmit,
       invalid,
@@ -50,40 +60,42 @@ class Settings extends Component {
     } = this.props
 
     return (
-      <div className={className}>
+      <Wrapper>
         <Container>
-          <Box className="settings__content">
-            <form onSubmit={handleSubmit(this.submit)}>
-              <BoxSection hasPadding>
-                <Spacer>
-                  {accountError && <Alert message={accountError} />}
-                  <FormControl color="gray" label="Username" name="username" />
-                  <FormControl color="gray" label="Email" name="email" />
-                  <FormControl
-                    color="gray"
-                    label="Current Password"
-                    name="currentPassword"
-                    type="password"
-                  />
-                  <FormControl
-                    color="gray"
-                    label="New Password"
-                    name="password"
-                    type="password"
-                  />
-                </Spacer>
-              </BoxSection>
-              <BoxSection hasPadding>
-                <Button
-                  disabled={invalid || pristine || submitting || isSaving}
-                  loading={isSaving}
-                  type="submit"
-                >
-                  Save
-                </Button>
-              </BoxSection>
-            </form>
-          </Box>
+          <StyledSettingsContent>
+            <Box>
+              <form onSubmit={handleSubmit(this.submit)}>
+                <BoxSection hasPadding>
+                  <Spacer>
+                    {accountError && <Alert message={accountError} />}
+                    <FormControl color="gray" label="Username" name="username" />
+                    <FormControl color="gray" label="Email" name="email" />
+                    <FormControl
+                      color="gray"
+                      label="Current Password"
+                      name="currentPassword"
+                      type="password"
+                    />
+                    <FormControl
+                      color="gray"
+                      label="New Password"
+                      name="password"
+                      type="password"
+                    />
+                  </Spacer>
+                </BoxSection>
+                <BoxSection hasPadding>
+                  <Button
+                    disabled={invalid || pristine || submitting || isSaving}
+                    loading={isSaving}
+                    type="submit"
+                  >
+                    Save
+                  </Button>
+                </BoxSection>
+              </form>
+            </Box>
+          </StyledSettingsContent>
         </Container>
         <NavigationPrompt when={dirty && !submitting}>
           {({ onCancel, onConfirm }) => (
@@ -94,7 +106,7 @@ class Settings extends Component {
             </Modal>
           )}
         </NavigationPrompt>
-      </div>
+      </Wrapper>
     )
   }
 }
@@ -130,17 +142,6 @@ const validate = values => {
   return errors
 }
 
-const StyledSettings = styled(Settings)`
-  border-top: 1px solid var(--color-ultra-light-gray);
-  padding-bottom: var(--spacing-responsive-md);
-  padding-top: var(--spacing-responsive-md);
-
-  .settings__content {
-    margin: 0 auto;
-    max-width: 640px;
-  }
-`
-
 export default connect(mapStateToProps, {
   authenticateUser,
   fetchAccount,
@@ -149,5 +150,5 @@ export default connect(mapStateToProps, {
   reduxForm({
     form: 'settings',
     validate
-  })(StyledSettings)
+  })(Settings)
 )
