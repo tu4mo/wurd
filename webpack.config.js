@@ -72,42 +72,40 @@ const config = {
 
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/),
 
-    new webpack.NamedModulesPlugin()
+    new webpack.NamedModulesPlugin(),
+
+    ...(!isDev
+      ? [
+          new CompressionPlugin({
+            algorithm: 'gzip',
+            asset: '[path].gz[query]',
+            minRatio: 0.8,
+            test: /\.(css|html|js|svg)$/,
+            threshold: 10240
+          }),
+
+          new CleanWebpackPlugin('dist'),
+
+          new webpack.optimize.CommonsChunkPlugin({
+            async: true,
+            children: true,
+            minChunks: 2
+          }),
+
+          new webpack.optimize.ModuleConcatenationPlugin(),
+
+          new webpack.optimize.UglifyJsPlugin({
+            output: {
+              comments: false
+            },
+            sourceMap: true
+          })
+        ]
+      : []),
+
+    // It's always better if OfflinePlugin is the last plugin added
+    new OfflinePlugin()
   ]
 }
-
-if (!isDev) {
-  config.plugins.push(
-    new CompressionPlugin({
-      algorithm: 'gzip',
-      asset: '[path].gz[query]',
-      minRatio: 0.8,
-      test: /\.(css|html|js|svg)$/,
-      threshold: 10240
-    }),
-
-    new CleanWebpackPlugin('dist'),
-
-    new webpack.optimize.CommonsChunkPlugin({
-      async: true,
-      children: true,
-      minChunks: 2
-    }),
-
-    new webpack.optimize.ModuleConcatenationPlugin(),
-
-    new webpack.optimize.UglifyJsPlugin({
-      output: {
-        comments: false
-      },
-      sourceMap: true
-    })
-  )
-}
-
-config.plugins.push(
-  // It's always better if OfflinePlugin is the last plugin added
-  new OfflinePlugin()
-)
 
 module.exports = config
