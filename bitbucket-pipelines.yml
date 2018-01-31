@@ -8,7 +8,6 @@ image: node:9.4.0
 clone:
   depth: full
 pipelines:
-  default:
   branches:
     master:
       - step:
