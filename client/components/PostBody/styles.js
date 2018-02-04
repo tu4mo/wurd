@@ -1,17 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const PostBody = ({ children, className }) => (
-  <div className={className}>{children}</div>
-)
-
-PostBody.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string
-}
-
-export const StyledPostBody = styled(PostBody)`
+export const StyledPostBody = styled.div`
   background-image: linear-gradient(
     45deg,
     ${props => props.gradientStart},
