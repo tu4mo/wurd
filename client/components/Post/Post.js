@@ -65,7 +65,7 @@ class Post extends Component {
           profileUrl={profileUrl}
           username={username}
         />
-        {comments.length && (
+        {comments.length > 0 && (
           <div className="comments">
             <PostComments comments={comments} />
           </div>
