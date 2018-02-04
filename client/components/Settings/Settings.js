@@ -68,7 +68,11 @@ class Settings extends Component {
                 <BoxSection hasPadding>
                   <Spacer>
                     {accountError && <Alert message={accountError} />}
-                    <FormControl color="gray" label="Username" name="username" />
+                    <FormControl
+                      color="gray"
+                      label="Username"
+                      name="username"
+                    />
                     <FormControl color="gray" label="Email" name="email" />
                     <FormControl
                       color="gray"
