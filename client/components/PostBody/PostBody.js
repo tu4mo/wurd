@@ -2,8 +2,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { ContainerQuery } from 'react-container-query'
 import classNames from 'classnames'
+import { Link } from 'react-router-dom'
 
-import { StyledPostBody, StyledPostContent } from './styles'
+import {
+  StyledPostBody,
+  StyledPostHeader,
+  StyledProfilePhoto,
+  StyledPostContent
+} from './styles'
 import PostWord from '../PostWord'
 
 const query = {
@@ -19,9 +25,13 @@ const query = {
 class PostBody extends Component {
   static propTypes = {
     content: PropTypes.string,
+    createdAt: PropTypes.string,
     fill: PropTypes.bool,
     gradientEnd: PropTypes.string,
-    gradientStart: PropTypes.string
+    gradientStart: PropTypes.string,
+    id: PropTypes.string,
+    profileUrl: PropTypes.string,
+    username: PropTypes.string
   }
 
   shouldComponentUpdate(nextProps) {
@@ -29,7 +39,16 @@ class PostBody extends Component {
   }
 
   render() {
-    const { content, fill, gradientEnd, gradientStart } = this.props
+    const {
+      content,
+      createdAt,
+      fill,
+      gradientEnd,
+      gradientStart,
+      id,
+      profileUrl,
+      username
+    } = this.props
 
     return (
       <StyledPostBody
@@ -37,6 +56,17 @@ class PostBody extends Component {
         gradientEnd={gradientEnd}
         gradientStart={gradientStart}
       >
+        <StyledPostHeader>
+          <Link className="profile" to={`/${username}`}>
+            <StyledProfilePhoto size="small" url={profileUrl} />
+          </Link>
+          <Link className="user" to={`/${username}`}>
+            {username}
+          </Link>
+          <Link className="time" to={`/${username}/${id}`}>
+            {createdAt}
+          </Link>
+        </StyledPostHeader>
         <ContainerQuery query={query}>
           {params => (
             <StyledPostContent className={classNames(params)}>

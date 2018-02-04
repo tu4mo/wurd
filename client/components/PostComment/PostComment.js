@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 import Input from '../Input'
 
+const StyledForm = styled.form`
+  width: 100%;
+`
+
 class PostComment extends Component {
   static propTypes = {
+    className: PropTypes.string,
     onSubmit: PropTypes.func.isRequired,
     postId: PropTypes.string.isRequired
   }
@@ -28,11 +34,11 @@ class PostComment extends Component {
   }
 
   render() {
-    const { postId } = this.props
+    const { className, postId } = this.props
     const { comment } = this.state
 
     return (
-      <form className="post__comment" onSubmit={this.onCommentSubmit}>
+      <StyledForm className={className} onSubmit={this.onCommentSubmit}>
         <Input
           color="none"
           id={`input-comment-${postId}`}
@@ -42,7 +48,7 @@ class PostComment extends Component {
           placeholder="Add a Comment…"
           value={comment}
         />
-      </form>
+      </StyledForm>
     )
   }
 }

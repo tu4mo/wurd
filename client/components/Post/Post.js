@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 import time from '../../utils/time'
 
@@ -12,16 +11,9 @@ import PostBody from '../PostBody'
 import PostComment from '../PostComment'
 import PostComments from '../PostComments'
 import PostMenu from '../PostMenu'
-import ProfilePhoto from '../ProfilePhoto'
 
 // Import styles
-import './Post.scss'
-
-const placeholderStyles = {
-  body: { paddingTop: '40%' },
-  footer: { height: '24px' },
-  header: { height: '40px' }
-}
+import { StyledPost, StyledPlaceholder } from './styles'
 
 class Post extends Component {
   static propTypes = {
@@ -42,17 +34,7 @@ class Post extends Component {
 
   render() {
     if (!this.props.post || this.props.isPlaceholder) {
-      return (
-        <div className="post post--placeholder">
-          <div className="post__header">
-            <div style={placeholderStyles.header} />
-          </div>
-          <div style={placeholderStyles.body} />
-          <div className="post__footer">
-            <div style={placeholderStyles.footer} />
-          </div>
-        </div>
-      )
+      return <StyledPlaceholder />
     }
 
     const {
@@ -73,47 +55,39 @@ class Post extends Component {
     const { isMenuOpen } = this.state
 
     return (
-      <div className="post">
-        <div className="post__header">
-          <Link className="post__profile" to={`/${username}`}>
-            <ProfilePhoto size="small" url={profileUrl} />
-          </Link>
-          <Link className="post__user" to={`/${username}`}>
-            {username}
-          </Link>
-          <Link className="post__time" to={`/${username}/${id}`}>
-            {time(createdAt)}
-          </Link>
-        </div>
+      <StyledPost>
         <PostBody
           content={content}
+          createdAt={time(createdAt)}
           gradientEnd={gradientEnd}
           gradientStart={gradientStart}
+          id={id}
+          profileUrl={profileUrl}
+          username={username}
         />
-        {comments.length > 0 && (
-          <div className="post__comments">
+        {comments.length && (
+          <div className="comments">
             <PostComments comments={comments} />
           </div>
         )}
-        <div className="post__footer">
-          <PostComment onSubmit={createComment} postId={id} />
-          <Like
-            className="post__like"
-            liked={liked}
-            likes={likes}
+        <div className="footer">
+          <PostComment
+            className="comment"
+            onSubmit={createComment}
             postId={id}
           />
+          <Like className="like" liked={liked} likes={likes} postId={id} />
           <Button onClick={this.onMenuClick} textOnly>
             <Icon
-              className={classnames('post__menu-toggle', {
-                'post__menu-toggle--open': isMenuOpen
+              className={classnames('menu-toggle', {
+                'menu-toggle--open': isMenuOpen
               })}
               name="menu"
             />
           </Button>
         </div>
         <PostMenu isOpen={isMenuOpen} postId={id} />
-      </div>
+      </StyledPost>
     )
   }
 }
