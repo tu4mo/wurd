@@ -5,6 +5,7 @@ require('dotenv').config()
 
 // Import dependencies
 const compression = require('compression')
+const cors = require('cors')
 const express = require('express')
 const helmet = require('helmet')
 const mongoose = require('mongoose')
@@ -23,6 +24,9 @@ app.use(compression())
 
 // Set up Helmet
 app.use(helmet())
+
+// Enable CORS
+app.use(cors())
 
 // Set up session
 app.use(
