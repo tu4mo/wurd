@@ -12,11 +12,12 @@ BoxSection.propTypes = {
   hasPadding: PropTypes.bool
 }
 
-// prettier-ignore
 const StyledBoxSection = styled(BoxSection)`
-  ${props => props.hasPadding && css`
-    padding: var(--spacing-responsive-md);
-  `}
+  ${props =>
+    props.hasPadding &&
+    css`
+      padding: var(--spacing-responsive-md);
+    `};
 
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-ultra-light-gray);

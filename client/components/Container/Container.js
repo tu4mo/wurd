@@ -11,7 +11,6 @@ const withYPaddingStyle = css`
   padding-top: var(--spacing-responsive-md);
 `
 
-// prettier-ignore
 const Container = styled.div`
   height: ${props => props.fullHeight && '100%'};
   margin: 0 auto;
@@ -20,8 +19,8 @@ const Container = styled.div`
   padding-right: var(--spacing-responsive-md);
   width: 100%;
 
-  ${props => props.disablePadding && disablePaddingStyle}
-  ${props => props.withYPadding && withYPaddingStyle}
+  ${props => props.disablePadding && disablePaddingStyle};
+  ${props => props.withYPadding && withYPaddingStyle};
 `
 
 Container.propTypes = {

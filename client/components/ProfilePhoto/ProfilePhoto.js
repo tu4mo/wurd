@@ -21,7 +21,6 @@ ProfilePhoto.propTypes = {
   username: PropTypes.string
 }
 
-//  prettier-ignore
 const StyledProfilePhoto = styled(ProfilePhoto)`
   border-radius: 50%;
   display: inline-block;
@@ -31,15 +30,19 @@ const StyledProfilePhoto = styled(ProfilePhoto)`
   vertical-align: middle;
   width: 160px;
 
-  ${props => props.size === 'small' && css`
-    height: 40px;
-    width: 40px;
-  `}
+  ${props =>
+    props.size === 'small' &&
+    css`
+      height: 40px;
+      width: 40px;
+    `};
 
-  ${props => props.size === 'tiny' && css`
-    height: 30px;
-    width: 30px;
-  `}
+  ${props =>
+    props.size === 'tiny' &&
+    css`
+      height: 30px;
+      width: 30px;
+    `};
 
   .change {
     align-items: center;
