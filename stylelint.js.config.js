@@ -6,7 +6,6 @@ module.exports = {
   processors: ['stylelint-processor-styled-components'],
   rules: {
     ...stylelintConfig.rules,
-    'comment-empty-line-before': null, // Fix for false positives
     'value-list-max-empty-lines': null
   }
 }
