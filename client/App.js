@@ -12,7 +12,6 @@ import ScrollToTop from './components/ScrollToTop'
 import ToolBar from './components/ToolBar'
 
 import { StyledMain } from './styles'
-import './App.scss'
 
 const AuthenticateToken = LoadableComponent(() =>
   import('./views/AuthenticateToken')

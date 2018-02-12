@@ -1,52 +1,50 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Field } from 'redux-form'
-import classnames from 'classnames'
+import styled from 'styled-components'
+
 import Input from '../Input'
-import './FormControl.scss'
 
 const renderField = field => {
   return (
-    <div className="form-control__input">
-      <Input
-        {...field.input}
-        color={field.color}
-        error={field.meta.touched && field.meta.error ? field.meta.error : null}
-        id={field.id}
-        maxLength={field.maxLength}
-        placeholder={field.placeholder}
-        type={field.type}
-      />
-    </div>
+    <Input
+      {...field.input}
+      color={field.color}
+      error={field.meta.touched && field.meta.error ? field.meta.error : null}
+      id={field.id}
+      maxLength={field.maxLength}
+      placeholder={field.placeholder}
+      type={field.type}
+    />
   )
 }
 
-const FormControl = ({
-  className,
-  color,
-  label,
-  maxLength,
-  name,
-  placeholder,
-  type
-}) => {
-  const classNames = classnames('form-control', className)
+const Wrapper = styled.label`
+  display: block;
+`
+
+const StyledLabel = styled.div`
+  color: var(--color-gray);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-xs);
+`
+
+const FormControl = ({ color, label, maxLength, name, placeholder, type }) => {
   const id = `input-${name}`
 
   return (
-    <label className={classNames} htmlFor={id}>
-      {label && <div className="form-control__label">{label}</div>}
+    <Wrapper htmlFor={id}>
+      {label && <StyledLabel>{label}</StyledLabel>}
       <Field
         component={renderField}
         name={name}
         props={{ color, id, maxLength, placeholder, type }}
       />
-    </label>
+    </Wrapper>
   )
 }
 
 FormControl.propTypes = {
-  className: PropTypes.string,
   color: PropTypes.string,
   label: PropTypes.string,
   maxLength: PropTypes.string,
