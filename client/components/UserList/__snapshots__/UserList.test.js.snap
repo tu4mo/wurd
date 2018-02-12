@@ -13,7 +13,7 @@ exports[`renders correctly 3`] = `
   className="user-list sc-bdVaJa kEgatI"
 >
   <div
-    className="sc-bwzfXH ekItIQ"
+    className="sc-bwzfXH jajsRW"
   >
     <div
       className="user-list__row"
@@ -26,7 +26,7 @@ exports[`renders correctly 3`] = `
           onClick={[Function]}
         >
           <div
-            className="sc-bxivhb eZsYtS"
+            className="sc-bxivhb gckCMN"
           >
             <img
               alt="tu4mo"
