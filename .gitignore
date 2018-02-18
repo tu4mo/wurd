@@ -1,5 +1,6 @@
 .DS_Store
 .env
 stats.json
+coverage/
 dist/
 node_modules/
