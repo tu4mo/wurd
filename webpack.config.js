@@ -34,6 +34,8 @@ const config = {
 
   entry: ['babel-polyfill', './client/index.js'],
 
+  mode: isDev ? 'development' : 'production',
+
   module: {
     rules: [
       {
@@ -72,8 +74,6 @@ const config = {
 
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/),
 
-    new webpack.NamedModulesPlugin(),
-
     ...(!isDev
       ? [
           new CompressionPlugin({
@@ -84,27 +84,17 @@ const config = {
             threshold: 10240
           }),
 
-          new CleanWebpackPlugin('dist'),
-
-          new webpack.optimize.CommonsChunkPlugin({
-            async: true,
-            children: true,
-            minChunks: 2
-          }),
-
-          new webpack.optimize.ModuleConcatenationPlugin(),
-
-          new webpack.optimize.UglifyJsPlugin({
-            output: {
-              comments: false
-            },
-            sourceMap: true
-          })
+          new CleanWebpackPlugin('dist')
         ]
       : []),
 
     // It's always better if OfflinePlugin is the last plugin added
-    new OfflinePlugin()
+    new OfflinePlugin({
+      ServiceWorker: {
+        // Minifying doesn't work with webpack 4 yet
+        minify: false
+      }
+    })
   ]
 }
 
