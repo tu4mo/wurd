@@ -59,7 +59,6 @@ const config = {
 
   output: {
     filename: isDev ? 'wurd.js' : 'wurd.[hash].js',
-    path: path.join(__dirname, 'dist'),
     publicPath: '/'
   },
 
