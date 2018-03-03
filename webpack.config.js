@@ -8,20 +8,6 @@ const OfflinePlugin = require('offline-plugin')
 const path = require('path')
 const webpack = require('webpack')
 
-const styleLoaders = [
-  'css-loader',
-  'sass-loader',
-  {
-    loader: 'sass-resources-loader',
-    options: {
-      resources: [
-        './client/styles/variables.scss',
-        './client/styles/mixins.scss'
-      ]
-    }
-  }
-]
-
 const config = {
   devServer: {
     historyApiFallback: true,
@@ -45,7 +31,20 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', ...styleLoaders]
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+          {
+            loader: 'sass-resources-loader',
+            options: {
+              resources: [
+                './client/styles/variables.scss',
+                './client/styles/mixins.scss'
+              ]
+            }
+          }
+        ]
       },
       {
         loader: 'file-loader',
