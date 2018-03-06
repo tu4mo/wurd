@@ -1,6 +1,7 @@
+import React, { Component } from 'react'
 import styled from 'styled-components'
 
-const Spinner = styled.div`
+const StyledSpinner = styled.div`
   height: 20px;
   position: relative;
 
@@ -26,5 +27,29 @@ const Spinner = styled.div`
     }
   }
 `
+
+class Spinner extends Component {
+  state = {
+    showSpinner: false
+  }
+
+  componentDidMount() {
+    this.timer = setTimeout(
+      () =>
+        this.setState({
+          showSpinner: true
+        }),
+      200
+    )
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer)
+  }
+
+  render() {
+    return this.state.showSpinner ? <StyledSpinner /> : null
+  }
+}
 
 export default Spinner
