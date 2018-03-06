@@ -6,12 +6,18 @@ import store from '../../store'
 
 import UserList from './UserList'
 
-it('renders correctly', () => {
-  const tree1 = renderer.create(<UserList />).toJSON()
+it('should render null', () => {
+  const tree = renderer.create(<UserList />).toJSON()
+  expect(tree).toMatchSnapshot()
+})
 
-  const tree2 = renderer.create(<UserList isPending />).toJSON()
+it('should render null', () => {
+  const tree = renderer.create(<UserList isPending />).toJSON()
+  expect(tree).toMatchSnapshot()
+})
 
-  const tree3 = renderer
+it('should render users', () => {
+  const tree = renderer
     .create(
       <Provider store={store}>
         <MemoryRouter>
@@ -28,7 +34,5 @@ it('renders correctly', () => {
     )
     .toJSON()
 
-  expect(tree1).toMatchSnapshot()
-  expect(tree2).toMatchSnapshot()
-  expect(tree3).toMatchSnapshot()
+  expect(tree).toMatchSnapshot()
 })

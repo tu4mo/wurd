@@ -1,14 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `null`;
+exports[`should render null 1`] = `null`;
 
-exports[`renders correctly 2`] = `
-<div
-  className="sc-htpNat epCarF"
-/>
-`;
+exports[`should render null 2`] = `null`;
 
-exports[`renders correctly 3`] = `
+exports[`should render users 1`] = `
 <div
   className="user-list sc-bdVaJa kEgatI"
 >
