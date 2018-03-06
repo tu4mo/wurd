@@ -11,10 +11,6 @@ exports[`renders correctly 1`] = `
   Test
   <div
     className="button__spinner"
-  >
-    <div
-      className="sc-bdVaJa bqqEXV"
-    />
-  </div>
+  />
 </button>
 `;
