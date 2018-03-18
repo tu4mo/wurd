@@ -26,6 +26,7 @@ class PostBody extends Component {
   static propTypes = {
     content: PropTypes.string,
     createdAt: PropTypes.string,
+    createdAtDate: PropTypes.string,
     fill: PropTypes.bool,
     gradientEnd: PropTypes.string,
     gradientStart: PropTypes.string,
@@ -42,6 +43,7 @@ class PostBody extends Component {
     const {
       content,
       createdAt,
+      createdAtDate,
       fill,
       gradientEnd,
       gradientStart,
@@ -70,9 +72,11 @@ class PostBody extends Component {
         <ContainerQuery query={query}>
           {params => (
             <StyledPostContent className={classNames(params)}>
-              {content
-                .split(' ')
-                .map((word, i) => <PostWord key={i}>{word}</PostWord>)}
+              {content.split(' ').map((word, i) => (
+                <PostWord createdAtDate={createdAtDate} index={i} key={i}>
+                  {word}
+                </PostWord>
+              ))}
             </StyledPostContent>
           )}
         </ContainerQuery>

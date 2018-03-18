@@ -2,25 +2,39 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const getRotation = () => {
-  const deg = Math.floor(Math.random() * 10 + -5)
-  return deg !== 0 ? deg : getRotation()
+const stringToHash = str =>
+  str
+    .split('')
+    .reduce(
+      (prevHash, currVal) => (prevHash << 5) - prevHash + currVal.charCodeAt(0),
+      0
+    )
+
+const getRotation = (word, index, date) => {
+  const hash = stringToHash(`${index}${word}${+new Date(date)}`)
+    .toString()
+    .split('')
+
+  const lastNumber = hash[hash.length - 1]
+  return Math.round(lastNumber / 9 * -10 + 5)
 }
 
 class Word extends Component {
   static propTypes = {
     children: PropTypes.node,
-    className: PropTypes.string.isRequired
+    className: PropTypes.string.isRequired,
+    createdAtDate: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired
   }
 
   render() {
-    const { children, className } = this.props
+    const { children, className, createdAtDate, index } = this.props
 
     return (
       <div
         className={className}
         style={{
-          transform: `rotate(${getRotation()}deg`
+          transform: `rotate(${getRotation(children, index, createdAtDate)}deg`
         }}
       >
         {children}

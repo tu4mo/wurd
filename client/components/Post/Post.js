@@ -59,6 +59,7 @@ class Post extends Component {
         <PostBody
           content={content}
           createdAt={time(createdAt)}
+          createdAtDate={createdAt}
           gradientEnd={gradientEnd}
           gradientStart={gradientStart}
           id={id}
