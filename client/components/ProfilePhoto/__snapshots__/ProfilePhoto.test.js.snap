@@ -33,6 +33,7 @@ exports[`renders correctly 1`] = `
   position: absolute;
   right: 0;
   text-align: center;
+  -webkit-text-decoration: none;
   text-decoration: none;
   top: 0;
   visibility: hidden;
