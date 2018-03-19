@@ -46,11 +46,17 @@ class Composer extends Component {
   }
 
   onSaveClick = () => {
-    this.props.onSaveClick({
-      content: this.state.content,
-      gradientEnd: this.state.color.to,
-      gradientStart: this.state.color.from
-    })
+    this.props
+      .onSaveClick({
+        content: this.state.content,
+        gradientEnd: this.state.color.to,
+        gradientStart: this.state.color.from
+      })
+      .then(() =>
+        this.setState({
+          content: ''
+        })
+      )
   }
 
   render() {
@@ -71,6 +77,7 @@ class Composer extends Component {
             onChange={this.onContentChange}
             placeholder="write here"
             ref={ref => (this.input = ref)}
+            type="text"
             value={content}
           />
           <StyledComposerToolBar>
