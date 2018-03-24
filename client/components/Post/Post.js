@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import time from '../../utils/time'
 
 // Import components
 import Button from '../Button'
@@ -58,8 +57,7 @@ class Post extends Component {
       <StyledPost>
         <PostBody
           content={content}
-          createdAt={time(createdAt)}
-          createdAtDate={createdAt}
+          createdAt={createdAt}
           gradientEnd={gradientEnd}
           gradientStart={gradientStart}
           id={id}

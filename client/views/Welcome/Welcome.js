@@ -83,6 +83,7 @@ class Welcome extends Component {
           {post && (
             <PostBody
               content={post.content}
+              createdAt={post.createdAt}
               fill
               gradientEnd={post.gradientEnd}
               gradientStart={post.gradientStart}

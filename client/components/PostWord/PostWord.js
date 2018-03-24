@@ -23,18 +23,18 @@ class Word extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string.isRequired,
-    createdAtDate: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired
   }
 
   render() {
-    const { children, className, createdAtDate, index } = this.props
+    const { children, className, createdAt, index } = this.props
 
     return (
       <div
         className={className}
         style={{
-          transform: `rotate(${getRotation(children, index, createdAtDate)}deg`
+          transform: `rotate(${getRotation(children, index, createdAt)}deg`
         }}
       >
         {children}

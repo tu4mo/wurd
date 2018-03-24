@@ -4,12 +4,15 @@ import { ContainerQuery } from 'react-container-query'
 import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 
+import time from '../../utils/time'
+
 import {
   StyledPostBody,
   StyledPostHeader,
   StyledProfilePhoto,
   StyledPostContent
 } from './styles'
+
 import PostWord from '../PostWord'
 
 const query = {
@@ -26,7 +29,6 @@ class PostBody extends Component {
   static propTypes = {
     content: PropTypes.string,
     createdAt: PropTypes.string,
-    createdAtDate: PropTypes.string,
     fill: PropTypes.bool,
     gradientEnd: PropTypes.string,
     gradientStart: PropTypes.string,
@@ -43,7 +45,6 @@ class PostBody extends Component {
     const {
       content,
       createdAt,
-      createdAtDate,
       fill,
       gradientEnd,
       gradientStart,
@@ -58,22 +59,24 @@ class PostBody extends Component {
         gradientEnd={gradientEnd}
         gradientStart={gradientStart}
       >
-        <StyledPostHeader>
-          <Link className="profile" to={`/${username}`}>
-            <StyledProfilePhoto size="small" url={profileUrl} />
-          </Link>
-          <Link className="user" to={`/${username}`}>
-            {username}
-          </Link>
-          <Link className="time" to={`/${username}/${id}`}>
-            {createdAt}
-          </Link>
-        </StyledPostHeader>
+        {!fill && (
+          <StyledPostHeader>
+            <Link className="profile" to={`/${username}`}>
+              <StyledProfilePhoto size="small" url={profileUrl} />
+            </Link>
+            <Link className="user" to={`/${username}`}>
+              {username}
+            </Link>
+            <Link className="time" to={`/${username}/${id}`}>
+              {time(createdAt)}
+            </Link>
+          </StyledPostHeader>
+        )}
         <ContainerQuery query={query}>
           {params => (
             <StyledPostContent className={classNames(params)}>
               {content.split(' ').map((word, i) => (
-                <PostWord createdAtDate={createdAtDate} index={i} key={i}>
+                <PostWord createdAt={createdAt} index={i} key={i}>
                   {word}
                 </PostWord>
               ))}
