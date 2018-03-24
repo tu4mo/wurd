@@ -70,10 +70,11 @@ class Header extends PureComponent {
   onComposerSaveClick = data => {
     const { createPost, fetchUserByUsername, username } = this.props
 
+    this.setState({
+      isComposerOpen: false
+    })
+
     return createPost(data).then(() => {
-      this.setState({
-        isComposerOpen: false
-      })
       fetchUserByUsername(username)
     })
   }

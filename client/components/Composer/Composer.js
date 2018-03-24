@@ -46,17 +46,15 @@ class Composer extends Component {
   }
 
   onSaveClick = () => {
-    this.props
-      .onSaveClick({
-        content: this.state.content,
-        gradientEnd: this.state.color.to,
-        gradientStart: this.state.color.from
-      })
-      .then(() =>
-        this.setState({
-          content: ''
-        })
-      )
+    this.props.onSaveClick({
+      content: this.state.content,
+      gradientEnd: this.state.color.to,
+      gradientStart: this.state.color.from
+    })
+
+    this.setState({
+      content: ''
+    })
   }
 
   render() {
