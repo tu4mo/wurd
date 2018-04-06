@@ -4,9 +4,12 @@ import { fetchUserByUsername } from './users'
 const AUTH_CLEAR = 'AUTH/CLEAR'
 const AUTH_SET_AUTHENTICATED = 'AUTH/SET_AUTHENTICATED'
 const AUTH_SET_ERROR = 'AUTH/SET_ERROR'
+const AUTH_SET_IS_AUTHENTICATING = 'AUTH/SET_IS_AUTHENTICATING'
 
 export const authenticateUser = () => async (dispatch, getState, api) => {
   try {
+    dispatch(setIsAuthenticating(true))
+
     const response = await api({ method: 'get', url: 'auth' })
     const { data: { id, username } } = response
 
@@ -18,6 +21,7 @@ export const authenticateUser = () => async (dispatch, getState, api) => {
 
     dispatch(fetchAccount())
     dispatch(fetchUserByUsername(username))
+    dispatch(setIsAuthenticating(false))
   } catch (err) {
     dispatch(logOut())
   }
@@ -83,6 +87,11 @@ export const logOut = () => {
   }
 }
 
+export const setIsAuthenticating = isAuthenticating => ({
+  isAuthenticating,
+  type: AUTH_SET_IS_AUTHENTICATING
+})
+
 // TODO: Move to account.js
 export const signUp = (username, email, password) => async (
   dispatch,
@@ -111,7 +120,8 @@ export const signUp = (username, email, password) => async (
 
 const INITIAL_STATE = {
   authenticated: false,
-  error: null
+  error: null,
+  isAuthenticating: false
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -127,6 +137,12 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         authenticated: true,
         error: null
+      }
+
+    case AUTH_SET_IS_AUTHENTICATING:
+      return {
+        ...state,
+        isAuthenticating: action.isAuthenticating
       }
 
     case AUTH_SET_ERROR:

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { hot } from 'react-hot-loader'
 
 import { authenticateUser } from './ducks/auth'
-import { isAuthenticated } from './selectors/auth'
+import { isAuthenticated, isAuthenticating } from './selectors/auth'
 import LoadableComponent from './components/LoadableComponent'
 import Header from './components/Header'
 import ScrollToTop from './components/ScrollToTop'
@@ -30,7 +30,8 @@ const Welcome = LoadableComponent(() => import('./views/Welcome'))
 class App extends Component {
   static propTypes = {
     authenticateUser: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool.isRequired
+    isAuthenticated: PropTypes.bool.isRequired,
+    isAuthenticating: PropTypes.bool.isRequired
   }
 
   componentDidMount() {
@@ -38,7 +39,7 @@ class App extends Component {
   }
 
   render() {
-    const { isAuthenticated } = this.props
+    const { isAuthenticated, isAuthenticating } = this.props
 
     return (
       <BrowserRouter>
@@ -46,22 +47,24 @@ class App extends Component {
           <div className="app">
             <Route component={Header} />
             <StyledMain>
-              <Switch>
-                <Route
-                  component={isAuthenticated ? Home : Welcome}
-                  exact
-                  path="/"
-                />
-                <Route component={NotFound} path="/404" />
-                <Route
-                  component={AuthenticateToken}
-                  exact
-                  path="/auth/:token"
-                />
-                <Route component={Users} path="/users" />
-                <Route component={Profile} exact path="/:username" />
-                <Route component={Profile} path="/:username/:postId" />
-              </Switch>
+              {!isAuthenticating && (
+                <Switch>
+                  <Route
+                    component={isAuthenticated ? Home : Welcome}
+                    exact
+                    path="/"
+                  />
+                  <Route component={NotFound} path="/404" />
+                  <Route
+                    component={AuthenticateToken}
+                    exact
+                    path="/auth/:token"
+                  />
+                  <Route component={Users} path="/users" />
+                  <Route component={Profile} exact path="/:username" />
+                  <Route component={Profile} path="/:username/:postId" />
+                </Switch>
+              )}
             </StyledMain>
             {isAuthenticated && <Route component={ToolBar} path="/" />}
           </div>
@@ -72,7 +75,8 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: isAuthenticated(state)
+  isAuthenticated: isAuthenticated(state),
+  isAuthenticating: isAuthenticating(state)
 })
 
 export default connect(mapStateToProps, { authenticateUser })(hot(module)(App))
