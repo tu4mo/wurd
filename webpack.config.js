@@ -25,7 +25,7 @@ const config = {
   module: {
     rules: [
       {
-        exclude: /node_modules\/(?!(react-hot-loader)\/).*/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
         test: /\.js$/
       },
