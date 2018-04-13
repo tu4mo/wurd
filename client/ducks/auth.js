@@ -11,7 +11,9 @@ export const authenticateUser = () => async (dispatch, getState, api) => {
     dispatch(setIsAuthenticating(true))
 
     const response = await api({ method: 'get', url: 'auth' })
-    const { data: { id, username } } = response
+    const {
+      data: { id, username }
+    } = response
 
     dispatch({
       id,

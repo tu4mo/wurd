@@ -58,7 +58,11 @@ class Composer extends Component {
   }
 
   render() {
-    const { color, color: { from, to }, content } = this.state
+    const {
+      color,
+      color: { from, to },
+      content
+    } = this.state
     const { isOpen, onCloseClick } = this.props
 
     if (!isOpen) {
