@@ -42,13 +42,13 @@ const passport = require('./middleware/passport')
 app.use(passport.initialize())
 
 // Force HTTPS
-if (!isDev) {
-  app.use((req, res, next) => {
-    req.headers['x-forwarded-proto'] === 'https'
-      ? next()
-      : res.redirect('https://' + req.headers.host + req.url)
-  })
-}
+// if (!isDev) {
+//   app.use((req, res, next) => {
+//     req.headers['x-forwarded-proto'] === 'https'
+//       ? next()
+//       : res.redirect('https://' + req.headers.host + req.url)
+//   })
+// }
 
 // Set up JSON parser
 app.use(express.json())
