@@ -87,12 +87,7 @@ const config = {
       : []),
 
     // It's always better if OfflinePlugin is the last plugin added
-    new OfflinePlugin({
-      ServiceWorker: {
-        // Minifying doesn't work with webpack 4 yet
-        minify: false
-      }
-    })
+    new OfflinePlugin()
   ]
 }
 
