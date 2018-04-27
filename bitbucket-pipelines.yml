@@ -4,7 +4,7 @@
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
 # image: docker-image:tag
-image: node:9.9.0
+image: node:10.0.0
 clone:
   depth: full
 pipelines:
