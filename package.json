@@ -16,7 +16,7 @@
     "test:watch": "jest --watch"
   },
   "engines": {
-    "node": "10.1.0"
+    "node": "10.4.1"
   },
   "dependencies": {
     "axios": "^0.18.0",
